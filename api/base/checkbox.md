@@ -13,6 +13,7 @@
 ---|---|---|---|---
 checked | 指定当前是否选中 | boolean | false
 defaultChecked | 初始是否选中 | boolean | false
+text | 关联的文案 | string | 无
 className | 样式类名 | string | 无
 disabled | 是否禁用 | boolean | false
 onChange|绑定change事件的监控事件|function|无
