@@ -2,7 +2,6 @@
   "name": "umui",
   "version": "0.0.1",
   "description": "mobile ui",
-  "main": "index.js",
   "dependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
