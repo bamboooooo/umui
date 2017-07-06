@@ -40,7 +40,7 @@ onSubmit|submit 事件 (点击键盘的 enter)|function|无
 > 获取组件的value
 
 #### 返回值
-- bool true为开，false为关
+- string 返回搜索的关键字  
 
 
 ### 3.setDisabled(v)
