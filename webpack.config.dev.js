@@ -9,8 +9,8 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWepackPlugin = require('copy-webpack-plugin');
 var node_modules_dir = path.join(__dirname, 'node_modules');
-
-var SOURCE_DIR = "./examples/src";
+const SOURCE_DIR = 'examples/src/';
+const PRODUCT_DIR = 'examples';
 
 var getEntrys = function(globPath) {
 	var files = glob.sync(globPath);
@@ -44,7 +44,7 @@ var pages = Object.keys(entries.pages);
 var app_src_config = {
 	entry: entries.js,
 	output: {
-		path: path.resolve(__dirname, "examples"),
+		path: path.resolve(__dirname, PRODUCT_DIR),
 		filename: "[name]" // 用于长效缓存
 	},
 	module: {
