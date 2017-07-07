@@ -8,7 +8,6 @@ var glob = require('glob');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWepackPlugin = require('copy-webpack-plugin');
-var node_modules_dir = path.join(__dirname, 'node_modules');
 const SOURCE_DIR = 'examples/src/';
 const PRODUCT_DIR = 'examples';
 
@@ -41,6 +40,7 @@ var getEntrys = function(globPath) {
 var entries = getEntrys(SOURCE_DIR + "*/*.*");
 var pages = Object.keys(entries.pages);
 
+//********CSS*************
 var app_src_config = {
 	entry: entries.js,
 	output: {
@@ -50,7 +50,7 @@ var app_src_config = {
 	module: {
 		rules: [{
 				test: /\.jsx?$/,
-				loaders: ["babel-loader","eslint-loader"],
+				loader: "babel-loader",
 				options: {
 					presets: [
 						[
@@ -63,60 +63,12 @@ var app_src_config = {
 					]
 				},
 				include: [path.resolve(__dirname, 'examples/src'),path.resolve(__dirname, 'src')]
-			},
-			{
-                    test: /\.js$/,
-                    enforce: 'pre',  // 在babel-loader对源码进行编译前进行lint的检查
-                    include: [path.resolve(__dirname, 'examples/src'),path.resolve(__dirname, 'src')],  // src文件夹下的文件需要被lint
-                    use: [{
-                        loader: 'eslint-loader',
-                        options: {
-                            formatter: require('eslint-friendly-formatter')   // 编译后错误报告格式
-                        }
-                    }]
-                    // exclude: /node_modules/ 可以不用定义这个字段的属性值，eslint会自动忽略node_modules和bower_
-              },
-			{
-				test: /\.css?$/,
-				use: [{
-						loader: 'style-loader'
-					},
-					{
-						loader: 'css-loader',
-						options: {
-							importLoaders: 1
-						}
-					}
-				]
-			},
-			{
-				test: /\.scss?$/,
-				use: [{
-					loader: 'sass-loader',
-					options: {
-						noIeCompat: true
-					}
-				}]
-			},
-			// 处理图片操作  25000bit ~3kb
-			{
-				test: /\.(png|jpg|jpeg|gif)$/,
-				use: ['url-loader']
-			},
-			// 处理字体文件
-			{
-				test: /\.(eot|woff|ttf|woff2|svg)$/,
-				use: ['url-loader']
 			}
 		]
 	},
 	// 在配置中添加插件
 	plugins: [
-		// 构建优化插件
-		new ExtractTextPlugin({
-			filename: 'app.css',
-			allChunks: true,
-		})
+
 	],
 	resolve: {
 		modules: [path.resolve(__dirname, 'node_modules')]
@@ -146,4 +98,54 @@ pages.forEach(function(pathname) {
 	}
 });
 
-module.exports = [app_src_config];
+//********CSS*************
+var css_config = {
+	entry: {
+		'app': './scss/app.scss'
+	},
+	output: {
+		path: path.resolve(__dirname, 'examples'),
+		filename: 'app.css'
+	},
+	plugins: [
+		// 构建优化插件
+		new ExtractTextPlugin({
+			filename: 'app.css',
+			allChunks: true,
+		})
+	],
+	module: {
+		rules: [
+			{
+				test: /\.css?$/,
+				use: ExtractTextPlugin.extract({
+					use: 'css-loader'
+				})
+			},
+			{
+				test: /\.scss$/,
+				use: ExtractTextPlugin.extract({
+					use: [{
+						loader: "css-loader"
+					}, {
+						loader: "sass-loader"
+					}],
+					// use style-loader in development
+					fallback: "style-loader"
+				})
+			},
+			// 处理图片操作  25000bit ~3kb
+			{
+				test: /\.(png|jpg|jpeg|gif)$/,
+				use: ['url-loader']
+			},
+			// 处理字体文件
+			{
+				test: /\.(eot|woff|ttf|woff2|svg)$/,
+				use: ['url-loader']
+			}
+		]
+	},
+}
+
+module.exports = [app_src_config,css_config];
