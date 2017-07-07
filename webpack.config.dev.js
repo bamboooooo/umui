@@ -50,7 +50,7 @@ var app_src_config = {
 	module: {
 		rules: [{
 				test: /\.jsx?$/,
-				loader: "babel-loader",
+				loaders: ["babel-loader","eslint-loader"],
 				options: {
 					presets: [
 						[
@@ -64,6 +64,18 @@ var app_src_config = {
 				},
 				include: [path.resolve(__dirname, 'examples/src'),path.resolve(__dirname, 'src')]
 			},
+			{
+                    test: /\.js$/,
+                    enforce: 'pre',  // 在babel-loader对源码进行编译前进行lint的检查
+                    include: [path.resolve(__dirname, 'examples/src'),path.resolve(__dirname, 'src')],  // src文件夹下的文件需要被lint
+                    use: [{
+                        loader: 'eslint-loader',
+                        options: {
+                            formatter: require('eslint-friendly-formatter')   // 编译后错误报告格式
+                        }
+                    }]
+                    // exclude: /node_modules/ 可以不用定义这个字段的属性值，eslint会自动忽略node_modules和bower_
+              },
 			{
 				test: /\.css?$/,
 				use: [{
