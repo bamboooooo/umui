@@ -40,7 +40,7 @@ var getEntrys = function(globPath) {
 var entries = getEntrys(SOURCE_DIR + "*/*.*");
 var pages = Object.keys(entries.pages);
 
-//********CSS*************
+//********app*************
 var app_src_config = {
 	entry: entries.js,
 	output: {
@@ -49,7 +49,7 @@ var app_src_config = {
 	},
 	module: {
 		rules: [{
-				test: /\.jsx?$/,
+				test: /\.js?$/,
 				loader: "babel-loader",
 				options: {
 					presets: [
@@ -62,14 +62,20 @@ var app_src_config = {
 						"react"
 					]
 				},
-				include: [path.resolve(__dirname, 'examples/src'),path.resolve(__dirname, 'src')]
+				include: [path.resolve(__dirname, 'examples/src'), path.resolve(__dirname, 'src')]
+			},
+			{
+				test: /\.js?$/,
+				enforce: "pre",
+				loader: "eslint-loader",
+				options: {
+					configFile:'eslintrc.js'
+				},
+				include: [path.resolve(__dirname, 'examples/src'), path.resolve(__dirname, 'src')]
 			}
 		]
 	},
-	// 在配置中添加插件
-	plugins: [
-
-	],
+	plugins: [],
 	resolve: {
 		modules: [path.resolve(__dirname, 'node_modules')]
 	},
@@ -111,12 +117,12 @@ var css_config = {
 		// 构建优化插件
 		new ExtractTextPlugin({
 			filename: 'app.css',
+			disable: false,
 			allChunks: true,
 		})
 	],
 	module: {
-		rules: [
-			{
+		rules: [{
 				test: /\.css?$/,
 				use: ExtractTextPlugin.extract({
 					use: 'css-loader'
@@ -128,7 +134,10 @@ var css_config = {
 					use: [{
 						loader: "css-loader"
 					}, {
-						loader: "sass-loader"
+						loader: "sass-loader",
+						options: {
+							noIeCompat: true
+						}
 					}],
 					// use style-loader in development
 					fallback: "style-loader"
@@ -148,4 +157,4 @@ var css_config = {
 	},
 }
 
-module.exports = [app_src_config,css_config];
+module.exports = [app_src_config, css_config];
