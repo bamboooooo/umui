@@ -9,6 +9,11 @@ module.exports = {
 		"es6": true,
 		"mocha": true
 	},
+	"plugins": [
+    		"react"
+  	],
+  	"parser": "babel-eslint",   //使用babel-eslint来作为eslint的解析器
+  	"extends": ["eslint:recommended",'plugin:react/recommended'],
 	// JavaScript 语言选项
 	"parserOptions": {
 		// ECMAScript 版本
@@ -19,7 +24,7 @@ module.exports = {
 			// 允许在全局作用域下使用 return 语句
 			"globalReturn": true,
 			// impliedStric
-			"impliedStrict": true,
+//			"impliedStrict": true,
 			// 启用 JSX
 			"jsx": true
 		}
@@ -542,6 +547,12 @@ module.exports = {
 		// 要求或禁止模板字符串中的嵌入表达式周围空格的使用
 		"template-curly-spacing": 1,
 		// 强制在 yield* 表达式中 * 周围使用空格
-		"yield-star-spacing": 2
+		"yield-star-spacing": 2,
+		
+		//////////////
+		// React //
+		//////////////
+		"react/no-deprecated":0,
+		"react/display-name":0
 	}
 }
