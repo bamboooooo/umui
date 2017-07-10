@@ -1,6 +1,6 @@
 module.exports = {
 	// 环境定义了预定义的全局变量。
-	"env":{
+	"env": {
 		//环境定义了预定义的全局变量。更多在官网查看
 		"browser": true,
 		"node": true,
@@ -10,10 +10,10 @@ module.exports = {
 		"mocha": true
 	},
 	"plugins": [
-    		"react"
-  	],
-  	"parser": "babel-eslint",   //使用babel-eslint来作为eslint的解析器
-  	"extends": ["eslint:recommended",'plugin:react/recommended'],
+		"react"
+	],
+	"parser": "babel-eslint", //使用babel-eslint来作为eslint的解析器
+	"extends": ["eslint:recommended", 'plugin:react/recommended'],
 	// JavaScript 语言选项
 	"parserOptions": {
 		// ECMAScript 版本
@@ -24,15 +24,15 @@ module.exports = {
 			// 允许在全局作用域下使用 return 语句
 			"globalReturn": true,
 			// impliedStric
-//			"impliedStrict": true,
+			//			"impliedStrict": true,
 			// 启用 JSX
 			"jsx": true
 		}
 	},
 	"globals": {
-        "React": false,
-        "ReactDOM": false
-    },
+		"React": false,
+		"ReactDOM": false
+	},
 	/**
 	 * "off" 或 0 - 关闭规则
 	 * "warn" 或 1 - 开启规则，使用警告级别的错误：warn (不会导致程序退出),
@@ -121,7 +121,7 @@ module.exports = {
 		// 强制把变量的使用限制在其定义的作用域范围内
 		"block-scoped-var": 0,
 		// 限制圈复杂度，也就是类似if else能连续接多少个
-		"complexity": [2, 9],
+		//		"complexity": [2, 9],
 		// 要求 return 语句要么总是指定返回的值，要么不指定
 		"consistent-return": 0,
 		// 强制所有控制语句使用一致的括号风格
@@ -212,7 +212,7 @@ module.exports = {
 		// 禁用 __proto__ 属性
 		"no-proto": 2,
 		// 禁止使用 var 多次声明同一变量
-		"no-redeclare": 2,
+		"no-redeclare": 0,
 		// 禁用指定的通过 require 加载的模块
 		"no-return-assign": 0,
 		// 禁止使用 javascript: url
@@ -345,7 +345,7 @@ module.exports = {
 			"afterColon": true
 		}],
 		// 强制使用一致的换行风格
-		"linebreak-style": [1, "unix"],
+		//		"linebreak-style": [1, "unix"],
 		// 要求在注释周围有空行 ( 要求在块级注释之前有一空行)
 		"lines-around-comment": [1, {
 			"beforeBlockComment": true
@@ -437,7 +437,7 @@ module.exports = {
 		// 强制将对象的属性放在不同的行上
 		"object-property-newline": 0,
 		// 强制函数中的变量要么一起声明要么分开声明
-		"one-var": [2, {
+		"one-var": [0, {
 			"initialized": "never"
 		}],
 		// 要求或禁止在 var 声明周围换行
@@ -548,11 +548,12 @@ module.exports = {
 		"template-curly-spacing": 1,
 		// 强制在 yield* 表达式中 * 周围使用空格
 		"yield-star-spacing": 2,
-		
+
 		//////////////
 		// React //
 		//////////////
-		"react/no-deprecated":0,
-		"react/display-name":0
+		"react/no-deprecated": 0,
+		"react/display-name": 0,
+		"react/no-string-refs": 0
 	}
 }
