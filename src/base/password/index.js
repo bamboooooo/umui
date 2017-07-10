@@ -44,11 +44,11 @@ var Password = React.createClass({
     setReadOnly: function (v) {
         if (v) {
             this.setState({
-                readOnly: true,
+                readOnly: true
             });
         } else {
             this.setState({
-                readOnly: false,
+                readOnly: false
             });
         }
     },
@@ -56,12 +56,12 @@ var Password = React.createClass({
         if (v) {
             this.setState({
                 className: classnames(this.state.className, 'disabled'),
-                disabled: true,
+                disabled: true
             });
         } else {
             this.setState({
                 className: classnames('ucs-password', this.props.className),
-                disabled: false,
+                disabled: false
             });
         }
     },
@@ -70,7 +70,7 @@ var Password = React.createClass({
     },
     setEncryptKey: function (v) {
         this.setState({
-            encryptKey: v,
+            encryptKey: v
         });
     },
 
@@ -110,6 +110,6 @@ var Password = React.createClass({
                 <i className="icon-clear" ref='clear' onClick={this.clear}>X</i>
             </div>
         );
-    },
+    }
 });
 module.exports = Password;
