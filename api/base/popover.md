@@ -11,8 +11,9 @@
 参数 | 说明 | 类型 | 默认值
 ---|---|---|---|---
 autoSlideUp | 是否点击后收起 | bool | true
+displayListsIcon | 是否显示菜单（列表）图标 | bool | true
 displayMaskLayer | 是否显示遮罩层 | bool | true
-popLists | 弹出菜单（列表） | json | 无
+lists | 弹出菜单（列表） | json | [{'icon': 'icon1', 'text': '菜单一', 'value': '1'}, {'icon': 'icon2', 'text': '菜单二', 'value': '2'}, {'icon': 'icon3', 'text': '菜单三', 'value': '3'}]
 
 `文本或图标内容放在children中:<Popover>更多</Popover>`
 
@@ -24,10 +25,10 @@ popLists | 弹出菜单（列表） | json | 无
 > 设置组件的选中的项
 
 #### 参数
-- v: st
+- v: string类型，设置的值
 
 #### 返回值
-- voidring类型，设置的值
+- void
 
 ### 2.getValue()
 > 获取组件的选中的项
@@ -56,14 +57,23 @@ popLists | 弹出菜单（列表） | json | 无
 #### 返回值
 - void
 
-### 5.slideDown()
+### 6.slideDown()
 > 展开菜单
 
 #### 返回值
 - void
 
-### 6.slideUp()
+### 7.slideUp()
 > 收起菜单
+
+#### 返回值
+- void
+
+### 8.clickHandle(e)
+> 菜单（列表）项点击事件
+
+#### 参数
+- e: 当前点击的事件的event对象
 
 #### 返回值
 - void
