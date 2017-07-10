@@ -6,8 +6,8 @@ var Password = React.createClass({
     getInitialState:function () {
         return{
             className:classnames('ucs-password',this.props.className),
-            disabled:false,
             readOnly:false,
+            disabled:false,
             isShowClear:false,
             encryptKey:'',
             encryptType:'',
@@ -28,19 +28,22 @@ var Password = React.createClass({
     getValue:function () {
         var encryptType = this.state.encryptType;
         var encryptPassword = '';
+        var formalPassword = this.refs.password.value;
         switch(encryptType)
         {
             case 'md5':
-                encryptPassword = md5(this.state.encryptKey);
+                encryptPassword = md5(this.state.encryptKey+formalPassword);
                 break;
             case 'sha1':
-                encryptPassword = sha1(this.state.encryptKey);
+                encryptPassword = sha1(this.state.encryptKey+formalPassword);
                 break;
             case 'sha256':
-                encryptPassword = sha256(this.state.encryptKey);
+                encryptPassword = sha256(this.state.encryptKey+formalPassword);
                 break;
             default:
+                encryptPassword = formalPassword;
         }
+        return encryptPassword;
     },
     setReadOnly:function(v){
         if(v){
@@ -77,15 +80,20 @@ var Password = React.createClass({
 
     /*显示清除的标签*/
     _isShowClear:function () {
-        if(!this.state.disabled && !this.state.readOnly){
-            this.refs.clear.style = "block";
+        if(!this.state.disabled && !this.state.readOnly ){
+            if(this.state.isShowClear){
+                this.refs.clear.style = "block";
+            }else{
+                this.refs.clear.style = "none";
+            }
+
         }else{
             this.refs.clear.style = "none";
         }
     },
     _keyUpHandle:function (e) {
         var passwordVal = this.refs.password.value;
-        this.refs.passwordOut.value = passwordVal.replace(/./g,this.props.displayChar);
+        this.refs.password.value = passwordVal.replace(/./g,this.props.displayChar);
     },
     onChange:function (e) {
         this.props.onChange ? this.props.onChange(e) : '';
@@ -107,5 +115,5 @@ var Password = React.createClass({
             </div>
         )
     }
-})
+});
 moudle.exports = Password;
