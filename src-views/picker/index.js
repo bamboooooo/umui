@@ -1,4 +1,4 @@
-var Picker = require('../../../src/base/picker');
+var Picker = require('../../src/base/picker');
 
 var Root = React.createClass({
     render: function () {
