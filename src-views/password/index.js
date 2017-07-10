@@ -1,2 +1,25 @@
 var Password = require('../../../src/base/password');
-ReactDOM.render(<Password/>, document.getElementById('merry'));
+var Root = React.createClass({
+    getDefaultProps: function () {
+        return {
+            placeHolder: '请输入密码',
+            id: 'passsword',
+            name: 'passsword',
+            displayChar: '.',
+            maxLength: '',
+            isShowClear: true,
+        };
+    },
+    render: function () {
+        return (
+            <div>
+                <label >密码:</label><Password ref="passwd" {...this.props} placeholder={this.props.placeHolder}/>
+            </div>
+        );
+    },
+    componentDidMount: function () {
+        // this.refs.passwd.setDisabled(true);
+        // this.refs.passwd.setReadOnly(true);
+    },
+});
+ReactDOM.render(<Root/>, document.getElementById('merry'));

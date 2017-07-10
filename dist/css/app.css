@@ -168,3 +168,36 @@
 
 .hairline-remove-left-top:before, .hairline-remove-right-bottom-bak:after, .hairline-remove-right-bottom:after {
   display: none; }
+
+.ucs-password-box {
+  position: relative;
+  float: left;
+  background-color: #fff;
+  width: 14rem;
+  height: 2rem;
+  line-height: 2rem;
+  font-size: 14px; }
+  .ucs-password-box .ucs-password {
+    display: inline-block;
+    width: 14rem;
+    height: 2rem;
+    line-height: 2rem;
+    border: none;
+    border: 1px solid #ddd;
+    font-size: 1.3rem;
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
+    position: absolute;
+    left: 5px;
+    top: 0; }
+  .ucs-password-box ::-webkit-input-placeholder {
+    color: #999;
+    font-size: 14px; }
+  .ucs-password-box i.icon-clear {
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    font-style: normal;
+    color: #999; }

@@ -8,21 +8,18 @@ var Password = React.createClass({
             className: classnames('ucs-password', this.props.className),
             readOnly: false,
             disabled: false,
-            isShowClear: false,
             encryptKey: '',
-            encryptType: '',
-            onChange: '',
-            onBlur: '',
-            onFocus: '',
+            encryptType: ''
         };
     },
     getDefaultProps: function () {
         return {
+            isShowClear: false,
             placeHolder: '',
             id: 'passsword',
             name: 'passsword',
-            displayChar: '*',
-            maxLength: '',
+            displayChar: '.',
+            maxLength: ''
         };
     },
     getValue: function () {
@@ -80,14 +77,14 @@ var Password = React.createClass({
     /* 显示清除的标签*/
     _isShowClear: function () {
         if (!this.state.disabled && !this.state.readOnly) {
-            if (this.state.isShowClear) {
-                this.refs.clear.style = 'block';
+            if (this.props.isShowClear) {
+                this.refs.clear.style.display = 'block';
             } else {
-                this.refs.clear.style = 'none';
+                this.refs.clear.style.display = 'none';
             }
 
         } else {
-            this.refs.clear.style = 'none';
+            this.refs.clear.style.display = 'none';
         }
     },
     _keyUpHandle: function (e) {
@@ -107,17 +104,10 @@ var Password = React.createClass({
         this._isShowClear();
     },
     render: function () {
-        var password = [];
-        if (this.props.displayChar) {
-            password.push(<input type="text" ref="password" {...this.props} className={this.state.className} disabled={this.state.disabled} readOnly={this.state.readOnly} onKeyUp={this._keyUpHandle} onBlur={this.onBlur} onFocus={this.onFocus}></input>);
-
-        } else {
-            password.push(<input type="password" ref="password" {...this.props} className={this.state.className} disabled={this.state.disabled} readOnly={this.state.readOnly} onBlur={this.onBlur} onFocus={this.onFocus}></input>);
-        }
         return (
-            <div className="ucs-password">
-                {password}
-                <i className="icon-clear" onClick={this.clear}>X</i>
+            <div className="ucs-password-box">
+                <input type="text" ref="password" {...this.props} className={this.state.className} disabled={this.state.disabled} palceholder={this.props.placeHolder} readOnly={this.state.readOnly} onKeyUp={this._keyUpHandle} onBlur={this.onBlur} onFocus={this.onFocus}></input>
+                <i className="icon-clear" ref='clear' onClick={this.clear}>X</i>
             </div>
         );
     },
