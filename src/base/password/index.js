@@ -3,117 +3,123 @@ var sha1 = require('sha1');
 var md5 = require('js-md5');
 var sha256 = require('sha256');
 var Password = React.createClass({
-    getInitialState:function () {
-        return{
-            className:classnames('ucs-password',this.props.className),
-            readOnly:false,
-            disabled:false,
-            isShowClear:false,
-            encryptKey:'',
-            encryptType:'',
-            onChange:'',
-            onBlur:'',
-            onFocus:''
-        }
+    getInitialState: function () {
+        return {
+            className: classnames('ucs-password', this.props.className),
+            readOnly: false,
+            disabled: false,
+            isShowClear: false,
+            encryptKey: '',
+            encryptType: '',
+            onChange: '',
+            onBlur: '',
+            onFocus: '',
+        };
     },
-    getDefaultProps:function () {
-        return{
-            placeHolder:'',
-            id:'',
-            name:'',
-            displayChar:'',
-            maxLength:''
-        }
+    getDefaultProps: function () {
+        return {
+            placeHolder: '',
+            id: 'passsword',
+            name: 'passsword',
+            displayChar: '*',
+            maxLength: '',
+        };
     },
-    getValue:function () {
+    getValue: function () {
         var encryptType = this.state.encryptType;
         var encryptPassword = '';
         var formalPassword = this.refs.password.value;
-        switch(encryptType)
-        {
+        switch (encryptType) {
             case 'md5':
-                encryptPassword = md5(this.state.encryptKey+formalPassword);
+                encryptPassword = md5(this.state.encryptKey + formalPassword);
                 break;
             case 'sha1':
-                encryptPassword = sha1(this.state.encryptKey+formalPassword);
+                encryptPassword = sha1(this.state.encryptKey + formalPassword);
                 break;
             case 'sha256':
-                encryptPassword = sha256(this.state.encryptKey+formalPassword);
+                encryptPassword = sha256(this.state.encryptKey + formalPassword);
                 break;
             default:
                 encryptPassword = formalPassword;
         }
         return encryptPassword;
     },
-    setReadOnly:function(v){
-        if(v){
+    setReadOnly: function (v) {
+        if (v) {
             this.setState({
-                readOnly:true
-            })
-        }else {
+                readOnly: true,
+            });
+        } else {
             this.setState({
-                readOnly:false
-            })
+                readOnly: false,
+            });
         }
     },
-    setDisabled:function(v){
-        if(v){
+    setDisabled: function (v) {
+        if (v) {
             this.setState({
-                className:classnames(this.state.className,'disabled'),
-                disabled:true
-            })
-        }else {
+                className: classnames(this.state.className, 'disabled'),
+                disabled: true,
+            });
+        } else {
             this.setState({
-                className:classnames('ucs-password',this.props.className),
-                disabled:false
-            })
+                className: classnames('ucs-password', this.props.className),
+                disabled: false,
+            });
         }
     },
-    clear:function(){
-        this.refs.password.value='';
+    clear: function () {
+        this.refs.password.value = '';
     },
-    setEncryptKey:function (v) {
+    setEncryptKey: function (v) {
         this.setState({
-            encryptKey:v
-        })
+            encryptKey: v,
+        });
     },
 
-    /*显示清除的标签*/
-    _isShowClear:function () {
-        if(!this.state.disabled && !this.state.readOnly ){
-            if(this.state.isShowClear){
-                this.refs.clear.style = "block";
-            }else{
-                this.refs.clear.style = "none";
+    /* 显示清除的标签*/
+    _isShowClear: function () {
+        if (!this.state.disabled && !this.state.readOnly) {
+            if (this.state.isShowClear) {
+                this.refs.clear.style = 'block';
+            } else {
+                this.refs.clear.style = 'none';
             }
 
-        }else{
-            this.refs.clear.style = "none";
+        } else {
+            this.refs.clear.style = 'none';
         }
     },
-    _keyUpHandle:function (e) {
+    _keyUpHandle: function (e) {
         var passwordVal = this.refs.password.value;
-        this.refs.password.value = passwordVal.replace(/./g,this.props.displayChar);
+        this.refs.password.value = passwordVal.replace(/./g, this.props.displayChar);
     },
-    onChange:function (e) {
+    onChange: function (e) {
         this.props.onChange ? this.props.onChange(e) : '';
     },
-    onBlur:function (e) {
+    onBlur: function (e) {
         this.props.onBlur ? this.props.onBlur(e) : '';
     },
-    onFocus:function (e) {
+    onFocus: function (e) {
         this.props.onFocus ? this.props.onFocus(e) : '';
     },
-    componentDidMount:function () {
+    componentDidMount: function () {
         this._isShowClear();
     },
-    render:function(){
-        return(
+    render: function () {
+        var password = [];
+        if (this.props.displayChar) {
+            password.push(<input type="text" ref="password" {...this.props} className={this.state.className} disabled={this.state.disabled} readOnly={this.state.readOnly} onKeyUp={this._keyUpHandle} onBlur={this.onBlur} onFocus={this.onFocus}></input>);
+
+        } else {
+            password.push(<input type="password" ref="password" {...this.props} className={this.state.className} disabled={this.state.disabled} readOnly={this.state.readOnly} onBlur={this.onBlur} onFocus={this.onFocus}></input>);
+        }
+        return (
             <div className="ucs-password">
-                <input type="text" ref="password" {...this.props} className={this.state.className} disabled={this.state.disabled}  readOnly={this.state.readOnly} onKeyUp={this._keyUpHandle}></input>
+                {password}
                 <i className="icon-clear" onClick={this.clear}>X</i>
             </div>
-        )
-    }
+        );
+    },
 });
-moudle.exports = Password;
+module.exports = Password;
