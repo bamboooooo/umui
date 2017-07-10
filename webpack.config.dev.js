@@ -110,7 +110,7 @@ var css_config = {
 		'app': './scss/app.scss'
 	},
 	output: {
-		path: path.resolve(__dirname, 'examples'),
+		path: path.resolve(__dirname, 'dist/css'),
 		filename: 'app.css'
 	},
 	plugins: [
