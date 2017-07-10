@@ -8,7 +8,7 @@ var glob = require('glob');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWepackPlugin = require('copy-webpack-plugin');
-const SOURCE_DIR = 'examples/src/';
+const SOURCE_DIR = './src-views/';
 const PRODUCT_DIR = 'examples';
 
 var getEntrys = function(globPath) {

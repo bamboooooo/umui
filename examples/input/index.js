@@ -63,16 +63,37 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */,
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 0 */
+/***/ (function(module, exports) {
 
-var Password = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../../src/base/password\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-ReactDOM.render(React.createElement(Password, null), document.getElementById('merry'));
+var Test = React.createClass({
+	displayName: 'Test',
+
+	getInitialState: function getInitialState() {
+		return {
+			a: 'a',
+			b: ''
+		};
+	},
+	render: function render() {
+		return React.createElement(
+			'div',
+			null,
+			'dfdfdfdf'
+		);
+	}
+});
+var Root = React.createElement(
+	'div',
+	null,
+	React.createElement(Test, null)
+);
+function aa() {}
+ReactDOM.render(Root, document.querySelector('#merry'));
 
 /***/ })
 /******/ ]);
