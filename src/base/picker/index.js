@@ -136,15 +136,15 @@ var Picker = React.createClass({
                 </div>
                 <div className={classes} onClick={this.onContainerClick}>
                     <div className="am-picker-popup-mask" onClick={this.onMaskClick}></div>
-                    <div tabIndex="-1" className="am-picker-popup-wrap " role="dialog">
+                    <div tabIndex="-1" className="am-picker-popup-wrap" role="dialog">
                         <div role="document" className="am-picker-popup forss">
                             <div className="am-picker-popup-content">
                                 <div className="am-picker-popup-body">
                                     <div>
                                         <div className="am-picker-popup-header">
-                                            <div className="am-picker-popup-item am-picker-popup-header-left">{cancelText}</div>
+                                            <div className="am-picker-popup-item am-picker-popup-header-left" onClick={this.onCancel}>{cancelText}</div>
                                             <div className="am-picker-popup-item am-picker-popup-title">{title}</div>
-                                            <div className="am-picker-popup-item am-picker-popup-header-right">{okText}</div>
+                                            <div className="am-picker-popup-item am-picker-popup-header-right" onClick={this.onOk}>{okText}</div>
                                         </div>
                                         <div className="am-picker">
                                             <div className="am-picker-item">

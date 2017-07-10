@@ -276,7 +276,7 @@ var Picker = React.createClass({
                 React.createElement('div', { className: 'am-picker-popup-mask', onClick: this.onMaskClick }),
                 React.createElement(
                     'div',
-                    { tabIndex: '-1', className: 'am-picker-popup-wrap ', role: 'dialog' },
+                    { tabIndex: '-1', className: 'am-picker-popup-wrap', role: 'dialog' },
                     React.createElement(
                         'div',
                         { role: 'document', className: 'am-picker-popup forss' },
@@ -294,7 +294,7 @@ var Picker = React.createClass({
                                         { className: 'am-picker-popup-header' },
                                         React.createElement(
                                             'div',
-                                            { className: 'am-picker-popup-item am-picker-popup-header-left' },
+                                            { className: 'am-picker-popup-item am-picker-popup-header-left', onClick: this.onCancel },
                                             cancelText
                                         ),
                                         React.createElement(
@@ -304,7 +304,7 @@ var Picker = React.createClass({
                                         ),
                                         React.createElement(
                                             'div',
-                                            { className: 'am-picker-popup-item am-picker-popup-header-right' },
+                                            { className: 'am-picker-popup-item am-picker-popup-header-right', onClick: this.onOk },
                                             okText
                                         )
                                     ),
