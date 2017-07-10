@@ -17,10 +17,7 @@ overflowNum | 超过多少个分段，滑动显示 | number | 5
 selectedIndex | 默认选中的分段 | string | 1
 values | 显示在每个分段的文本内容 | json | [{'icon': 'icon1', 'text': '分段一', 'value': '1'}, {'icon': 'icon2', 'text': '分段二', 'value': '2'}, {'icon': 'icon3', 'text': '分段三', 'value': '3'}]
 
-`文本或图标内容放在children中:<Popover>更多</Popover>`
-
 ---
-
 
 ## 三、方法说明
 ### 1.setValue(v)
