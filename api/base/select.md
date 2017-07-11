@@ -15,7 +15,7 @@ id|dom元素id|string|无
 disabled | 是否禁用 | bool |false
 placeHolder | 占位符 | string | ''
 name|dom元素name|string|无
-data|option数据|json|无
+data|option数据[{option:'选项一',value:'1']|json|无
 value | 值 | string | 无
 defaultValue | 初始默认值（对应data中的value值）|string|无
 onChange|绑定change事件的监控事件|function|无
@@ -38,7 +38,7 @@ onChange|绑定change事件的监控事件|function|无
 > 获取组件的value
 
 #### 返回值
-- string 没有值时返回''
+- json {value:'1',option:'选项一',index:0}  没有值时返回''
 
 
 ### 3.setDisabled(v)
