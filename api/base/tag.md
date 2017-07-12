@@ -27,11 +27,20 @@ id|dom元素id|string|无
 #### 返回值
 - void
 
-### 2.setDisplay(b)
-> 设置组件显示或隐藏
+### 2.show()
+> 设置组件显示
 
 #### 参数
-- b: bool类型，true 显示； false 隐藏
+- 无
+
+#### 返回值
+- void
+
+### 3.hide()
+> 设置组件隐藏
+
+#### 参数
+- 无
 
 #### 返回值
 - void
