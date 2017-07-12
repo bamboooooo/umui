@@ -1,4 +1,4 @@
-# segmentedControl组件
+# SegmentedControl组件
 > 分段组件
 ## 一、功能说明
 ### 1.将容器平均分成若干等份，可作为分组按钮等。
