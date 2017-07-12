@@ -14,7 +14,7 @@ className | 样式类名 | string |无
 disabled | 是否禁用 | bool |false
 id|dom元素id|string|无
 onClick|绑定click事件的监控事件|function|无
-
+name| dom元素name属性| string | 无
 ---
 
 ## 三、方法说明
