@@ -24,7 +24,7 @@ onClick|绑定click事件|function|无
 > 显示漂浮按钮组件
 
 #### 参数
-- v: bool，true为开，false为关
+- void
 
 #### 返回值
 - void
