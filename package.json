@@ -18,6 +18,7 @@
     "html-webpack-plugin": "^2.29.0",
     "jsdom": "^11.1.0",
     "mocha": "^3.4.2",
+    "mochawesome": "^2.3.0",
     "react": "15.5.4",
     "react-dom": "15.5.4",
     "style-loader": "^0.18.1",
@@ -40,9 +41,10 @@
     "sha256": "^0.2.0"
   },
   "scripts": {
-    "test": "mocha ./tests/**/test.js --compilers js:babel-register --require ./tests/setup.js",
     "dev": "node ./node_modules/webpack/bin/webpack --config webpack.config.dev.js --progress --watch",
-    "eslint": "node ./node_modules/eslint/bin/eslint --config eslintrc.js ./src-views ./src/ --fix"
+    "eslint": "node ./node_modules/eslint/bin/eslint --config eslintrc.js ./src-views ./src/ --fix",
+    "test": "mocha ./tests/**/test.js --compilers js:babel-register --require ./tests/setup.js",
+    "testreport": "mocha ./tests/**/test.js --compilers js:babel-register --require ./tests/setup.js --reporter mochawesome"
   },
   "author": "",
   "license": "ISC"
