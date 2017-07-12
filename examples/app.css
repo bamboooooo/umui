@@ -179,28 +179,19 @@
   font-size: 14px; }
   .ucs-password-box .ucs-password {
     display: inline-block;
-    width: 12rem;
-    padding: 0 1.5rem 0 .5rem;
+    width: 14rem;
     height: 2rem;
     line-height: 2rem;
     border: none;
     border: 1px solid #ddd;
     font-size: 1.3rem;
+    padding: 0;
     margin: 0;
     vertical-align: middle;
     position: absolute;
     left: 5px;
     top: 0; }
   .ucs-password-box ::-webkit-input-placeholder {
-    color: #999;
-    font-size: 14px; }
-  .ucs-password-box :-moz-placeholder {
-    color: #999;
-    font-size: 14px; }
-  .ucs-password-box ::-moz-placeholder {
-    color: #999;
-    font-size: 14px; }
-  .ucs-password-box :-ms-input-placeholder {
     color: #999;
     font-size: 14px; }
   .ucs-password-box i.icon-clear {

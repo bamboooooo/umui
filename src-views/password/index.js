@@ -5,7 +5,6 @@ var Root = React.createClass({
             placeHolder: '请输入密码',
             id: 'passsword',
             name: 'passsword',
-            displayChar: '.',
             maxLength: '',
             isShowClear: true
         };
