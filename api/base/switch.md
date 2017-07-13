@@ -14,15 +14,14 @@ className | 样式类名 | string |无
 id|dom元素id|string|无
 checked | 是否默认选中 | bool | false
 disabled | 禁用	 | bool |false
-name | switch 的 name | string | ''
 onChange|绑定change事件的监控事件|function|无
 
 
 ---
 
 ## 三、方法说明
-### 1.setValue(v)
-> 设置组件的value
+### 1.setChecked(v)
+> 设置组件的checked
 
 #### 参数
 - v: bool，true为开，false为关
@@ -31,8 +30,8 @@ onChange|绑定change事件的监控事件|function|无
 - void
 
 
-### 2.getValue()
-> 获取组件的value
+### 2.getChecked()
+> 获取组件的checked
 
 #### 返回值
 - bool true为开，false为关
