@@ -93,13 +93,13 @@ var Password = React.createClass({
         var passwordVal = this.refs.password.value;
         this.refs.password.value = passwordVal.replace(/./g, this.props.displayChar);
     },
-    onChange: function (e) {
+    changeHandle: function (e) {
         this.props.onChange ? this.props.onChange(e) : '';
     },
-    onBlur: function (e) {
+    blurHandle: function (e) {
         this.props.onBlur ? this.props.onBlur(e) : '';
     },
-    onFocus: function (e) {
+    focusHandle: function (e) {
         this.props.onFocus ? this.props.onFocus(e) : '';
     },
     componentDidUpdate: function () {
@@ -111,7 +111,7 @@ var Password = React.createClass({
     render: function () {
         return (
             <div className="ucs-password-box">
-                <input type="text" ref="password" {...this.props} className={this.state.className} disabled={this.state.disabled} palceholder={this.props.placeHolder} readOnly={this.state.readOnly} onKeyUp={this._keyUpHandle} onBlur={this.onBlur} onFocus={this.onFocus} />
+                <input type="text" ref="password" {...this.props} className={this.state.className} encryptKey={this.state.encryptKey} disabled={this.state.disabled} palceholder={this.props.placeHolder} readOnly={this.state.readOnly} onKeyUp={this._keyUpHandle} onBlur={this.blurHandle} onFocus={this.focusHandle} onChange={this.changeHandle}/>
                 <i className="icon-clear" ref='clear' onClick={this.clear}>X</i>
             </div>
         );

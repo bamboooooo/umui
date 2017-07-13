@@ -13486,13 +13486,13 @@ var Password = React.createClass({
         var passwordVal = this.refs.password.value;
         this.refs.password.value = passwordVal.replace(/./g, this.props.displayChar);
     },
-    onChange: function onChange(e) {
+    changeHandle: function changeHandle(e) {
         this.props.onChange ? this.props.onChange(e) : '';
     },
-    onBlur: function onBlur(e) {
+    blurHandle: function blurHandle(e) {
         this.props.onBlur ? this.props.onBlur(e) : '';
     },
-    onFocus: function onFocus(e) {
+    focusHandle: function focusHandle(e) {
         this.props.onFocus ? this.props.onFocus(e) : '';
     },
     componentDidUpdate: function componentDidUpdate() {
@@ -13505,7 +13505,7 @@ var Password = React.createClass({
         return React.createElement(
             'div',
             { className: 'ucs-password-box' },
-            React.createElement('input', _extends({ type: 'text', ref: 'password' }, this.props, { className: this.state.className, disabled: this.state.disabled, palceholder: this.props.placeHolder, readOnly: this.state.readOnly, onKeyUp: this._keyUpHandle, onBlur: this.onBlur, onFocus: this.onFocus })),
+            React.createElement('input', _extends({ type: 'text', ref: 'password' }, this.props, { className: this.state.className, encryptKey: this.state.encryptKey, disabled: this.state.disabled, palceholder: this.props.placeHolder, readOnly: this.state.readOnly, onKeyUp: this._keyUpHandle, onBlur: this.blurHandle, onFocus: this.focusHandle, onChange: this.changeHandle })),
             React.createElement(
                 'i',
                 { className: 'icon-clear', ref: 'clear', onClick: this.clear },

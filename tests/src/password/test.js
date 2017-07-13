@@ -93,3 +93,69 @@ describe('Password-setEncryptKey()方法测试', function () {
         expect(password.state.encryptKey).to.equal('1111');
     });
 });
+
+
+/*onChange()方法测试*/
+describe('Password-onChange()方法测试', function () {
+    it('--------------onChange()方法测试-----------------', function () {
+        const password = TestUtils.renderIntoDocument(<Password onChange={changeHandle}/>);
+        function changeHandle() {
+            password.refs.password.value = '123456';
+        }
+        const passwordDOM = findDOMNode(password);
+        const inputItem = passwordDOM.querySelector('input');
+        TestUtils.Simulate.change(inputItem);
+        expect(password.refs.password.value).to.equal('123456');
+    });
+});
+
+/*onBlur()方法测试*/
+describe('Password-onBlur()方法测试', function () {
+    it('--------------onBlur()方法测试-----------------', function () {
+        const password = TestUtils.renderIntoDocument(<Password onBlur={blurHandle}/>);
+        function blurHandle() {
+            password.refs.password.value = '123456';
+        }
+        const passwordDOM = findDOMNode(password);
+        const inputItem = passwordDOM.querySelector('input');
+        TestUtils.Simulate.blur(inputItem);
+        expect(password.refs.password.value).to.equal('123456');
+    });
+});
+
+
+/*onFocus()方法测试*/
+describe('Password-onFocus()方法测试', function () {
+    it('--------------onFocus()方法测试-----------------', function () {
+        const password = TestUtils.renderIntoDocument(<Password onFocus={focusHandle}/>);
+        function focusHandle() {
+            password.refs.password.value = '123456';
+        }
+        const passwordDOM = findDOMNode(password);
+        const inputItem = passwordDOM.querySelector('input');
+        TestUtils.Simulate.focus(inputItem);
+        expect(password.refs.password.value).to.equal('123456');
+    });
+});
+
+/*_isShowClear()方法测试*/
+describe('Password-_isShowClear()方法测试', function () {
+    it('--------------_isShowClear()方法测试-----------------', function () {
+        const password = TestUtils.renderIntoDocument(<Password/>);
+        const passwordDOM = findDOMNode(password);
+        const clearItem = passwordDOM.querySelector('i');
+        expect(clearItem.style.display).to.equal('none');
+    });
+});
+
+/*_keyUpHandle()方法测试*/
+describe('Password-_keyUpHandle()方法测试', function () {
+    it('--------------_keyUpHandle()方法测试-----------------', function () {
+        const password = TestUtils.renderIntoDocument(<Password  displayChar="."/>);
+        const passwordDOM = findDOMNode(password);
+        const inputItem = passwordDOM.querySelector('input');
+        password.refs.password.value = '123456';
+        TestUtils.Simulate.keyUp(inputItem);
+        expect(password.refs.password.value).to.equal('......');
+    });
+});
