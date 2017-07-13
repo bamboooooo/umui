@@ -1,5 +1,6 @@
 # Button组件
 > 按钮用于开始一个即时操作
+
 ## 一、功能说明
 ### 1.标记了一个操作命令，响应用户点击行为，触发相应的业务逻辑。
 
@@ -14,7 +15,7 @@ className | 样式类名 | string |无
 disabled | 是否禁用 | bool |false
 id|dom元素id|string|无
 onClick|绑定click事件的监控事件|function|无
-
+name| dom元素name属性| string | 无
 ---
 
 ## 三、方法说明

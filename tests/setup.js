@@ -5,4 +5,5 @@ if(typeof document === 'undefined') {
 	global.navigator = global.window.navigator;
 	global.event = global.window.event;
 	global.React = require('react');
+	global.ReactDOM = require('react-dom');
 }

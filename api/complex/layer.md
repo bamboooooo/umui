@@ -24,7 +24,7 @@ closeBack | 点击关闭按钮的回调事件 | function | 无
 ---
 
 ## 三、方法说明
-### 1.layerOpen()
+### 1.show()
 > 打开自定义弹窗
 
 
@@ -32,7 +32,7 @@ closeBack | 点击关闭按钮的回调事件 | function | 无
 - void
 
 
-### 2.layerClose()
+### 2.hide()
 > 关闭自定义弹窗
 
 #### 返回值

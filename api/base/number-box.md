@@ -1,7 +1,7 @@
-# Select组件
-> 下拉选择组件
+# NumberBox组件
+> 数字输入功能组件
 ## 一、功能说明
-### 1.下拉选择框。
+### 1.数组输入框，有`+`,`-`两个按钮，可按基数增减。
 
 ---
 
@@ -15,10 +15,13 @@ id|dom元素id|string|无
 disabled | 是否禁用 | bool |false
 placeHolder | 占位符 | string | ''
 name|dom元素name|string|无
-data|option数据[{option:'选项一',value:'1'}]|json|无
+min|最小值|number|无
+max|最大值|number|无
+step|阀值|number|无
+formatter|指定输入框展示值的格式|`function(value: number)`|无
 value | 值 | string | 无
 defaultValue | 初始默认值（对应data中的value值）|string|无
-onChange|绑定change事件的监控事件|function|无
+onChange|绑定change事件的监控事件|`function(value: number)`|无
 
 
 ---
@@ -38,7 +41,7 @@ onChange|绑定change事件的监控事件|function|无
 > 获取组件的value
 
 #### 返回值
-- json {value:'1',option:'选项一',index:0}  没有值时返回''
+- string 没有值时返回''
 
 
 ### 3.setDisabled(v)

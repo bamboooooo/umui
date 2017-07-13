@@ -51,11 +51,20 @@ onClick | 点击事件 | function | 无
 #### 返回值
 - string 没有值时返回 ''
 
-### 3.setDisplay(b)
-> 设置组件显示或隐藏
+### 3.show()
+> 设置组件显示
 
 #### 参数
-- b: bool类型，true 显示； false 隐藏
+- 无
+
+#### 返回值
+- void
+
+### 4.hide()
+> 设置组件隐藏
+
+#### 参数
+- 无
 
 #### 返回值
 - void
