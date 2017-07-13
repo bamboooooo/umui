@@ -46,3 +46,10 @@ onChange|绑定change事件的监控事件|function|无
 
 #### 返回值
 - void
+
+
+### 4.reset()
+> 重置组件的值，如果设置了`checked`,执行此方法则将组件设置为`checked`，如果组件没有设置`checked`，则checked = false
+
+#### 返回值
+- void
