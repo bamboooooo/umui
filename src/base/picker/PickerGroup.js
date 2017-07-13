@@ -115,7 +115,7 @@ var PickerGroup = React.createClass({
         var values = this.state.value.concat();
 
         if (!values || !values.length) {
-            var data = dataSource;
+            var data = this.state.data;
             if (this.state.cascade) {
                 for (var i = 0; i < this.props.cols; i += 1) {
                     if (data && data.length) {
