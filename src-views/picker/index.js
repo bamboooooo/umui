@@ -1,38 +1,34 @@
 var Picker = require('../../src/base/picker');
-
+var District = require('./district');
+var seasons = [
+    [
+        {
+            label: '2013',
+            value: '2013'
+        },
+        {
+            label: '2014',
+            value: '2014'
+        }
+    ],
+    [
+        {
+            label: '春',
+            value: '春'
+        },
+        {
+            label: '夏',
+            value: '夏'
+        }
+    ]
+];
 var Root = React.createClass({
-    getInitialState: function () {
-        return {
-            CascaderPicker: false,
-            sValue: [],
-            disabled: false
-        };
-    },
     render: function () {
-        var province = ['安徽省', '澳门特别行政区', '北京', '广西壮族自治区', '香港特别行政区', '浙江省'];
         return (
-            <Picker
-                visible={this.state.CascaderPicker}
-                title="请选择"
-                placeholder="请选择"
-                format=""
-                disabled={this.state.disabled}
-                dataSource={province}
-                cols={1}
-                displayMember="label"
-                valueMember="label"
-                value={this.state.sValue}
-                onChange={function (value) {
-                    console.log('外部change value ->', value);
-                    this.setState({sValue: value});
-                }}
-                onOk={function (value) {
-                    console.log(value);
-                }}
-                onCancel={function () {
-                    console.log(123);
-                }}
-            />
+            <div>
+                <Picker.Group dataSource={District} cols={3}/>
+                <Picker.Group dataSource={seasons}/>
+            </div>
         );
     }
 });
