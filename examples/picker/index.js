@@ -125,7 +125,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /***/ }),
 
 /***/ 26:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 var district = [{
     'value': '340000',
@@ -18225,7 +18228,10 @@ module.exports = district;
 /***/ }),
 
 /***/ 42:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 /**
  * Created by Administrator on 2017/7/11.
@@ -18247,6 +18253,9 @@ module.exports = Option;
 
 /***/ 43:
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 /**
  * Created by Administrator on 2017/6/27.
@@ -18433,6 +18442,9 @@ module.exports = Picker;
 /***/ 74:
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
 /**
  * Created by Administrator on 2017/7/11.
  */
@@ -18447,6 +18459,9 @@ module.exports = Picker;
 
 /***/ 84:
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 var Picker = __webpack_require__(74);
 var District = __webpack_require__(26);
@@ -18481,6 +18496,9 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'
 
 /***/ 85:
 /***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -18605,7 +18623,7 @@ var PickerGroup = React.createClass({
         var values = this.state.value.concat();
 
         if (!values || !values.length) {
-            var data = dataSource;
+            var data = this.state.data;
             if (this.state.cascade) {
                 for (var i = 0; i < this.props.cols; i += 1) {
                     if (data && data.length) {
