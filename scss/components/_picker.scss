@@ -1,3 +1,6 @@
+.am-picker-placeholder{
+  font-size: .5rem;
+}
 .am-picker-col {
   display: block;
   position: relative;
@@ -95,16 +98,21 @@
 .am-picker-popup-wrap {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-  outline: 0
-}
-
-.am-picker-popup-mask,.am-picker-popup-wrap {
+  outline: 0;
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   z-index: 1000
+}
+
+.am-picker-popup-mask{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 .am-picker-popup-mask {
