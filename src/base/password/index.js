@@ -8,22 +8,23 @@ var Password = React.createClass({
             className: classnames('ucs-password', this.props.className),
             readOnly: false,
             disabled: false,
-            encryptKey: '',
-            encryptType: ''
+            encryptKey: ''
+
         };
     },
     getDefaultProps: function () {
         return {
             isShowClear: false,
             placeHolder: '',
-            id: 'passsword',
-            name: 'passsword',
+            id: '',
+            name: '',
             displayChar: '.',
-            maxLength: ''
+            maxLength: '',
+            encryptType: ''
         };
     },
     getValue: function () {
-        var encryptType = this.state.encryptType;
+        var encryptType = this.props.encryptType;
         var encryptPassword = '';
         var formalPassword = this.refs.password.value;
         switch (encryptType) {
@@ -77,6 +78,7 @@ var Password = React.createClass({
     /* 显示清除的标签*/
     _isShowClear: function () {
         if (!this.state.disabled && !this.state.readOnly) {
+            console.log(this.state.readOnly);
             if (this.props.isShowClear) {
                 this.refs.clear.style.display = 'block';
             } else {
@@ -99,6 +101,9 @@ var Password = React.createClass({
     },
     onFocus: function (e) {
         this.props.onFocus ? this.props.onFocus(e) : '';
+    },
+    componentDidUpdate: function () {
+        this._isShowClear();
     },
     componentDidMount: function () {
         this._isShowClear();
