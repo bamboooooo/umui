@@ -6,10 +6,9 @@ var Password = React.createClass({
     getInitialState: function () {
         return {
             className: classnames('ucs-password', this.props.className),
-            readOnly: false,
-            disabled: false,
-            encryptKey: ''
-
+            readOnly: this.props.readOnly ? this.props.readOnly : false,
+            disabled: this.props.disabled ? this.props.disabled : false,
+            encryptKey: this.props.encryptKey ? this.props.encryptKey : ''
         };
     },
     getDefaultProps: function () {
