@@ -12,22 +12,28 @@
 参数 | 说明 | 类型 | 默认值
 ---|---|---|---|---
 className | 样式类名 | string |无
-displayText | 是否显示文本 | bool | true
 id|dom元素id|string|无
+value|显示的文本|string|无
 
 ---
 
 ## 三、方法说明
-### 1.setValue(t)
+### 1.setValue(v)
 > 设置组件的文本内容
 
 #### 参数
-- t: string类型，设置的值
+- v: string类型，设置的值
 
 #### 返回值
 - void
 
-### 2.show()
+### 2.getValue()
+> 获取组件的文本内容
+
+#### 返回值
+- void
+
+### 3.show()
 > 设置组件显示
 
 #### 参数
@@ -36,7 +42,7 @@ id|dom元素id|string|无
 #### 返回值
 - void
 
-### 3.hide()
+### 4.hide()
 > 设置组件隐藏
 
 #### 参数
@@ -44,5 +50,3 @@ id|dom元素id|string|无
 
 #### 返回值
 - void
-
-` <Tag>new</Tag> 最终会被渲染为 <i>new</i>`
