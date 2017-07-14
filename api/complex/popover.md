@@ -10,6 +10,8 @@
 
 参数 | 说明 | 类型 | 默认值
 ---|---|---|---|---
+className | 样式类名 | string |无
+id|dom元素id|string|无
 autoSlideUp | 是否点击后收起 | bool | true
 displayListsIcon | 是否显示菜单（列表）图标 | bool | true
 displayMaskLayer | 是否显示遮罩层 | bool | true
