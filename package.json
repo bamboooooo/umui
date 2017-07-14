@@ -44,7 +44,7 @@
     "dev": "node ./node_modules/webpack/bin/webpack --config webpack.config.dev.js --progress --watch",
     "eslint": "node ./node_modules/eslint/bin/eslint --config eslintrc.js ./src-views ./src/ --fix",
     "test": "mocha ./tests/**/test.js --compilers js:babel-register --require ./tests/setup.js",
-    "testreport": "mocha ./tests/**/test.js --compilers js:babel-register --require ./tests/setup.js --reporter mochawesome --reporter-options reportDir=tests-report,reportFilename=report,reportTitle=UMUI,reportPageTitle=UMUI,timestamp=yyyymmddHHMMss"
+    "testreport": "mocha ./tests/**/test.js --compilers js:babel-register --require ./tests/setup.js --reporter mochawesome --reporter-options reportDir=/devdata/tests-report,reportFilename=report,reportTitle=UMUI,reportPageTitle=UMUI,timestamp=yyyymmddHHMMss"
   },
   "author": "",
   "license": "ISC"
