@@ -157,4 +157,4 @@ var css_config = {
 	},
 }
 
-module.exports = [app_src_config];
+module.exports = [app_src_config,css_config];
