@@ -1,5 +1,6 @@
 # NumberBox组件
 > 数字输入功能组件
+
 ## 一、功能说明
 ### 1.数组输入框，有`+`,`-`两个按钮，可按基数增减。
 
@@ -18,7 +19,7 @@ min|最小值|number|无
 max|最大值|number|无
 step|阀值|number|无
 formatter|指定输入框展示值的格式|`function(value: number)`|无
-value | 值 | string | 0
+value | 值，达到最大最小值时对应的按钮不可点击 | string | 0
 defaultValue | 初始默认值（对应data中的value值）|string|无
 onChange|绑定change事件的监控事件|`function(value: number)`|无
 
