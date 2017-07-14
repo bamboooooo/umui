@@ -13,6 +13,7 @@
 autoSlideUp | 是否点击后收起 | bool | true
 displayListsIcon | 是否显示菜单（列表）图标 | bool | true
 displayMaskLayer | 是否显示遮罩层 | bool | true
+onClick|绑定click事件|function(index)|无
 lists | 弹出菜单（列表） | json | [{'icon': 'icon1', 'text': '菜单一', 'value': '1'}, {'icon': 'icon2', 'text': '菜单二', 'value': '2'}, {'icon': 'icon3', 'text': '菜单三', 'value': '3'}]
 
 `文本或图标内容放在children中:<Popover>更多</Popover>`
@@ -72,15 +73,6 @@ lists | 弹出菜单（列表） | json | [{'icon': 'icon1', 'text': '菜单一'
 
 #### 参数
 - 无
-
-#### 返回值
-- void
-
-### 8.clickHandle(e)
-> 菜单（列表）项点击事件
-
-#### 参数
-- e: 当前点击的事件的event对象
 
 #### 返回值
 - void
