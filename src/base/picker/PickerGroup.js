@@ -2,6 +2,7 @@
  * Created by Administrator on 2017/7/11.
  */
 var classnames = require('classnames');
+var Util = require('./Utils');
 var Picker = require('./Picker');
 var PickerGroup = React.createClass({
     getDefaultProps: function () {
@@ -16,11 +17,11 @@ var PickerGroup = React.createClass({
             dataSource: [],
             cols: 3,
             value: [],
-            onClick: function () {
-                console.log(123);
+            onClick: function (v) {
+                console.log(v);
             },
-            onChange: function () {
-                console.log(123);
+            onChange: function (v) {
+                console.log(v);
             },
             onOk: function (v) {
                 console.log(v);
@@ -28,11 +29,9 @@ var PickerGroup = React.createClass({
             onCancel: function (v) {
                 console.log(v);
             },
-            onMaskClick: function () {
-                console.log(123);
+            onMaskClick: function (v) {
+                console.log(v);
             },
-            prefixCls: 'ui-picker-column-group',
-            pickerPrefixCls: 'ui-cascaderpicker',
             displayMember: 'label',
             valueMember: 'value'
         };
@@ -110,12 +109,14 @@ var PickerGroup = React.createClass({
     },
     // 选择器选值
     onpickerChange: function (dataSource, level, value) {
+        var _this = this;
         var displayMember = this.props.displayMember;
+        var onChange = this.props.onChange;
 
         var values = this.state.value.concat();
 
         if (!values || !values.length) {
-            var data = this.state.data;
+            var data = this.props.dataSource;
             if (this.state.cascade) {
                 for (var i = 0; i < this.props.cols; i += 1) {
                     if (data && data.length) {
@@ -143,6 +144,16 @@ var PickerGroup = React.createClass({
                     ? dataSource[0][displayMember]
                     : undefined;
             }
+            var children = Util.arrayTreeFilter(_this.props.dataSource, function (item, lv) {
+                return lv <= level && item[displayMember] === values[lv];
+            });
+            var data = children[level];
+            var ii;
+            for (ii = level + 1; data && data.children && data.children.length && ii < this.props.cols; ii += 1) {
+                data = data.children[0];
+                values[ii] = data[displayMember];
+            }
+            values.length = ii;
         } else {
             values[level] = value;
         }
@@ -150,6 +161,7 @@ var PickerGroup = React.createClass({
         this.setState({
             value: values
         });
+        onChange && onChange(values);
     },
     getInitValue: function () {
         var data = this.state.data;
@@ -202,13 +214,13 @@ var PickerGroup = React.createClass({
         var okText = this.props.okText;
         var pickers = this.getOptions(dataSource, 0);
         var classes = classnames({
-            'am-picker-container': true,
-            'am-picker-popup-mask-hidden': !this.state.visible,
+            'ucs-picker-container': true,
+            'ucs-picker-popup-mask-hidden': !this.state.visible,
             [className]: !!className
         });
 
         var inputCls = classnames({
-            'am-picker-placeholder': !value.join(format)
+            'ucs-picker-placeholder': !value.join(format)
         });
 
         return (
@@ -217,18 +229,18 @@ var PickerGroup = React.createClass({
                     {value.join(format) || placeholder}
                 </div>
                 <div className={classes} onClick={this.onContainerClick}>
-                    <div tabIndex="-1" className="am-picker-popup-wrap" role="dialog">
-                        <div className="am-picker-popup-mask" onClick={this.onMaskClick}></div>
-                        <div role="document" className="am-picker-popup forss">
-                            <div className="am-picker-popup-content">
-                                <div className="am-picker-popup-body">
+                    <div tabIndex="-1" className="ucs-picker-popup-wrap" role="dialog">
+                        <div className="ucs-picker-popup-mask" onClick={this.onMaskClick}></div>
+                        <div role="document" className="ucs-picker-popup forss">
+                            <div className="ucs-picker-popup-content">
+                                <div className="ucs-picker-popup-body">
                                     <div>
-                                        <div className="am-picker-popup-header">
-                                            <div className="am-picker-popup-item am-picker-popup-header-left" onClick={this.onCancel}>{cancelText}</div>
-                                            <div className="am-picker-popup-item am-picker-popup-title">{title}</div>
-                                            <div className="am-picker-popup-item am-picker-popup-header-right" onClick={this.onOk}>{okText}</div>
+                                        <div className="ucs-picker-popup-header">
+                                            <div className="ucs-picker-popup-item ucs-picker-popup-header-left" onClick={this.onCancel}>{cancelText}</div>
+                                            <div className="ucs-picker-popup-item ucs-picker-popup-title">{title}</div>
+                                            <div className="ucs-picker-popup-item ucs-picker-popup-header-right" onClick={this.onOk}>{okText}</div>
                                         </div>
-                                        <div className="am-picker">
+                                        <div className="ucs-picker">
                                             {pickers}
                                         </div>
                                     </div>

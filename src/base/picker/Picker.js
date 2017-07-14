@@ -142,14 +142,14 @@ var Picker = React.createClass({
 
         var options = dataSource.map(function (item, index) {
             var className = classnames({
-                'am-picker-col-item': true,
-                'am-picker-col-item-selected': item[displayMember] === curValue
+                'ucs-picker-col-item': true,
+                'ucs-picker-col-item-selected': item[displayMember] === curValue
             });
             return <Option key={index} value={item[valueMember]} className={className}>{item[displayMember]}</Option>;
         });
 
         var cls = classnames({
-            'am-picker-item': true,
+            'ucs-picker-item': true,
             'disabled': 'disabled' in this.props || isDisabled
         });
 
@@ -159,10 +159,10 @@ var Picker = React.createClass({
                 onTouchStart={this.onTouchStart}
                 onTouchMove={this.onTouchMove}
                 onTouchEnd={this.onTouchEnd}>
-                <div className="am-picker-col">
-                    <div className="am-picker-col-mask"></div>
-                    <div className="am-picker-col-indicator"></div>
-                    <div className="am-picker-col-content" ref="picker">
+                <div className="ucs-picker-col">
+                    <div className="ucs-picker-col-mask"></div>
+                    <div className="ucs-picker-col-indicator"></div>
+                    <div className="ucs-picker-col-content" ref="picker">
                         {options}
                     </div>
                 </div>

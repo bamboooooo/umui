@@ -18399,8 +18399,8 @@ var Picker = React.createClass({
 
         var options = dataSource.map(function (item, index) {
             var className = classnames({
-                'am-picker-col-item': true,
-                'am-picker-col-item-selected': item[displayMember] === curValue
+                'ucs-picker-col-item': true,
+                'ucs-picker-col-item-selected': item[displayMember] === curValue
             });
             return React.createElement(
                 Option,
@@ -18410,7 +18410,7 @@ var Picker = React.createClass({
         });
 
         var cls = classnames({
-            'am-picker-item': true,
+            'ucs-picker-item': true,
             'disabled': 'disabled' in this.props || isDisabled
         });
 
@@ -18423,12 +18423,12 @@ var Picker = React.createClass({
                 onTouchEnd: this.onTouchEnd },
             React.createElement(
                 'div',
-                { className: 'am-picker-col' },
-                React.createElement('div', { className: 'am-picker-col-mask' }),
-                React.createElement('div', { className: 'am-picker-col-indicator' }),
+                { className: 'ucs-picker-col' },
+                React.createElement('div', { className: 'ucs-picker-col-mask' }),
+                React.createElement('div', { className: 'ucs-picker-col-indicator' }),
                 React.createElement(
                     'div',
-                    { className: 'am-picker-col-content', ref: 'picker' },
+                    { className: 'ucs-picker-col-content', ref: 'picker' },
                     options
                 )
             )
@@ -18506,6 +18506,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * Created by Administrator on 2017/7/11.
  */
 var classnames = __webpack_require__(21);
+var Util = __webpack_require__(86);
 var Picker = __webpack_require__(43);
 var PickerGroup = React.createClass({
     displayName: 'PickerGroup',
@@ -18522,11 +18523,11 @@ var PickerGroup = React.createClass({
             dataSource: [],
             cols: 3,
             value: [],
-            onClick: function onClick() {
-                console.log(123);
+            onClick: function onClick(v) {
+                console.log(v);
             },
-            onChange: function onChange() {
-                console.log(123);
+            onChange: function onChange(v) {
+                console.log(v);
             },
             onOk: function onOk(v) {
                 console.log(v);
@@ -18534,11 +18535,9 @@ var PickerGroup = React.createClass({
             onCancel: function onCancel(v) {
                 console.log(v);
             },
-            onMaskClick: function onMaskClick() {
-                console.log(123);
+            onMaskClick: function onMaskClick(v) {
+                console.log(v);
             },
-            prefixCls: 'ui-picker-column-group',
-            pickerPrefixCls: 'ui-cascaderpicker',
             displayMember: 'label',
             valueMember: 'value'
         };
@@ -18618,12 +18617,14 @@ var PickerGroup = React.createClass({
     },
     // 选择器选值
     onpickerChange: function onpickerChange(dataSource, level, value) {
+        var _this = this;
         var displayMember = this.props.displayMember;
+        var onChange = this.props.onChange;
 
         var values = this.state.value.concat();
 
         if (!values || !values.length) {
-            var data = this.state.data;
+            var data = this.props.dataSource;
             if (this.state.cascade) {
                 for (var i = 0; i < this.props.cols; i += 1) {
                     if (data && data.length) {
@@ -18649,6 +18650,16 @@ var PickerGroup = React.createClass({
                 dataSource = item ? item.children : [];
                 value = dataSource[0] ? dataSource[0][displayMember] : undefined;
             }
+            var children = Util.arrayTreeFilter(_this.props.dataSource, function (item, lv) {
+                return lv <= level && item[displayMember] === values[lv];
+            });
+            var data = children[level];
+            var ii;
+            for (ii = level + 1; data && data.children && data.children.length && ii < this.props.cols; ii += 1) {
+                data = data.children[0];
+                values[ii] = data[displayMember];
+            }
+            values.length = ii;
         } else {
             values[level] = value;
         }
@@ -18656,6 +18667,7 @@ var PickerGroup = React.createClass({
         this.setState({
             value: values
         });
+        onChange && onChange(values);
     },
     getInitValue: function getInitValue() {
         var data = this.state.data;
@@ -18708,12 +18720,12 @@ var PickerGroup = React.createClass({
         var okText = this.props.okText;
         var pickers = this.getOptions(dataSource, 0);
         var classes = classnames(_defineProperty({
-            'am-picker-container': true,
-            'am-picker-popup-mask-hidden': !this.state.visible
+            'ucs-picker-container': true,
+            'ucs-picker-popup-mask-hidden': !this.state.visible
         }, className, !!className));
 
         var inputCls = classnames({
-            'am-picker-placeholder': !value.join(format)
+            'ucs-picker-placeholder': !value.join(format)
         });
 
         return React.createElement(
@@ -18729,42 +18741,42 @@ var PickerGroup = React.createClass({
                 { className: classes, onClick: this.onContainerClick },
                 React.createElement(
                     'div',
-                    { tabIndex: '-1', className: 'am-picker-popup-wrap', role: 'dialog' },
-                    React.createElement('div', { className: 'am-picker-popup-mask', onClick: this.onMaskClick }),
+                    { tabIndex: '-1', className: 'ucs-picker-popup-wrap', role: 'dialog' },
+                    React.createElement('div', { className: 'ucs-picker-popup-mask', onClick: this.onMaskClick }),
                     React.createElement(
                         'div',
-                        { role: 'document', className: 'am-picker-popup forss' },
+                        { role: 'document', className: 'ucs-picker-popup forss' },
                         React.createElement(
                             'div',
-                            { className: 'am-picker-popup-content' },
+                            { className: 'ucs-picker-popup-content' },
                             React.createElement(
                                 'div',
-                                { className: 'am-picker-popup-body' },
+                                { className: 'ucs-picker-popup-body' },
                                 React.createElement(
                                     'div',
                                     null,
                                     React.createElement(
                                         'div',
-                                        { className: 'am-picker-popup-header' },
+                                        { className: 'ucs-picker-popup-header' },
                                         React.createElement(
                                             'div',
-                                            { className: 'am-picker-popup-item am-picker-popup-header-left', onClick: this.onCancel },
+                                            { className: 'ucs-picker-popup-item ucs-picker-popup-header-left', onClick: this.onCancel },
                                             cancelText
                                         ),
                                         React.createElement(
                                             'div',
-                                            { className: 'am-picker-popup-item am-picker-popup-title' },
+                                            { className: 'ucs-picker-popup-item ucs-picker-popup-title' },
                                             title
                                         ),
                                         React.createElement(
                                             'div',
-                                            { className: 'am-picker-popup-item am-picker-popup-header-right', onClick: this.onOk },
+                                            { className: 'ucs-picker-popup-item ucs-picker-popup-header-right', onClick: this.onOk },
                                             okText
                                         )
                                     ),
                                     React.createElement(
                                         'div',
-                                        { className: 'am-picker' },
+                                        { className: 'ucs-picker' },
                                         pickers
                                     )
                                 )
@@ -18782,6 +18794,43 @@ var PickerGroup = React.createClass({
     }
 });
 module.exports = PickerGroup;
+
+/***/ }),
+
+/***/ 86:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Created by Administrator on 2017/7/14.
+ */
+var Utils = {
+    arrayTreeFilter: function arrayTreeFilter(data, filterFn, options) {
+        options = options || {};
+        options.childrenKeyName = options.childrenKeyName || 'children';
+        var children = data || [];
+        var result = [];
+        var level = 0;
+
+        var filterInnerFn = function filterInnerFn(item) {
+            return filterFn(item, level);
+        };
+
+        do {
+            var foundItem = children.filter(filterInnerFn)[0];
+            if (!foundItem) {
+                break;
+            }
+            result.push(foundItem);
+            children = foundItem[options.childrenKeyName] || [];
+            level += 1;
+        } while (children.length > 0);
+        return result;
+    }
+};
+module.exports = Utils;
 
 /***/ })
 
