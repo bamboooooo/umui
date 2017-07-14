@@ -18467,26 +18467,160 @@ var Picker = __webpack_require__(74);
 var District = __webpack_require__(26);
 var seasons = [[{
     label: '2013',
-    value: '2013'
+    value: '003'
 }, {
     label: '2014',
-    value: '2014'
+    value: '004'
+}, {
+    label: '2015',
+    value: '005'
+}, {
+    label: '2016',
+    value: '006'
 }], [{
     label: '春',
-    value: '春'
+    value: 'a'
 }, {
     label: '夏',
-    value: '夏'
+    value: 'b'
+}, {
+    label: '秋',
+    value: 'c'
+}, {
+    label: '冬',
+    value: 'd'
+}]];
+var majors = [[{
+    key: '001',
+    value: '计算机'
+}, {
+    key: '002',
+    value: '挖掘机'
+}, {
+    key: '003',
+    value: '工业设计'
+}, {
+    key: '004',
+    value: '心理学'
 }]];
 var Root = React.createClass({
     displayName: 'Root',
 
     render: function render() {
+        var config1 = {
+            placeholder: '请选择',
+            title: '请选择',
+            cancelText: '取消',
+            okText: '确定',
+            format: '-',
+            disabled: false,
+            dataSource: District,
+            cols: 3,
+            value: [],
+            onClick: function onClick(v) {
+                console.log(v);
+            },
+            onChange: function onChange(v) {
+                console.log(v);
+            },
+            onOk: function onOk(v) {
+                console.log(v);
+            },
+            onCancel: function onCancel(v) {
+                console.log(v);
+            },
+            onMaskClick: function onMaskClick(v) {
+                console.log(v);
+            },
+            displayMember: 'label',
+            valueMember: 'value'
+        };
+        var config2 = {
+            placeholder: '请选择',
+            title: '请选择',
+            cancelText: '取消',
+            okText: '确定',
+            format: '-',
+            disabled: false,
+            dataSource: seasons,
+            value: ['2015', '夏'],
+            onClick: function onClick(v) {
+                console.log(v);
+            },
+            onChange: function onChange(v) {
+                console.log(v);
+            },
+            onOk: function onOk(v) {
+                console.log(v);
+            },
+            onCancel: function onCancel(v) {
+                console.log(v);
+            },
+            onMaskClick: function onMaskClick(v) {
+                console.log(v);
+            },
+            displayMember: 'label',
+            valueMember: 'value'
+        };
+        var config3 = {
+            placeholder: '请选择专业',
+            title: '',
+            cancelText: '取消',
+            okText: '确定',
+            disabled: false,
+            dataSource: majors,
+            value: [],
+            onClick: function onClick(v) {
+                console.log(v);
+            },
+            onChange: function onChange(v) {
+                console.log(v);
+            },
+            onOk: function onOk(v) {
+                console.log(v);
+            },
+            onCancel: function onCancel(v) {
+                console.log(v);
+            },
+            onMaskClick: function onMaskClick(v) {
+                console.log(v);
+            },
+            displayMember: 'value',
+            valueMember: 'key'
+        };
         return React.createElement(
-            'div',
-            null,
-            React.createElement(Picker.Group, { dataSource: District, cols: 3 }),
-            React.createElement(Picker.Group, { dataSource: seasons })
+            'ul',
+            { className: 'list' },
+            React.createElement(
+                'li',
+                { className: 'list-item' },
+                React.createElement(
+                    'label',
+                    { className: 'label' },
+                    '\u9009\u62E9\u5730\u533A\uFF08\u591A\u5217\uFF0C\u8054\u52A8\uFF09\uFF1A'
+                ),
+                React.createElement(Picker.Group, config1)
+            ),
+            React.createElement(
+                'li',
+                { className: 'list-item' },
+                React.createElement(
+                    'label',
+                    { className: 'label' },
+                    '\u9009\u62E9\u5B63\u8282\uFF08\u591A\u5217\uFF0C\u4E0D\u8054\u52A8\uFF09\uFF1A'
+                ),
+                React.createElement(Picker.Group, config2)
+            ),
+            React.createElement(
+                'li',
+                { className: 'list-item' },
+                React.createElement(
+                    'label',
+                    { className: 'label' },
+                    '\u9009\u62E9\u4E13\u4E1A\uFF08\u5355\u5217\uFF09\uFF1A'
+                ),
+                React.createElement(Picker.Group, config3)
+            )
         );
     }
 });
@@ -18725,6 +18859,7 @@ var PickerGroup = React.createClass({
         }, className, !!className));
 
         var inputCls = classnames({
+            'ucs-picker-text': true,
             'ucs-picker-placeholder': !value.join(format)
         });
 

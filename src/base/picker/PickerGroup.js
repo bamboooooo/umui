@@ -220,6 +220,7 @@ var PickerGroup = React.createClass({
         });
 
         var inputCls = classnames({
+            'ucs-picker-text': true,
             'ucs-picker-placeholder': !value.join(format)
         });
 
