@@ -16,10 +16,12 @@
 
 参数 | 说明 | 类型 | 默认值
 ---|---|---|---|---
+className | 样式类名 | string | 无
+id|dom元素id|string|无
+name|dom元素name|string|无
 checked | 指定当前是否选中 | boolean | false
 defaultChecked | 初始是否选中 | boolean | false
 text | 关联的文案 | string | 无
-className | 样式类名 | string | 无
 disabled | 是否禁用 | boolean | false
 onChange|绑定change事件的监控事件|function|无
 
@@ -43,6 +45,18 @@ onChange|绑定change事件的监控事件|function|无
 
 ### 3.setDisabled(v)
 > 设置组件是否禁用
+
+#### 返回值
+- void
+
+### 4.clear()
+> 清空组件的值
+
+#### 返回值
+- void
+
+### 5.reset()
+> 重置组件的值，如果设置了defaultValue,执行此方法则将组件设置为默认值，如果组件没有设置默认值，则清空组件的值
 
 #### 返回值
 - void
