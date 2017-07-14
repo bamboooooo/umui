@@ -17,13 +17,16 @@ var Root = React.createClass({
     render: function () {
         return (
             <div>
+                <p>正常的使用</p>
                 <Password ref="passwd" {...this.props} placeholder={this.props.placeHolder} onBlur={this.blurHandle}/>
+                <p>禁止输入的情况</p>
+                <Password ref="passwd1" {...this.props} placeholder={this.props.placeHolder} onBlur={this.blurHandle}/>
             </div>
         );
     },
     componentDidMount: function () {
-        // this.refs.passwd.setDisabled(true);
-        this.refs.passwd.setReadOnly(true);
+        this.refs.passwd1.setDisabled(true);
+        this.refs.passwd1.setReadOnly(true);
     }
 });
 ReactDOM.render(<Root/>, document.getElementById('merry'));

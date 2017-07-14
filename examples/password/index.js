@@ -14532,12 +14532,28 @@ var Root = React.createClass({
         return React.createElement(
             'div',
             null,
-            React.createElement(Password, _extends({ ref: 'passwd' }, this.props, { placeholder: this.props.placeHolder, onBlur: this.blurHandle }))
+            React.createElement(
+                'p',
+                null,
+                '\u6B63\u5E38\u7684\u4F7F\u7528'
+            ),
+            React.createElement(Password, _extends({ ref: 'passwd' }, this.props, { placeholder: this.props.placeHolder, onBlur: this.blurHandle })),
+            React.createElement(
+                'p',
+                null,
+                '\u7981\u6B62\u8F93\u5165\u7684\u60C5\u51B5'
+            ),
+            React.createElement(Password, _extends({ ref: 'passwd1' }, this.props, { placeholder: this.props.placeHolder, onBlur: this.blurHandle })),
+            React.createElement(
+                'p',
+                null,
+                '\u9009\u62E9\u52A0\u5BC6\u7684\u65B9\u5F0F'
+            )
         );
     },
     componentDidMount: function componentDidMount() {
-        // this.refs.passwd.setDisabled(true);
-        this.refs.passwd.setReadOnly(true);
+        this.refs.passwd1.setDisabled(true);
+        this.refs.passwd1.setReadOnly(true);
     }
 });
 ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));

@@ -14,14 +14,13 @@ function shallowRender(Component, props) {
 // props测试
 describe('Password-porps测试', function () {
     it('porps测试', function () {
-        const password = shallowRender(Password, { id: 'passwd', name: 'passwd', isShowClear:false ,placeHolder:'请输入验证码', displayChar: '.',maxLength: '6',encryptKey: '111', encryptType: 'md5'});
+        const password = shallowRender(Password, { id: 'passwd', name: 'passwd', isShowClear:false ,placeHolder:'请输入验证码', displayChar: '.',maxLength: '6', encryptType: 'md5'});
         expect(password.props.children[0].props.id.indexOf('passwd')).to.not.be.equal(-1);
         expect(password.props.children[0].props.name.indexOf('passwd')).to.not.be.equal(-1);
         expect(password.props.children[0].props.isShowClear).to.not.be.ok;
         expect(password.props.children[0].props.placeHolder).to.equal('请输入验证码');
         expect(password.props.children[0].props.displayChar).to.equal('.');
         expect(password.props.children[0].props.maxLength).to.equal('6');
-        expect(password.props.children[0].props.encryptKey).to.equal('111');
         expect(password.props.children[0].props.encryptType).to.equal('md5');
     });
 });
