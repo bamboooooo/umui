@@ -14,11 +14,19 @@
 className | 样式类名 | string |无
 id|dom元素id|string|无
 disabled | 是否禁用 | bool |false
-placeHolder | 占位符 | string | ''
-name|dom元素name|string|无
-data|option数据,格式：[{option:'选项一',value:'1',children:[]}], 支持多级选择（联动/非联动）|json|无
+placeHolder | 占位符 | string | '请选择'
+title|标题|string|'请选择'
+data|option数据,格式：[{label:'选项一',value:'1',children:[]}], 支持多级选择（联动/非联动）|json|无
+format|多级时的连接符|string|'-'
 value | 值 | Array | 无
 defaultValue | 初始默认值（对应data中的value值）|Array|无
+displayMember|对应data中的`label`|string|'label'
+valueMember|对应data中的`value`|string|'value'
+okText|对应确认按钮的文案|string|'确定'
+okCancel|对应取消按钮的文案|string|'取消'
+onOk|点击确定的监控事件|function(value)|无
+onCancel|点击取消的监控事件|function(value)|无
+onMaskClick|点击蒙层的监控事件|function(value)|无
 onChange|绑定change事件的监控事件|function(value)|无
 
 

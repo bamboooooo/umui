@@ -15,6 +15,7 @@
 className | 样式类名 | string |无
 id | dom元素id | string | 无
 isDisabled | 是否禁用 | bool | false
+maskClosable |点击蒙层是否允许关闭，默认允许|bool|true
 sidebar | 侧栏菜单内容 | ReactNode | 
 onOpenChange | open 状态切换时调用 | function | 
 open | 开关状态 | bool | false
