@@ -158,3 +158,14 @@ describe('Password-_keyUpHandle()方法测试', function () {
         expect(password.refs.password.value).to.equal('......');
     });
 });
+/*_keyPressHandle()方法测试*/
+describe('Password-_keyPressHandle()方法测试', function () {
+    it('--------------_keyPressHandle()方法测试-----------------', function () {
+        const password = TestUtils.renderIntoDocument(<Password/>);
+        const passwordDOM = findDOMNode(password);
+        const inputItem = passwordDOM.querySelector('input');
+        TestUtils.Simulate.keyPress(inputItem);
+        expect(password.state.formalPasswd).to.equal('\u0000');
+    });
+});
+

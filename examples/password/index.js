@@ -13391,8 +13391,6 @@ module.exports = Sha512
 "use strict";
 
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var classnames = __webpack_require__(22);
 var sha1 = __webpack_require__(163);
 var md5 = __webpack_require__(143);
@@ -13400,14 +13398,6 @@ var sha256 = __webpack_require__(164);
 var Password = React.createClass({
     displayName: 'Password',
 
-    getInitialState: function getInitialState() {
-        return {
-            className: classnames('ucs-password', this.props.className),
-            readOnly: this.props.readOnly ? this.props.readOnly : false,
-            disabled: this.props.disabled ? this.props.disabled : false,
-            encryptKey: this.props.encryptKey ? this.props.encryptKey : ''
-        };
-    },
     getDefaultProps: function getDefaultProps() {
         return {
             isShowClear: false,
@@ -13419,10 +13409,19 @@ var Password = React.createClass({
             encryptType: ''
         };
     },
+    getInitialState: function getInitialState() {
+        return {
+            className: classnames('ucs-password', this.props.className),
+            readOnly: this.props.readOnly ? this.props.readOnly : false,
+            disabled: this.props.disabled ? this.props.disabled : false,
+            encryptKey: this.props.encryptKey ? this.props.encryptKey : '',
+            formalPasswd: ''
+        };
+    },
     getValue: function getValue() {
         var encryptType = this.props.encryptType;
         var encryptPassword = '';
-        var formalPassword = this.refs.password.value;
+        var formalPassword = this.state.formalPasswd;
         switch (encryptType) {
             case 'md5':
                 encryptPassword = md5(this.state.encryptKey + formalPassword);
@@ -13464,6 +13463,9 @@ var Password = React.createClass({
     },
     clear: function clear() {
         this.refs.password.value = '';
+        this.setState({
+            formalPasswd: ''
+        });
     },
     setEncryptKey: function setEncryptKey(v) {
         this.setState({
@@ -13474,7 +13476,6 @@ var Password = React.createClass({
     /* 显示清除的标签*/
     _isShowClear: function _isShowClear() {
         if (!this.state.disabled && !this.state.readOnly) {
-            console.log(this.state.readOnly);
             if (this.props.isShowClear) {
                 this.refs.clear.style.display = 'block';
             } else {
@@ -13486,15 +13487,26 @@ var Password = React.createClass({
     },
     _keyUpHandle: function _keyUpHandle(e) {
         var passwordVal = this.refs.password.value;
-        this.refs.password.value = passwordVal.replace(/./g, this.props.displayChar);
+        var displayChar = this.props.displayChar;
+        var str = new RegExp('[^' + displayChar + ']', 'g');
+        this.refs.password.value = passwordVal.replace(str, this.props.displayChar);
     },
-    changeHandle: function changeHandle(e) {
+    _keyPressHandle: function _keyPressHandle(e) {
+        var keynum;
+        var keychar;
+        keynum = window.event ? e.charCode : e.which;
+        keychar = String.fromCharCode(keynum);
+        this.setState({
+            formalPasswd: this.state.formalPasswd + keychar
+        });
+    },
+    _changeHandle: function _changeHandle(e) {
         this.props.onChange ? this.props.onChange(e) : '';
     },
-    blurHandle: function blurHandle(e) {
+    _blurHandle: function _blurHandle(e) {
         this.props.onBlur ? this.props.onBlur(e) : '';
     },
-    focusHandle: function focusHandle(e) {
+    _focusHandle: function _focusHandle(e) {
         this.props.onFocus ? this.props.onFocus(e) : '';
     },
     componentDidUpdate: function componentDidUpdate() {
@@ -13507,7 +13519,7 @@ var Password = React.createClass({
         return React.createElement(
             'div',
             { className: 'ucs-password-box' },
-            React.createElement('input', _extends({ type: 'text', ref: 'password' }, this.props, { className: this.state.className, encryptKey: this.state.encryptKey, disabled: this.state.disabled, palceholder: this.props.placeHolder, readOnly: this.state.readOnly, onKeyUp: this._keyUpHandle, onBlur: this.blurHandle, onFocus: this.focusHandle, onChange: this.changeHandle })),
+            React.createElement('input', { type: 'text', ref: 'password', className: this.state.className, encryptKey: this.state.encryptKey, disabled: this.state.disabled, palceHolder: this.props.placeHolder, readOnly: this.state.readOnly, onKeyPress: this._keyPressHandle, onKeyUp: this._keyUpHandle, onBlur: this._blurHandle, onFocus: this._focusHandle, onChange: this._changeHandle }),
             React.createElement(
                 'i',
                 { className: 'icon-clear', ref: 'clear', onClick: this.clear },
@@ -14523,8 +14535,9 @@ var Root = React.createClass({
             name: 'passsword',
             maxLength: '',
             isShowClear: true,
+            displayChar: '***',
             encryptKey: '111',
-            encryptType: 'md5'
+            encryptType: ''
         };
     },
     blurHandle: function blurHandle() {
@@ -14539,7 +14552,7 @@ var Root = React.createClass({
                 null,
                 '\u6B63\u5E38\u7684\u4F7F\u7528'
             ),
-            React.createElement(Password, _extends({ ref: 'passwd' }, this.props, { placeholder: this.props.placeHolder, onBlur: this.blurHandle })),
+            React.createElement(Password, _extends({ ref: 'passwd' }, this.props, { placeholder: this.props.placeHolder, onBlur: this.blurHandle, defaultValue: 123 })),
             React.createElement(
                 'p',
                 null,
