@@ -7,7 +7,7 @@ var Root = React.createClass({
             name: 'passsword',
             maxLength: '',
             isShowClear: true,
-            displayChar: '***',
+            displayChar: '*',
             encryptKey: '111',
             encryptType: ''
         };

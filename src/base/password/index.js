@@ -124,7 +124,7 @@ var Password = React.createClass({
     render: function () {
         return (
             <div className="ucs-password-box">
-                <input type="text" ref="password" className={this.state.className} encryptKey={this.state.encryptKey} disabled={this.state.disabled} palceHolder={this.props.placeHolder} readOnly={this.state.readOnly} onKeyPress={this._keyPressHandle} onKeyUp={this._keyUpHandle} onBlur={this._blurHandle} onFocus={this._focusHandle} onChange={this._changeHandle}/>
+                <input type="text" ref="password" {...this.props} defaultValue={''} className={this.state.className} encryptKey={this.state.encryptKey} disabled={this.state.disabled} placeHolder={this.props.placeHolder} readOnly={this.state.readOnly} onKeyPress={this._keyPressHandle} onKeyUp={this._keyUpHandle} onBlur={this._blurHandle} onFocus={this._focusHandle} onChange={this._changeHandle}/>
                 <i className="icon-clear" ref='clear' onClick={this.clear}>X</i>
             </div>
         );
