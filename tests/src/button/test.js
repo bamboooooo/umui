@@ -1,4 +1,4 @@
-import Button  from '../../../src/base/Button/index.js'; // 引入组件
+import Button  from '../../../src/base/button/index.js'; // 引入组件
 
 // props测试
 describe('Button-props测试', function () {
