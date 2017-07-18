@@ -18,6 +18,7 @@ placeHolder | 占位符 | string | '请选择'
 title|标题|string|'请选择'
 data|option数据,格式：[{label:'选项一',value:'1',children:[]}], 支持多级选择（联动/非联动）|json|无
 format|多级时的连接符|string|'-'
+maxCols | 最高级数（仅当级联时起效） | number | 2
 value | 值 | Array | 无
 defaultValue | 初始默认值（对应data中的value值）|Array|无
 displayMember|对应data中的`label`|string|'label'
