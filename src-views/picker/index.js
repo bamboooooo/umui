@@ -67,23 +67,23 @@ var Root = React.createClass({
             okText: '确定',
             format: '-',
             disabled: false,
-            dataSource: District,
-            cols: 3,
-            value: [],
+            data: District,
+            maxCols: 3,
+            defaultValue: [],
             onClick: function (v) {
-                console.log(v);
+                console.log('外部onClick ->', v);
             },
             onChange: function (v) {
-                console.log(v);
+                console.log('外部change value ->', v);
             },
             onOk: function (v) {
-                console.log(v);
+                console.log('外部onOk ->', v);
             },
             onCancel: function (v) {
-                console.log(v);
+                console.log('外部onCancel ->', v);
             },
             onMaskClick: function (v) {
-                console.log(v);
+                console.log('外部onMaskClick ->', v);
             },
             displayMember: 'label',
             valueMember: 'value'
@@ -95,22 +95,22 @@ var Root = React.createClass({
             okText: '确定',
             format: '-',
             disabled: false,
-            dataSource: seasons,
-            value: ['2015', '夏'],
+            data: seasons,
+            defaultValue: ['2015', '夏'],
             onClick: function (v) {
-                console.log(v);
+                console.log('外部onClick ->', v);
             },
             onChange: function (v) {
-                console.log(v);
+                console.log('外部change value ->', v);
             },
             onOk: function (v) {
-                console.log(v);
+                console.log('外部onOk ->', v);
             },
             onCancel: function (v) {
-                console.log(v);
+                console.log('外部onCancel ->', v);
             },
             onMaskClick: function (v) {
-                console.log(v);
+                console.log('外部onMaskClick ->', v);
             },
             displayMember: 'label',
             valueMember: 'value'
@@ -121,31 +121,31 @@ var Root = React.createClass({
             cancelText: '取消',
             okText: '确定',
             disabled: false,
-            dataSource: majors,
-            value: [],
+            data: majors,
+            defaultValue: [],
             onClick: function (v) {
-                console.log(v);
+                console.log('外部onClick ->', v);
             },
             onChange: function (v) {
-                console.log(v);
+                console.log('外部change value ->', v);
             },
             onOk: function (v) {
-                console.log(v);
+                console.log('外部onOk ->', v);
             },
             onCancel: function (v) {
-                console.log(v);
+                console.log('外部onCancel ->', v);
             },
             onMaskClick: function (v) {
-                console.log(v);
+                console.log('外部onMaskClick ->', v);
             },
             displayMember: 'value',
             valueMember: 'key'
         };
         return (
             <ul className="list">
-                <li className="list-item"><label className="label">选择地区（多列，联动）：</label><Picker.Group {...config1}/></li>
-                <li className="list-item"><label className="label">选择季节（多列，不联动）：</label><Picker.Group {...config2}/></li>
-                <li className="list-item"><label className="label">选择专业（单列）：</label><Picker.Group {...config3}/></li>
+                <li className="list-item"><label className="label">选择地区（多列，联动）：</label><Picker {...config1}/></li>
+                <li className="list-item"><label className="label">选择季节（多列，不联动）：</label><Picker {...config2}/></li>
+                <li className="list-item"><label className="label">选择专业（单列）：</label><Picker {...config3}/></li>
             </ul>
         );
     }

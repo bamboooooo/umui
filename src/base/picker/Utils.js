@@ -2,6 +2,7 @@
  * Created by Administrator on 2017/7/14.
  */
 var Utils = {
+    // 过滤data数组中满足fiterFn返回值条件的元素
     arrayTreeFilter: function (data, filterFn, options) {
         options = options || {};
         options.childrenKeyName = options.childrenKeyName || 'children';

@@ -68,7 +68,7 @@
 /************************************************************************/
 /******/ ({
 
-/***/ 21:
+/***/ 10:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -18227,7 +18227,7 @@ module.exports = district;
 
 /***/ }),
 
-/***/ 42:
+/***/ 73:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18236,223 +18236,7 @@ module.exports = district;
 /**
  * Created by Administrator on 2017/7/11.
  */
-var Option = React.createClass({
-    displayName: "Option",
-
-    render: function render() {
-        return React.createElement(
-            "div",
-            { className: this.props.className, value: this.props.value },
-            this.props.children
-        );
-    }
-});
-module.exports = Option;
-
-/***/ }),
-
-/***/ 43:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Created by Administrator on 2017/6/27.
- */
-var classnames = __webpack_require__(21);
-var Option = __webpack_require__(42);
-var Picker = React.createClass({
-    displayName: 'Picker',
-
-    getDefaultProps: function getDefaultProps() {
-        return {
-            onChange: function onChange() {
-                console.log(123);
-            },
-            dataSource: [],
-            valueMember: 'value',
-            displayMember: 'label'
-        };
-    },
-    getInitialState: function getInitialState() {
-        return {
-            translateY: 0,
-            pointStart: 0,
-            pointEnd: 0,
-            value: this.props.value || this.props.defaultValue
-        };
-    },
-    componentDidMount: function componentDidMount() {
-        this.onValueChange(this.state.value, 0);
-    },
-    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-        if ('value' in nextProps) {
-            this.setState({
-                value: nextProps.value
-            });
-            this.onValueChange(nextProps.value, 300);
-        }
-    },
-    // 选中指定值
-    onValueChange: function onValueChange(value, speed) {
-        var dataSource = this.props.dataSource;
-        var displayMember = this.props.displayMember;
-        var index = 0;
-        for (var i = 0; i < dataSource.length; i++) {
-            if (dataSource[i][displayMember] === value) {
-                index = i;
-                break;
-            }
-        }
-        this.onMoveTo(index, speed);
-    },
-    // 移动到指定编号
-    onMoveTo: function onMoveTo(index, speed) {
-        var itemHeight = this.getItemHeight();
-        if (itemHeight === 0) {
-            return;
-        }
-
-        var offset = -index * itemHeight;
-
-        this.doTransition(offset, speed);
-        this.setState({
-            translateY: offset
-        });
-    },
-    // 执行过渡动画
-    doTransition: function doTransition(offset, duration) {
-        var style = this.refs.picker.style;
-        style.webkitTransitionDuration = duration + 'ms';
-        style.mozTransitionDuration = duration + 'ms';
-        style.oTransitionDuration = duration + 'ms';
-        style.transitionDuration = duration + 'ms';
-        style.webkitTransform = 'translate3d(0, ' + offset + 'px, 0)';
-        style.mozTransform = 'translate3d(0, ' + offset + 'px, 0)';
-        style.oTransform = 'translate3d(0, ' + offset + 'px, 0)';
-        style.transform = 'translate3d(0, ' + offset + 'px, 0)';
-    },
-    onTouchStart: function onTouchStart(event) {
-        var pointY = this.getPoint(event).y;
-        this.setState({
-            pointStart: pointY
-        });
-    },
-    onTouchMove: function onTouchMove(event) {
-        event.preventDefault();
-        var pointY = this.getPoint(event).y;
-        var offset = this.state.translateY + (pointY - this.state.pointStart);
-
-        this.doTransition(offset, 0);
-        this.setState({
-            pointEnd: pointY
-        });
-    },
-    onTouchEnd: function onTouchEnd(event) {
-        var offset = this.state.pointEnd !== 0 ? this.state.translateY + (this.state.pointEnd - this.state.pointStart) : 0;
-        var items = this.refs.picker.children;
-        var itemHeight = items[0] && items[0].offsetHeight;
-        var maxIndex = Math.abs(items.length - 1);
-        var index = Math.round(offset / itemHeight);
-
-        if (index > 0) {
-            index = 0;
-        } else {
-            index = Math.abs(offset) >= maxIndex * itemHeight ? maxIndex : Math.abs(index);
-        }
-
-        this.onMoveTo(index, 300);
-        var dataSource = this.props.dataSource;
-        var displayMember = this.props.displayMember;
-        var onChange = this.props.onChange;
-        var value = dataSource[index][displayMember];
-
-        this.setState({
-            value: value
-        });
-        onChange && onChange(value);
-    },
-    getItemHeight: function getItemHeight() {
-        var items = this.refs.picker.children;
-
-        if (!items || items.length === 0) {
-            return 0;
-        }
-        return items[0].offsetHeight;
-    },
-    // 获取触摸点的当前坐标
-    getPoint: function getPoint(event) {
-        var touch = event.touches[0];
-        return {
-            x: touch.pageX,
-            y: touch.pageY
-        };
-    },
-    render: function render() {
-        var height = this.props.height;
-        var isDisabled = this.props.isDisabled;
-        var valueMember = this.props.valueMember;
-        var displayMember = this.props.displayMember;
-        var dataSource = this.props.dataSource;
-        var curValue = this.state.value;
-
-        var options = dataSource.map(function (item, index) {
-            var className = classnames({
-                'ucs-picker-col-item': true,
-                'ucs-picker-col-item-selected': item[displayMember] === curValue
-            });
-            return React.createElement(
-                Option,
-                { key: index, value: item[valueMember], className: className },
-                item[displayMember]
-            );
-        });
-
-        var cls = classnames({
-            'ucs-picker-item': true,
-            'disabled': 'disabled' in this.props || isDisabled
-        });
-
-        return React.createElement(
-            'div',
-            { className: cls,
-                style: { height: height },
-                onTouchStart: this.onTouchStart,
-                onTouchMove: this.onTouchMove,
-                onTouchEnd: this.onTouchEnd },
-            React.createElement(
-                'div',
-                { className: 'ucs-picker-col' },
-                React.createElement('div', { className: 'ucs-picker-col-mask' }),
-                React.createElement('div', { className: 'ucs-picker-col-indicator' }),
-                React.createElement(
-                    'div',
-                    { className: 'ucs-picker-col-content', ref: 'picker' },
-                    options
-                )
-            )
-        );
-    }
-});
-module.exports = Picker;
-
-/***/ }),
-
-/***/ 74:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Created by Administrator on 2017/7/11.
- */
-var Picker = __webpack_require__(43);
-var Group = __webpack_require__(85);
-var Option = __webpack_require__(42);
-Picker.Group = Group;
-Picker.Option = Option;
+var Picker = __webpack_require__(87);
 module.exports = Picker;
 
 /***/ }),
@@ -18463,7 +18247,7 @@ module.exports = Picker;
 "use strict";
 
 
-var Picker = __webpack_require__(74);
+var Picker = __webpack_require__(73);
 var District = __webpack_require__(26);
 var seasons = [[{
     label: '2013',
@@ -18514,23 +18298,23 @@ var Root = React.createClass({
             okText: '确定',
             format: '-',
             disabled: false,
-            dataSource: District,
-            cols: 3,
-            value: [],
+            data: District,
+            maxCols: 3,
+            defaultValue: [],
             onClick: function onClick(v) {
-                console.log(v);
+                console.log('外部onClick ->', v);
             },
             onChange: function onChange(v) {
-                console.log(v);
+                console.log('外部change value ->', v);
             },
             onOk: function onOk(v) {
-                console.log(v);
+                console.log('外部onOk ->', v);
             },
             onCancel: function onCancel(v) {
-                console.log(v);
+                console.log('外部onCancel ->', v);
             },
             onMaskClick: function onMaskClick(v) {
-                console.log(v);
+                console.log('外部onMaskClick ->', v);
             },
             displayMember: 'label',
             valueMember: 'value'
@@ -18542,22 +18326,22 @@ var Root = React.createClass({
             okText: '确定',
             format: '-',
             disabled: false,
-            dataSource: seasons,
-            value: ['2015', '夏'],
+            data: seasons,
+            defaultValue: ['2015', '夏'],
             onClick: function onClick(v) {
-                console.log(v);
+                console.log('外部onClick ->', v);
             },
             onChange: function onChange(v) {
-                console.log(v);
+                console.log('外部change value ->', v);
             },
             onOk: function onOk(v) {
-                console.log(v);
+                console.log('外部onOk ->', v);
             },
             onCancel: function onCancel(v) {
-                console.log(v);
+                console.log('外部onCancel ->', v);
             },
             onMaskClick: function onMaskClick(v) {
-                console.log(v);
+                console.log('外部onMaskClick ->', v);
             },
             displayMember: 'label',
             valueMember: 'value'
@@ -18568,22 +18352,22 @@ var Root = React.createClass({
             cancelText: '取消',
             okText: '确定',
             disabled: false,
-            dataSource: majors,
-            value: [],
+            data: majors,
+            defaultValue: [],
             onClick: function onClick(v) {
-                console.log(v);
+                console.log('外部onClick ->', v);
             },
             onChange: function onChange(v) {
-                console.log(v);
+                console.log('外部change value ->', v);
             },
             onOk: function onOk(v) {
-                console.log(v);
+                console.log('外部onOk ->', v);
             },
             onCancel: function onCancel(v) {
-                console.log(v);
+                console.log('外部onCancel ->', v);
             },
             onMaskClick: function onMaskClick(v) {
-                console.log(v);
+                console.log('外部onMaskClick ->', v);
             },
             displayMember: 'value',
             valueMember: 'key'
@@ -18599,7 +18383,7 @@ var Root = React.createClass({
                     { className: 'label' },
                     '\u9009\u62E9\u5730\u533A\uFF08\u591A\u5217\uFF0C\u8054\u52A8\uFF09\uFF1A'
                 ),
-                React.createElement(Picker.Group, config1)
+                React.createElement(Picker, config1)
             ),
             React.createElement(
                 'li',
@@ -18609,7 +18393,7 @@ var Root = React.createClass({
                     { className: 'label' },
                     '\u9009\u62E9\u5B63\u8282\uFF08\u591A\u5217\uFF0C\u4E0D\u8054\u52A8\uFF09\uFF1A'
                 ),
-                React.createElement(Picker.Group, config2)
+                React.createElement(Picker, config2)
             ),
             React.createElement(
                 'li',
@@ -18619,7 +18403,7 @@ var Root = React.createClass({
                     { className: 'label' },
                     '\u9009\u62E9\u4E13\u4E1A\uFF08\u5355\u5217\uFF09\uFF1A'
                 ),
-                React.createElement(Picker.Group, config3)
+                React.createElement(Picker, config3)
             )
         );
     }
@@ -18634,14 +18418,226 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'
 "use strict";
 
 
+/**
+ * Created by Administrator on 2017/7/11.
+ */
+var Option = React.createClass({
+    displayName: "Option",
+
+    render: function render() {
+        return React.createElement(
+            "div",
+            { className: this.props.className, value: this.props.value },
+            this.props.children
+        );
+    }
+});
+module.exports = Option;
+
+/***/ }),
+
+/***/ 86:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Created by Administrator on 2017/6/27.
+ */
+var classnames = __webpack_require__(10);
+var Option = __webpack_require__(85);
+var Picker = React.createClass({
+    displayName: 'Picker',
+
+    getDefaultProps: function getDefaultProps() {
+        return {
+            onChange: function onChange() {
+                console.log(123);
+            },
+            dataSource: [],
+            valueMember: 'value',
+            displayMember: 'label'
+        };
+    },
+    getInitialState: function getInitialState() {
+        return {
+            translateY: 0,
+            pointStart: 0,
+            pointEnd: 0,
+            value: this.props.value || this.props.defaultValue
+        };
+    },
+    componentDidMount: function componentDidMount() {
+        this.onValueChange(this.state.value, 0);
+    },
+    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+        if ('value' in nextProps) {
+            this.setState({
+                value: nextProps.value
+            });
+            this.onValueChange(nextProps.value, 300);
+        }
+    },
+    // 选中指定值
+    onValueChange: function onValueChange(value, speed) {
+        var dataSource = this.props.dataSource;
+        var displayMember = this.props.displayMember;
+        var index = 0;
+        for (var i = 0; i < dataSource.length; i++) {
+            if (dataSource[i][displayMember] === value) {
+                index = i;
+                break;
+            }
+        }
+        this._onMoveTo(index, speed);
+    },
+    // 移动到指定编号
+    _onMoveTo: function _onMoveTo(index, speed) {
+        var itemHeight = this._getItemHeight();
+        if (itemHeight === 0) {
+            return;
+        }
+
+        var offset = -index * itemHeight;
+
+        this._doTransition(offset, speed);
+        this.setState({
+            translateY: offset
+        });
+    },
+    // 执行过渡动画
+    _doTransition: function _doTransition(offset, duration) {
+        var style = this.refs.picker.style;
+        style.webkitTransitionDuration = duration + 'ms';
+        style.mozTransitionDuration = duration + 'ms';
+        style.oTransitionDuration = duration + 'ms';
+        style.transitionDuration = duration + 'ms';
+        style.webkitTransform = 'translate3d(0, ' + offset + 'px, 0)';
+        style.mozTransform = 'translate3d(0, ' + offset + 'px, 0)';
+        style.oTransform = 'translate3d(0, ' + offset + 'px, 0)';
+        style.transform = 'translate3d(0, ' + offset + 'px, 0)';
+    },
+    _onTouchStart: function _onTouchStart(event) {
+        var pointY = this._getPoint(event).y;
+        this.setState({
+            pointStart: pointY
+        });
+    },
+    _onTouchMove: function _onTouchMove(event) {
+        event.preventDefault();
+        var pointY = this._getPoint(event).y;
+        var offset = this.state.translateY + (pointY - this.state.pointStart);
+
+        this._doTransition(offset, 0);
+        this.setState({
+            pointEnd: pointY
+        });
+    },
+    _onTouchEnd: function _onTouchEnd(event) {
+        var offset = this.state.pointEnd !== 0 ? this.state.translateY + (this.state.pointEnd - this.state.pointStart) : 0;
+        var items = this.refs.picker.children;
+        var itemHeight = items[0] && items[0].offsetHeight;
+        var maxIndex = Math.abs(items.length - 1);
+        var index = Math.round(offset / itemHeight);
+
+        if (index > 0) {
+            index = 0;
+        } else {
+            index = Math.abs(offset) >= maxIndex * itemHeight ? maxIndex : Math.abs(index);
+        }
+
+        this._onMoveTo(index, 300);
+        var dataSource = this.props.dataSource;
+        var displayMember = this.props.displayMember;
+        var onChange = this.props.onChange;
+        var value = dataSource[index][displayMember];
+
+        this.setState({
+            value: value
+        });
+        onChange && onChange(value);
+    },
+    _getItemHeight: function _getItemHeight() {
+        var items = this.refs.picker.children;
+
+        if (!items || items.length === 0) {
+            return 0;
+        }
+        return items[0].offsetHeight;
+    },
+    // 获取触摸点的当前坐标
+    _getPoint: function _getPoint(event) {
+        var touch = event.touches[0];
+        return {
+            x: touch.pageX,
+            y: touch.pageY
+        };
+    },
+    render: function render() {
+        var height = this.props.height;
+        var isDisabled = this.props.isDisabled;
+        var valueMember = this.props.valueMember;
+        var displayMember = this.props.displayMember;
+        var dataSource = this.props.dataSource;
+        var curValue = this.state.value;
+
+        var options = dataSource.map(function (item, index) {
+            var className = classnames({
+                'ucs-picker-col-item': true,
+                'ucs-picker-col-item-selected': item[displayMember] === curValue
+            });
+            return React.createElement(
+                Option,
+                { key: index, value: item[valueMember], className: className },
+                item[displayMember]
+            );
+        });
+
+        var cls = classnames({
+            'ucs-picker-item': true,
+            'disabled': 'disabled' in this.props || isDisabled
+        });
+
+        return React.createElement(
+            'div',
+            { className: cls,
+                style: { height: height },
+                onTouchStart: this._onTouchStart,
+                onTouchMove: this._onTouchMove,
+                onTouchEnd: this._onTouchEnd },
+            React.createElement(
+                'div',
+                { className: 'ucs-picker-col' },
+                React.createElement('div', { className: 'ucs-picker-col-mask' }),
+                React.createElement('div', { className: 'ucs-picker-col-indicator' }),
+                React.createElement(
+                    'div',
+                    { className: 'ucs-picker-col-content', ref: 'picker' },
+                    options
+                )
+            )
+        );
+    }
+});
+module.exports = Picker;
+
+/***/ }),
+
+/***/ 87:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /**
  * Created by Administrator on 2017/7/11.
  */
-var classnames = __webpack_require__(21);
-var Util = __webpack_require__(86);
-var Picker = __webpack_require__(43);
+var classnames = __webpack_require__(10);
+var Util = __webpack_require__(88);
+var Picker = __webpack_require__(86);
 var PickerGroup = React.createClass({
     displayName: 'PickerGroup',
 
@@ -18654,24 +18650,14 @@ var PickerGroup = React.createClass({
             okText: '确定',
             format: '-',
             disabled: false,
-            dataSource: [],
-            cols: 3,
-            value: [],
-            onClick: function onClick(v) {
-                console.log(v);
-            },
-            onChange: function onChange(v) {
-                console.log(v);
-            },
-            onOk: function onOk(v) {
-                console.log(v);
-            },
-            onCancel: function onCancel(v) {
-                console.log(v);
-            },
-            onMaskClick: function onMaskClick(v) {
-                console.log(v);
-            },
+            data: [],
+            maxCols: 3,
+            defaultValue: [],
+            onClick: null,
+            onChange: null,
+            onOk: null,
+            onCancel: null,
+            onMaskClick: null,
             displayMember: 'label',
             valueMember: 'value'
         };
@@ -18679,26 +18665,27 @@ var PickerGroup = React.createClass({
     getInitialState: function getInitialState() {
         return {
             visible: this.props.visible || false,
-            value: this.props.value,
-            data: this.props.dataSource,
-            cascade: Object.prototype.toString.call(this.props.dataSource[0]) !== '[object Array]' // 判断数据是否为级联，简单判断数据第一个元素是否为数组
+            value: this.props.defaultValue,
+            data: this.props.data,
+            cascade: Object.prototype.toString.call(this.props.data[0]) !== '[object Array]' // 判断数据是否为级联，简单判断数据第一个元素是否为数组
         };
     },
     componentDidMount: function componentDidMount() {
-        this.tempValue = this.props.value;
+        this.tempValue = this.props.defaultValue;
     },
     componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
         this.setState({
             visible: nextProps.visible,
-            value: nextProps.value.concat()
+            value: nextProps.defaultValue.concat()
         });
     },
     // 阻止选择器区域的默认事件
-    onContainerClick: function onContainerClick(e) {
+    _onContainerClick: function _onContainerClick(e) {
         e.stopPropagation();
     },
     // 切换显示状态
-    toggle: function toggle() {
+    _toggle: function _toggle() {
+
         if (this.props.disabled) {
             return;
         }
@@ -18706,17 +18693,22 @@ var PickerGroup = React.createClass({
             visible: !this.state.visible
         });
     },
+    _handleClick: function _handleClick() {
+        var onClick = this.props.onClick;
+        onClick && onClick(this.tempValue);
+        !this.props.disabled && this._toggle();
+    },
     onMaskClick: function onMaskClick() {
         var onMaskClick = this.props.onMaskClick;
         this.onCancel();
-        onMaskClick && onMaskClick();
+        onMaskClick && onMaskClick(this.tempValue);
     },
     // 获取选择器组
-    getOptions: function getOptions(dataSource, level) {
+    _getOptions: function _getOptions(dataSource, level) {
         var _this = this;
         var valueMember = this.props.valueMember;
         var displayMember = this.props.displayMember;
-        var cols = this.props.cols;
+        var maxCols = this.props.maxCols;
         var pickers = this.pickers || [];
 
         if (this.state.cascade) {
@@ -18724,25 +18716,25 @@ var PickerGroup = React.createClass({
                 return item[displayMember] === _this.state.value[level];
             })[0] || dataSource[0] || {};
 
-            if (level < cols - 1) {
+            if (level < maxCols - 1) {
                 if (selected.children && selected.children.length > 0) {
-                    pickers = this.getOptions(selected.children, level + 1);
+                    pickers = this._getOptions(selected.children, level + 1);
                 } else {
-                    pickers = this.getOptions([], level + 1);
+                    pickers = this._getOptions([], level + 1);
                 }
             }
 
             pickers.unshift(React.createElement(Picker, { key: level, valueMember: valueMember, displayMember: displayMember, dataSource: dataSource, value: selected[displayMember], onChange: function onChange(value) {
-                    _this.onpickerChange(dataSource, level, value);
+                    _this._onpickerChange(dataSource, level, value);
                 } }));
         } else {
             var selected = this.state.value[level];
             if (level < dataSource.length - 1) {
-                pickers = this.getOptions(dataSource, level + 1);
+                pickers = this._getOptions(dataSource, level + 1);
             }
 
             pickers.unshift(React.createElement(Picker, { key: level, valueMember: valueMember, displayMember: displayMember, dataSource: dataSource[level], value: selected, onChange: function onChange(value) {
-                    _this.onpickerChange(dataSource, level, value);
+                    _this._onpickerChange(dataSource, level, value);
                 } }));
         }
 
@@ -18750,7 +18742,7 @@ var PickerGroup = React.createClass({
         return pickers;
     },
     // 选择器选值
-    onpickerChange: function onpickerChange(dataSource, level, value) {
+    _onpickerChange: function _onpickerChange(dataSource, level, value) {
         var _this = this;
         var displayMember = this.props.displayMember;
         var onChange = this.props.onChange;
@@ -18758,9 +18750,9 @@ var PickerGroup = React.createClass({
         var values = this.state.value.concat();
 
         if (!values || !values.length) {
-            var data = this.props.dataSource;
+            var data = this.props.data;
             if (this.state.cascade) {
-                for (var i = 0; i < this.props.cols; i += 1) {
+                for (var i = 0; i < this.props.maxCols; i += 1) {
                     if (data && data.length) {
                         values[i] = data[0][displayMember];
                         data = data[0].children;
@@ -18784,12 +18776,12 @@ var PickerGroup = React.createClass({
                 dataSource = item ? item.children : [];
                 value = dataSource[0] ? dataSource[0][displayMember] : undefined;
             }
-            var children = Util.arrayTreeFilter(_this.props.dataSource, function (item, lv) {
+            var children = Util.arrayTreeFilter(_this.props.data, function (item, lv) {
                 return lv <= level && item[displayMember] === values[lv];
             });
             var data = children[level];
             var ii;
-            for (ii = level + 1; data && data.children && data.children.length && ii < this.props.cols; ii += 1) {
+            for (ii = level + 1; data && data.children && data.children.length && ii < this.props.maxCols; ii += 1) {
                 data = data.children[0];
                 values[ii] = data[displayMember];
             }
@@ -18803,7 +18795,7 @@ var PickerGroup = React.createClass({
         });
         onChange && onChange(values);
     },
-    getInitValue: function getInitValue() {
+    _getInitValue: function _getInitValue() {
         var data = this.state.data;
         var displayMember = this.props.displayMember;
 
@@ -18811,7 +18803,7 @@ var PickerGroup = React.createClass({
 
         if (!value || !value.length) {
             if (this.state.cascade) {
-                for (var i = 0; i < this.props.cols; i += 1) {
+                for (var i = 0; i < this.props.maxCols; i += 1) {
                     if (data && data.length) {
                         value[i] = data[0][displayMember];
                         data = data[0].children;
@@ -18829,7 +18821,7 @@ var PickerGroup = React.createClass({
     // 取消
     onCancel: function onCancel() {
         var onCancel = this.props.onCancel;
-        this.toggle();
+        this._toggle();
         this.setState({
             value: this.tempValue
         });
@@ -18838,13 +18830,13 @@ var PickerGroup = React.createClass({
     // 确定
     onOk: function onOk() {
         var onOk = this.props.onOk;
-        var value = this.getInitValue();
+        var value = this._getInitValue();
         this.tempValue = value;
-        this.toggle();
+        this._toggle();
         onOk && onOk(value);
     },
     render: function render() {
-        var dataSource = this.props.dataSource;
+        var dataSource = this.props.data;
         var value = this.state.value;
         var format = this.props.format;
         var placeholder = this.props.placeholder;
@@ -18852,7 +18844,7 @@ var PickerGroup = React.createClass({
         var title = this.props.title;
         var cancelText = this.props.cancelText;
         var okText = this.props.okText;
-        var pickers = this.getOptions(dataSource, 0);
+        var pickers = this._getOptions(dataSource, 0);
         var classes = classnames(_defineProperty({
             'ucs-picker-container': true,
             'ucs-picker-popup-mask-hidden': !this.state.visible
@@ -18865,7 +18857,7 @@ var PickerGroup = React.createClass({
 
         return React.createElement(
             'div',
-            { className: 'ucs-picker', onClick: this.toggle },
+            { className: 'ucs-picker', onClick: this._handleClick },
             React.createElement(
                 'div',
                 { className: inputCls },
@@ -18873,7 +18865,7 @@ var PickerGroup = React.createClass({
             ),
             React.createElement(
                 'div',
-                { className: classes, onClick: this.onContainerClick },
+                { className: classes, onClick: this._onContainerClick },
                 React.createElement(
                     'div',
                     { tabIndex: '-1', className: 'ucs-picker-popup-wrap', role: 'dialog' },
@@ -18932,7 +18924,7 @@ module.exports = PickerGroup;
 
 /***/ }),
 
-/***/ 86:
+/***/ 88:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18942,6 +18934,7 @@ module.exports = PickerGroup;
  * Created by Administrator on 2017/7/14.
  */
 var Utils = {
+    // 过滤data数组中满足fiterFn返回值条件的元素
     arrayTreeFilter: function arrayTreeFilter(data, filterFn, options) {
         options = options || {};
         options.childrenKeyName = options.childrenKeyName || 'children';
