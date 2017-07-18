@@ -27,8 +27,8 @@ var FloatButton = React.createClass({
     },
     render: function () {
         var _classname = classnames('ucs-float-button', this.props.className, {'ucs-hide': this.state.hide});
-        var _textClass = classnames('ucs-float-button-text',{'ucs-float-only-text':!this.props.img});
-        var _imgClass = classnames('ucs-float-button-img',{'ucs-float-only-img':!this.props.text});
+        var _textClass = classnames('ucs-float-button-text', {'ucs-float-only-text': !this.props.img});
+        var _imgClass = classnames('ucs-float-button-img', {'ucs-float-only-img': !this.props.text});
         return (
             <div className={_classname} id={this.props.id} onClick = {this.props.onClick}>
                 {this.props.img

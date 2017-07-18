@@ -224,3 +224,36 @@
     top: 0;
     font-style: normal;
     color: #999; }
+
+.ucs-float-button {
+  position: fixed;
+  bottom: 20px;
+  right: 10px;
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  border-radius: 50%;
+  background: orange; }
+  .ucs-float-button * {
+    margin: 0;
+    padding: 0;
+    border: none; }
+  .ucs-float-button .ucs-float-button-img img {
+    max-height: 60%;
+    max-width: 100%; }
+  .ucs-float-button .ucs-float-button-text {
+    height: 40%;
+    font-size: 14px;
+    text-align: center; }
+  .ucs-float-button .ucs-float-only-img {
+    line-height: 50px; }
+    .ucs-float-button .ucs-float-only-img img {
+      max-width: 100%;
+      max-height: 100%;
+      vertical-align: middle; }
+  .ucs-float-button .ucs-float-only-text {
+    height: 100%;
+    line-height: 50px; }
+
+.ucs-hide {
+  display: none; }
