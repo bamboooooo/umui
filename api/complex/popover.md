@@ -10,10 +10,13 @@
 
 参数 | 说明 | 类型 | 默认值
 ---|---|---|---|---
+className | 样式类名 | string |无
+id|dom元素id|string|无
 autoSlideUp | 是否点击后收起 | bool | true
 displayListsIcon | 是否显示菜单（列表）图标 | bool | true
 displayMaskLayer | 是否显示遮罩层 | bool | true
-lists | 弹出菜单（列表） | json | [{'icon': 'icon1', 'text': '菜单一', 'value': '1'}, {'icon': 'icon2', 'text': '菜单二', 'value': '2'}, {'icon': 'icon3', 'text': '菜单三', 'value': '3'}]
+onClick|绑定click事件|function(index)|无
+lists | 弹出菜单（列表） | json | [{'icon': 'icon1', 'text': '菜单一', 'value': '1', 'href':''}, {'icon': 'icon2', 'text': '菜单二', 'value': '2', 'href':''}, {'icon': 'icon3', 'text': '菜单三', 'value': '3', 'href':''}]
 
 `文本或图标内容放在children中:<Popover>更多</Popover>`
 
@@ -72,15 +75,6 @@ lists | 弹出菜单（列表） | json | [{'icon': 'icon1', 'text': '菜单一'
 
 #### 参数
 - 无
-
-#### 返回值
-- void
-
-### 8.clickHandle(e)
-> 菜单（列表）项点击事件
-
-#### 参数
-- e: 当前点击的事件的event对象
 
 #### 返回值
 - void

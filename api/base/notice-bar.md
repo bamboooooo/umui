@@ -18,6 +18,8 @@ id | dom元素id | string | 无
 scroll | 是否滚动 | bool | false
 scrollSpeed | 滚动速度（scroll属性为true，该属性才有效） | number | 50
 value | 通告文本 | string | 这是一条通告信息
+onClick|绑定click事件|function|无
+onClose|绑定关闭按钮点击事件|function|无
 
 ---
 
@@ -31,26 +33,7 @@ value | 通告文本 | string | 这是一条通告信息
 #### 返回值
 - void
 
-### 2.clickHandle(e)
-> 通告栏点击事件
-
-#### 参数
-- e: 当前点击的事件的event对象
-
-#### 返回值
-- void
-
-### 3.closeHandle(e)
-> 关闭按钮点击事件
-
-#### 参数
-- e: 当前点击的事件的event对象
-
-#### 返回值
-- void
-
-
-### 4.show()
+### 2.show()
 > 设置组件显示
 
 #### 参数
@@ -59,7 +42,7 @@ value | 通告文本 | string | 这是一条通告信息
 #### 返回值
 - void
 
-### 5.hide()
+### 3.hide()
 > 设置组件隐藏
 
 #### 参数

@@ -1,5 +1,6 @@
 # Layer组件
 > 自定义弹窗组件
+
 ## 一、功能说明
 自定义弹窗内容，包括input之类的。
 
@@ -18,7 +19,7 @@ confirmText | 确定按钮的文案 | string | '确定'
 cancelText|取消按钮的文案|string|'取消'
 confirmBack | 点击确定按钮的回调事件 | function | 无
 cancelBack | 点击取消按钮的回调事件 | function | 无
-closable | 是否显示关闭按钮 | bool | true
+isShowClose | 是否显示关闭按钮 | bool | true
 closeBack | 点击关闭按钮的回调事件 | function | 无
 
 ---

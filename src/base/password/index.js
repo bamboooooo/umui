@@ -3,29 +3,30 @@ var sha1 = require('sha1');
 var md5 = require('js-md5');
 var sha256 = require('sha256');
 var Password = React.createClass({
-    getInitialState: function () {
-        return {
-            className: classnames('ucs-password', this.props.className),
-            readOnly: false,
-            disabled: false,
-            encryptKey: '',
-            encryptType: ''
-        };
-    },
     getDefaultProps: function () {
         return {
             isShowClear: false,
             placeHolder: '',
-            id: 'passsword',
-            name: 'passsword',
+            id: '',
+            name: '',
             displayChar: '.',
-            maxLength: ''
+            maxLength: '',
+            encryptType: ''
+        };
+    },
+    getInitialState: function () {
+        return {
+            className: classnames('ucs-password', this.props.className),
+            readOnly: this.props.readOnly ? this.props.readOnly : false,
+            disabled: this.props.disabled ? this.props.disabled : false,
+            encryptKey: this.props.encryptKey ? this.props.encryptKey : '',
+            formalPasswd: ''
         };
     },
     getValue: function () {
-        var encryptType = this.state.encryptType;
+        var encryptType = this.props.encryptType;
         var encryptPassword = '';
-        var formalPassword = this.refs.password.value;
+        var formalPassword = this.state.formalPasswd;
         switch (encryptType) {
             case 'md5':
                 encryptPassword = md5(this.state.encryptKey + formalPassword);
@@ -67,6 +68,9 @@ var Password = React.createClass({
     },
     clear: function () {
         this.refs.password.value = '';
+        this.setState({
+            formalPasswd: ''
+        });
     },
     setEncryptKey: function (v) {
         this.setState({
@@ -89,16 +93,30 @@ var Password = React.createClass({
     },
     _keyUpHandle: function (e) {
         var passwordVal = this.refs.password.value;
-        this.refs.password.value = passwordVal.replace(/./g, this.props.displayChar);
+        var displayChar = this.props.displayChar;
+        var str = new RegExp('[^' + displayChar + ']', 'g');
+        this.refs.password.value = passwordVal.replace(str, this.props.displayChar);
     },
-    onChange: function (e) {
+    _keyPressHandle: function (e) {
+        var keynum;
+        var keychar;
+        keynum = window.event ? e.charCode : e.which;
+        keychar = String.fromCharCode(keynum);
+        this.setState({
+            formalPasswd: this.state.formalPasswd + keychar
+        });
+    },
+    _changeHandle: function (e) {
         this.props.onChange ? this.props.onChange(e) : '';
     },
-    onBlur: function (e) {
+    _blurHandle: function (e) {
         this.props.onBlur ? this.props.onBlur(e) : '';
     },
-    onFocus: function (e) {
+    _focusHandle: function (e) {
         this.props.onFocus ? this.props.onFocus(e) : '';
+    },
+    componentDidUpdate: function () {
+        this._isShowClear();
     },
     componentDidMount: function () {
         this._isShowClear();
@@ -106,7 +124,7 @@ var Password = React.createClass({
     render: function () {
         return (
             <div className="ucs-password-box">
-                <input type="text" ref="password" {...this.props} className={this.state.className} disabled={this.state.disabled} palceholder={this.props.placeHolder} readOnly={this.state.readOnly} onKeyUp={this._keyUpHandle} onBlur={this.onBlur} onFocus={this.onFocus}></input>
+                <input type="text" ref="password" {...this.props} defaultValue={''} className={this.state.className} encryptKey={this.state.encryptKey} disabled={this.state.disabled} placeHolder={this.props.placeHolder} readOnly={this.state.readOnly} onKeyPress={this._keyPressHandle} onKeyUp={this._keyUpHandle} onBlur={this._blurHandle} onFocus={this._focusHandle} onChange={this._changeHandle}/>
                 <i className="icon-clear" ref='clear' onClick={this.clear}>X</i>
             </div>
         );
