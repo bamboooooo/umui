@@ -29,6 +29,8 @@ describe('Button-setDisabled()方法测试', function () {
         // const inputItem = buttonDOM.querySelector('input');
         button.setDisabled(true);
         expect(buttonDOM.disabled).to.be.ok;
+        button.setDisabled(false);
+        expect(buttonDOM.disabled).to.not.be.ok;
     });
 });
 
