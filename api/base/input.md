@@ -75,3 +75,9 @@ onFocus|绑定焦点获取事件|function|无
 
 #### 返回值
 - void
+
+### 7.focus()
+> focus事件，为组件外部提供可以调用input的focus的方法。
+
+#### 返回值
+- void
