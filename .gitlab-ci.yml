@@ -1,4 +1,9 @@
+variables:
+  REPORT_PATH: "/devdata/tests-report"
+  CLEAR_FILE_TIME:'3600*24*5'
+  
 stages:
+  - init
   - install_deps
   - test
   
@@ -7,6 +12,16 @@ cache:
   paths:
     - node_modules/
 
+init:
+  stage: init
+  only:
+    - develop
+    - master
+  script:
+    - cd $REPORT_PATH
+    - find . -type f -name "report_*.html" -o -name "report_*.json" | awk -F'/' '{print $$2}'   | awk -F'_' '{print $$2}' | awk -F'.' '{tstamp1=mktime(substr($$1,1,4)" "substr($$1,5,2)" "substr($$1,7,2)" "substr($$1,9,2)" "substr($$1,11,2)" "substr($$1,13,2));if (systime() - tstamp1 > $CLEAR_FILE_TIME ) print $$1;}' 
+    - cd ${CI_PROJECT_DIR}
+    
 install_deps:
   stage: install_deps
   only:
