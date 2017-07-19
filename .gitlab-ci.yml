@@ -15,10 +15,12 @@ init:
     - master
   variables:
     REPORT_PATH: '/devdata/tests-report'
+    CLEAR_FILE_TIME: '3600*24*4'
   script:
     - cd "$REPORT_PATH"
     - pwd
-    - find . -type f -name "report_*.html" -o -name "report_*.json" | awk -F'/' '{print $2}'   | awk -F'_' '{print $2}' | awk -F'.' '{tstamp1=mktime(substr($1,1,4)" "substr($1,5,2)" "substr($1,7,2)" "substr($1,9,2)" "substr($1,11,2)" "substr($1,13,2));if (systime() - tstamp1 > 3600*24*5 ) print $1;}' 
+    - set CLEAR_FILE_TIME="CLEAR_FILE_TIME"
+    - find . -type f -name "report_*.html" -o -name "report_*.json" | awk -F'/' '{print $2}'   | awk -F'_' '{print $2}' | awk -F'.' '{tstamp1=mktime(substr($1,1,4)" "substr($1,5,2)" "substr($1,7,2)" "substr($1,9,2)" "substr($1,11,2)" "substr($1,13,2));if (systime() - tstamp1 > $CLEAR_FILE_TIME ) print $1;}' 
     - cd "$CI_PROJECT_DIR"
     - pwd
     
