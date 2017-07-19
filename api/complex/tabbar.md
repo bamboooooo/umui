@@ -15,8 +15,6 @@
 参数 | 说明 | 类型 | 默认值
 ---|---|---|---|---
 className | 样式类名 | string |无
-displayText | 是否显示文本 | bool | true
-hidden | 是否隐藏 | bool | false
 id | dom元素id | string | 无
 
 ### TabBar.Item
@@ -27,29 +25,25 @@ id | dom元素id | string | 无
 参数 | 说明 | 类型 | 默认值
 ---|---|---|---|---
 className | 样式类名 | string |无
-icon | 默认展示图片 | Image Source | 
-selectedIcon | 选中后的展示图片 | Image Source | 
-id | dom元素id | string | 无
-title | 标题文字 | string | 无
 selected | 是否选中 | bool | false
 onClick | 点击事件 | function | 无
 ---
 
 ## 三、方法说明
-### 1.setSelected(v)
+### 1.setSelected(i)
 > 设置组件的选中的项
 
 #### 参数
-- v: string类型，设置的值
+- i: string类型，设置当前索引值选中
 
 #### 返回值
 - void
 
-### 2.getValue()
+### 2.getSelected()
 > 获取组件的选中的项
 
 #### 返回值
-- string 没有值时返回 ''
+- index 选中项的索引值
 
 ### 3.show()
 > 设置组件显示
