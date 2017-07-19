@@ -10,11 +10,12 @@ import FloatButton  from '../../../src/base/float-button/index.js'; // 引入组
 describe('FloatButton-props测试', function () {
     it('porps测试', function () {
         // const floatButton = shallowRender(FloatButton, { id: 'flybutton', className: 'to-fly', img: 'http://172.17.21.139:10080/uploads/user/avatar/6/avatar.png' ,text: '浮动按钮'});
-        const floatButton = TestUtils.renderIntoDocument(<FloatButton id="flybutton" className="to-fly" img="http://172.17.21.139:10080/uploads/user/avatar/6/avatar.png" text="浮动按钮"/>);
+        const floatButton = TestUtils.renderIntoDocument(<FloatButton id="flybutton" className="to-fly" move={true} img="http://172.17.21.139:10080/uploads/user/avatar/6/avatar.png" text="浮动按钮"/>);
         expect(floatButton.props.id.indexOf('flybutton')).to.not.be.equal(-1);
         expect(floatButton.props.className.indexOf('to-fly')).to.not.be.equal(-1);
         expect(floatButton.props.img.indexOf('http://172.17.21.139:10080/uploads/user/avatar/6/avatar.png')).to.not.be.equal(-1);
         expect(floatButton.props.text.indexOf('浮动按钮')).to.not.be.equal(-1);
+        expect(floatButton.props.move).to.be.ok;
     });
 });
 
