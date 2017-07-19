@@ -15,7 +15,7 @@ init:
     - master
   variables:
     REPORT_PATH: '/devdata/tests-report'
-    FILE_EXPRIED_TIME: '3600*24*4'
+    FILE_EXPRIED_TIME: 3600*24*4
   script:
     - cd "$REPORT_PATH"
     - pwd
