@@ -68,105 +68,7 @@
 /************************************************************************/
 /******/ ({
 
-/***/ 76:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * 创建人：DuHuiling
- * 创建时间：2017/7/17
- * 说明：漂浮按钮组件
- */
-var classnames = __webpack_require__(9);
-var FloatButton = React.createClass({
-    displayName: 'FloatButton',
-
-    getDefaultProps: function getDefaultProps() {
-        return {};
-    },
-    getInitialState: function getInitialState() {
-        return {
-            hide: false
-        };
-    },
-    show: function show() {
-        this.setState({
-            hide: false
-        });
-    },
-    hide: function hide() {
-        this.setState({
-            hide: true
-        });
-    },
-    render: function render() {
-        var _classname = classnames('ucs-float-button', this.props.className, { 'ucs-hide': this.state.hide });
-        var _textClass = classnames('ucs-float-button-text', { 'ucs-float-only-text': !this.props.img });
-        var _imgClass = classnames('ucs-float-button-img', { 'ucs-float-only-img': !this.props.text });
-        return React.createElement(
-            'div',
-            { className: _classname, id: this.props.id, onClick: this.props.onClick },
-            this.props.img ? React.createElement(
-                'p',
-                { className: _imgClass },
-                React.createElement('img', { src: this.props.img })
-            ) : '',
-            this.props.text ? React.createElement(
-                'p',
-                { className: _textClass },
-                this.props.text
-            ) : ''
-        );
-    }
-});
-module.exports = FloatButton;
-
-/***/ }),
-
-/***/ 87:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * 创建人：DuHuiling
- * 创建时间：2017/7/17
- * 说明：
- */
-var FloatButton = __webpack_require__(76);
-var Root = React.createClass({
-    displayName: "Root",
-
-    componentDidMount: function componentDidMount() {
-        // var _this = this;
-        // setTimeout(function () {
-        //     console.log(_this);
-        //     _this.refs.fb.hide();
-        // }, 3000);
-        // setTimeout(function () {
-        //     console.log(_this);
-        //     _this.refs.fb.show();
-        // }, 6000);
-    },
-    _click: function _click() {
-        alert(123);
-    },
-    render: function render() {
-        return React.createElement(
-            "div",
-            null,
-            React.createElement(FloatButton, { ref: "fb", className: "test", img: "https://www.baidu.com/img/bd_logo1.png", text: "\u767E\u5EA6", onClick: this._click })
-        );
-    }
-});
-ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
-
-/***/ }),
-
-/***/ 9:
+/***/ 7:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -219,6 +121,165 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	}
 }());
 
+
+/***/ }),
+
+/***/ 75:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * 创建人：DuHuiling
+ * 创建时间：2017/7/17
+ * 说明：漂浮按钮组件
+ */
+var classnames = __webpack_require__(7);
+var FloatButton = React.createClass({
+    displayName: 'FloatButton',
+
+    getDefaultProps: function getDefaultProps() {
+        return {
+            move: false
+        };
+    },
+    getInitialState: function getInitialState() {
+        return {
+            hide: false,
+            xSpace: 10,
+            ySpace: 20,
+            tagSize: {}
+        };
+    },
+    show: function show() {
+        this.setState({
+            hide: false
+        });
+    },
+    hide: function hide() {
+        this.setState({
+            hide: true
+        });
+    },
+    _animation: function _animation(position, callback) {
+        var _style = this.refs.float_btn.style;
+        var tagWidth = this.state.tagSize.width;
+        var tagHeight = this.state.tagSize.height;
+        _style.left = position.x - tagWidth / 2 + 'px';
+        _style.top = position.y - tagHeight / 2 + 'px';
+    },
+    _onTouchStart: function _onTouchStart(e) {
+        this.props.onTouchStart && this.props.onTouchStart(e);
+    },
+    _onTouchMove: function _onTouchMove(e) {
+        if (!this.props.move) {
+            return;
+        }
+        var _touch = e.touches[0];
+        var _move = {
+            x: _touch.clientX,
+            y: _touch.clientY
+        };
+        this._animation(_move);
+    },
+    _onTouchEnd: function _onTouchEnd(e) {
+        if (!this.props.move) {
+            return;
+        }
+        var _touch = e.changedTouches[0];
+        var _docWidth = document.documentElement.clientWidth;
+        var _docHeight = document.documentElement.clientHeight;
+        var tagWidth = this.state.tagSize.width;
+        var tagHeight = this.state.tagSize.height;
+        var _x = 0,
+            _y = 0;
+        if (_touch.clientX >= _docWidth / 2) {
+            _x = _docWidth - tagWidth / 2 - this.state.xSpace;
+        } else {
+            _x = tagWidth / 2 + this.state.xSpace;
+        }
+        if (_touch.clientY >= _docHeight) {
+            _y = _docHeight - tagHeight / 2 - this.state.ySpace;
+        } else if (_touch.clientY < tagHeight / 2 + this.state.ySpace) {
+            _y = tagHeight / 2 + this.state.ySpace;
+        } else {
+            _y = _touch.clientY;
+        }
+        this._animation({
+            x: _x,
+            y: _y
+        });
+    },
+    componentDidMount: function componentDidMount() {
+        this.state.tagSize = {
+            width: this.refs.float_btn.offsetWidth,
+            height: this.refs.float_btn.offsetHeight
+        };
+    },
+    render: function render() {
+        var _classname = classnames('ucs-float-button', this.props.className, { 'ucs-hide': this.state.hide });
+        var _textClass = classnames('ucs-float-button-text', { 'ucs-float-only-text': !this.props.img });
+        var _imgClass = classnames('ucs-float-button-img', { 'ucs-float-only-img': !this.props.text });
+        return React.createElement(
+            'div',
+            { ref: 'float_btn', className: _classname, id: this.props.id, onClick: this.props.onClick,
+                onTouchStart: this._onTouchStart, onTouchMove: this._onTouchMove, onTouchEnd: this._onTouchEnd },
+            this.props.img ? React.createElement(
+                'p',
+                { className: _imgClass },
+                React.createElement('img', { src: this.props.img })
+            ) : '',
+            this.props.text ? React.createElement(
+                'p',
+                { className: _textClass },
+                this.props.text
+            ) : ''
+        );
+    }
+});
+module.exports = FloatButton;
+
+/***/ }),
+
+/***/ 87:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * 创建人：DuHuiling
+ * 创建时间：2017/7/17
+ * 说明：
+ */
+var FloatButton = __webpack_require__(75);
+var Root = React.createClass({
+    displayName: "Root",
+
+    componentDidMount: function componentDidMount() {
+        // var _this = this;
+        // setTimeout(function () {
+        //     console.log(_this);
+        //     _this.refs.fb.hide();
+        // }, 3000);
+        // setTimeout(function () {
+        //     console.log(_this);
+        //     _this.refs.fb.show();
+        // }, 6000);
+    },
+    _click: function _click() {
+        alert(123);
+    },
+    render: function render() {
+        return React.createElement(
+            "div",
+            null,
+            React.createElement(FloatButton, { move: true, ref: "fb", className: "test", img: "https://www.baidu.com/img/bd_logo1.png", text: "\u767E\u5EA6", onClick: this._click })
+        );
+    }
+});
+ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
 
 /***/ })
 

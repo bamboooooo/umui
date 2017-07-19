@@ -22,7 +22,7 @@ var Root = React.createClass({
     render: function () {
         return (
             <div>
-                <FloatButton ref="fb" className="test" img="https://www.baidu.com/img/bd_logo1.png" text="百度" onClick={ this._click }/>
+                <FloatButton move={true} ref="fb" className="test" img="https://www.baidu.com/img/bd_logo1.png" text="百度" onClick={ this._click }/>
             </div>
         );
     }
