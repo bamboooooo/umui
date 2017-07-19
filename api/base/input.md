@@ -11,7 +11,7 @@
 
 参数 | 说明 | 类型 | 默认值
 ---|---|---|---|---
-type|输入类型，文本text，手机号phone（此时最大长度固定为11,maxLength设置无效），数字number|string|'text'
+type|输入类型，文本text，手机号tel（此时最大长度固定为11,maxLength设置无效），数字number|string|'text'
 className | 样式类名 | string |无
 readOnly | 是否只读 | bool | false
 disabled | 是否禁用 | bool |false
