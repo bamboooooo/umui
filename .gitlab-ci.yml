@@ -1,6 +1,6 @@
 variables:
-  REPORT_PATH: "/devdata/tests-report"
-  CLEAR_FILE_TIME:'3600*24*5'
+  REPORT_PATH: '/devdata/tests-report'
+  CLEAR_FILE_TIME: '3600*24*5'
   
 stages:
   - init
