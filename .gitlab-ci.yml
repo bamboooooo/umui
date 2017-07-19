@@ -15,11 +15,11 @@ init:
     - master
   variables:
     REPORT_PATH: '/devdata/tests-report'
-    FILE_EXPRIED_DATE: 4
+    FILE_EXPRIED_DATE: '4'
   script:
     - cd "$REPORT_PATH"
     - pwd
-    - find . -type f -name "report_*.html" -o -name "report_*.json" | awk -F'/' '{print $2}'   | awk -F'_' '{print $2}' | awk -v expried=FILE_EXPRIED_DATE -F'.' '{tstamp1=mktime(substr($1,1,4)" "substr($1,5,2)" "substr($1,7,2)" "substr($1,9,2)" "substr($1,11,2)" "substr($1,13,2)); if (systime() - tstamp1 > 3600*24*expried  ) print systime() - tstamp1,(3600*24*expried),$1;}' 
+    - find . -type f -name "report_*.html" -o -name "report_*.json" | awk -F'/' '{print $2}'   | awk -F'_' '{print $2}' | awk -v expried=$FILE_EXPRIED_DATE+0 -F'.' '{tstamp1=mktime(substr($1,1,4)" "substr($1,5,2)" "substr($1,7,2)" "substr($1,9,2)" "substr($1,11,2)" "substr($1,13,2)); if (systime() - tstamp1 > 3600*24*expried  ) print systime() - tstamp1,(3600*24*expried),$1;}' 
     - cd "$CI_PROJECT_DIR"
     - pwd
     
