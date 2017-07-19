@@ -19,7 +19,7 @@ init:
   script:
     - cd "$REPORT_PATH"
     - pwd
-    - set CLEAR_FILE_TIME="$CLEAR_FILE_TIME"
+    - export CLEAR_FILE_TIME="$CLEAR_FILE_TIME"
     - find . -type f -name "report_*.html" -o -name "report_*.json" | awk -F'/' '{print $2}'   | awk -F'_' '{print $2}' | awk -F'.' '{tstamp1=mktime(substr($1,1,4)" "substr($1,5,2)" "substr($1,7,2)" "substr($1,9,2)" "substr($1,11,2)" "substr($1,13,2));if (systime() - tstamp1 > $CLEAR_FILE_TIME ) print $CLEAR_FILE_TIME,$1;}' 
     - cd "$CI_PROJECT_DIR"
     - pwd
