@@ -15,7 +15,7 @@ var PickerGroup = React.createClass({
             format: '-',
             disabled: false,
             data: [],
-            maxCols: 3,
+            maxCols: 2,
             defaultValue: [],
             onClick: null,
             onChange: null,
@@ -31,7 +31,8 @@ var PickerGroup = React.createClass({
             visible: this.props.visible || false,
             value: this.props.defaultValue,
             data: this.props.data,
-            cascade: Object.prototype.toString.call(this.props.data[0]) !== '[object Array]'// 判断数据是否为级联，简单判断数据第一个元素是否为数组
+            cascade: Object.prototype.toString.call(this.props.data[0]) !== '[object Array]', // 判断数据是否为级联，简单判断数据第一个元素是否为数组
+            disabled: this.props.disabled
         };
     },
     componentDidMount: function () {
@@ -49,8 +50,7 @@ var PickerGroup = React.createClass({
     },
     // 切换显示状态
     _toggle: function () {
-
-        if (this.props.disabled) {
+        if (this.state.disabled) {
             return;
         }
         this.setState({
@@ -60,12 +60,29 @@ var PickerGroup = React.createClass({
     _handleClick: function () {
         var onClick = this.props.onClick;
         onClick && onClick(this.tempValue);
-        !this.props.disabled && this._toggle();
+        !this.state.disabled && this._toggle();
     },
     onMaskClick: function () {
         var onMaskClick = this.props.onMaskClick;
         this.onCancel();
         onMaskClick && onMaskClick(this.tempValue);
+    },
+    // 取消
+    onCancel: function () {
+        var onCancel = this.props.onCancel;
+        this._toggle();
+        this.setState({
+            value: this.tempValue
+        });
+        onCancel && onCancel(this.tempValue);
+    },
+    // 确定
+    onOk: function () {
+        var onOk = this.props.onOk;
+        var value = this._getInitValue();
+        this.tempValue = value;
+        this._toggle();
+        onOk && onOk(value);
     },
     // 获取选择器组
     _getOptions: function (dataSource, level) {
@@ -182,22 +199,36 @@ var PickerGroup = React.createClass({
 
         return value;
     },
-    // 取消
-    onCancel: function () {
-        var onCancel = this.props.onCancel;
-        this._toggle();
+    // 设置值
+    setValue: function (v) {
+        this.tempValue = v;
         this.setState({
-            value: this.tempValue
+            value: v
         });
-        onCancel && onCancel(this.tempValue);
     },
-    // 确定
-    onOk: function () {
-        var onOk = this.props.onOk;
-        var value = this._getInitValue();
-        this.tempValue = value;
-        this._toggle();
-        onOk && onOk(value);
+    // 获取值
+    getValue: function () {
+        return this.state.value || [];
+    },
+    // 设置是否禁用
+    setDisabled: function (v) {
+        this.setState({
+            disabled: v
+        });
+    },
+    // 清空组件值
+    clear: function () {
+        this.tempValue = [];
+        this.setState({
+            value: []
+        });
+    },
+    // 重置组件值
+    reset: function () {
+        this.tempValue = this.props.defaultValue;
+        this.setState({
+            value: this.props.defaultValue
+        });
     },
     render: function () {
         var dataSource = this.props.data;
@@ -221,7 +252,7 @@ var PickerGroup = React.createClass({
         });
 
         return (
-            <div className="ucs-picker" onClick={this._handleClick}>
+            <div className="ucs-picker-box" onClick={this._handleClick}>
                 <div className={inputCls}>
                     {value.join(format) || placeholder}
                 </div>

@@ -18247,6 +18247,8 @@ module.exports = Picker;
 "use strict";
 
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var Picker = __webpack_require__(73);
 var District = __webpack_require__(26);
 var seasons = [[{
@@ -18290,6 +18292,35 @@ var majors = [[{
 var Root = React.createClass({
     displayName: 'Root',
 
+    getInitialState: function getInitialState() {
+        return {
+            disabled: false
+        };
+    },
+    setValue: function setValue(v) {
+        this.refs.picker1.setValue(v);
+    },
+    getValue: function getValue() {
+        console.log(this.refs.picker2.getValue());
+    },
+    setDisabled: function setDisabled(e) {
+        var btn = e.srcElement ? e.srcElement : e.target;
+        if (this.state.disabled) {
+            btn.innerHTML = '禁用';
+        } else {
+            btn.innerHTML = '启用';
+        }
+        this.setState({
+            disabled: !this.state.disabled
+        });
+        this.refs.picker3.setDisabled(!this.state.disabled);
+    },
+    clear: function clear() {
+        this.refs.picker4.clear();
+    },
+    reset: function reset() {
+        this.refs.picker4.reset();
+    },
     render: function render() {
         var config1 = {
             placeholder: '请选择',
@@ -18372,6 +18403,32 @@ var Root = React.createClass({
             displayMember: 'value',
             valueMember: 'key'
         };
+        var config4 = {
+            placeholder: '请选择专业',
+            title: '',
+            cancelText: '取消',
+            okText: '确定',
+            disabled: false,
+            data: majors,
+            defaultValue: ['挖掘机'],
+            onClick: function onClick(v) {
+                console.log('外部onClick ->', v);
+            },
+            onChange: function onChange(v) {
+                console.log('外部change value ->', v);
+            },
+            onOk: function onOk(v) {
+                console.log('外部onOk ->', v);
+            },
+            onCancel: function onCancel(v) {
+                console.log('外部onCancel ->', v);
+            },
+            onMaskClick: function onMaskClick(v) {
+                console.log('外部onMaskClick ->', v);
+            },
+            displayMember: 'value',
+            valueMember: 'key'
+        };
         return React.createElement(
             'ul',
             { className: 'list' },
@@ -18381,9 +18438,15 @@ var Root = React.createClass({
                 React.createElement(
                     'label',
                     { className: 'label' },
-                    '\u9009\u62E9\u5730\u533A\uFF08\u591A\u5217\uFF0C\u8054\u52A8\uFF09\uFF1A'
+                    '\u9009\u62E9\u5730\u533A\uFF08\u591A\u5217\uFF0C\u8054\u52A8\uFF09',
+                    React.createElement(
+                        'button',
+                        { onClick: this.setValue.bind(this, ['北京', '北京市', '昌平区']) },
+                        '\u8BBE\u503C'
+                    ),
+                    '\uFF1A'
                 ),
-                React.createElement(Picker, config1)
+                React.createElement(Picker, _extends({ ref: 'picker1' }, config1))
             ),
             React.createElement(
                 'li',
@@ -18391,9 +18454,15 @@ var Root = React.createClass({
                 React.createElement(
                     'label',
                     { className: 'label' },
-                    '\u9009\u62E9\u5B63\u8282\uFF08\u591A\u5217\uFF0C\u4E0D\u8054\u52A8\uFF09\uFF1A'
+                    '\u9009\u62E9\u5B63\u8282\uFF08\u591A\u5217\uFF0C\u4E0D\u8054\u52A8\uFF09',
+                    React.createElement(
+                        'button',
+                        { onClick: this.getValue },
+                        '\u83B7\u53D6\u503C'
+                    ),
+                    '\uFF1A'
                 ),
-                React.createElement(Picker, config2)
+                React.createElement(Picker, _extends({ ref: 'picker2' }, config2))
             ),
             React.createElement(
                 'li',
@@ -18401,9 +18470,35 @@ var Root = React.createClass({
                 React.createElement(
                     'label',
                     { className: 'label' },
-                    '\u9009\u62E9\u4E13\u4E1A\uFF08\u5355\u5217\uFF09\uFF1A'
+                    '\u9009\u62E9\u4E13\u4E1A\uFF08\u5355\u5217\uFF09',
+                    React.createElement(
+                        'button',
+                        { onClick: this.setDisabled },
+                        '\u7981\u7528'
+                    ),
+                    '\uFF1A'
                 ),
-                React.createElement(Picker, config3)
+                React.createElement(Picker, _extends({ ref: 'picker3' }, config3))
+            ),
+            React.createElement(
+                'li',
+                { className: 'list-item' },
+                React.createElement(
+                    'label',
+                    { className: 'label' },
+                    React.createElement(
+                        'button',
+                        { onClick: this.clear, style: { marginRight: '30px' } },
+                        '\u6E05\u7A7A'
+                    ),
+                    React.createElement(
+                        'button',
+                        { onClick: this.reset },
+                        '\u91CD\u7F6E'
+                    ),
+                    '\uFF1A'
+                ),
+                React.createElement(Picker, _extends({ ref: 'picker4' }, config4))
             )
         );
     }
@@ -18651,7 +18746,7 @@ var PickerGroup = React.createClass({
             format: '-',
             disabled: false,
             data: [],
-            maxCols: 3,
+            maxCols: 2,
             defaultValue: [],
             onClick: null,
             onChange: null,
@@ -18667,7 +18762,8 @@ var PickerGroup = React.createClass({
             visible: this.props.visible || false,
             value: this.props.defaultValue,
             data: this.props.data,
-            cascade: Object.prototype.toString.call(this.props.data[0]) !== '[object Array]' // 判断数据是否为级联，简单判断数据第一个元素是否为数组
+            cascade: Object.prototype.toString.call(this.props.data[0]) !== '[object Array]', // 判断数据是否为级联，简单判断数据第一个元素是否为数组
+            disabled: this.props.disabled
         };
     },
     componentDidMount: function componentDidMount() {
@@ -18685,8 +18781,7 @@ var PickerGroup = React.createClass({
     },
     // 切换显示状态
     _toggle: function _toggle() {
-
-        if (this.props.disabled) {
+        if (this.state.disabled) {
             return;
         }
         this.setState({
@@ -18696,12 +18791,29 @@ var PickerGroup = React.createClass({
     _handleClick: function _handleClick() {
         var onClick = this.props.onClick;
         onClick && onClick(this.tempValue);
-        !this.props.disabled && this._toggle();
+        !this.state.disabled && this._toggle();
     },
     onMaskClick: function onMaskClick() {
         var onMaskClick = this.props.onMaskClick;
         this.onCancel();
         onMaskClick && onMaskClick(this.tempValue);
+    },
+    // 取消
+    onCancel: function onCancel() {
+        var onCancel = this.props.onCancel;
+        this._toggle();
+        this.setState({
+            value: this.tempValue
+        });
+        onCancel && onCancel(this.tempValue);
+    },
+    // 确定
+    onOk: function onOk() {
+        var onOk = this.props.onOk;
+        var value = this._getInitValue();
+        this.tempValue = value;
+        this._toggle();
+        onOk && onOk(value);
     },
     // 获取选择器组
     _getOptions: function _getOptions(dataSource, level) {
@@ -18818,22 +18930,36 @@ var PickerGroup = React.createClass({
 
         return value;
     },
-    // 取消
-    onCancel: function onCancel() {
-        var onCancel = this.props.onCancel;
-        this._toggle();
+    // 设置值
+    setValue: function setValue(v) {
+        this.tempValue = v;
         this.setState({
-            value: this.tempValue
+            value: v
         });
-        onCancel && onCancel(this.tempValue);
     },
-    // 确定
-    onOk: function onOk() {
-        var onOk = this.props.onOk;
-        var value = this._getInitValue();
-        this.tempValue = value;
-        this._toggle();
-        onOk && onOk(value);
+    // 获取值
+    getValue: function getValue() {
+        return this.state.value || [];
+    },
+    // 设置是否禁用
+    setDisabled: function setDisabled(v) {
+        this.setState({
+            disabled: v
+        });
+    },
+    // 清空组件值
+    clear: function clear() {
+        this.tempValue = [];
+        this.setState({
+            value: []
+        });
+    },
+    // 重置组件值
+    reset: function reset() {
+        this.tempValue = this.props.defaultValue;
+        this.setState({
+            value: this.props.defaultValue
+        });
     },
     render: function render() {
         var dataSource = this.props.data;
@@ -18857,7 +18983,7 @@ var PickerGroup = React.createClass({
 
         return React.createElement(
             'div',
-            { className: 'ucs-picker', onClick: this._handleClick },
+            { className: 'ucs-picker-box', onClick: this._handleClick },
             React.createElement(
                 'div',
                 { className: inputCls },

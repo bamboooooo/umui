@@ -59,6 +59,35 @@ var majors = [
     ]
 ];
 var Root = React.createClass({
+    getInitialState: function () {
+        return {
+            disabled: false
+        };
+    },
+    setValue: function (v) {
+        this.refs.picker1.setValue(v);
+    },
+    getValue: function () {
+        console.log(this.refs.picker2.getValue());
+    },
+    setDisabled: function (e) {
+        var btn = e.srcElement ? e.srcElement : e.target;
+        if (this.state.disabled) {
+            btn.innerHTML = '禁用';
+        } else {
+            btn.innerHTML = '启用';
+        }
+        this.setState({
+            disabled: !this.state.disabled
+        });
+        this.refs.picker3.setDisabled(!this.state.disabled);
+    },
+    clear: function () {
+        this.refs.picker4.clear();
+    },
+    reset: function () {
+        this.refs.picker4.reset();
+    },
     render: function () {
         var config1 = {
             placeholder: '请选择',
@@ -141,11 +170,38 @@ var Root = React.createClass({
             displayMember: 'value',
             valueMember: 'key'
         };
+        var config4 = {
+            placeholder: '请选择专业',
+            title: '',
+            cancelText: '取消',
+            okText: '确定',
+            disabled: false,
+            data: majors,
+            defaultValue: ['挖掘机'],
+            onClick: function (v) {
+                console.log('外部onClick ->', v);
+            },
+            onChange: function (v) {
+                console.log('外部change value ->', v);
+            },
+            onOk: function (v) {
+                console.log('外部onOk ->', v);
+            },
+            onCancel: function (v) {
+                console.log('外部onCancel ->', v);
+            },
+            onMaskClick: function (v) {
+                console.log('外部onMaskClick ->', v);
+            },
+            displayMember: 'value',
+            valueMember: 'key'
+        };
         return (
             <ul className="list">
-                <li className="list-item"><label className="label">选择地区（多列，联动）：</label><Picker {...config1}/></li>
-                <li className="list-item"><label className="label">选择季节（多列，不联动）：</label><Picker {...config2}/></li>
-                <li className="list-item"><label className="label">选择专业（单列）：</label><Picker {...config3}/></li>
+                <li className="list-item"><label className="label">选择地区（多列，联动）<button onClick={this.setValue.bind(this, ['北京', '北京市', '昌平区'])}>设值</button>：</label><Picker ref="picker1" {...config1}/></li>
+                <li className="list-item"><label className="label">选择季节（多列，不联动）<button onClick={this.getValue}>获取值</button>：</label><Picker ref="picker2" {...config2}/></li>
+                <li className="list-item"><label className="label">选择专业（单列）<button onClick={this.setDisabled}>禁用</button>：</label><Picker ref="picker3" {...config3}/></li>
+                <li className="list-item"><label className="label"><button onClick={this.clear} style={{marginRight: '30px'}}>清空</button><button onClick={this.reset}>重置</button>：</label><Picker ref="picker4" {...config4}/></li>
             </ul>
         );
     }
