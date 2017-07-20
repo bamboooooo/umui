@@ -25,6 +25,7 @@ maxLength|最大长度|number|无
 onChange|绑定change事件的监控事件|function|无
 onBlur|绑定焦点离开事件|function|无
 onFocus|绑定焦点获取事件|function|无
+afterValidation|绑定校验回调事件,成功返回true,失败返回false|function|无
 
 
 ---
