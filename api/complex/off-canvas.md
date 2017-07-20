@@ -19,7 +19,7 @@ maskClosable |点击蒙层是否允许关闭，默认允许|bool|true
 sidebar | 侧栏菜单内容 | ReactNode | 
 onOpenChange | open 状态切换时调用 | function | 
 open | 开关状态 | bool | false
-touch | 是否开启触摸手势 | bool | true
+touch | 是否开启触摸手势,侧滑出菜单栏 | bool | true
 transitions | 是否开启动画 | bool | true
 width | 宽度 | string | 300
 

@@ -15,6 +15,7 @@ className | 样式类名 | string |无
 id|dom元素id|string|无
 img|按钮的背景图片|string|无
 text|按钮的文案|string|无
+move|按钮是否可以拖动|bool|false
 onClick|绑定click事件|function|无
 
 

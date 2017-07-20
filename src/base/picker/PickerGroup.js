@@ -14,24 +14,14 @@ var PickerGroup = React.createClass({
             okText: '确定',
             format: '-',
             disabled: false,
-            dataSource: [],
-            cols: 3,
-            value: [],
-            onClick: function (v) {
-                console.log(v);
-            },
-            onChange: function (v) {
-                console.log(v);
-            },
-            onOk: function (v) {
-                console.log(v);
-            },
-            onCancel: function (v) {
-                console.log(v);
-            },
-            onMaskClick: function (v) {
-                console.log(v);
-            },
+            data: [],
+            maxCols: 2,
+            defaultValue: [],
+            onClick: null,
+            onChange: null,
+            onOk: null,
+            onCancel: null,
+            onMaskClick: null,
             displayMember: 'label',
             valueMember: 'value'
         };
@@ -39,68 +29,91 @@ var PickerGroup = React.createClass({
     getInitialState: function () {
         return {
             visible: this.props.visible || false,
-            value: this.props.value,
-            data: this.props.dataSource,
-            cascade: Object.prototype.toString.call(this.props.dataSource[0]) !== '[object Array]'// 判断数据是否为级联，简单判断数据第一个元素是否为数组
+            value: this.props.defaultValue,
+            data: this.props.data,
+            cascade: Object.prototype.toString.call(this.props.data[0]) !== '[object Array]', // 判断数据是否为级联，简单判断数据第一个元素是否为数组
+            disabled: this.props.disabled
         };
     },
     componentDidMount: function () {
-        this.tempValue = this.props.value;
+        this.tempValue = this.props.defaultValue;
     },
     componentWillReceiveProps: function (nextProps) {
         this.setState({
             visible: nextProps.visible,
-            value: nextProps.value.concat()
+            value: nextProps.defaultValue.concat()
         });
     },
     // 阻止选择器区域的默认事件
-    onContainerClick: function (e) {
+    _onContainerClick: function (e) {
         e.stopPropagation();
     },
     // 切换显示状态
-    toggle: function () {
-        if (this.props.disabled) {
+    _toggle: function () {
+        if (this.state.disabled) {
             return;
         }
         this.setState({
             visible: !this.state.visible
         });
     },
+    _handleClick: function () {
+        var onClick = this.props.onClick;
+        onClick && onClick(this.tempValue);
+        !this.state.disabled && this._toggle();
+    },
     onMaskClick: function () {
         var onMaskClick = this.props.onMaskClick;
         this.onCancel();
-        onMaskClick && onMaskClick();
+        onMaskClick && onMaskClick(this.tempValue);
+    },
+    // 取消
+    onCancel: function () {
+        var onCancel = this.props.onCancel;
+        this._toggle();
+        this.setState({
+            value: this.tempValue
+        });
+        onCancel && onCancel(this.tempValue);
+    },
+    // 确定
+    onOk: function () {
+        var onOk = this.props.onOk;
+        var value = this._getInitValue();
+        this.tempValue = value;
+        this._toggle();
+        onOk && onOk(value);
     },
     // 获取选择器组
-    getOptions: function (dataSource, level) {
+    _getOptions: function (dataSource, level) {
         var _this = this;
         var valueMember = this.props.valueMember;
         var displayMember = this.props.displayMember;
-        var cols = this.props.cols;
+        var maxCols = this.props.maxCols;
         var pickers = this.pickers || [];
 
         if (this.state.cascade) {
             var selected = dataSource.filter(function (item) {return item[displayMember] === _this.state.value[level];})[0] || dataSource[0] || {};
 
-            if (level < cols - 1) {
+            if (level < maxCols - 1) {
                 if (selected.children && selected.children.length > 0) {
-                    pickers = this.getOptions(selected.children, level + 1);
+                    pickers = this._getOptions(selected.children, level + 1);
                 } else {
-                    pickers = this.getOptions([], level + 1);
+                    pickers = this._getOptions([], level + 1);
                 }
             }
 
             pickers.unshift(<Picker key={level} valueMember={valueMember} displayMember={displayMember} dataSource={dataSource} value={selected[displayMember]} onChange={function (value) {
-                _this.onpickerChange(dataSource, level, value);
+                _this._onpickerChange(dataSource, level, value);
             }} />);
         } else {
             var selected = this.state.value[level];
             if (level < dataSource.length - 1) {
-                pickers = this.getOptions(dataSource, level + 1);
+                pickers = this._getOptions(dataSource, level + 1);
             }
 
             pickers.unshift(<Picker key={level} valueMember={valueMember} displayMember={displayMember} dataSource={dataSource[level]} value={selected} onChange={function (value) {
-                _this.onpickerChange(dataSource, level, value);
+                _this._onpickerChange(dataSource, level, value);
             }} />);
         }
 
@@ -108,7 +121,7 @@ var PickerGroup = React.createClass({
         return pickers;
     },
     // 选择器选值
-    onpickerChange: function (dataSource, level, value) {
+    _onpickerChange: function (dataSource, level, value) {
         var _this = this;
         var displayMember = this.props.displayMember;
         var onChange = this.props.onChange;
@@ -116,9 +129,9 @@ var PickerGroup = React.createClass({
         var values = this.state.value.concat();
 
         if (!values || !values.length) {
-            var data = this.props.dataSource;
+            var data = this.props.data;
             if (this.state.cascade) {
-                for (var i = 0; i < this.props.cols; i += 1) {
+                for (var i = 0; i < this.props.maxCols; i += 1) {
                     if (data && data.length) {
                         values[i] = data[0][displayMember];
                         data = data[0].children;
@@ -144,12 +157,12 @@ var PickerGroup = React.createClass({
                     ? dataSource[0][displayMember]
                     : undefined;
             }
-            var children = Util.arrayTreeFilter(_this.props.dataSource, function (item, lv) {
+            var children = Util.arrayTreeFilter(_this.props.data, function (item, lv) {
                 return lv <= level && item[displayMember] === values[lv];
             });
             var data = children[level];
             var ii;
-            for (ii = level + 1; data && data.children && data.children.length && ii < this.props.cols; ii += 1) {
+            for (ii = level + 1; data && data.children && data.children.length && ii < this.props.maxCols; ii += 1) {
                 data = data.children[0];
                 values[ii] = data[displayMember];
             }
@@ -163,7 +176,7 @@ var PickerGroup = React.createClass({
         });
         onChange && onChange(values);
     },
-    getInitValue: function () {
+    _getInitValue: function () {
         var data = this.state.data;
         var displayMember = this.props.displayMember;
 
@@ -171,7 +184,7 @@ var PickerGroup = React.createClass({
 
         if (!value || !value.length) {
             if (this.state.cascade) {
-                for (var i = 0; i < this.props.cols; i += 1) {
+                for (var i = 0; i < this.props.maxCols; i += 1) {
                     if (data && data.length) {
                         value[i] = data[0][displayMember];
                         data = data[0].children;
@@ -186,25 +199,39 @@ var PickerGroup = React.createClass({
 
         return value;
     },
-    // 取消
-    onCancel: function () {
-        var onCancel = this.props.onCancel;
-        this.toggle();
+    // 设置值
+    setValue: function (v) {
+        this.tempValue = v;
         this.setState({
-            value: this.tempValue
+            value: v
         });
-        onCancel && onCancel(this.tempValue);
     },
-    // 确定
-    onOk: function () {
-        var onOk = this.props.onOk;
-        var value = this.getInitValue();
-        this.tempValue = value;
-        this.toggle();
-        onOk && onOk(value);
+    // 获取值
+    getValue: function () {
+        return this.state.value || [];
+    },
+    // 设置是否禁用
+    setDisabled: function (v) {
+        this.setState({
+            disabled: v
+        });
+    },
+    // 清空组件值
+    clear: function () {
+        this.tempValue = [];
+        this.setState({
+            value: []
+        });
+    },
+    // 重置组件值
+    reset: function () {
+        this.tempValue = this.props.defaultValue;
+        this.setState({
+            value: this.props.defaultValue
+        });
     },
     render: function () {
-        var dataSource = this.props.dataSource;
+        var dataSource = this.props.data;
         var value = this.state.value;
         var format = this.props.format;
         var placeholder = this.props.placeholder;
@@ -212,7 +239,7 @@ var PickerGroup = React.createClass({
         var title = this.props.title;
         var cancelText = this.props.cancelText;
         var okText = this.props.okText;
-        var pickers = this.getOptions(dataSource, 0);
+        var pickers = this._getOptions(dataSource, 0);
         var classes = classnames({
             'ucs-picker-container': true,
             'ucs-picker-popup-mask-hidden': !this.state.visible,
@@ -225,11 +252,11 @@ var PickerGroup = React.createClass({
         });
 
         return (
-            <div className="ucs-picker" onClick={this.toggle}>
+            <div className="ucs-picker-box" onClick={this._handleClick}>
                 <div className={inputCls}>
                     {value.join(format) || placeholder}
                 </div>
-                <div className={classes} onClick={this.onContainerClick}>
+                <div className={classes} onClick={this._onContainerClick}>
                     <div tabIndex="-1" className="ucs-picker-popup-wrap" role="dialog">
                         <div className="ucs-picker-popup-mask" onClick={this.onMaskClick}></div>
                         <div role="document" className="ucs-picker-popup forss">

@@ -1,16 +1,7 @@
-import TestUtils from 'react-dom/test-utils'; // 引入测试工具库
-import { expect } from 'chai'; // 引入断言
 import Password  from '../../../src/base/password/index.js'; // 引入组件
-import {findDOMNode} from 'react-dom';
 var sha1 = require('sha1');
 var md5 = require('js-md5');
 var sha256 = require('sha256');
-// 浅渲染
-function shallowRender(Component, props) {
-    const renderer = TestUtils.createRenderer();
-    renderer.render(<Component {...props}/>);
-    return renderer.getRenderOutput();
-}
 // props测试
 describe('Password组件测试', function () {
     describe('props测试', function () {

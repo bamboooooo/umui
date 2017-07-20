@@ -44,24 +44,24 @@ var Picker = React.createClass({
                 break;
             }
         }
-        this.onMoveTo(index, speed);
+        this._onMoveTo(index, speed);
     },
     // 移动到指定编号
-    onMoveTo: function (index, speed) {
-        var itemHeight = this.getItemHeight();
+    _onMoveTo: function (index, speed) {
+        var itemHeight = this._getItemHeight();
         if (itemHeight === 0) {
             return;
         }
 
         var offset = -index * itemHeight;
 
-        this.doTransition(offset, speed);
+        this._doTransition(offset, speed);
         this.setState({
             translateY: offset
         });
     },
     // 执行过渡动画
-    doTransition: function (offset, duration) {
+    _doTransition: function (offset, duration) {
         var style = this.refs.picker.style;
         style.webkitTransitionDuration = duration + 'ms';
         style.mozTransitionDuration = duration + 'ms';
@@ -72,23 +72,23 @@ var Picker = React.createClass({
         style.oTransform = 'translate3d(0, ' + offset + 'px, 0)';
         style.transform = 'translate3d(0, ' + offset + 'px, 0)';
     },
-    onTouchStart: function (event) {
-        var pointY = this.getPoint(event).y;
+    _onTouchStart: function (event) {
+        var pointY = this._getPoint(event).y;
         this.setState({
             pointStart: pointY
         });
     },
-    onTouchMove: function (event) {
+    _onTouchMove: function (event) {
         event.preventDefault();
-        var pointY = this.getPoint(event).y;
+        var pointY = this._getPoint(event).y;
         var offset = this.state.translateY + (pointY - this.state.pointStart);
 
-        this.doTransition(offset, 0);
+        this._doTransition(offset, 0);
         this.setState({
             pointEnd: pointY
         });
     },
-    onTouchEnd: function (event) {
+    _onTouchEnd: function (event) {
         var offset = (this.state.pointEnd !== 0)
             ? this.state.translateY + (this.state.pointEnd - this.state.pointStart)
             : 0;
@@ -105,7 +105,7 @@ var Picker = React.createClass({
                 : Math.abs(index);
         }
 
-        this.onMoveTo(index, 300);
+        this._onMoveTo(index, 300);
         var dataSource = this.props.dataSource;
         var displayMember = this.props.displayMember;
         var onChange = this.props.onChange;
@@ -116,7 +116,7 @@ var Picker = React.createClass({
         });
         onChange && onChange(value);
     },
-    getItemHeight: function () {
+    _getItemHeight: function () {
         var items = this.refs.picker.children;
 
         if (!items || items.length === 0) {
@@ -125,7 +125,7 @@ var Picker = React.createClass({
         return items[0].offsetHeight;
     },
     // 获取触摸点的当前坐标
-    getPoint: function (event) {
+    _getPoint: function (event) {
         var touch = event.touches[0];
         return {
             x: touch.pageX,
@@ -156,9 +156,9 @@ var Picker = React.createClass({
         return (
             <div className={cls}
                 style={{height: height}}
-                onTouchStart={this.onTouchStart}
-                onTouchMove={this.onTouchMove}
-                onTouchEnd={this.onTouchEnd}>
+                onTouchStart={this._onTouchStart}
+                onTouchMove={this._onTouchMove}
+                onTouchEnd={this._onTouchEnd}>
                 <div className="ucs-picker-col">
                     <div className="ucs-picker-col-mask"></div>
                     <div className="ucs-picker-col-indicator"></div>

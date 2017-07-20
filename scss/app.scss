@@ -1,3 +1,9 @@
 @charset "utf-8";
-@import "components/_picker";
-@import "components/_password";
+@import
+"components/_global",
+"components/_picker",
+"components/_password",
+"components/_button",
+"components/_float-button",
+"components/_tag",
+"components/_input";

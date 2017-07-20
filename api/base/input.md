@@ -11,7 +11,7 @@
 
 参数 | 说明 | 类型 | 默认值
 ---|---|---|---|---
-type|输入类型，文本text，手机号phone（此时最大长度固定为11,maxLength设置无效），数字number|string|'text'
+type|输入类型，文本text，手机号tel（此时最大长度固定为11,maxLength设置无效），数字number|string|'text'
 className | 样式类名 | string |无
 readOnly | 是否只读 | bool | false
 disabled | 是否禁用 | bool |false
@@ -25,6 +25,7 @@ maxLength|最大长度|number|无
 onChange|绑定change事件的监控事件|function|无
 onBlur|绑定焦点离开事件|function|无
 onFocus|绑定焦点获取事件|function|无
+afterValidation|绑定校验回调事件,成功返回true,失败返回false|function|无
 
 
 ---
@@ -72,6 +73,12 @@ onFocus|绑定焦点获取事件|function|无
 
 ### 6.reset()
 > 重置组件的值，如果设置了defaultValue,执行此方法则将组件设置为默认值，如果组件没有设置默认值，则清空组件的值
+
+#### 返回值
+- void
+
+### 7.focus()
+> focus事件，为组件外部提供可以调用input的focus的方法。
 
 #### 返回值
 - void
