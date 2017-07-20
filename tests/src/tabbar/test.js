@@ -22,7 +22,6 @@ const tabbarDom = findDOMNode(tabbar);
 // props测试
 describe('Tabbar-props测试', function () {
     it('props测试', function () {
-        // const tabbar = shallowRender(Tabbar, { id: 'tab',className: 'ucs-test'});
         expect(tabbar.props.id.indexOf('tab')).to.not.be.equal(-1);
         expect(tabbar.props.className.indexOf('ucs-test')).to.not.be.equal(-1);
     });
