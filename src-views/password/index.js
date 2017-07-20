@@ -19,9 +19,9 @@ var Root = React.createClass({
         return (
             <div>
                 <p>正常的使用</p>
-                <Password ref="passwd" {...this.props} placeholder={this.props.placeHolder} onBlur={this.blurHandle} defaultValue={123}/>
+                <Password ref="passwd" {...this.props} onBlur={this.blurHandle} defaultValue={123}/>
                 <p>禁止输入的情况</p>
-                <Password ref="passwd1" {...this.props} placeholder={this.props.placeHolder} onBlur={this.blurHandle}/>
+                <Password ref="passwd1" {...this.props} onBlur={this.blurHandle}/>
             </div>
         );
     },
