@@ -64,7 +64,10 @@ var PickerGroup = React.createClass({
     },
     onMaskClick: function () {
         var onMaskClick = this.props.onMaskClick;
-        this.onCancel();
+        this._toggle();
+        this.setState({
+            value: this.tempValue
+        });
         onMaskClick && onMaskClick(this.tempValue);
     },
     // 取消
