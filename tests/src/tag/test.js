@@ -6,7 +6,7 @@
 
 import Tag from '../../../src/base/tag/index.js'; // 引入组件
 
-describe('Input组件测试', function() {
+describe('Tag组件测试', function() {
     describe('props测试', function() {
         // props属性测试
         describe('Tag-props测试', function () {
