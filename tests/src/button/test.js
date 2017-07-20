@@ -1,6 +1,6 @@
 import Button  from '../../../src/base/button/index.js'; // 引入组件
-describe('Tabbar-props测试', function () {
-    describe('Tabbar-props测试', function () {
+describe('Button-props测试', function () {
+    describe('Button-props测试', function () {
         // props测试
         describe('Button-props测试', function () {
             it('props测试', function () {
@@ -12,7 +12,7 @@ describe('Tabbar-props测试', function () {
             });
         });
     });
-    describe('Tabbar-props测试', function () {
+    describe('Button-props测试', function () {
         /*setValue()方法测试*/
         describe('Button-setValue()方法测试', function () {
             it('----------setValue()方法测试---------------', function () {
