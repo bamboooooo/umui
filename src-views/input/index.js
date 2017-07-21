@@ -1,5 +1,10 @@
 var Input = require('../../src/base/input');
 var Root = React.createClass({
+    getInitialState: function () {
+        return {
+            msg: ''
+        };
+    },
     getDefaultProps: function () {
         return {
         };
@@ -23,8 +28,9 @@ var Root = React.createClass({
     _reset: function () {
         this.refs.inputEle.reset();
     },
-    _onChange: function () {
-        // console.log('onChange');
+    _onChange: function (e) {
+        console.log('onChange');
+        // console.log(e.target.name);
     },
     _onFocus: function () {
         this.refs.inputEle.onFocus();
@@ -32,10 +38,22 @@ var Root = React.createClass({
     _onBlur: function () {
         // console.log('onBlur');
     },
+    onFocus: function (e) {
+        // this.setState({msg: e.target.name});
+    },
+    validation: function (e, result) {
+        if (!result) {
+            this.setState({msg: e.target.name + '的手机号码不正确'});
+        }
+    },
     render: function () {
         return (
             <div>
-                <Input placeHolder="telephone" type="tel" ref="inputEle" onChange={this._onChange} defaultValue="123456"/>
+                {this.state.msg}
+                <Input type="tel" ref="inputEle" name="a1" onFocus={this.onFocus} afterValidation={this.validation}/>
+                <Input type="number" ref="inputEle2" onFocus={this.onFocus} name="a2" afterValidation={this.validation}/>
+                <Input type="text" ref="inputEle3" onFocus={this.onFocus} name="a3" afterValidation={this.validation}/>
+                <Input type="text" ref="inputEle4" onFocus={this.onFocus} name="a4" afterValidation={this.validation}/>
                 <input type="button" value="readOnly" onClick={this._setReadOnly} />
                 <input type="button" value="disabled" onClick={this._setDisabled} />
                 <input type="button" value="setValue" onClick={this._setValue} />
