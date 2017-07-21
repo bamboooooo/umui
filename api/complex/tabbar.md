@@ -16,6 +16,8 @@
 ---|---|---|---|---
 className | 样式类名 | string |无
 id | dom元素id | string | 无
+selected | 是否选中 | bool | false
+onClick | 点击事件 | function | 无
 
 ### TabBar.Item
 
@@ -25,8 +27,6 @@ id | dom元素id | string | 无
 参数 | 说明 | 类型 | 默认值
 ---|---|---|---|---
 className | 样式类名 | string |无
-selected | 是否选中 | bool | false
-onClick | 点击事件 | function | 无
 ---
 
 ## 三、方法说明
