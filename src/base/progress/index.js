@@ -1,3 +1,4 @@
+var classnames = require('classnames');
 // 查询样式是否存在
 function hasClass (elem, cls) {
     elem = elem || {};
@@ -21,33 +22,104 @@ function removeClass (elem, cls) {
 var Progress = React.createClass({
     getDefaultProps: function () {
         return {
+            type: 'ring',
             radius: 100,
             border: 10,
             color: ['#ccc', '#f00', '#000'],
-            value: 0
+            value: 0,
+            animate: true,
+            speed: 10,
+            className: ''
         };
     },
     getInitialState: function () {
         return {
-
+            value: this.props.value
         };
     },
     componentDidMount: function () {
+        if (this.props.type === 'ring') {
+            this.ringHandler();
+        } else {
+            this.lineHandler();
+        }
+    },
+    componentDidUpdate: function () {
+        if (this.props.type === 'ring') {
+            this.ringHandler();
+        } else {
+            this.lineHandler();
+        }
+    },
+    setValue: function (v) {
+        this.setState({
+            value: v
+        });
+    },
+    lineHandler: function () {
         var _this = this;
+        var _value = _this.state.value;
+        var _animate = _this.props.animate;
+        var _speed = _this.props.speed;
+        var bd = _this.props.border;
+        var bgc = _this.props.color[0];
+        var bdc = _this.props.color[1];
+        var fnc = _this.props.color[2];
+        var _wrap = _this.refs.line;
+        var _lineBg = _wrap.querySelector('.line-bg');
+        var _lineInner = _wrap.querySelector('.line-inner');
+        var _num = _wrap.querySelector('.line-num');
+
+        _lineBg.style.height = bd + 'px';
+        _lineBg.style.borderRadius = bd + 'px';
+        _lineBg.style.backgroundColor = bgc;
+
+        _lineInner.style.height = bd + 'px';
+        _lineInner.style.borderRadius = bd + 'px';
+        _lineInner.style.backgroundColor = bdc;
+
+        _num.style.height = bd + 'px';
+        _num.style.lineHeight = bd + 'px';
+        _num.style.top = -bd + 'px';
+        _num.style.color = fnc;
+
+        if (_animate) {
+            var range = 0;
+            var loading = setInterval(function () {
+                if (range === _value) {
+                    clearInterval(loading);
+                }
+                _lineInner.style.width = range + '%';
+                _num.childNodes[0].innerHTML = range;
+                _num.style.left = range + '%';
+                range++;
+            }, _speed);
+        } else {
+            _lineInner.style.width = _value + '%';
+            _num.childNodes[0].innerHTML = _value;
+            _num.style.left = _value + '%';
+        }
+    },
+    ringHandler: function () {
+        var _this = this;
+        var _value = _this.state.value;
+        var _animate = _this.props.animate;
+        var _speed = _this.props.speed;
         var rd = _this.props.radius;
         var bd = _this.props.border;
         var bgc = _this.props.color[0];
         var bdc = _this.props.color[1];
         var fnc = _this.props.color[2];
-        var _wrap = _this.refs.progress;
-        var _circle = _wrap.querySelector('.circle');
-        var _percent = _circle.querySelectorAll('.percent');
+        var _wrap = _this.refs.ring;
+        var _circle = _wrap.querySelector('.ring-circle');
+        var _percent = _circle.querySelectorAll('.ring-percent');
         var _left = _percent[0];
         var _right = _percent[1];
-        var _num = _wrap.querySelector('.num');
+        var _num = _wrap.querySelector('.ring-num');
 
         _wrap.style.width = rd + 'px';
         _wrap.style.height = rd + 'px';
+        _wrap.style.backgroundColor = bgc;
 
         _circle.style.width = rd + 'px';
         _circle.style.height = rd + 'px';
@@ -62,9 +134,9 @@ var Progress = React.createClass({
         _left.style.border = bd + 'px solid ' + bdc;
         _left.style.clip = 'rect(0,' + rd / 2 + 'px,' + rd + 'px,0)';
 
-
         _right.style.border = bd + 'px solid ' + bdc;
         _right.style.clip = 'rect(0,' + rd + 'px,' + rd + 'px,' + rd / 2 + 'px)';
+        _right.style.width = 0;
 
         _num.style.width = rd - 2 * bd + 'px';
         _num.style.height = rd - 2 * bd + 'px';
@@ -74,12 +146,26 @@ var Progress = React.createClass({
         _num.style.fontSize = rd / 5 + 'px';
         _num.style.color = fnc;
 
-        var percent = 0;
-        var _value = _this.props.value;
-        var loading = setInterval(function () {
-            if (percent === _value) {
-                clearInterval(loading);
-            } else if (percent > 50) {
+        if (_animate) {
+            var percent = 0;
+            var loading = setInterval(function () {
+                if (percent === _value) {
+                    clearInterval(loading);
+                } else if (percent > 50) {
+                    addClass(_circle, 'clip-auto');
+                    removeClass(_right, 'wth0');
+                    _circle.style.clip = 'rect(auto, auto, auto, auto)';
+                    _right.style.width = rd + 'px';
+                    _right.style.height = rd + 'px';
+                    _right.style.top = -bd + 'px';
+                    _right.style.left = -bd + 'px';
+                }
+                _left.style.webkitTransform = 'rotate(' + (18 / 5) * percent + 'deg)';
+                _num.childNodes[0].innerHTML = percent;
+                percent++;
+            }, _speed);
+        } else {
+            if (_value > 50) {
                 addClass(_circle, 'clip-auto');
                 removeClass(_right, 'wth0');
                 _circle.style.clip = 'rect(auto, auto, auto, auto)';
@@ -88,19 +174,35 @@ var Progress = React.createClass({
                 _right.style.top = -bd + 'px';
                 _right.style.left = -bd + 'px';
             }
-            _left.style.webkitTransform = 'rotate(' + (18 / 5) * percent + 'deg)';
-            _num.childNodes[0].innerHTML = percent;
-            percent++;
-        }, 10);
+            _left.style.webkitTransform = 'rotate(' + (18 / 5) * _value + 'deg)';
+            _num.childNodes[0].innerHTML = _value;
+        }
     },
     render: function () {
+        var classes = classnames({
+            'ucs-progress': true,
+            [this.props.className]: !!this.props.className
+        });
         return (
-            <div className="wrap" ref="progress">
-                <div className="circle">
-                    <div className="percent left"></div>
-                    <div className="percent right wth0"></div>
-                </div>
-                <div className="num"><span>0</span>%</div>
+            <div className={classes}>
+                {
+                    this.props.type === 'ring' ? (
+                        <div className="ring-wrap" ref="ring">
+                            <div className="ring-circle">
+                                <div className="ring-percent left"></div>
+                                <div className="ring-percent right wth0"></div>
+                            </div>
+                            <div className="ring-num"><span>0</span>%</div>
+                        </div>
+                    ) : (
+                        <div className="line-wrap" ref="line">
+                            <div className="line-bg">
+                                <div className="line-inner"></div>
+                                <div className="line-num"><span>0</span>%</div>
+                            </div>
+                        </div>
+                    )
+                }
             </div>
         );
     }
