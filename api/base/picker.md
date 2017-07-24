@@ -24,7 +24,7 @@ defaultValue | 初始默认值（对应data中的value值）|Array|无
 displayMember|对应data中的`label`|string|'label'
 valueMember|对应data中的`value`|string|'value'
 okText|对应确认按钮的文案|string|'确定'
-okCancel|对应取消按钮的文案|string|'取消'
+cancelText|对应取消按钮的文案|string|'取消'
 onOk|点击确定的监控事件|function(value)|无
 onCancel|点击取消的监控事件|function(value)|无
 onMaskClick|点击蒙层的监控事件|function(value)|无
