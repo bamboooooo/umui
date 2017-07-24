@@ -24,7 +24,7 @@ minDate | 最小可选日期, 格式同 value | string |无
 maxDate | 最大可选日期, 格式同 value | string |无
 format | 格式化日期 | string | YYYY-MM-DD HH:mm
 okText|对应确认按钮的文案|string|'确定'
-okCancel|对应取消按钮的文案|string|'取消'
+cancelText|对应取消按钮的文案|string|'取消'
 onOk|点击确定的监控事件|function(value)|无
 onCancel|点击取消的监控事件|function(value)|无
 onMaskClick|点击蒙层的监控事件|function(value)|无
