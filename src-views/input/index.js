@@ -48,12 +48,13 @@ var Root = React.createClass({
     },
     render: function () {
         return (
-            <div>
+            <div className="ucs-input-example">
                 {this.state.msg}
-                <Input type="tel" ref="inputEle" name="a1" onFocus={this.onFocus} afterValidation={this.validation}/>
-                <Input type="number" ref="inputEle2" onFocus={this.onFocus} name="a2" afterValidation={this.validation}/>
-                <Input type="text" ref="inputEle3" onFocus={this.onFocus} name="a3" afterValidation={this.validation}/>
-                <Input type="text" ref="inputEle4" onFocus={this.onFocus} name="a4" afterValidation={this.validation}/>
+                <Input type="tel" ref="inputEle" name="a1" value="asdfafd" onFocus={this.onFocus} afterValidation={this.validation}/>
+                <Input type="tel" ref="inputEle2" onFocus={this.onFocus} name="a2" afterValidation={this.validation}/>
+                <Input type="tel" ref="inputEle3" value="sadfasfd" onFocus={this.onFocus} name="a3" afterValidation={this.validation}/>
+                <Input type="tel" ref="inputEle4" onFocus={this.onFocus} name="a4" afterValidation={this.validation}/>
+                <Input type="number" value="adfa" onFocus={this.onFocus}/>
                 <input type="button" value="readOnly" onClick={this._setReadOnly} />
                 <input type="button" value="disabled" onClick={this._setDisabled} />
                 <input type="button" value="setValue" onClick={this._setValue} />

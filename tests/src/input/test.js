@@ -84,8 +84,8 @@ describe('Input组件测试', function() {
             });
         });
         // props-afterValidation测试
-        describe('Input-props-onBlur测试', function(){
-            it('----------props-onBlur测试----------',function(){
+        describe('Input-props-afterValidation测试', function(){
+            it('----------props-afterValidation测试----------',function(){
                 const input = TestUtils.renderIntoDocument(<Input type="tel" onBlur={_onBlur} name="telephoneInput" afterValidation={_afterValidation}/>);
                 let targetName = '';
                 let msg = '';

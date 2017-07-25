@@ -10,12 +10,13 @@ var Input = React.createClass({
         };
     },
     componentDidMount: function () {
-        if (this.props.type === 'tel') {
+        if (this.props.type === 'tel' || this.props.type === 'number') {
             this.setState({
-                value: this.state.value.replace(/\D/g, '')
+                value: this.refs.inputEle.value.replace(/\D/g, '')
+            }, function () {
+                this._showCloseHandler(this.refs.inputEle.value);
             });
         }
-        this._showCloseHandler(this.state.value);
     },
     getDefaultProps: function () {
         return {
@@ -45,7 +46,7 @@ var Input = React.createClass({
         } else {
             this.setState({value: e.target.value});
         }
-        this._showCloseHandler(this.state.value);
+        this._showCloseHandler(this.refs.inputEle.value);
         this.props.onChange && this.props.onChange(e);
     },
     // Input获取焦点时执行的事件
@@ -71,11 +72,6 @@ var Input = React.createClass({
                 isShowClear: false
             });
         }
-        // if (value === '') {
-        //     console.log('123');
-        // } else {
-        //     console.log('456');
-        // }
     },
     // 点击showClose
     _showCloseClick: function () {
@@ -91,7 +87,13 @@ var Input = React.createClass({
     },
     // 设置Input的value @param {string} v
     setValue: function (v) {
-        this.setState({value: v});
+        if (this.props.type === 'tel' || this.props.type === 'tel') {
+            this.setState({
+                value: v.replace(/\D/g, '')
+            });
+        } else {
+            this.setState({value: v});
+        }
     },
     // 获取Input的value @return {string}
     getValue: function () {
