@@ -63,12 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 98);
+/******/ 	return __webpack_require__(__webpack_require__.s = 97);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 3:
+/***/ 2:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -124,7 +124,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 79:
+/***/ 77:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -132,7 +132,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var classnames = __webpack_require__(3);
+var classnames = __webpack_require__(2);
 // 查询样式是否存在
 function hasClass(elem, cls) {
     elem = elem || {};
@@ -204,7 +204,8 @@ var Progress = React.createClass({
         var _wrap = _this.refs.line;
         var _lineBg = _wrap.querySelector('.line-bg');
         var _lineInner = _wrap.querySelector('.line-inner');
-        var _num = _wrap.querySelector('.line-num');
+        var _info = _wrap.querySelector('.line-info');
+        var _num = _info.querySelector('.num-info');
 
         _lineBg.style.height = bd + 'px';
         _lineBg.style.borderRadius = bd + 'px';
@@ -214,10 +215,10 @@ var Progress = React.createClass({
         _lineInner.style.borderRadius = bd + 'px';
         _lineInner.style.backgroundColor = bdc;
 
-        _num.style.height = bd + 'px';
-        _num.style.lineHeight = bd + 'px';
-        _num.style.top = -bd + 'px';
-        _num.style.color = fnc;
+        _info.style.height = bd + 'px';
+        _info.style.lineHeight = bd + 'px';
+        _info.style.top = -bd + 'px';
+        _info.style.color = fnc;
 
         if (_animate) {
             var range = 0;
@@ -227,13 +228,13 @@ var Progress = React.createClass({
                 }
                 _lineInner.style.width = range + '%';
                 _num.childNodes[0].innerHTML = range;
-                _num.style.left = range + '%';
+                _info.style.left = range + '%';
                 range++;
             }, _speed);
         } else {
             _lineInner.style.width = _value + '%';
             _num.childNodes[0].innerHTML = _value;
-            _num.style.left = _value + '%';
+            _info.style.left = _value + '%';
         }
     },
     ringHandler: function ringHandler() {
@@ -251,7 +252,8 @@ var Progress = React.createClass({
         var _percent = _circle.querySelectorAll('.ring-percent');
         var _left = _percent[0];
         var _right = _percent[1];
-        var _num = _wrap.querySelector('.ring-num');
+        var _info = _wrap.querySelector('.ring-info');
+        var _num = _info.querySelector('.num-info');
 
         _wrap.style.width = rd + 'px';
         _wrap.style.height = rd + 'px';
@@ -274,13 +276,13 @@ var Progress = React.createClass({
         _right.style.clip = 'rect(0,' + rd + 'px,' + rd + 'px,' + rd / 2 + 'px)';
         _right.style.width = 0;
 
-        _num.style.width = rd - 2 * bd + 'px';
-        _num.style.height = rd - 2 * bd + 'px';
-        _num.style.lineHeight = rd - 2 * bd + 'px';
-        _num.style.top = bd + 'px';
-        _num.style.left = bd + 'px';
-        _num.style.fontSize = rd / 5 + 'px';
-        _num.style.color = fnc;
+        _info.style.width = rd - 2 * bd + 'px';
+        _info.style.height = rd - 2 * bd + 'px';
+        _info.style.lineHeight = rd - 2 * bd + 'px';
+        _info.style.top = bd + 'px';
+        _info.style.left = bd + 'px';
+        _info.style.fontSize = rd / 5 + 'px';
+        _info.style.color = fnc;
 
         if (_animate) {
             var percent = 0;
@@ -332,13 +334,18 @@ var Progress = React.createClass({
                 ),
                 React.createElement(
                     'div',
-                    { className: 'ring-num' },
+                    { className: 'ring-info' },
                     React.createElement(
                         'span',
-                        null,
-                        '0'
+                        { className: 'num-info' },
+                        React.createElement(
+                            'i',
+                            null,
+                            '0'
+                        ),
+                        '%'
                     ),
-                    '%'
+                    this.props.children
                 )
             ) : React.createElement(
                 'div',
@@ -349,13 +356,17 @@ var Progress = React.createClass({
                     React.createElement('div', { className: 'line-inner' }),
                     React.createElement(
                         'div',
-                        { className: 'line-num' },
+                        { className: 'line-info' },
                         React.createElement(
                             'span',
-                            null,
-                            '0'
-                        ),
-                        '%'
+                            { className: 'num-info' },
+                            React.createElement(
+                                'i',
+                                null,
+                                '0'
+                            ),
+                            '%'
+                        )
                     )
                 )
             )
@@ -366,13 +377,13 @@ module.exports = Progress;
 
 /***/ }),
 
-/***/ 98:
+/***/ 97:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Progress = __webpack_require__(79);
+var Progress = __webpack_require__(77);
 var Root = React.createClass({
     displayName: 'Root',
 
@@ -385,7 +396,15 @@ var Root = React.createClass({
             null,
             React.createElement(Progress, { radius: 50, border: 4, color: ['orange', '#f00', '#000'], value: 30 }),
             React.createElement(Progress, { radius: 100, border: 6, color: ['#ccc', '#0f0', '#000'], value: 80 }),
-            React.createElement(Progress, { radius: 200, color: ['#ccc', '#00f', '#00f'], value: 100, ref: 'myProgress' }),
+            React.createElement(
+                Progress,
+                { radius: 200, color: ['#ccc', '#00f', '#999'], value: 100, ref: 'myProgress', className: 'myProgress' },
+                React.createElement(
+                    'div',
+                    { className: 'full', style: { width: '100%', height: '30px', lineHeight: '30px', position: 'absolute', left: '0', bottom: '45px', fontSize: '30px', color: '#999' } },
+                    '\u6EE1\u6807'
+                )
+            ),
             React.createElement(
                 'button',
                 { onClick: this.setValue },

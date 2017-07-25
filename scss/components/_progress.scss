@@ -1,28 +1,35 @@
 .ring-wrap{
   position: relative;
   border-radius: 50%;
-}
-.ring-circle,.ring-percent{
-  position: absolute;
-  border-radius: 50%;
-  box-sizing: border-box;
-}
-.clip-auto{
-  clip:rect(auto, auto, auto, auto);
-}
-.left{
-  transition:transform ease;
-}
-.wth0{
-  width:0;
-}
-.ring-num{
-  position: absolute;
-  box-sizing: border-box;
-  text-align: center;
-  border-radius: 50%;
-  background-color: #fff;
-  z-index: 1;
+  .ring-circle,.ring-percent{
+    position: absolute;
+    border-radius: 50%;
+    box-sizing: border-box;
+  }
+  .ring-circle.clip-auto{
+    clip:rect(auto, auto, auto, auto);
+  }
+  .ring-percent{
+    .left{
+      transition:transform ease;
+    }
+    .right{
+      .wth0{
+        width:0;
+      }
+    }
+  }
+  .ring-info{
+    position: absolute;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #fff;
+    z-index: 1;
+    .num-info i{
+      font-style: normal;
+    }
+  }
 }
 
 .line-wrap{
@@ -35,8 +42,11 @@
       left: 0;
       top: 0;
     }
-    .line-num{
+    .line-info{
       position: absolute;
+      .num-info i{
+        font-style: normal;
+      }
     }
   }
 }

@@ -68,7 +68,8 @@ var Progress = React.createClass({
         var _wrap = _this.refs.line;
         var _lineBg = _wrap.querySelector('.line-bg');
         var _lineInner = _wrap.querySelector('.line-inner');
-        var _num = _wrap.querySelector('.line-num');
+        var _info = _wrap.querySelector('.line-info');
+        var _num = _info.querySelector('.num-info');
 
         _lineBg.style.height = bd + 'px';
         _lineBg.style.borderRadius = bd + 'px';
@@ -78,10 +79,10 @@ var Progress = React.createClass({
         _lineInner.style.borderRadius = bd + 'px';
         _lineInner.style.backgroundColor = bdc;
 
-        _num.style.height = bd + 'px';
-        _num.style.lineHeight = bd + 'px';
-        _num.style.top = -bd + 'px';
-        _num.style.color = fnc;
+        _info.style.height = bd + 'px';
+        _info.style.lineHeight = bd + 'px';
+        _info.style.top = -bd + 'px';
+        _info.style.color = fnc;
 
         if (_animate) {
             var range = 0;
@@ -91,13 +92,13 @@ var Progress = React.createClass({
                 }
                 _lineInner.style.width = range + '%';
                 _num.childNodes[0].innerHTML = range;
-                _num.style.left = range + '%';
+                _info.style.left = range + '%';
                 range++;
             }, _speed);
         } else {
             _lineInner.style.width = _value + '%';
             _num.childNodes[0].innerHTML = _value;
-            _num.style.left = _value + '%';
+            _info.style.left = _value + '%';
         }
     },
     ringHandler: function () {
@@ -115,7 +116,8 @@ var Progress = React.createClass({
         var _percent = _circle.querySelectorAll('.ring-percent');
         var _left = _percent[0];
         var _right = _percent[1];
-        var _num = _wrap.querySelector('.ring-num');
+        var _info = _wrap.querySelector('.ring-info');
+        var _num = _info.querySelector('.num-info');
 
         _wrap.style.width = rd + 'px';
         _wrap.style.height = rd + 'px';
@@ -138,13 +140,13 @@ var Progress = React.createClass({
         _right.style.clip = 'rect(0,' + rd + 'px,' + rd + 'px,' + rd / 2 + 'px)';
         _right.style.width = 0;
 
-        _num.style.width = rd - 2 * bd + 'px';
-        _num.style.height = rd - 2 * bd + 'px';
-        _num.style.lineHeight = rd - 2 * bd + 'px';
-        _num.style.top = bd + 'px';
-        _num.style.left = bd + 'px';
-        _num.style.fontSize = rd / 5 + 'px';
-        _num.style.color = fnc;
+        _info.style.width = rd - 2 * bd + 'px';
+        _info.style.height = rd - 2 * bd + 'px';
+        _info.style.lineHeight = rd - 2 * bd + 'px';
+        _info.style.top = bd + 'px';
+        _info.style.left = bd + 'px';
+        _info.style.fontSize = rd / 5 + 'px';
+        _info.style.color = fnc;
 
         if (_animate) {
             var percent = 0;
@@ -192,13 +194,20 @@ var Progress = React.createClass({
                                 <div className="ring-percent left"></div>
                                 <div className="ring-percent right wth0"></div>
                             </div>
-                            <div className="ring-num"><span>0</span>%</div>
+                            <div className="ring-info">
+                                <span className="num-info"><i>0</i>%</span>
+                                {
+                                    this.props.children
+                                }
+                            </div>
                         </div>
                     ) : (
                         <div className="line-wrap" ref="line">
                             <div className="line-bg">
                                 <div className="line-inner"></div>
-                                <div className="line-num"><span>0</span>%</div>
+                                <div className="line-info">
+                                    <span className="num-info"><i>0</i>%</span>
+                                </div>
                             </div>
                         </div>
                     )
