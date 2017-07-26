@@ -27,7 +27,7 @@ function formatDate (fmt, date) {
 function getFormatter (type) {
     var formatter;
     if (type === 'year') {
-        formatter = ('YYYY年');
+        formatter = ('YYYY');
     } else if (type === 'month') {
         formatter = ('MM');
     } else if (type === 'time') {
@@ -41,17 +41,12 @@ function getFormatter (type) {
 }
 
 function formatFn (instance, value) {
-    var { format } = instance.props;
-    var type = typeof format;
-
-    if (type === 'string') {
+    var format = instance.props.format;
+    if (format === null) {
+        return formatDate(getFormatter(instance.props.mode), new Date(value));
+    } else {
         return formatDate(format, new Date(value));
     }
-
-    if (type === 'function') {
-        return format(value);
-    }
-    return formatDate(getFormatter(instance.props.mode), new Date(value));
 }
 
 var DATETIME = 'datetime';
@@ -74,7 +69,7 @@ function getDaysInMonth (now) {
 
 // 补齐格式
 function pad (n) {
-    return n < 10 ? `0${n}` : `${n}`;
+    return n < 10 ? '0' + n : n;
 }
 
 // 阻止选择器区域的默认事件
@@ -98,6 +93,7 @@ var DatePicker = React.createClass({
             cancelText: '取消',
             okText: '确定',
             mode: DATE,
+            format: null,
             disabled: false,
             value: '',
             defaultValue: '',
@@ -109,9 +105,7 @@ var DatePicker = React.createClass({
             locale: defaultLocale,
             minuteStep: 1,
             prefixCls: 'ucs-datepicker-column-group',
-            pickerPrefixCls: 'ucs-datepicker-cascaderpicker',
-            displayMember: 'value',
-            valueMember: 'value'
+            pickerPrefixCls: 'ucs-datepicker-cascaderpicker'
         };
     },
 
@@ -547,7 +541,10 @@ var DatePicker = React.createClass({
     },
 
     getValue: function () {
-        var result = formatDate(this.props.format, this.state.date);
+        if(this.state.date === '') {
+            return '';
+        }
+        var result = formatFn(this, this.state.date);
         return result;
     },
 
@@ -580,7 +577,7 @@ var DatePicker = React.createClass({
     render: function () {
         var _this = this;
         var { value, cols } = this._getValueCols();
-        var { id, prefixCls, pickerPrefixCls, className, cancelText, okText, title, placeholder, displayMember, valueMember } = this.props;
+        var { id, prefixCls, pickerPrefixCls, className, cancelText, okText, title, placeholder } = this.props;
         var {disabled} = this.state;
         var wrapperClasses = classnames({
             'ucs-datepicker': true,
@@ -620,8 +617,6 @@ var DatePicker = React.createClass({
                                     prefixCls={prefixCls}
                                     pickerPrefixCls={pickerPrefixCls}
                                     disabled={disabled}
-                                    displayMember={displayMember}
-                                    valueMember={valueMember}
                                     selectedValue={value}
                                     onValueChange={function (values, index) {_this._onValueChange(values, index);}}>
                                     {cols}

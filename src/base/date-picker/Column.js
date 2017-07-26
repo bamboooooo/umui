@@ -22,14 +22,6 @@ function isChildrenEqual (c1, c2, pure) {
     return true;
 }
 
-function getChildMember (child, m) {
-    return child[m];
-}
-
-function toChildrenArray (children) {
-    return children;
-}
-
 var Column = React.createClass({
 
     getDefaultProps: function () {
@@ -39,6 +31,7 @@ var Column = React.createClass({
             onValueChange: function () {return null;}
         };
     },
+
     getInitialState: function () {
         var selectedValueState;
         var selectedValue = this.props.selectedValue;
@@ -50,7 +43,7 @@ var Column = React.createClass({
         } else if (defaultSelectedValue !== undefined) {
             selectedValueState = defaultSelectedValue;
         } else if (children && children.length) {
-            selectedValueState = children[0][this.props.valueMember];
+            selectedValueState = children[0]['value'];
         }
         return {
             selectedValue: selectedValueState,
@@ -78,30 +71,14 @@ var Column = React.createClass({
         return this.state.selectedValue !== nextState.selectedValue || !isChildrenEqual(this.props.children, nextProps.children, this.props.pure);
     },
 
-    componentDidUpdate: function () {
+    componentDidUpdate: function (next1) {
         this._select(this.state.selectedValue);
     },
 
-    getValue: function () {
-        return this.props.selectedValue ? this.props.selectedValue : this.props.children && this.props.children[0] && this.props.children[0][this.props.valueMember];
-    },
-
-    _fireValueChange: function (selectedValue) {
-        if (selectedValue !== this.state.selectedValue) {
-            if (!('selectedValue' in this.props)) {
-                this.setState({
-                    selectedValue
-                });
-            }
-
-            this.props.onValueChange(selectedValue);
-        }
-    },
-
     _select: function (value) {
-        var children = toChildrenArray(this.props.children);
+        var children = this.props.children;
         for (var i = 0, len = children.length; i < len; i += 1) {
-            if (getChildMember(children[i], this.props.valueMember) === value) {
+            if (children[i]['value'] === value) {
                 this._selectByIndex(i);
                 return;
             }
@@ -110,11 +87,10 @@ var Column = React.createClass({
     },
 
     _selectByIndex: function (index) {
-        if (index < 0 || index >= toChildrenArray(this.props.children).length || !this.itemHeight) {
+        if (index < 0 || index >= this.props.children.length || !this.itemHeight) {
             return;
         }
         this._onMoveTo(index, 300);
-        this._doScrollingComplete(index * this.itemHeight);
     },
 
     _doScrollingComplete: function (top) {
@@ -126,12 +102,14 @@ var Column = React.createClass({
             index = floor;
         }
 
-        var children = toChildrenArray(this.props.children);
+        var children = this.props.children;
 
         index = Math.min(index, children.length - 1);
         var child = children[index];
         if (child) {
-            this._fireValueChange(getChildMember(child, this.props.valueMember));
+            if (child['value'] !== this.state.selectedValue) {
+                this.props.onValueChange(child['value']);
+            }
         } else if (console.warn) {
             console.warn('child not found', children, index);
         }
@@ -234,7 +212,7 @@ var Column = React.createClass({
         var items = children.map(function (item) {
             return (
                 <div
-                    className={selectedValue === item[_this.props.valueMember] ? selectedItemClassName : itemClassName}
+                    className={selectedValue === item['value'] ? selectedItemClassName : itemClassName}
                     key={item.value} >
                     {item.label}
                 </div>
@@ -246,8 +224,8 @@ var Column = React.createClass({
                 onTouchStart={this._onTouchStart}
                 onTouchMove={this._onTouchMove}
                 onTouchEnd={this._onTouchEnd}>
-                <div className={`${prefixCls}-indicator`} ref={function (indicator) {_this.indicator = indicator;}} style={indicatorStyle} />
-                <div className={`${prefixCls}-content`} ref={function (content) {_this.content = content;}}>
+                <div className={prefixCls + '-indicator'} ref={function (indicator) {_this.indicator = indicator;}} style={indicatorStyle} />
+                <div className={prefixCls + '-content'} ref={function (content) {_this.content = content;}}>
                     {items}
                 </div>
             </div>

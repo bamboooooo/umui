@@ -47,7 +47,7 @@ var Root = React.createClass({
             title: '选择日期',
             mode: 'date',
             value: '2008-08-08',
-            defaultValue: '',
+            defaultValue: '2009-09-09',
             format: 'YYYY年MM月DD日',
             okText: '点我确定',
             cancelText: '点我取消',
@@ -176,6 +176,11 @@ var Root = React.createClass({
                         <label className="label">选择月份：
                         </label>
                         <DatePicker ref="datePicker5" {...config5} />
+                    </li>
+                    <li className="list-item">
+                        <label className="label">选择日期base：
+                        </label>
+                        <DatePicker ref="datePicker" />
                     </li>
                 </ul>
                 <button onClick={this.setToday}>设第一个为今天</button>：
