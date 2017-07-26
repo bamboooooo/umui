@@ -1,18 +1,39 @@
 var classnames = require('classnames');
-var moment = require('moment');
 var ColumnGroup = require('./ColumnGroup');
 var defaultLocale = require('./locale/zh_CN');
+
+function formatDate (fmt, date) {
+    var o = {
+        'M+': date.getMonth() + 1,
+        'D+': date.getDate(),
+        'h+': date.getHours(),
+        'm+': date.getMinutes(),
+        's+': date.getSeconds(),
+        'q+': Math.floor((date.getMonth() + 3) / 3),
+        'S': date.getMilliseconds()
+    };
+    if (/(y+)/i.test(fmt)) {
+        fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
+    }
+
+    for (var k in o) {
+        if (new RegExp('(' + k + ')').test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
+        }
+    }
+    return fmt;
+}
 
 function getFormatter (type) {
     var formatter;
     if (type === 'year') {
-        formatter = ('YYYY[年]');
+        formatter = ('YYYY年');
     } else if (type === 'month') {
-        formatter = ('YYYY-MM');
+        formatter = ('MM');
     } else if (type === 'time') {
-        formatter = ('HH:mm');
+        formatter = ('hh:mm');
     } else if (type === 'datetime') {
-        formatter = ('YYYY-MM-DD HH:mm');
+        formatter = ('YYYY-MM-DD hh:mm');
     } else {
         formatter = ('YYYY-MM-DD');
     }
@@ -24,14 +45,13 @@ function formatFn (instance, value) {
     var type = typeof format;
 
     if (type === 'string') {
-        return value.format(format);
+        return formatDate(format, new Date(value));
     }
 
     if (type === 'function') {
         return format(value);
     }
-
-    return value.format(getFormatter(instance.props.mode));
+    return formatDate(getFormatter(instance.props.mode), new Date(value));
 }
 
 var DATETIME = 'datetime';
@@ -40,9 +60,16 @@ var TIME = 'time';
 var MONTH = 'month';
 var YEAR = 'year';
 
-// 获取当月天数
 function getDaysInMonth (now) {
-    return now.clone().endOf('month').date();
+    var month = new Date(now).getMonth() + 1;
+    var newYear = new Date(now).getFullYear();
+    var newMonth = month++;
+    if (month > 12) {
+        newMonth -= 12;
+        newYear++;
+    }
+    var newDate = new Date(newYear, newMonth, 1);
+    return (new Date(newDate.getTime() - 1000 * 60 * 60 * 24)).getDate();
 }
 
 // 补齐格式
@@ -57,7 +84,7 @@ function stopClick (e) {
 
 // 转成moment格式
 function getGregorianCalendar (arg) {
-    return moment(arg);
+    return new Date(arg[0], arg[1], arg[2], arg[3], arg[4]);
 }
 
 var DatePicker = React.createClass({
@@ -142,41 +169,47 @@ var DatePicker = React.createClass({
         var value = parseInt(values[index], 10);
         var props = this.props;
         var { mode } = props;
-        var newValue = this._getDate().clone();
+        var newValue = this._getDate();
+        var _year = newValue.getFullYear();
+        var _month = newValue.getMonth();
+        var _date = newValue.getDate();
+        var _minute = newValue.getMinutes();
+        var _hour = newValue.getHours();
         if (mode === DATETIME || mode === DATE || mode === YEAR) {
             switch (index) {
                 case 0:
-                    newValue.year(value);
+                    _year = value;
                     break;
                 case 1:
-                    newValue.month(value);
+                    _month = value;
                     break;
                 case 2:
-                    newValue.date(value);
+                    _date = value;
                     break;
                 case 3:
-                    newValue.hour(value);
+                    _hour = value;
                     break;
                 case 4:
-                    newValue.minute(value);
+                    _minute = value;
                     break;
                 default:
                     break;
             }
         } else if (mode === MONTH) {
-            newValue.month(value);
+            _month = value;
         } else {
             switch (index) {
                 case 0:
-                    newValue.hour(value);
+                    _hour = value;
                     break;
                 case 1:
-                    newValue.minute(value);
+                    _minute = value;
                     break;
                 default:
                     break;
             }
         }
+        newValue = new Date(_year, _month, _date, _hour, _minute);
         newValue = this._clipDate(newValue);
         if (!('date' in props)) {
             this.setState({
@@ -201,47 +234,47 @@ var DatePicker = React.createClass({
     },
 
     _getDate: function () {
-        return this.state.date || this._getMinDate() || moment(new Date());
+        return this.state.date || this._getMinDate() || new Date();
     },
 
     _getMinYear: function () {
-        return this._getMinDate().year();
+        return this._getMinDate().getFullYear();
     },
 
     _getMaxYear: function () {
-        return this._getMaxDate().year();
+        return this._getMaxDate().getFullYear();
     },
 
     _getMinMonth: function () {
-        return this._getMinDate().month();
+        return this._getMinDate().getMonth();
     },
 
     _getMaxMonth: function () {
-        return this._getMaxDate().month();
+        return this._getMaxDate().getMonth();
     },
 
     _getMinDay: function () {
-        return this._getMinDate().date();
+        return this._getMinDate().getDate();
     },
 
     _getMaxDay: function () {
-        return this._getMaxDate().date();
+        return this._getMaxDate().getDate();
     },
 
     _getMinHour: function () {
-        return this._getMinDate().hour();
+        return this._getMinDate().getHours();
     },
 
     _getMaxHour: function () {
-        return this._getMaxDate().hour();
+        return this._getMaxDate().getHours();
     },
 
     _getMinMinute: function () {
-        return this._getMinDate().minute();
+        return this._getMinDate().getMinutes();
     },
 
     _getMaxMinute: function () {
-        return this._getMaxDate().minute();
+        return this._getMaxDate().getMinutes();
     },
 
     _getMinDate: function () {
@@ -257,8 +290,8 @@ var DatePicker = React.createClass({
     _getDateData: function () {
         var { locale, mode } = this.props;
         var date = this._getDate();
-        var selYear = date.year();
-        var selMonth = date.month();
+        var selYear = date.getFullYear();
+        var selMonth = date.getMonth();
         var minDateYear = this._getMinYear();
         var maxDateYear = this._getMaxYear();
         var minDateMonth = this._getMinMonth();
@@ -338,12 +371,12 @@ var DatePicker = React.createClass({
         var maxDateMinute = this._getMaxMinute();
         var minDateHour = this._getMinHour();
         var maxDateHour = this._getMaxHour();
-        var hour = date.hour();
+        var hour = date.getHours();
 
         if (mode === DATETIME) {
-            var year = date.year();
-            var month = date.month();
-            var day = date.date();
+            var year = date.getFullYear();
+            var month = date.getMonth();
+            var day = date.getDate();
 
             var minDateYear = this._getMinYear();
             var maxDateYear = this._getMaxYear();
@@ -409,25 +442,25 @@ var DatePicker = React.createClass({
         if (mode === YEAR) {
             return {
                 cols: this._getDateData(),
-                value: ['' + date.year()]
+                value: ['' + date.getFullYear()]
             };
         }
 
         if (mode === MONTH) {
             return {
                 cols: this._getDateData(),
-                value: ['' + date.month()]
+                value: ['' + date.getMonth()]
             };
         }
 
         if (mode === DATETIME || mode === DATE) {
             cols = this._getDateData();
-            value = ['' + date.year(), '' + date.month(), '' + date.date()];
+            value = ['' + date.getFullYear(), '' + date.getMonth(), '' + date.getDate()];
         }
 
         if (mode === DATETIME || mode === TIME) {
             cols = cols.concat(this._getTimeData());
-            value = value.concat(['' + date.hour(), '' + date.minute()]);
+            value = value.concat(['' + date.getHours(), '' + date.getMinutes()]);
         }
         return {
             value,
@@ -440,31 +473,31 @@ var DatePicker = React.createClass({
         var minDate = this._getMinDate();
         var maxDate = this._getMaxDate();
         if (mode === DATETIME) {
-            if (date.isBefore(minDate)) {
-                return minDate.clone();
+            if (date.getTime() < minDate.getTime()) {
+                return minDate;
             }
-            if (date.isAfter(maxDate)) {
-                return maxDate.clone();
+            if (date.getTime() > maxDate.getTime()) {
+                return maxDate;
             }
         } else if (mode === DATE) {
-            if (date.isBefore(minDate, 'day')) {
-                return minDate.clone();
+            if (date.getTime() < minDate.getTime()) {
+                return minDate;
             }
-            if (date.isAfter(maxDate, 'day')) {
-                return maxDate.clone();
+            if (date.getTime() > maxDate.getTime()) {
+                return maxDate;
             }
         } else {
-            var maxHour = maxDate.hour();
-            var maxMinutes = maxDate.minute();
-            var minHour = minDate.hour();
-            var minMinutes = minDate.minute();
-            var hour = date.hour();
-            var minutes = date.minute();
+            var maxHour = maxDate.getHours();
+            var maxMinutes = maxDate.getMinutes();
+            var minHour = minDate.getHours();
+            var minMinutes = minDate.getMinutes();
+            var hour = date.getHours();
+            var minutes = date.getMinutes();
             if (hour < minHour || (hour === minHour && minutes < minMinutes)) {
-                return minDate.clone();
+                return minDate;
             }
             if (hour > maxHour || (hour === maxHour && minutes > maxMinutes)) {
-                return maxDate.clone();
+                return maxDate;
             }
         }
         return date;
@@ -472,23 +505,25 @@ var DatePicker = React.createClass({
 
     _isExtendMoment: function (date) {
         var { mode } = this.props;
-        if (date instanceof moment) {
-            return date;
-        }
 
         if (!date) {
             return '';
         }
+        if (mode === DATE) {
+            return new Date(date);
+        }
 
         if (mode === MONTH) {
-            return moment('1990-' + date, 'YYYY-MM');
+            var _temp = '1970-' + date + '-01';
+            return new Date(_temp);
         }
 
         if (mode === TIME) {
             // 如果传递参数不合法，默认转换为时：分
-            return moment(date).isValid() ? moment(date, 'YYYY-MM-DD HH:mm') : moment(date, 'HH:mm');
+            var _temp = '1970-01-01 ' + date;
+            return new Date(_temp);
         }
-        return moment(date, 'YYYY-MM-DD HH:mm');
+        return new Date(date);
     },
 
     // 切换显示状态
@@ -512,27 +547,7 @@ var DatePicker = React.createClass({
     },
 
     getValue: function () {
-        var mode = this.props.mode;
-        var result;
-        switch (mode) {
-            case 'date':
-                result = moment(this.state.date).format('YYYY-MM-DD');
-                break;
-            case 'time':
-                result = moment(this.state.date).format('HH:mm');
-                break;
-            case 'datetime':
-                result = moment(this.state.date).format('YYYY-MM-DD HH:mm');
-                break;
-            case 'year':
-                result = moment(this.state.date).format('YYYY');
-                break;
-            case 'month':
-                result = moment(this.state.date).format('MM');
-                break;
-            default:
-                break;
-        }
+        var result = formatDate(this.props.format, this.state.date);
         return result;
     },
 

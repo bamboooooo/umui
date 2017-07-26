@@ -1,4 +1,3 @@
-var ZScroller = require('zscroller');
 
 function isEmptyArray (a) {
     return !a || !a.length;
@@ -54,25 +53,17 @@ var Column = React.createClass({
             selectedValueState = children[0][this.props.valueMember];
         }
         return {
-            selectedValue: selectedValueState
+            selectedValue: selectedValueState,
+            translateY: 0,
+            pointStart: 0,
+            pointEnd: 0
         };
     },
 
     componentDidMount: function () {
         this.itemHeight = this.indicator.offsetHeight;
-        // compact
         this.content.style.padding = this.itemHeight * 3 + 'px 0';
-        this.zscroller = new ZScroller(this.content, {
-            scrollingX: false,
-            snapping: true,
-            penetrationDeceleration: 0.1,
-            minVelocityToKeepDecelerating: 0.5,
-            scrollingComplete: this.scrollingComplete.bind(this)
-        });
-
-        this.zscroller.setDisabled(this.props.disabled);
-        this.zscroller.scroller.setSnapSize(0, this.itemHeight);
-        this.select(this.state.selectedValue);
+        this._select(this.state.selectedValue);
     },
 
     componentWillReceiveProps: function (nextProps) {
@@ -81,7 +72,6 @@ var Column = React.createClass({
                 selectedValue: nextProps.selectedValue
             });
         }
-        this.zscroller.setDisabled(nextProps.disabled);
     },
 
     shouldComponentUpdate: function (nextProps, nextState) {
@@ -89,26 +79,14 @@ var Column = React.createClass({
     },
 
     componentDidUpdate: function () {
-        this.zscroller.reflow();
-        this.select(this.state.selectedValue);
-    },
-
-    componentWillUnmount: function () {
-        this.zscroller.destroy();
+        this._select(this.state.selectedValue);
     },
 
     getValue: function () {
         return this.props.selectedValue ? this.props.selectedValue : this.props.children && this.props.children[0] && this.props.children[0][this.props.valueMember];
     },
 
-    scrollingComplete: function () {
-        var { top } = this.zscroller.scroller.getValues();
-        if (top >= 0) {
-            this.doScrollingComplete(top);
-        }
-    },
-
-    fireValueChange: function (selectedValue) {
+    _fireValueChange: function (selectedValue) {
         if (selectedValue !== this.state.selectedValue) {
             if (!('selectedValue' in this.props)) {
                 this.setState({
@@ -120,29 +98,26 @@ var Column = React.createClass({
         }
     },
 
-    scrollTo: function (top) {
-        this.zscroller.scroller.scrollTo(0, top);
-    },
-
-    select: function (value) {
+    _select: function (value) {
         var children = toChildrenArray(this.props.children);
         for (var i = 0, len = children.length; i < len; i += 1) {
             if (getChildMember(children[i], this.props.valueMember) === value) {
-                this.selectByIndex(i);
+                this._selectByIndex(i);
                 return;
             }
         }
-        this.selectByIndex(0);
+        this._selectByIndex(0);
     },
 
-    selectByIndex: function (index) {
+    _selectByIndex: function (index) {
         if (index < 0 || index >= toChildrenArray(this.props.children).length || !this.itemHeight) {
             return;
         }
-        this.scrollTo(index * this.itemHeight);
+        this._onMoveTo(index, 300);
+        this._doScrollingComplete(index * this.itemHeight);
     },
 
-    doScrollingComplete: function (top) {
+    _doScrollingComplete: function (top) {
         var index = top / this.itemHeight;
         var floor = Math.floor(index);
         if (index - floor > 0.5) {
@@ -156,10 +131,95 @@ var Column = React.createClass({
         index = Math.min(index, children.length - 1);
         var child = children[index];
         if (child) {
-            this.fireValueChange(getChildMember(child, this.props.valueMember));
+            this._fireValueChange(getChildMember(child, this.props.valueMember));
         } else if (console.warn) {
             console.warn('child not found', children, index);
         }
+    },
+
+    // 获取触摸点的当前坐标
+    _getPoint: function (event) {
+        var touch = event.touches[0];
+        return {
+            x: touch.pageX,
+            y: touch.pageY
+        };
+    },
+
+    // 执行过渡动画
+    _doTransition: function (offset, duration) {
+        var style = this.content.style;
+        style.webkitTransitionDuration = duration + 'ms';
+        style.mozTransitionDuration = duration + 'ms';
+        style.oTransitionDuration = duration + 'ms';
+        style.transitionDuration = duration + 'ms';
+        style.webkitTransform = 'translate3d(0, ' + offset + 'px, 0)';
+        style.mozTransform = 'translate3d(0, ' + offset + 'px, 0)';
+        style.oTransform = 'translate3d(0, ' + offset + 'px, 0)';
+        style.transform = 'translate3d(0, ' + offset + 'px, 0)';
+    },
+
+    // 移动到指定编号
+    _onMoveTo: function (index, speed) {
+        var itemHeight = this._getItemHeight();
+        if (itemHeight === 0) {
+            return;
+        }
+
+        var offset = -index * itemHeight;
+
+        this._doTransition(offset, speed);
+        this.setState({
+            translateY: offset
+        });
+    },
+
+    _getItemHeight: function () {
+        var items = this.content.children;
+
+        if (!items || items.length === 0) {
+            return 0;
+        }
+        return items[0].offsetHeight;
+    },
+
+    _onTouchStart: function (event) {
+        var pointY = this._getPoint(event).y;
+        this.setState({
+            pointStart: pointY
+        });
+    },
+
+    _onTouchMove: function (event) {
+        event.preventDefault();
+        var pointY = this._getPoint(event).y;
+        var offset = this.state.translateY + (pointY - this.state.pointStart);
+
+        this._doTransition(offset, 0);
+        this.setState({
+            pointEnd: pointY
+        });
+    },
+
+    _onTouchEnd: function (event) {
+        var offset = (this.state.pointEnd !== 0)
+            ? this.state.translateY + (this.state.pointEnd - this.state.pointStart)
+            : 0;
+        var items = this.content.children;
+        var itemHeight = items[0] && items[0].offsetHeight;
+        var maxIndex = Math.abs(items.length - 1);
+        var index = Math.round(offset / itemHeight);
+
+        if (index > 0) {
+            index = 0;
+        } else {
+            index = (Math.abs(offset) >= maxIndex * itemHeight)
+                ? maxIndex
+                : Math.abs(index);
+        }
+
+        this._onMoveTo(index, 300);
+        this._doScrollingComplete(index * itemHeight);
     },
 
     render: function () {
@@ -182,9 +242,12 @@ var Column = React.createClass({
         });
         return (
             <div
-                className={prefixCls} >
+                className={prefixCls}
+                onTouchStart={this._onTouchStart}
+                onTouchMove={this._onTouchMove}
+                onTouchEnd={this._onTouchEnd}>
                 <div className={`${prefixCls}-indicator`} ref={function (indicator) {_this.indicator = indicator;}} style={indicatorStyle} />
-                <div className={`${prefixCls}-content`} ref={function (content) { _this.content = content; }}>
+                <div className={`${prefixCls}-content`} ref={function (content) {_this.content = content;}}>
                     {items}
                 </div>
             </div>

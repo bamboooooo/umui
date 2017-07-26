@@ -48,8 +48,6 @@ var Root = React.createClass({
             mode: 'date',
             value: '2008-08-08',
             defaultValue: '',
-            minDate: '2000',
-            maxDate: '2020',
             format: 'YYYY年MM月DD日',
             okText: '点我确定',
             cancelText: '点我取消',
@@ -71,9 +69,9 @@ var Root = React.createClass({
             mode: 'time',
             value: '14:29',
             defaultValue: '00:00',
-            minDate: '09:00',
-            maxDate: '18:00',
-            format: 'HH时mm分',
+            minDate: '05:10',
+            maxDate: '19:50',
+            format: 'hh时mm分',
             okText: '确定',
             cancelText: '取消',
             onOk: function (value) {
@@ -92,10 +90,54 @@ var Root = React.createClass({
             placeholder: '请选择时间',
             title: '选择时间',
             mode: 'datetime',
-            value: '2017-07-24 14:29',
+            value: '2017-07-24 14:33',
             defaultValue: '2017-01-01 01:01',
             minDate: '2010-01-01 09:00',
             maxDate: '2020-12-31 18:00',
+            okText: '确定',
+            cancelText: '取消',
+            onOk: function (value) {
+                console.log('外部ok value ->', value);
+            },
+            onCancel: function () {return null;},
+            onMaskClick: function () {console.log('点击了蒙层');},
+            onChange: function (value) {
+                console.log('外部change value ->', value);
+            }
+        };
+        var config4 = {
+            className: 'customClassName4',
+            id: 'customId4',
+            disabled: false,
+            placeholder: '请选择年份',
+            title: '选择年份',
+            mode: 'year',
+            value: '1997',
+            defaultValue: '2017',
+            minDate: '1990',
+            maxDate: '2020',
+            okText: '确定',
+            cancelText: '取消',
+            onOk: function (value) {
+                console.log('外部ok value ->', value);
+            },
+            onCancel: function () {return null;},
+            onMaskClick: function () {console.log('点击了蒙层');},
+            onChange: function (value) {
+                console.log('外部change value ->', value);
+            }
+        };
+        var config5 = {
+            className: 'customClassName4',
+            id: 'customId4',
+            disabled: false,
+            placeholder: '请选择月份',
+            title: '选择月份',
+            mode: 'month',
+            value: '5',
+            defaultValue: '4',
+            minDate: '3',
+            maxDate: '9',
             okText: '确定',
             cancelText: '取消',
             onOk: function (value) {
@@ -111,26 +153,36 @@ var Root = React.createClass({
             <div>
                 <ul className="list">
                     <li className="list-item">
-                        <label className="label">选择日期
-                            <button onClick={this.setToday}>设为今天</button>：
+                        <label className="label">选择日期：
                         </label>
                         <DatePicker ref="datePicker1" {...config1} />
                     </li>
                     <li className="list-item">
-                        <label className="label">选择时间
-                            <button onClick={this.getTime}>获取值</button>：
-                            <button onClick={this.setDisabled}>禁用/启用</button>：
+                        <label className="label">选择时间：
                         </label>
                         <DatePicker ref="datePicker2" {...config2} />
                     </li>
                     <li className="list-item">
-                        <label className="label">
-                            <button onClick={this.clear} style={{marginRight: '30px'}}>清空</button>
-                            <button onClick={this.reset}>重置</button>：
+                        <label className="label">选择具体时间：
                         </label>
                         <DatePicker ref="datePicker3" {...config3} />
                     </li>
+                    <li className="list-item">
+                        <label className="label">选择年份：
+                        </label>
+                        <DatePicker ref="datePicker4" {...config4} />
+                    </li>
+                    <li className="list-item">
+                        <label className="label">选择月份：
+                        </label>
+                        <DatePicker ref="datePicker5" {...config5} />
+                    </li>
                 </ul>
+                <button onClick={this.setToday}>设第一个为今天</button>：
+                <button onClick={this.getTime}>获取第二个值</button>：
+                <button onClick={this.setDisabled}>禁用/启用第二个</button>：
+                <button onClick={this.clear}>清空第三个</button>：
+                <button onClick={this.reset}>重置第三个</button>：
             </div>
         );
     }
