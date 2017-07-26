@@ -19,7 +19,6 @@ var ColumnGroup = React.createClass({
     },
 
     _getValue: function () {
-        var _this = this;
         var { children, selectedValue } = this.props;
 
         if (selectedValue && selectedValue.length) {
@@ -30,7 +29,7 @@ var ColumnGroup = React.createClass({
         }
         return children.map(function (c) {
             var cc = c.props.children;
-            return cc && cc[0] && cc[0]['value'];
+            return cc && cc[0] && cc[0].value;
         });
     },
     render: function () {

@@ -43,7 +43,7 @@ var Column = React.createClass({
         } else if (defaultSelectedValue !== undefined) {
             selectedValueState = defaultSelectedValue;
         } else if (children && children.length) {
-            selectedValueState = children[0]['value'];
+            selectedValueState = children[0].value;
         }
         return {
             selectedValue: selectedValueState,
@@ -78,7 +78,7 @@ var Column = React.createClass({
     _select: function (value) {
         var children = this.props.children;
         for (var i = 0, len = children.length; i < len; i += 1) {
-            if (children[i]['value'] === value) {
+            if (children[i].value === value) {
                 this._selectByIndex(i);
                 return;
             }
@@ -107,8 +107,8 @@ var Column = React.createClass({
         index = Math.min(index, children.length - 1);
         var child = children[index];
         if (child) {
-            if (child['value'] !== this.state.selectedValue) {
-                this.props.onValueChange(child['value']);
+            if (child.value !== this.state.selectedValue) {
+                this.props.onValueChange(child.value);
             }
         } else if (console.warn) {
             console.warn('child not found', children, index);
@@ -212,7 +212,7 @@ var Column = React.createClass({
         var items = children.map(function (item) {
             return (
                 <div
-                    className={selectedValue === item['value'] ? selectedItemClassName : itemClassName}
+                    className={selectedValue === item.value ? selectedItemClassName : itemClassName}
                     key={item.value} >
                     {item.label}
                 </div>

@@ -541,7 +541,7 @@ var DatePicker = React.createClass({
     },
 
     getValue: function () {
-        if(this.state.date === '') {
+        if (this.state.date === '') {
             return '';
         }
         var result = formatFn(this, this.state.date);
