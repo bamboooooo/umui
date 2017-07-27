@@ -26,6 +26,7 @@ describe('Picker组件测试', function () {
                 expect(picker.props.onMaskClick).to.be.equal(null);
                 expect(picker.props.displayMember).to.be.equal('label');
                 expect(picker.props.valueMember).to.be.equal('value');
+                expect(picker.props.cascade).to.not.be.ok;
             });
         });
     });
@@ -46,14 +47,14 @@ describe('Picker组件测试', function () {
         /*onCancel()方法测试*/
         describe('Picker-onCancel()方法测试', function () {
             it('--------------onCancel()方法测试-----------------', function () {
-                const picker = TestUtils.renderIntoDocument(<Picker defaultValue={['广东省','广州市','天河区']}/>);
+                const picker = TestUtils.renderIntoDocument(<Picker defaultValue={[{'value': '440000', 'label': '广东省'}, {'value': '440100', 'label': '广州市'}, {'value': '440106', 'label': '天河区'}]}/>);
                 const pickerDOM = findDOMNode(picker);
                 const pickerContainer = pickerDOM.querySelector('.ucs-picker-container');
                 const pickerCancel = pickerDOM.querySelector('.ucs-picker-popup-header-left');
                 TestUtils.Simulate.click(pickerDOM);
                 TestUtils.Simulate.click(pickerCancel);
                 expect(pickerContainer.className).to.contain('ucs-picker-popup-mask-hidden');
-                expect(picker.state.value).to.include('广东省');
+                expect(picker.state.value[0]).to.be.deep.equal({'value': '440000', 'label': '广东省'});
             });
         });
 
@@ -87,7 +88,7 @@ describe('Picker组件测试', function () {
                 TestUtils.Simulate.click(pickerDOM);
                 TestUtils.Simulate.click(pickerOk);
                 expect(pickerContainer.className).to.contain('ucs-picker-popup-mask-hidden');
-                expect(picker.state.value).to.include('计算机');
+                expect(picker.state.value[0]).to.be.deep.equal({key: '001', value: '计算机'});
             });
         });
 
@@ -115,8 +116,8 @@ describe('Picker组件测试', function () {
                     ]
                 ];
                 const picker = TestUtils.renderIntoDocument(<Picker data={majors} displayMember={'value'} valueMember={'key'}/>);
-                picker.setValue(['挖掘机']);
-                expect(picker.state.value).to.include('挖掘机');
+                picker.setValue([{key: '002', value: '挖掘机'}]);
+                expect(picker.state.value[0]).to.be.deep.equal({key: '002', value: '挖掘机'});
             });
         });
 
@@ -143,9 +144,9 @@ describe('Picker组件测试', function () {
                         }
                     ]
                 ];
-                const picker = TestUtils.renderIntoDocument(<Picker data={majors} displayMember={'value'} valueMember={'key'} defaultValue={['工业设计']}/>);
+                const picker = TestUtils.renderIntoDocument(<Picker data={majors} displayMember={'value'} valueMember={'key'} defaultValue={[{key: '003', value: '工业设计'}]}/>);
                 const value = picker.getValue();
-                expect(value).to.include('工业设计');
+                expect(value[0]).to.be.deep.equal({key: '003', value: '工业设计'});
             });
         });
 
@@ -184,10 +185,10 @@ describe('Picker组件测试', function () {
                         }
                     ]
                 ];
-                const picker = TestUtils.renderIntoDocument(<Picker data={majors} displayMember={'value'} valueMember={'key'} defaultValue={['工业设计']}/>);
-                picker.setValue(['挖掘机']);
+                const picker = TestUtils.renderIntoDocument(<Picker data={majors} displayMember={'value'} valueMember={'key'} defaultValue={[{key: '003', value: '工业设计'}]}/>);
+                picker.setValue([{key: '002', value: '挖掘机'}]);
                 picker.reset();
-                expect(picker.state.value).to.include('工业设计');
+                expect(picker.state.value[0]).to.be.deep.equal({key: '003', value: '工业设计'});
             });
         });
 
@@ -214,7 +215,7 @@ describe('Picker组件测试', function () {
                         }
                     ]
                 ];
-                const picker = TestUtils.renderIntoDocument(<Picker data={majors} displayMember={'value'} valueMember={'key'} defaultValue={['工业设计']}/>);
+                const picker = TestUtils.renderIntoDocument(<Picker data={majors} displayMember={'value'} valueMember={'key'} defaultValue={[{key: '003', value: '工业设计'}]}/>);
                 picker.clear();
                 expect(picker.state.value).to.be.empty;
             });
@@ -247,47 +248,29 @@ describe('Picker组件测试', function () {
         /*_getOptions()方法测试*/
         describe('Picker-_getOptions()方法测试', function () {
             it('--------------_getOptions()方法测试-----------------', function () {
-                const seasons = [
+                const majors = [
                     [
                         {
-                            label: '2013',
-                            value: '003'
+                            key: '001',
+                            value: '计算机'
                         },
                         {
-                            label: '2014',
-                            value: '004'
+                            key: '002',
+                            value: '挖掘机'
                         },
                         {
-                            label: '2015',
-                            value: '005'
+                            key: '003',
+                            value: '工业设计'
                         },
                         {
-                            label: '2016',
-                            value: '006'
-                        }
-                    ],
-                    [
-                        {
-                            label: '春',
-                            value: 'a'
-                        },
-                        {
-                            label: '夏',
-                            value: 'b'
-                        },
-                        {
-                            label: '秋',
-                            value: 'c'
-                        },
-                        {
-                            label: '冬',
-                            value: 'd'
+                            key: '004',
+                            value: '心理学'
                         }
                     ]
                 ];
-                const picker = TestUtils.renderIntoDocument(<Picker data={seasons}/>);
+                const picker = TestUtils.renderIntoDocument(<Picker data={majors} displayMember={'value'} valueMember={'key'}/>);
                 const pickers = picker._getOptions(picker.props.data,0);
-                expect(pickers.length).to.be.equal(2);
+                expect(pickers.length).to.be.equal(1);
             });
         });
 
@@ -343,9 +326,9 @@ describe('Picker组件测试', function () {
                         }
                     ]
                 ];
-                const picker = TestUtils.renderIntoDocument(<Picker data={seasons} defaultValue={['2015', '夏']}/>);
-                picker._onpickerChange(picker.props.data,1,'冬');
-                expect(picker.state.value).to.include('冬');
+                const picker = TestUtils.renderIntoDocument(<Picker data={seasons} defaultValue={[{label: '2015', value: '005'}, {label: '夏', value: 'b'}]}/>);
+                picker._onpickerChange(picker.props.data,1,{label: '冬', value: 'd'});
+                expect(picker.state.value[1]).to.be.deep.equal({label: '冬', value: 'd'});
             });
         });
 
@@ -390,9 +373,9 @@ describe('Picker组件测试', function () {
                         }
                     ]
                 ];
-                const picker = TestUtils.renderIntoDocument(<Picker data={seasons} defaultValue={['2015', '夏']}/>);
+                const picker = TestUtils.renderIntoDocument(<Picker data={seasons} defaultValue={[{label: '2015', value: '005'}, {label: '夏', value: 'b'}]}/>);
                 const value = picker._getInitValue();
-                expect(value).to.include('2015');
+                expect(value[0]).to.be.deep.equal({label: '2015', value: '005'});
             });
         });
     });

@@ -115,7 +115,8 @@ var Root = React.createClass({
                 console.log('外部onMaskClick ->', v);
             },
             displayMember: 'label',
-            valueMember: 'value'
+            valueMember: 'value',
+            cascade: true
         };
         var config2 = {
             placeholder: '请选择',
@@ -125,7 +126,16 @@ var Root = React.createClass({
             format: '-',
             disabled: false,
             data: seasons,
-            defaultValue: ['2015', '夏'],
+            defaultValue: [
+                {
+                    label: '2015',
+                    value: '005'
+                },
+                {
+                    label: '夏',
+                    value: 'b'
+                }
+            ],
             onClick: function (v) {
                 console.log('外部onClick ->', v);
             },
@@ -177,7 +187,12 @@ var Root = React.createClass({
             okText: '确定',
             disabled: false,
             data: majors,
-            defaultValue: ['挖掘机'],
+            defaultValue: [
+                {
+                    key: '002',
+                    value: '挖掘机'
+                }
+            ],
             onClick: function (v) {
                 console.log('外部onClick ->', v);
             },
@@ -198,7 +213,7 @@ var Root = React.createClass({
         };
         return (
             <ul className="list">
-                <li className="list-item"><label className="label">选择地区（多列，联动）<button onClick={this.setValue.bind(this, ['北京', '北京市', '昌平区'])}>设值</button>：</label><Picker ref="picker1" {...config1}/></li>
+                <li className="list-item"><label className="label">选择地区（多列，联动）<button onClick={this.setValue.bind(this, [{'value': '110000', 'label': '北京'}, {'value': '110100', 'label': '北京市'}, {'value': '110114', 'label': '昌平区'}])}>设值</button>：</label><Picker ref="picker1" {...config1}/></li>
                 <li className="list-item"><label className="label">选择季节（多列，不联动）<button onClick={this.getValue}>获取值</button>：</label><Picker ref="picker2" {...config2}/></li>
                 <li className="list-item"><label className="label">选择专业（单列）<button onClick={this.setDisabled}>禁用</button>：</label><Picker ref="picker3" {...config3}/></li>
                 <li className="list-item"><label className="label"><button onClick={this.clear} style={{marginRight: '30px'}}>清空</button><button onClick={this.reset}>重置</button>：</label><Picker ref="picker4" {...config4}/></li>

@@ -23,7 +23,8 @@ var PickerGroup = React.createClass({
             onCancel: null,
             onMaskClick: null,
             displayMember: 'label',
-            valueMember: 'value'
+            valueMember: 'value',
+            cascade: false
         };
     },
     getInitialState: function () {
@@ -31,7 +32,6 @@ var PickerGroup = React.createClass({
             visible: this.props.visible || false,
             value: this.props.defaultValue,
             data: this.props.data,
-            cascade: Object.prototype.toString.call(this.props.data[0]) !== '[object Array]', // 判断数据是否为级联，简单判断数据第一个元素是否为数组
             disabled: this.props.disabled
         };
     },
@@ -90,29 +90,42 @@ var PickerGroup = React.createClass({
     // 获取选择器组
     _getOptions: function (dataSource, level) {
         var _this = this;
-        var valueMember = this.props.valueMember;
-        var displayMember = this.props.displayMember;
-        var maxCols = this.props.maxCols;
-        var pickers = this.pickers || [];
+        var valueMember = _this.props.valueMember;
+        var displayMember = _this.props.displayMember;
+        var maxCols = _this.props.maxCols;
+        var pickers = _this.pickers || [];
 
-        if (this.state.cascade) {
-            var selected = dataSource.filter(function (item) {return item[displayMember] === _this.state.value[level];})[0] || dataSource[0] || {};
+        if (_this.props.cascade) {
+            var selected;
+
+            if (_this.state.value.length > 0) {
+                selected = dataSource.filter(function (item) {return item[displayMember] === _this.state.value[level][displayMember];})[0] || dataSource[0] || {};
+            } else {
+                selected = dataSource[0] || {};
+            }
 
             if (level < maxCols - 1) {
                 if (selected.children && selected.children.length > 0) {
-                    pickers = this._getOptions(selected.children, level + 1);
+                    pickers = _this._getOptions(selected.children, level + 1);
                 } else {
-                    pickers = this._getOptions([], level + 1);
+                    pickers = _this._getOptions([], level + 1);
                 }
             }
 
-            pickers.unshift(<Picker key={level} valueMember={valueMember} displayMember={displayMember} dataSource={dataSource} value={selected[displayMember]} onChange={function (value) {
+            pickers.unshift(<Picker key={level} valueMember={valueMember} displayMember={displayMember} dataSource={dataSource} value={selected} onChange={function (value) {
                 _this._onpickerChange(dataSource, level, value);
             }} />);
         } else {
-            var selected = this.state.value[level];
+            var selected;
+
+            if (_this.state.value.length > 0) {
+                selected = _this.state.value[level];
+            } else {
+                selected = dataSource[level] || {};
+            }
+
             if (level < dataSource.length - 1) {
-                pickers = this._getOptions(dataSource, level + 1);
+                pickers = _this._getOptions(dataSource, level + 1);
             }
 
             pickers.unshift(<Picker key={level} valueMember={valueMember} displayMember={displayMember} dataSource={dataSource[level]} value={selected} onChange={function (value) {
@@ -126,48 +139,53 @@ var PickerGroup = React.createClass({
     // 选择器选值
     _onpickerChange: function (dataSource, level, value) {
         var _this = this;
-        var displayMember = this.props.displayMember;
-        var onChange = this.props.onChange;
+        var valueMember = _this.props.valueMember;
+        var displayMember = _this.props.displayMember;
+        var onChange = _this.props.onChange;
 
-        var values = this.state.value.concat();
+        var values = _this.state.value.concat();
 
         if (!values || !values.length) {
-            var data = this.props.data;
-            if (this.state.cascade) {
-                for (var i = 0; i < this.props.maxCols; i += 1) {
+            var data = _this.props.data;
+            if (_this.props.cascade) {
+                for (var i = 0; i < _this.props.maxCols; i += 1) {
                     if (data && data.length) {
-                        values[i] = data[0][displayMember];
+                        values[i] = {};
+                        values[i][valueMember] = data[0][valueMember];
+                        values[i][displayMember] = data[0][displayMember];
                         data = data[0].children;
                     }
                 }
             } else {
                 data.forEach(function (d) {
-                    values.push(d[0][displayMember]);
+                    values.push(d[0]);
                 });
             }
         }
 
         var item = null;
-        if (this.state.cascade) {
+        if (_this.props.cascade) {
             for (var i = level; i < values.length; i++) {
-                item = dataSource.filter(function (item) {return item[displayMember] === value;})[0];
-                values[i] = item && item[displayMember];
+                item = dataSource.filter(function (item) {return item[displayMember] === value[displayMember];})[0];
+                values[i][valueMember] = item[valueMember];
+                values[i][displayMember] = item[displayMember];
 
                 dataSource = item
                     ? item.children
                     : [];
                 value = dataSource[0]
-                    ? dataSource[0][displayMember]
+                    ? dataSource[0]
                     : undefined;
             }
             var children = Util.arrayTreeFilter(_this.props.data, function (item, lv) {
-                return lv <= level && item[displayMember] === values[lv];
+                return lv <= level && item[displayMember] === values[lv][displayMember];
             });
             var data = children[level];
             var ii;
-            for (ii = level + 1; data && data.children && data.children.length && ii < this.props.maxCols; ii += 1) {
+            for (ii = level + 1; data && data.children && data.children.length && ii < _this.props.maxCols; ii += 1) {
                 data = data.children[0];
-                values[ii] = data[displayMember];
+                values[ii][valueMember] = data[valueMember];
+                values[ii][displayMember] = data[displayMember];
             }
             values.length = ii;
         } else {
@@ -180,22 +198,25 @@ var PickerGroup = React.createClass({
         onChange && onChange(values);
     },
     _getInitValue: function () {
-        var data = this.state.data;
+        var valueMember = this.props.valueMember;
         var displayMember = this.props.displayMember;
+        var data = this.state.data;
 
         var value = this.state.value;
 
         if (!value || !value.length) {
-            if (this.state.cascade) {
+            if (this.props.cascade) {
                 for (var i = 0; i < this.props.maxCols; i += 1) {
                     if (data && data.length) {
-                        value[i] = data[0][displayMember];
+                        value[i] = {};
+                        value[i][valueMember] = data[0][valueMember];
+                        value[i][displayMember] = data[0][displayMember];
                         data = data[0].children;
                     }
                 }
             } else {
                 data.forEach(function (d) {
-                    value.push(d[0][displayMember]);
+                    value.push(d[0]);
                 });
             }
         }
@@ -211,7 +232,7 @@ var PickerGroup = React.createClass({
     },
     // 获取值
     getValue: function () {
-        return this.state.value || [];
+        return this.state.value;
     },
     // 设置是否禁用
     setDisabled: function (v) {
@@ -235,7 +256,12 @@ var PickerGroup = React.createClass({
     },
     render: function () {
         var dataSource = this.props.data;
-        var value = this.state.value;
+        var displayMember = this.props.displayMember;
+        var values = this.state.value;
+        var value = [];
+        for (var i = 0; i < values.length; i += 1) {
+            value.push(values[i][displayMember]);
+        }
         var format = this.props.format;
         var placeholder = this.props.placeholder;
         var className = this.props.className;

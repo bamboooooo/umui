@@ -6,9 +6,7 @@ var Option = require('./Option');
 var Picker = React.createClass({
     getDefaultProps: function () {
         return {
-            onChange: function () {
-                console.log(123);
-            },
+            onChange: null,
             dataSource: [],
             valueMember: 'value',
             displayMember: 'label'
@@ -39,7 +37,7 @@ var Picker = React.createClass({
         var displayMember = this.props.displayMember;
         var index = 0;
         for (var i = 0; i < dataSource.length; i++) {
-            if (dataSource[i][displayMember] === value) {
+            if (dataSource[i][displayMember] === value[displayMember]) {
                 index = i;
                 break;
             }
@@ -107,9 +105,8 @@ var Picker = React.createClass({
 
         this._onMoveTo(index, 300);
         var dataSource = this.props.dataSource;
-        var displayMember = this.props.displayMember;
         var onChange = this.props.onChange;
-        var value = dataSource[index][displayMember];
+        var value = dataSource[index];
 
         this.setState({
             value: value
@@ -143,7 +140,7 @@ var Picker = React.createClass({
         var options = dataSource.map(function (item, index) {
             var className = classnames({
                 'ucs-picker-col-item': true,
-                'ucs-picker-col-item-selected': item[displayMember] === curValue
+                'ucs-picker-col-item-selected': item[displayMember] === curValue[displayMember]
             });
             return <Option key={index} value={item[valueMember]} className={className}>{item[displayMember]}</Option>;
         });
