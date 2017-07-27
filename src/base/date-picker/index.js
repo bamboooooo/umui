@@ -77,7 +77,7 @@ function stopClick (e) {
     e.stopPropagation();
 }
 
-// 转成moment格式
+// 转成date格式
 function getGregorianCalendar (arg) {
     return new Date(arg[0], arg[1], arg[2], arg[3], arg[4]);
 }
@@ -97,7 +97,6 @@ var DatePicker = React.createClass({
             disabled: false,
             value: '',
             defaultValue: '',
-            onClick: function () {return null;},
             onChange: function () {return null;},
             onOk: function () {return null;},
             onCancel: function () {return null;},
@@ -112,12 +111,21 @@ var DatePicker = React.createClass({
     getInitialState: function () {
         var date = this.props.value && this._isExtendMoment(this.props.value);
         var defaultDate = this.props.defaultValue && this._isExtendMoment(this.props.defaultValue);
-        this.initDate = this.props.value && this._isExtendMoment(this.props.value);
         return {
             visible: this.props.visible || false,
             date: date || defaultDate,
             disabled: this.props.disabled
         };
+    },
+
+    componentDidMount: function () {
+        if (this.props.value) {
+            this.initDate = this._isExtendMoment(this.props.value);
+        } else if(this.props.defaultValue) {
+            this.initDate = this._isExtendMoment(this.props.defaultValue);
+        }else{
+            this.initDate = '';
+        }
     },
 
     componentWillReceiveProps: function (nextProps) {
@@ -205,11 +213,9 @@ var DatePicker = React.createClass({
         }
         newValue = new Date(_year, _month, _date, _hour, _minute);
         newValue = this._clipDate(newValue);
-        if (!('date' in props)) {
-            this.setState({
-                date: newValue
-            });
-        }
+        this.setState({
+            date: newValue
+        });
         props.onChange(formatFn(this, newValue));
     },
 
@@ -503,9 +509,6 @@ var DatePicker = React.createClass({
         if (!date) {
             return '';
         }
-        if (mode === DATE) {
-            return new Date(date);
-        }
 
         if (mode === MONTH) {
             var _temp = '1970-' + date + '-01';
@@ -513,7 +516,6 @@ var DatePicker = React.createClass({
         }
 
         if (mode === TIME) {
-            // 如果传递参数不合法，默认转换为时：分
             var _temp = '1970-01-01 ' + date;
             return new Date(_temp);
         }
@@ -528,7 +530,6 @@ var DatePicker = React.createClass({
     },
 
     _handleClick: function () {
-        this.props.onClick();
         !this.state.disabled && this._toggle();
     },
 
@@ -573,7 +574,6 @@ var DatePicker = React.createClass({
             this.clear();
         }
     },
-
     render: function () {
         var _this = this;
         var { value, cols } = this._getValueCols();
@@ -585,7 +585,7 @@ var DatePicker = React.createClass({
         });
 
         var inputCls = classnames({
-            'ucs-picker-text': true,
+            'ucs-datepicker-text': true,
             'ucs-datepicker-placeholder': !this.state.date,
             'ucs-datepicker-disabled': !!disabled
         });
@@ -599,17 +599,17 @@ var DatePicker = React.createClass({
             <div
                 id={id}
                 className={wrapperClasses}
-                onClick={function () {_this._handleClick();}}>
+                onTouchStart={function () {_this._handleClick();}}>
                 <div className={inputCls}>
                     {this.state.date ? formatFn(this, this.state.date) : placeholder}
                 </div>
-                <div className={classes} onClick={function (e) {stopClick(e);}}>
-                    <div className="ucs-datepicker-mask" onClick={function () {_this._onMaskClick();}} />
+                <div className={classes} onTouchStart={function (e) {stopClick(e);}}>
+                    <div className="ucs-datepicker-mask" onTouchStart={function () {_this._onMaskClick();}} />
                     <div className="ucs-datepicker-inner">
                         <div className="ucs-datepicker-header">
-                            <div className="ucs-datepicker-cancel" onClick={function () {_this._onCancel();}}>{cancelText}</div>
+                            <div className="ucs-datepicker-cancel" onTouchStart={function () {_this._onCancel();}}>{cancelText}</div>
                             <div className="ucs-datepicker-title">{title}</div>
-                            <div className="ucs-datepicker-submit" onClick={function () {_this._onOk();}}>{okText}</div>
+                            <div className="ucs-datepicker-submit" onTouchStart={function () {_this._onOk();}}>{okText}</div>
                         </div>
                         <div className="ucs-datepicker-mask-top">
                             <div className="ucs-datepicker-mask-bottom">

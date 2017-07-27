@@ -184,7 +184,8 @@ var Column = React.createClass({
             ? this.state.translateY + (this.state.pointEnd - this.state.pointStart)
             : 0;
         var items = this.content.children;
-        var itemHeight = items[0] && items[0].offsetHeight;
+        //var itemHeight = items[0] && items[0].offsetHeight;
+        var itemHeight = 30;
         var maxIndex = Math.abs(items.length - 1);
         var index = Math.round(offset / itemHeight);
 
