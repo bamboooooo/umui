@@ -207,7 +207,7 @@ describe('DatePicker组件测试', function () {
             it('--------------_getDefaultMinDate()方法测试------------------', function () {
                 const datePicker = TestUtils.renderIntoDocument(<DatePicker />);
                 const value = datePicker._getDefaultMinDate();
-                expect(value.toString()).to.be.equal(new Date('1980-01-01 00:00').toString());
+                expect(value.toString()).to.be.equal(new Date('1990-01-01 00:00').toString());
             });
             it('--------------_getMinDate()方法测试 有默认最小值------------------', function () {
                 const datePicker = TestUtils.renderIntoDocument(<DatePicker minDate="2000-01-01" />);
@@ -217,7 +217,7 @@ describe('DatePicker组件测试', function () {
             it('--------------_getMinDate()方法测试 没有默认最小值------------------', function () {
                 const datePicker = TestUtils.renderIntoDocument(<DatePicker />);
                 const value = datePicker._getMinDate();
-                expect(value.toString()).to.be.equal(new Date('1980-01-01 00:00').toString());
+                expect(value.toString()).to.be.equal(new Date('1990-01-01 00:00').toString());
             });
             it('--------------_getDefaultMaxDate()方法测试------------------', function () {
                 const datePicker = TestUtils.renderIntoDocument(<DatePicker />);
@@ -240,7 +240,7 @@ describe('DatePicker组件测试', function () {
                 expect(value[0].key).to.be.equal('year');
                 expect(value[1].key).to.be.equal('month');
                 expect(value[2].key).to.be.equal('day');
-                expect(value[0].props.children[0].value).to.be.equal('1980');
+                expect(value[0].props.children[0].value).to.be.equal('1990');
                 expect(value[1].props.children[5].value).to.be.equal('5');
                 expect(value[2].props.children[20].value).to.be.equal('21');
             });
@@ -255,7 +255,7 @@ describe('DatePicker组件测试', function () {
             it('--------------_getValueCols()方法测试------------------', function () {
                 const datePicker = TestUtils.renderIntoDocument(<DatePicker />);
                 const value = datePicker._getValueCols();
-                expect(value.value.toString()).to.be.equal(['1980', '0', '1'].toString());
+                expect(value.value.toString()).to.be.equal(['1990', '0', '1'].toString());
             });
 
 

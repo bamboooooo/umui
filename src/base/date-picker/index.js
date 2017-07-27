@@ -221,14 +221,14 @@ var DatePicker = React.createClass({
 
     _getDefaultMinDate: function () {
         if (!this.defaultMinDate) {
-            this.defaultMinDate = getGregorianCalendar([1950, 0, 1, 0, 0, 0]);
+            this.defaultMinDate = getGregorianCalendar([1990, 0, 1, 0, 0, 0]);
         }
         return this.defaultMinDate;
     },
 
     _getDefaultMaxDate: function () {
         if (!this.defaultMaxDate) {
-            this.defaultMaxDate = getGregorianCalendar([2030, 11, 31, 23, 59, 59]);
+            this.defaultMaxDate = getGregorianCalendar([2020, 11, 31, 23, 59, 59]);
         }
         return this.defaultMaxDate;
     },
