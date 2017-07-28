@@ -23,7 +23,7 @@ describe('DatePicker组件测试', function () {
         /*onMaskClick()方法测试*/
         describe('DatePicker-onMaskClick()方法测试', function () {
             it('--------------onMaskClick()方法测试-----------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker/>);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker minDate="2000" maxDate="2017" mode="year"/>);
                 const datePickerDOM = findDOMNode(datePicker);
                 const datePickerContainer = datePickerDOM.querySelector('.ucs-datepicker-container');
                 const datePickerMask = datePickerDOM.querySelector('.ucs-datepicker-mask');
@@ -36,7 +36,7 @@ describe('DatePicker组件测试', function () {
         /*onCancel()方法测试*/
         describe('DatePicker-onCancel()方法测试', function () {
             it('--------------onCancel()方法测试 不传参-----------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker />);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker minDate="01" maxDate="10" mode="month" />);
                 const datePickerDOM = findDOMNode(datePicker);
                 const datePickerContainer = datePickerDOM.querySelector('.ucs-datepicker-container');
                 const datePickerCancel = datePickerDOM.querySelector('.ucs-datepicker-cancel');
@@ -48,7 +48,7 @@ describe('DatePicker组件测试', function () {
                 expect(datePicker.state.date).to.be.equal('');
             });
             it('--------------onCancel()方法测试 只传defaultValue-----------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker defaultValue='2017-06-01'/>);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker defaultValue='2017-06-01' minDate="2010-12-31" maxDate="2017-07-28"/>);
                 const datePickerDOM = findDOMNode(datePicker);
                 const datePickerContainer = datePickerDOM.querySelector('.ucs-datepicker-container');
                 const datePickerCancel = datePickerDOM.querySelector('.ucs-datepicker-cancel');
@@ -61,7 +61,7 @@ describe('DatePicker组件测试', function () {
                 expect(datePicker.state.date.toString()).to.be.equal(value);
             });
             it('--------------onCancel()方法测试 只传value-----------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-11-11"/>);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-11-11"  minDate="2010-12-31" maxDate="2017-11-28"/>);
                 const datePickerDOM = findDOMNode(datePicker);
                 const datePickerContainer = datePickerDOM.querySelector('.ucs-datepicker-container');
                 const datePickerCancel = datePickerDOM.querySelector('.ucs-datepicker-cancel');
@@ -74,7 +74,7 @@ describe('DatePicker组件测试', function () {
                 expect(datePicker.state.date.toString()).to.be.equal(value);
             });
             it('--------------onCancel()方法测试 传value和defaultValue-----------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker defaultValue='2017-06-01' value="2017-11-11"/>);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker defaultValue='2017-06-01' value="2017-11-11" minDate="2010-12-31" maxDate="2017-11-28"/>);
                 const datePickerDOM = findDOMNode(datePicker);
                 const datePickerContainer = datePickerDOM.querySelector('.ucs-datepicker-container');
                 const datePickerCancel = datePickerDOM.querySelector('.ucs-datepicker-cancel');
@@ -90,7 +90,7 @@ describe('DatePicker组件测试', function () {
         /*onOk()方法测试*/
         describe('DatePicker-onOk()方法测试', function () {
             it('--------------onOk()方法测试-传defaultValue-----------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker defaultValue='2017-06-01'/>);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker defaultValue='2017-06-01' minDate="2010-12-31" maxDate="2017-07-28"/>);
                 const datePickerDOM = findDOMNode(datePicker);
                 const datePickerContainer = datePickerDOM.querySelector('.ucs-datepicker-container');
                 const datePickerOk = datePickerDOM.querySelector('.ucs-datepicker-submit');
@@ -103,7 +103,7 @@ describe('DatePicker组件测试', function () {
                 expect(datePicker.state.date.toString()).to.be.equal(value);
             });
             it('--------------onOk()方法测试-传value-----------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01"/>);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01" minDate="2010-12-31" maxDate="2017-07-28"/>);
                 const datePickerDOM = findDOMNode(datePicker);
                 const datePickerContainer = datePickerDOM.querySelector('.ucs-datepicker-container');
                 const datePickerOk = datePickerDOM.querySelector('.ucs-datepicker-submit');
@@ -118,16 +118,16 @@ describe('DatePicker组件测试', function () {
         });
         describe('DatePicker-对外方法测试', function () {
             it('--------------setValue()方法测试------------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01"/>);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01" minDate="2010-12-31" maxDate="2017-07-28"/>);
                 datePicker.setValue('2017-11-11');
                 expect(datePicker.state.date.toString()).to.be.equal(new Date('2017-11-11').toString());
             });
             it('--------------getValue()方法测试------------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01"/>);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01" minDate="2010-12-31" maxDate="2017-07-28"/>);
                 expect(new Date(datePicker.getValue()).toString()).to.be.equal(new Date('2017-06-01').toString());
             });
             it('--------------setDisabled()方法测试------------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01"/>);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01" minDate="2010-12-31" maxDate="2017-07-28"/>);
                 const datePickerDOM = findDOMNode(datePicker);
                 const datePickerContainer = datePickerDOM.querySelector('.ucs-datepicker-container');
                 const datePickerText = datePickerDOM.querySelector('.ucs-datepicker-text');
@@ -141,20 +141,19 @@ describe('DatePicker组件测试', function () {
                 expect(datePickerContainer.className).to.not.contain('ucs-datepicker-hidden');
             });
             it('--------------clear()方法测试------------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01"/>);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2002" minDate="2000" maxDate="2017" mode="year"/>);
                 datePicker.clear();
                 expect(datePicker.state.date).to.be.empty;
                 expect(datePicker.initDate).to.be.empty;
             });
             it('--------------reset()方法测试 不传defaultValue------------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01"/>);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2002" minDate="2000" maxDate="2017" mode="year"/>);
                 datePicker.reset();
                 expect(datePicker.state.date).to.be.empty;
                 expect(datePicker.initDate).to.be.empty;
             });
             it('--------------reset()方法测试 传defaultValue------------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01"
-                                                                            defaultValue="2017-11-11"/>);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01" defaultValue="2017-11-11" minDate="2010-12-31" maxDate="2017-11-28"/>);
                 datePicker.reset();
                 expect(datePicker.state.date.toString()).to.be.equal(new Date('2017-11-11').toString());
                 expect(datePicker.initDate.toString()).to.be.equal(new Date('2017-11-11').toString());
@@ -162,17 +161,17 @@ describe('DatePicker组件测试', function () {
         });
         describe('DatePicker-内部方法测试', function () {
             it('--------------_isExtendMoment()方法测试 mode=date------------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker mode="date" />);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker mode="date" minDate="2017-05-31" maxDate="2017-06-01" />);
                 const value = datePicker._isExtendMoment('2017-06-01');
                 expect(value.toString()).to.be.equal(new Date('2017-06-01').toString());
             });
             it('--------------_isExtendMoment()方法测试 mode=datetime------------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker mode="datetime" />);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker mode="datetime" minDate="2017-05-31 00:00" maxDate="2017-06-01 23:59" />);
                 const value = datePicker._isExtendMoment('2017-06-01 09:30:15');
                 expect(value.toString()).to.be.equal(new Date('2017-06-01 09:30:15').toString());
             });
             it('--------------_isExtendMoment()方法测试 mode=time------------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker mode="time" />);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker mode="time" minDate="09:00" maxDate="12:00" />);
                 const value = datePicker._isExtendMoment('09:30:15');
                 expect(value.toString()).to.be.equal(new Date('1970-01-01 09:30:15').toString());
             });
@@ -187,7 +186,7 @@ describe('DatePicker组件测试', function () {
                 expect(value.toString()).to.be.equal(new Date('1970-09-01').toString());
             });
             it('--------------_onValueChange()方法测试------------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker mode="date" value="2017-06-01" />);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker mode="date" value="2017-06-01" minDate="2017-05-31" maxDate="2018-12-01" />);
                 datePicker._onValueChange(['2018'], 0);
                 expect(datePicker.state.date.toString()).to.be.equal(new Date('2018-06-01').toString());
                 datePicker._onValueChange(['2018','10'], 1);
