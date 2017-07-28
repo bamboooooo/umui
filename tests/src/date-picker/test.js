@@ -17,20 +17,6 @@ describe('DatePicker组件测试', function () {
                 expect(datePicker.props.children[1].props.className.indexOf('ucs-datepicker-hidden')).to.not.be.equal(-1);
                 expect(datePicker.props.children[0].props.children.indexOf('请选择日期啊')).to.be.equal(0);
             });
-            it('props测试', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker/>);
-                expect(datePicker.props.title).to.be.equal('请选择日期');
-                expect(datePicker.props.cancelText).to.be.equal('取消');
-                expect(datePicker.props.okText).to.be.equal('确定');
-                expect(datePicker.props.format).to.be.equal(null);
-                expect(datePicker.props.mode).to.be.equal('date');
-                expect(datePicker.props.disabled).to.not.be.ok;
-                expect(datePicker.props.value).to.be.empty;
-                expect(datePicker.props.minuteStep).to.be.equal(1);
-                expect(datePicker.props.defaultValue).to.be.empty;
-                expect(datePicker.props.prefixCls).to.be.equal('ucs-datepicker-column-group');
-                expect(datePicker.props.pickerPrefixCls).to.be.equal('ucs-datepicker-cascaderpicker');
-            });
         });
     });
     describe('function测试', function () {
@@ -117,7 +103,7 @@ describe('DatePicker组件测试', function () {
                 expect(datePicker.state.date.toString()).to.be.equal(value);
             });
             it('--------------onOk()方法测试-传value-----------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01" />);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01"/>);
                 const datePickerDOM = findDOMNode(datePicker);
                 const datePickerContainer = datePickerDOM.querySelector('.ucs-datepicker-container');
                 const datePickerOk = datePickerDOM.querySelector('.ucs-datepicker-submit');
@@ -129,17 +115,19 @@ describe('DatePicker组件测试', function () {
                 expect(datePicker.initDate.toString()).to.be.equal(value);
                 expect(datePicker.state.date.toString()).to.be.equal(value);
             });
+        });
+        describe('DatePicker-对外方法测试', function () {
             it('--------------setValue()方法测试------------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01" />);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01"/>);
                 datePicker.setValue('2017-11-11');
                 expect(datePicker.state.date.toString()).to.be.equal(new Date('2017-11-11').toString());
             });
             it('--------------getValue()方法测试------------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01" />);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01"/>);
                 expect(new Date(datePicker.getValue()).toString()).to.be.equal(new Date('2017-06-01').toString());
             });
             it('--------------setDisabled()方法测试------------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01" />);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01"/>);
                 const datePickerDOM = findDOMNode(datePicker);
                 const datePickerContainer = datePickerDOM.querySelector('.ucs-datepicker-container');
                 const datePickerText = datePickerDOM.querySelector('.ucs-datepicker-text');
@@ -153,23 +141,26 @@ describe('DatePicker组件测试', function () {
                 expect(datePickerContainer.className).to.not.contain('ucs-datepicker-hidden');
             });
             it('--------------clear()方法测试------------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01" />);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01"/>);
                 datePicker.clear();
                 expect(datePicker.state.date).to.be.empty;
                 expect(datePicker.initDate).to.be.empty;
             });
             it('--------------reset()方法测试 不传defaultValue------------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01" />);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01"/>);
                 datePicker.reset();
                 expect(datePicker.state.date).to.be.empty;
                 expect(datePicker.initDate).to.be.empty;
             });
             it('--------------reset()方法测试 传defaultValue------------------', function () {
-                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01" defaultValue="2017-11-11" />);
+                const datePicker = TestUtils.renderIntoDocument(<DatePicker value="2017-06-01"
+                                                                            defaultValue="2017-11-11"/>);
                 datePicker.reset();
                 expect(datePicker.state.date.toString()).to.be.equal(new Date('2017-11-11').toString());
                 expect(datePicker.initDate.toString()).to.be.equal(new Date('2017-11-11').toString());
             });
+        });
+        describe('DatePicker-内部方法测试', function () {
             it('--------------_isExtendMoment()方法测试 mode=date------------------', function () {
                 const datePicker = TestUtils.renderIntoDocument(<DatePicker mode="date" />);
                 const value = datePicker._isExtendMoment('2017-06-01');

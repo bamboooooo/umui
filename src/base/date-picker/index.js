@@ -1,16 +1,20 @@
 var classnames = require('classnames');
 var ColumnGroup = require('./ColumnGroup');
-var defaultLocale = require('./locale/zh_CN');
 
+var DATETIME = 'datetime';
+var DATE = 'date';
+var TIME = 'time';
+var MONTH = 'month';
+var YEAR = 'year';
+
+// 格式化
 function formatDate (fmt, date) {
     var o = {
         'M+': date.getMonth() + 1,
         'D+': date.getDate(),
         'h+': date.getHours(),
         'm+': date.getMinutes(),
-        's+': date.getSeconds(),
-        'q+': Math.floor((date.getMonth() + 3) / 3),
-        'S': date.getMilliseconds()
+        's+': date.getSeconds()
     };
     if (/(y+)/i.test(fmt)) {
         fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
@@ -24,37 +28,36 @@ function formatDate (fmt, date) {
     return fmt;
 }
 
+// 获取使用哪个格式化
 function getFormatter (type) {
     var formatter;
-    if (type === 'year') {
-        formatter = ('YYYY');
-    } else if (type === 'month') {
-        formatter = ('MM');
-    } else if (type === 'time') {
-        formatter = ('hh:mm');
-    } else if (type === 'datetime') {
-        formatter = ('YYYY-MM-DD hh:mm');
+    if (type === YEAR) {
+        formatter = 'YYYY';
+    } else if (type === MONTH) {
+        formatter = 'MM';
+    } else if (type === TIME) {
+        formatter = 'hh:mm';
+    } else if (type === DATETIME) {
+        formatter = 'YYYY-MM-DD hh:mm';
     } else {
-        formatter = ('YYYY-MM-DD');
+        formatter = 'YYYY-MM-DD';
     }
     return formatter;
 }
 
+// 格式化入口函数
 function formatFn (instance, value) {
     var format = instance.props.format;
+    var mode = instance.props.mode;
+    var date = new Date(value);
     if (format === null) {
-        return formatDate(getFormatter(instance.props.mode), new Date(value));
+        return formatDate(getFormatter(mode), date);
     } else {
-        return formatDate(format, new Date(value));
+        return formatDate(format, date);
     }
 }
 
-var DATETIME = 'datetime';
-var DATE = 'date';
-var TIME = 'time';
-var MONTH = 'month';
-var YEAR = 'year';
-
+// 获取月份的天数
 function getDaysInMonth (now) {
     var month = new Date(now).getMonth() + 1;
     var newYear = new Date(now).getFullYear();
@@ -77,11 +80,6 @@ function stopClick (e) {
     e.stopPropagation();
 }
 
-// 转成date格式
-function getGregorianCalendar (arg) {
-    return new Date(arg[0], arg[1], arg[2], arg[3], arg[4]);
-}
-
 var DatePicker = React.createClass({
     getDefaultProps: function () {
         return {
@@ -101,10 +99,7 @@ var DatePicker = React.createClass({
             onOk: function () {return null;},
             onCancel: function () {return null;},
             onMaskClick: function () {return null;},
-            locale: defaultLocale,
-            minuteStep: 1,
-            prefixCls: 'ucs-datepicker-column-group',
-            pickerPrefixCls: 'ucs-datepicker-cascaderpicker'
+            minuteStep: 1
         };
     },
 
@@ -121,9 +116,9 @@ var DatePicker = React.createClass({
     componentDidMount: function () {
         if (this.props.value) {
             this.initDate = this._isExtendMoment(this.props.value);
-        } else if(this.props.defaultValue) {
+        } else if (this.props.defaultValue) {
             this.initDate = this._isExtendMoment(this.props.defaultValue);
-        }else{
+        } else {
             this.initDate = '';
         }
     },
@@ -132,20 +127,20 @@ var DatePicker = React.createClass({
         var date = nextProps.value && this._isExtendMoment(nextProps.value);
         var defaultDate = nextProps.defaultValue && this._isExtendMoment(nextProps.defaultValue);
         this.setState({
-            date: date || defaultDate,
+            date: date || defaultDate
         });
     },
 
     // 点击遮罩层
     _onMaskClick: function () {
-        var { onMaskClick } = this.props;
+        var onMaskClick = this.props.onMaskClick;
         this._onCancel();
         onMaskClick && onMaskClick();
     },
 
     // 点击取消
     _onCancel: function () {
-        var { onCancel } = this.props;
+        var onCancel = this.props.onCancel;
         this._toggle();
         this.setState({
             date: this.initDate
@@ -155,7 +150,7 @@ var DatePicker = React.createClass({
 
     // 点击确定
     _onOk: function () {
-        var { onOk } = this.props;
+        var onOk = this.props.onOk;
         var value = this._getDate();
         this.initDate = value;
         this._toggle();
@@ -170,7 +165,7 @@ var DatePicker = React.createClass({
     _onValueChange: function (values, index) {
         var value = parseInt(values[index], 10);
         var props = this.props;
-        var { mode } = props;
+        var mode = props.mode;
         var newValue = this._getDate();
         var _year = newValue.getFullYear();
         var _month = newValue.getMonth();
@@ -221,14 +216,14 @@ var DatePicker = React.createClass({
 
     _getDefaultMinDate: function () {
         if (!this.defaultMinDate) {
-            this.defaultMinDate = getGregorianCalendar([1990, 0, 1, 0, 0, 0]);
+            this.defaultMinDate = new Date(1990, 0, 1, 0, 0, 0);
         }
         return this.defaultMinDate;
     },
 
     _getDefaultMaxDate: function () {
         if (!this.defaultMaxDate) {
-            this.defaultMaxDate = getGregorianCalendar([2020, 11, 31, 23, 59, 59]);
+            this.defaultMaxDate = new Date(2020, 11, 31, 23, 59, 0);
         }
         return this.defaultMaxDate;
     },
@@ -288,7 +283,7 @@ var DatePicker = React.createClass({
     },
 
     _getDateData: function () {
-        var { locale, mode } = this.props;
+        var mode = this.props.mode;
         var date = this._getDate();
         var selYear = date.getFullYear();
         var selMonth = date.getMonth();
@@ -303,7 +298,7 @@ var DatePicker = React.createClass({
         for (var i = minDateYear; i <= maxDateYear; i += 1) {
             years.push({
                 value: '' + i,
-                label: i + locale.year
+                label: i + '年'
             });
         }
 
@@ -325,7 +320,7 @@ var DatePicker = React.createClass({
         for (var i = minMonth; i <= maxMonth; i += 1) {
             months.push({
                 value: '' + i,
-                label: i + 1 + locale.month
+                label: pad(i + 1) + '月'
             });
         }
 
@@ -348,10 +343,9 @@ var DatePicker = React.createClass({
         for (var i = minDay; i <= maxDay; i += 1) {
             days.push({
                 value: '' + i,
-                label: i + locale.day
+                label: pad(i) + '日'
             });
         }
-
         return [
             yearCol,
             monthCol,
@@ -364,7 +358,8 @@ var DatePicker = React.createClass({
         var maxHour = 23;
         var minMinute = 0;
         var maxMinute = 59;
-        var { mode, locale, minuteStep } = this.props;
+        var mode = this.props.mode;
+        var minuteStep = this.props.minuteStep;
         var date = this._getDate();
 
         var minDateMinute = this._getMinMinute();
@@ -412,7 +407,7 @@ var DatePicker = React.createClass({
         for (var i = minHour; i <= maxHour; i += 1) {
             hours.push({
                 value: '' + i,
-                label: locale.hour ? i + locale.hour : pad(i)
+                label: pad(i) + '时'
             });
         }
 
@@ -421,10 +416,9 @@ var DatePicker = React.createClass({
         for (var i = minMinute; i <= maxMinute; i += minuteStep) {
             minutes.push({
                 value: '' + i,
-                label: locale.minute ? i + locale.minute : pad(i)
+                label: pad(i) + '分'
             });
         }
-
         return [
             { key: 'hours', props: { children: hours } },
             { key: 'minutes', props: { children: minutes } }
@@ -433,7 +427,7 @@ var DatePicker = React.createClass({
 
     // 获取
     _getValueCols: function () {
-        var { mode } = this.props;
+        var mode = this.props.mode;
         var date = this._getDate();
 
         var cols = [];
@@ -469,7 +463,7 @@ var DatePicker = React.createClass({
     },
 
     _clipDate: function (date) {
-        var { mode } = this.props;
+        var mode = this.props.mode;
         var minDate = this._getMinDate();
         var maxDate = this._getMaxDate();
         if (mode === DATETIME) {
@@ -504,7 +498,7 @@ var DatePicker = React.createClass({
     },
 
     _isExtendMoment: function (date) {
-        var { mode } = this.props;
+        var mode = this.props.mode;
 
         if (!date) {
             return '';
@@ -525,7 +519,7 @@ var DatePicker = React.createClass({
     // 切换显示状态
     _toggle: function () {
         this.setState({
-            visible: !this.state.visible,
+            visible: !this.state.visible
         });
     },
 
@@ -576,9 +570,16 @@ var DatePicker = React.createClass({
     },
     render: function () {
         var _this = this;
-        var { value, cols } = this._getValueCols();
-        var { id, prefixCls, pickerPrefixCls, className, cancelText, okText, title, placeholder } = this.props;
-        var {disabled} = this.state;
+        var value = this._getValueCols().value;
+        var cols = this._getValueCols().cols;
+        var propsObj = this.props;
+        var id = propsObj.id;
+        var className = propsObj.className;
+        var cancelText = propsObj.cancelText;
+        var okText = propsObj.okText;
+        var title = propsObj.title;
+        var placeholder = propsObj.placeholder;
+        var disabled = this.state.disabled;
         var wrapperClasses = classnames({
             'ucs-datepicker': true,
             [className]: !!className
@@ -614,8 +615,6 @@ var DatePicker = React.createClass({
                         <div className="ucs-datepicker-mask-top">
                             <div className="ucs-datepicker-mask-bottom">
                                 <ColumnGroup
-                                    prefixCls={prefixCls}
-                                    pickerPrefixCls={pickerPrefixCls}
                                     disabled={disabled}
                                     selectedValue={value}
                                     onValueChange={function (values, index) {_this._onValueChange(values, index);}}>

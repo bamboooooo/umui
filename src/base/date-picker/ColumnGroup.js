@@ -1,12 +1,9 @@
-var classnames = require('classnames');
 var Column = require('./Column');
 
 var ColumnGroup = React.createClass({
 
     getDefaultProps: function () {
         return {
-            prefixCls: '',
-            pickerPrefixCls: '',
             onValueChange: function () {return null;},
             disabled: true
         };
@@ -19,7 +16,8 @@ var ColumnGroup = React.createClass({
     },
 
     _getValue: function () {
-        var { children, selectedValue } = this.props;
+        var children = this.props.children;
+        var selectedValue = this.props.selectedValue;
 
         if (selectedValue && selectedValue.length) {
             return selectedValue;
@@ -34,26 +32,21 @@ var ColumnGroup = React.createClass({
     },
     render: function () {
         var _this = this;
-        var prefixCls = this.props.prefixCls;
-        var pickerPrefixCls = this.props.pickerPrefixCls;
-        var indicatorStyle = this.props.indicatorStyle;
         var children = this.props.children;
         var selectedValue = this._getValue();
         var colElements = children.map(function (col, i) {
             return (
-                <div key={col.key || i} className={prefixCls + '-item'}>
+                <div key={col.key || i} className="ucs-datepicker-column-group-item">
                     <Column
-                        indicatorStyle={indicatorStyle}
-                        prefixCls={pickerPrefixCls}
                         selectedValue={selectedValue[i]}
-                        onValueChange={function (value) {_this._onValueChange(value, i);}}
-                        {...col.props}
-                    />
+                        onValueChange={function (value) {_this._onValueChange(value, i);}}>
+                        {col.props.children}
+                    </Column>
                 </div>
             );
         });
         return (
-            <div className={classnames(prefixCls)}>
+            <div className="ucs-datepicker-column-group">
                 {colElements}
             </div>
         );
@@ -61,3 +54,4 @@ var ColumnGroup = React.createClass({
 });
 
 module.exports = ColumnGroup;
+

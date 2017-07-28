@@ -26,7 +26,6 @@ var Column = React.createClass({
 
     getDefaultProps: function () {
         return {
-            prefixCls: 'ucs-datepicker-cascaderpicker',
             pure: true,
             onValueChange: function () {return null;}
         };
@@ -184,8 +183,7 @@ var Column = React.createClass({
             ? this.state.translateY + (this.state.pointEnd - this.state.pointStart)
             : 0;
         var items = this.content.children;
-        //var itemHeight = items[0] && items[0].offsetHeight;
-        var itemHeight = 30;
+        var itemHeight = items[0] && items[0].offsetHeight;
         var maxIndex = Math.abs(items.length - 1);
         var index = Math.round(offset / itemHeight);
 
@@ -203,17 +201,12 @@ var Column = React.createClass({
 
     render: function () {
         var _this = this;
-        var prefixCls = this.props.prefixCls,
-            children = this.props.children,
-            indicatorStyle = this.props.indicatorStyle;
-
+        var children = this.props.children;
         var selectedValue = this.state.selectedValue;
-        var itemClassName = prefixCls + '-item';
-        var selectedItemClassName = itemClassName + ' ' + prefixCls + '-item-selected';
         var items = children.map(function (item) {
             return (
                 <div
-                    className={selectedValue === item.value ? selectedItemClassName : itemClassName}
+                    className={selectedValue === item.value ? 'ucs-datepicker-cascaderpicker-item ucs-datepicker-cascaderpicker-item-selected' : 'ucs-datepicker-cascaderpicker-item'}
                     key={item.value} >
                     {item.label}
                 </div>
@@ -221,12 +214,12 @@ var Column = React.createClass({
         });
         return (
             <div
-                className={prefixCls}
+                className="ucs-datepicker-cascaderpicker"
                 onTouchStart={this._onTouchStart}
                 onTouchMove={this._onTouchMove}
                 onTouchEnd={this._onTouchEnd}>
-                <div className={prefixCls + '-indicator'} ref={function (indicator) {_this.indicator = indicator;}} style={indicatorStyle} />
-                <div className={prefixCls + '-content'} ref={function (content) {_this.content = content;}}>
+                <div className="ucs-datepicker-cascaderpicker-indicator" ref={function (indicator) {_this.indicator = indicator;}} />
+                <div className="ucs-datepicker-cascaderpicker-content" ref={function (content) {_this.content = content;}}>
                     {items}
                 </div>
             </div>
