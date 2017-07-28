@@ -1,0 +1,46 @@
+
+.ucs-numberbox-box{
+  position: relative;
+  width: 240px;
+  height: 30px;
+  .icon{
+    position: absolute;
+    display: inline-block;
+    font-size: 30px;
+    z-index: 3;
+  }
+  .icon-plus {
+    right: 8px;
+    top: 0;
+
+  }
+  .icon-reduce {
+    left: 8px;
+    top: 0;
+  }
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .ucs-number-box {
+    position: absolute;
+    left:0;
+    top:0;
+    width: 173px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 32px;
+  }
+  .textbox{
+    position: absolute;
+    left:0;
+    top:0;
+    display: none;
+    width: 173px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 32px;
+    //background: red;
+  }
+}
