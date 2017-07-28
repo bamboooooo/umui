@@ -16,17 +16,6 @@
 className | 样式类名 | string |无
 id | dom元素id | string | 无
 data | 传入的数据 | Array | [{icon: 'http://imgdemo.png', text: '标题一'}, {icon: 'http://imgdemo.png', text: '标题二'}]
-columnNum | 列数 | number | 4
-renderItem | 自定义每个 grid 条目的创建函数 | function | 
-
----
-
-## 三、方法说明
-### 1.clickHandle(e)
-> 区块点击事件
-
-#### 参数
-- e: 当前点击的事件的event对象
-
-#### 返回值
-- void
+columnNum | 列数 | number | 3
+hasLine | 是否有边框 | boolean | true
+onClick | 项目点击事件 | function | 无
