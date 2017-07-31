@@ -1,0 +1,50 @@
+.ucs-noticeBar{
+  position:relative;
+}
+.ucs-seamless-scroll {
+  background: #fff;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  margin: 0 auto;
+  border-top: 3px solid #f66000;
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  .ucs-seamless-scroll-list {
+    float:left;
+    p{
+      white-space: nowrap;
+    }
+  }
+  ul {
+    li {
+      width: auto;
+      float: left;
+      margin: 0 10px;
+      white-space: nowrap;
+    }
+  }
+  .ucs-showClose{
+    position:absolute;
+    display:inline-block;
+    background:rgba(144, 144, 144, .3);;
+    width:20px;
+    height:20px;
+    line-height:20px;
+    text-align:center;
+    border-radius:50%;
+    top: 50%;
+    right: 2%;
+    font-size: 24px;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    transform:translate(-50%,-50%);
+  }
+
+  @at-root .ucs-seamless-scroll-in {
+    height:100%;
+    @at-root .ucs-seamless-scroll ul {
+      line-height: 30px;
+    }
+  }
+}

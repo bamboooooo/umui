@@ -312,6 +312,118 @@ table {
 .hairline-remove-left-top:before, .hairline-remove-right-bottom-bak:after, .hairline-remove-right-bottom:after {
   display: none; }
 
+.ucs-datepicker-placeholder {
+  font-size: .5rem;
+  color: #a9a9a9; }
+
+.ucs-datepicker-text {
+  font-size: .5rem;
+  color: #333; }
+
+.ucs-datepicker-disabled {
+  color: #a9a9a9; }
+
+.ucs-datepicker {
+  z-index: 1500; }
+
+.ucs-datepicker-hidden .ucs-datepicker-mask {
+  display: none;
+  background: transparent; }
+
+.ucs-datepicker-hidden .ucs-datepicker-inner {
+  transform: translate(0, 100%); }
+
+.ucs-datepicker-mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transition: background .3s;
+  background: rgba(0, 0, 0, 0.4);
+  -webkit-overflow-scrolling: touch;
+  user-select: none;
+  z-index: 1501; }
+
+.ucs-datepicker-inner {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  transform: translate(0, 0);
+  transition: transform .3s;
+  z-index: 1502; }
+
+.ucs-datepicker-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #f2f2f2;
+  width: 100%;
+  font-size: .5rem;
+  height: 1.12rem;
+  line-height: 1.12rem; }
+  .ucs-datepicker-header .ucs-datepicker-cancel,
+  .ucs-datepicker-header .ucs-datepicker-submit {
+    flex: 1;
+    padding: 0 0.6rem;
+    cursor: pointer; }
+  .ucs-datepicker-header .ucs-datepicker-cancel {
+    font-size: .5rem;
+    color: #a9a9a9; }
+  .ucs-datepicker-header .ucs-datepicker-submit {
+    font-size: .5rem;
+    text-align: right;
+    color: #01c1f5; }
+
+.ucs-datepicker-mask-top {
+  -webkit-mask: -webkit-gradient(linear, 0% 40%, 0% 0%, from(#debb47), to(rgba(36, 142, 36, 0))); }
+
+.ucs-datepicker-mask-bottom {
+  -webkit-mask: -webkit-gradient(linear, 0% 60%, 0% 100%, from(#debb47), to(rgba(36, 142, 36, 0))); }
+
+.ucs-datepicker-cascaderpicker {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  height: 210px;
+  width: 100%; }
+  .ucs-datepicker-cascaderpicker-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    padding: 90px 0; }
+  .ucs-datepicker-cascaderpicker-item {
+    text-align: center;
+    font-size: 0.6rem;
+    line-height: 30px;
+    height: 30px;
+    color: #000;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden; }
+  .ucs-datepicker-cascaderpicker-indicator {
+    right: 0;
+    position: absolute;
+    left: 0;
+    top: 90px;
+    height: 30px;
+    z-index: 3;
+    background-image: -webkit-linear-gradient(top, #d0d0d0, #d0d0d0, transparent, transparent), -webkit-linear-gradient(bottom, #d0d0d0, #d0d0d0, transparent, transparent);
+    background-image: linear-gradient(to bottom, #d0d0d0, #d0d0d0, transparent, transparent), linear-gradient(to top, #d0d0d0, #d0d0d0, transparent, transparent);
+    background-position: top, bottom;
+    background-size: 100% 1px;
+    background-repeat: no-repeat; }
+
+.ucs-datepicker-column-group {
+  display: flex;
+  align-items: center; }
+  .ucs-datepicker-column-group-item {
+    flex: 1;
+    text-align: center; }
+
 .ucs-password-box {
   position: relative;
   background-color: #fff;
@@ -525,28 +637,25 @@ table {
 .ring-wrap {
   position: relative;
   border-radius: 50%; }
-
-.ring-circle, .ring-percent {
-  position: absolute;
-  border-radius: 50%;
-  box-sizing: border-box; }
-
-.clip-auto {
-  clip: rect(auto, auto, auto, auto); }
-
-.left {
-  transition: transform ease; }
-
-.wth0 {
-  width: 0; }
-
-.ring-num {
-  position: absolute;
-  box-sizing: border-box;
-  text-align: center;
-  border-radius: 50%;
-  background-color: #fff;
-  z-index: 1; }
+  .ring-wrap .ring-circle, .ring-wrap .ring-percent {
+    position: absolute;
+    border-radius: 50%;
+    box-sizing: border-box; }
+  .ring-wrap .ring-circle.clip-auto {
+    clip: rect(auto, auto, auto, auto); }
+  .ring-wrap .ring-percent .left {
+    transition: transform ease; }
+  .ring-wrap .ring-percent .right .wth0 {
+    width: 0; }
+  .ring-wrap .ring-info {
+    position: absolute;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #fff;
+    z-index: 1; }
+    .ring-wrap .ring-info .num-info i {
+      font-style: normal; }
 
 .line-wrap {
   position: relative;
@@ -557,5 +666,133 @@ table {
       position: absolute;
       left: 0;
       top: 0; }
-    .line-wrap .line-bg .line-num {
+    .line-wrap .line-bg .line-info {
       position: absolute; }
+      .line-wrap .line-bg .line-info .num-info i {
+        font-style: normal; }
+
+.ucs-noticeBar {
+  position: relative; }
+
+.ucs-seamless-scroll {
+  background: #fff;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  margin: 0 auto;
+  border-top: 3px solid #f66000;
+  width: 100%;
+  height: auto;
+  padding: 10px; }
+  .ucs-seamless-scroll .ucs-seamless-scroll-list {
+    float: left; }
+    .ucs-seamless-scroll .ucs-seamless-scroll-list p {
+      white-space: nowrap; }
+  .ucs-seamless-scroll ul li {
+    width: auto;
+    float: left;
+    margin: 0 10px;
+    white-space: nowrap; }
+  .ucs-seamless-scroll .ucs-showClose {
+    position: absolute;
+    display: inline-block;
+    background: rgba(144, 144, 144, 0.3);
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    top: 50%;
+    right: 2%;
+    font-size: 24px;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+  .ucs-seamless-scroll-in {
+    height: 100%; }
+    .ucs-seamless-scroll ul {
+      line-height: 30px; }
+
+.ucs-switch {
+  width: 1.6rem;
+  height: 0.8rem;
+  display: inline-block;
+  background: #ccc;
+  box-sizing: border-box;
+  position: relative;
+  cursor: pointer;
+  border-radius: 1rem;
+  vertical-align: middle;
+  border: 1px solid #ccc; }
+
+.ucs-switch-inner {
+  width: 98%;
+  height: 98%;
+  position: absolute;
+  border-radius: 1rem;
+  background: #ffffff;
+  z-index: 0;
+  margin: 0;
+  padding: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+  display: inline-block; }
+
+.ucs-switch-inner:before, .ucs-switch-inner:after {
+  content: " ";
+  position: absolute;
+  left: 0rem;
+  top: 0rem;
+  height: 100%;
+  border-radius: 1rem;
+  background: #fff;
+  -webkit-transition: all .2s;
+  transition: all .2s; }
+
+.ucs-switch-inner:before {
+  width: 94%;
+  box-sizing: border-box;
+  z-index: 1;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1); }
+
+.ucs-switch-inner:after {
+  width: 50%;
+  z-index: 2;
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
+  box-shadow: 0.04rem 0.04rem 0.08rem rgba(0, 0, 0, 0.21); }
+
+.am-switch-checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  border: 0 none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
+
+.ucs-switch.ucs-switch-on .ucs-switch-inner {
+  background: #4dd865; }
+
+.ucs-switch.ucs-switch-disabled .ucs-switch-inner {
+  opacity: .3; }
+
+.ucs-switch.ucs-switch-on .ucs-switch-inner:after {
+  -webkit-transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  transform: translateX(100%); }
+
+.ucs-switch.ucs-switch-on .ucs-switch-inner:before {
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0); }
