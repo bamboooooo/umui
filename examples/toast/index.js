@@ -63,10 +63,88 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 97);
+/******/ 	return __webpack_require__(__webpack_require__.s = 101);
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ 101:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * 创建人：DuHuiling
+ * 创建时间：2017/7/17
+ * 说明：
+ */
+var Toast = __webpack_require__(81);
+var Root = React.createClass({
+    displayName: "Root",
+
+    componentDidMount: function componentDidMount() {},
+    _toast1: function _toast1() {
+        Toast.success({
+            content: "默认有mask,3秒消失"
+        });
+    },
+    _toast2: function _toast2() {
+        Toast.success({
+            content: "mask:false",
+            mask: false
+        });
+    },
+    _toast3: function _toast3() {
+        Toast.success({
+            content: "duration:5000",
+            duration: 5000
+        });
+    },
+    _toast4: function _toast4() {
+        Toast.success({
+            content: "onClose()回调函数",
+            onClose: function onClose() {
+                console.log("onClose()触发了");
+            }
+        });
+    },
+    render: function render() {
+        return React.createElement(
+            "div",
+            null,
+            React.createElement(
+                "button",
+                { onClick: this._toast1 },
+                "\u9ED8\u8BA4\u7684Toast"
+            ),
+            React.createElement("br", null),
+            React.createElement("br", null),
+            React.createElement(
+                "button",
+                { onClick: this._toast2 },
+                "mask:false\u7684Toast"
+            ),
+            React.createElement("br", null),
+            React.createElement("br", null),
+            React.createElement(
+                "button",
+                { onClick: this._toast3 },
+                "duration:5000\u7684Toast"
+            ),
+            React.createElement("br", null),
+            React.createElement("br", null),
+            React.createElement(
+                "button",
+                { onClick: this._toast4 },
+                "\u6709onClose()\u7684Toast"
+            )
+        );
+    }
+});
+ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
+
+/***/ }),
 
 /***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
@@ -124,7 +202,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 80:
+/***/ 81:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -138,64 +216,79 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * 2. 轻量级反馈/提示，可以用来显示不会打断用户操作的内容
  */
 var classnames = __webpack_require__(3);
-var Toast = React.createClass({
-    displayName: 'Toast',
+var Toast = function () {
+    var msgArea = document.createElement('div');
 
-    getDefaultProps: function getDefaultProps() {
-        return {
-            content: null,
-            duration: 3000,
-            mask: true,
-            onClose: null
-        };
-    },
-    getInitialState: function getInitialState() {
-        return {
-            hide: false
-        };
-    },
-    render: function render() {
-        var _class = classnames('ucs-toast', { 'ucs-hide': this.state.hide }, this.props.className);
-        return React.createElement(
-            'div',
-            { className: _class },
-            '1234564',
-            React.createElement('br', null),
-            '1111111'
-        );
-    }
-});
+    var ToastItem = React.createClass({
+        displayName: 'ToastItem',
+
+        getDefaultProps: function getDefaultProps() {
+            return {
+                content: null,
+                duration: 3000,
+                mask: true,
+                onClose: null
+            };
+        },
+        getInitialState: function getInitialState() {
+            return {
+                hide: false,
+                content: this.props.content,
+                duration: this.props.duration,
+                mask: this.props.mask,
+                onClose: this.props.onClose
+            };
+        },
+        _toDisappear: function _toDisappear() {
+            var _this = this;
+            if (this._disappear) {
+                clearTimeout(this._disappear);
+            }
+            this._disappear = setTimeout(function () {
+                document.body.removeChild(msgArea);
+                _this.props.onClose && _this.props.onClose();
+            }, 3000);
+        },
+        componentDidMount: function componentDidMount() {
+            this._toDisappear();
+        },
+        componentDidUpdate: function componentDidUpdate() {
+            this._toDisappear();
+        },
+        render: function render() {
+            var _class = classnames('ucs-toast', this.props.className, { 'ucs-toast-nomask': !this.state.mask });
+            document.body.appendChild(msgArea);
+
+            return React.createElement(
+                'div',
+                { className: _class },
+                React.createElement(
+                    'div',
+                    { className: 'ucs-toast-content' },
+                    this.props.content
+                )
+            );
+        }
+    });
+    return {
+        /*hide: function () {
+            document.body.removeChild(msgArea);
+        },*/
+        success: function success(obj) {
+            ReactDOM.render(React.createElement(ToastItem, { className: 'toast-success', content: obj.content, duration: obj.duration, mask: obj.mask, onClose: obj.onClose }), msgArea);
+        },
+        fail: function fail(obj) {
+            ReactDOM.render(React.createElement(ToastItem, { className: 'toast-fail', content: obj.content, duration: obj.duration, mask: obj.mask, onClose: obj.onClose }), msgArea);
+        },
+        info: function info(obj) {
+            ReactDOM.render(React.createElement(ToastItem, { className: 'toast-info', content: obj.content, duration: obj.duration, mask: obj.mask, onClose: obj.onClose }), msgArea);
+        },
+        warning: function warning(obj) {
+            ReactDOM.render(React.createElement(ToastItem, { className: 'toast-warning', content: obj.content, duration: obj.duration, mask: obj.mask, onClose: obj.onClose }), msgArea);
+        }
+    };
+}();
 module.exports = Toast;
-
-/***/ }),
-
-/***/ 97:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * 创建人：DuHuiling
- * 创建时间：2017/7/17
- * 说明：
- */
-var Toast = __webpack_require__(80);
-var Root = React.createClass({
-    displayName: 'Root',
-
-    render: function render() {
-        return React.createElement(
-            'div',
-            null,
-            React.createElement(Toast, { className: 'error' }),
-            React.createElement(Toast, { className: 'success' }),
-            React.createElement(Toast, { className: 'warning' }),
-            React.createElement(Toast, { className: 'info' })
-        );
-    }
-});
-ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
 
 /***/ })
 
