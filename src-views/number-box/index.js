@@ -3,7 +3,7 @@ var Root = React.createClass({
     getDefaultProps: function () {
         return {
             id: '1',
-            name: 'numberbox',
+            name: 'numberbo1x',
             max: 100,
             min: 3,
             step: 10,
@@ -27,7 +27,7 @@ var Root = React.createClass({
             <div>
                 <p>重置组件的值</p>
                 <Numberbox ref="numberbox" {...this.props} />
-                <input type = "button" value="reset" onClick={this.clickHandle} className="btn"/>
+                <input type = "button" value="reset" onClick={this.clickHandle} className="btn" />
                 <br/>
                 <p>禁用</p>
                 <Numberbox ref="numberbox1" {...this.props}/>

@@ -14,11 +14,11 @@ var Numberbox = React.createClass({
     },
     getInitialState: function () {
         return {
-            value: 0,
+            value: this.props.defaultValue ? this.props.defaultValue : 0,
             className: classnames('ucs-number-box', this.props.className),
             disabled: this.props.disabled ? this.props.disabled : false,
-            formalValue: 0,
-            formatterValue: ''
+            formalValue: this.props.defaultValue ? this.props.defaultValue : 0,
+            formatterValue: this.props.formatter ? this.props.formatter(this.props.defaultValue) : ''
         };
     },
     setValue: function (v) {
@@ -69,7 +69,7 @@ var Numberbox = React.createClass({
             }
         }
         if (c === '') {
-          c = 0;
+            c = 0;
         }
         this.setValue(c);
         this._setformalValue(c);
@@ -94,9 +94,7 @@ var Numberbox = React.createClass({
                     formatterValue: v
                 });
             }
-
         }
-
     },
 
     _setformalValue: function (v) {
@@ -108,7 +106,9 @@ var Numberbox = React.createClass({
         if (this.state.formatterValue === '') {
             this.setValue('0');
         } else {
-            this.setValue(this.state.formatterValue);
+            this.setState({
+                value:this.state.formatterValue
+            })
         }
         this.props.onBlur && this.props.onBlur();
     },

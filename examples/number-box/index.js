@@ -83,7 +83,7 @@ var Root = React.createClass({
     getDefaultProps: function getDefaultProps() {
         return {
             id: '1',
-            name: 'numberbox',
+            name: 'numberbo1x',
             max: 100,
             min: 3,
             step: 10,
@@ -215,11 +215,11 @@ var Numberbox = React.createClass({
     },
     getInitialState: function getInitialState() {
         return {
-            value: 0,
+            value: this.props.defaultValue ? this.props.defaultValue : 0,
             className: classnames('ucs-number-box', this.props.className),
             disabled: this.props.disabled ? this.props.disabled : false,
-            formalValue: 0,
-            formatterValue: ''
+            formalValue: this.props.defaultValue ? this.props.defaultValue : 0,
+            formatterValue: this.props.formatter ? this.props.formatter(this.props.defaultValue) : ''
         };
     },
     setValue: function setValue(v) {
@@ -307,7 +307,9 @@ var Numberbox = React.createClass({
         if (this.state.formatterValue === '') {
             this.setValue('0');
         } else {
-            this.setValue(this.state.formatterValue);
+            this.setState({
+                value: this.state.formatterValue
+            });
         }
         this.props.onBlur && this.props.onBlur();
     },
