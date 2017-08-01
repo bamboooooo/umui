@@ -25,7 +25,7 @@ onClose | 关闭之后的回调事件 | function | 无
 ### 1.Toast.success(obj)
 ### 2.Toast.fail(obj)
 ### 3.Toast.info(obj)
-### 4.Toast.loading(obj)
+### 4.Toast.warning(obj)
 > 调用成功/失败/信息/加载的Toast
 
 #### 参数
