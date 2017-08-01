@@ -11,19 +11,19 @@ var Root = React.createClass({
         });
     },
     _toast2: function () {
-        Toast.success({
+        Toast.fail({
             content: 'mask:false',
             mask: false
         });
     },
     _toast3: function () {
-        Toast.success({
+        Toast.info({
             content: 'duration:5000',
             duration: 5000
         });
     },
     _toast4: function () {
-        Toast.success({
+        Toast.warning({
             content: 'onClose()回调函数',
             onClose: function () {
                 console.log('onClose()触发了');

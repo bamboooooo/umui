@@ -6,6 +6,7 @@
  * 2. 轻量级反馈/提示，可以用来显示不会打断用户操作的内容
  */
 var classnames = require('classnames');
+
 var Toast = (function () {
     var msgArea = document.createElement('div');
 
@@ -47,23 +48,28 @@ var Toast = (function () {
             document.body.appendChild(msgArea);
             return (
                 <div className={_class}>
-                    <div className="ucs-toast-content">{this.props.content}</div>
+                    <div className="ucs-toast-content">
+                        {this.props.type !== 'info'
+                            ? <i className={'iconfont icon-' + this.props.type}></i> : ''
+                        }
+                        <p>{this.props.content}</p>
+                    </div>
                 </div>
             );
         }
     });
     return {
         success: function (obj) {
-            ReactDOM.render(<ToastItem className="toast-success" content={obj.content} duration={obj.duration} mask={obj.mask} onClose={obj.onClose}/>, msgArea);
+            ReactDOM.render(<ToastItem type="success" className="toast-success" content={obj.content} duration={obj.duration} mask={obj.mask} onClose={obj.onClose}/>, msgArea);
         },
         fail: function (obj) {
-            ReactDOM.render(<ToastItem className="toast-fail" content={obj.content} duration={obj.duration} mask={obj.mask} onClose={obj.onClose}/>, msgArea);
+            ReactDOM.render(<ToastItem type="fail" className="toast-fail" content={obj.content} duration={obj.duration} mask={obj.mask} onClose={obj.onClose}/>, msgArea);
         },
         info: function (obj) {
-            ReactDOM.render(<ToastItem className="toast-info" content={obj.content} duration={obj.duration} mask={obj.mask} onClose={obj.onClose}/>, msgArea);
+            ReactDOM.render(<ToastItem type="info" className="toast-info" content={obj.content} duration={obj.duration} mask={obj.mask} onClose={obj.onClose}/>, msgArea);
         },
         warning: function (obj) {
-            ReactDOM.render(<ToastItem className="toast-warning" content={obj.content} duration={obj.duration} mask={obj.mask} onClose={obj.onClose}/>, msgArea);
+            ReactDOM.render(<ToastItem type="warning" className="toast-warning" content={obj.content} duration={obj.duration} mask={obj.mask} onClose={obj.onClose}/>, msgArea);
         }
     };
 })();

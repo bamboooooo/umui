@@ -63,12 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 107);
+/******/ 	return __webpack_require__(__webpack_require__.s = 109);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 107:
+/***/ 109:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -89,19 +89,19 @@ var Root = React.createClass({
         });
     },
     _toast2: function _toast2() {
-        Toast.success({
+        Toast.fail({
             content: 'mask:false',
             mask: false
         });
     },
     _toast3: function _toast3() {
-        Toast.success({
+        Toast.info({
             content: 'duration:5000',
             duration: 5000
         });
     },
     _toast4: function _toast4() {
-        Toast.success({
+        Toast.warning({
             content: 'onClose()回调函数',
             onClose: function onClose() {
                 console.log('onClose()触发了');
@@ -215,6 +215,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * 2. 轻量级反馈/提示，可以用来显示不会打断用户操作的内容
  */
 var classnames = __webpack_require__(2);
+
 var Toast = function () {
     var msgArea = document.createElement('div');
 
@@ -262,23 +263,28 @@ var Toast = function () {
                 React.createElement(
                     'div',
                     { className: 'ucs-toast-content' },
-                    this.props.content
+                    this.props.type !== 'info' ? React.createElement('i', { className: 'iconfont icon-' + this.props.type }) : '',
+                    React.createElement(
+                        'p',
+                        null,
+                        this.props.content
+                    )
                 )
             );
         }
     });
     return {
         success: function success(obj) {
-            ReactDOM.render(React.createElement(ToastItem, { className: 'toast-success', content: obj.content, duration: obj.duration, mask: obj.mask, onClose: obj.onClose }), msgArea);
+            ReactDOM.render(React.createElement(ToastItem, { type: 'success', className: 'toast-success', content: obj.content, duration: obj.duration, mask: obj.mask, onClose: obj.onClose }), msgArea);
         },
         fail: function fail(obj) {
-            ReactDOM.render(React.createElement(ToastItem, { className: 'toast-fail', content: obj.content, duration: obj.duration, mask: obj.mask, onClose: obj.onClose }), msgArea);
+            ReactDOM.render(React.createElement(ToastItem, { type: 'fail', className: 'toast-fail', content: obj.content, duration: obj.duration, mask: obj.mask, onClose: obj.onClose }), msgArea);
         },
         info: function info(obj) {
-            ReactDOM.render(React.createElement(ToastItem, { className: 'toast-info', content: obj.content, duration: obj.duration, mask: obj.mask, onClose: obj.onClose }), msgArea);
+            ReactDOM.render(React.createElement(ToastItem, { type: 'info', className: 'toast-info', content: obj.content, duration: obj.duration, mask: obj.mask, onClose: obj.onClose }), msgArea);
         },
         warning: function warning(obj) {
-            ReactDOM.render(React.createElement(ToastItem, { className: 'toast-warning', content: obj.content, duration: obj.duration, mask: obj.mask, onClose: obj.onClose }), msgArea);
+            ReactDOM.render(React.createElement(ToastItem, { type: 'warning', className: 'toast-warning', content: obj.content, duration: obj.duration, mask: obj.mask, onClose: obj.onClose }), msgArea);
         }
     };
 }();

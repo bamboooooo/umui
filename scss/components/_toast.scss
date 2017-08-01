@@ -3,8 +3,6 @@
 .ucs-toast{
   position: fixed;
   top: 0;
-  //right: 0;
-  //bottom: 0;
   left: 0;
   z-index: 999;
   width: 100%;
@@ -36,14 +34,43 @@
       transform: translateX(-50%) translateY(-50%);
     }
   }
+  i{
+    font-size: 30px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    margin-bottom: 10px;
+  }
   &.toast-success{
-
+    i:before {
+      content: "\e665";
+    }
+    i{
+      color: #4ca40b;
+    }
+  }
+  &.toast-fail{
+    i:before {
+      content: "\e665";
+    }
+    i{
+      color: #a41815;
+    }
+  }
+  &.toast-warning{
+    i:before {
+      content: "\e665";
+    }
+    i{
+      color: #a4a423;
+    }
   }
   .ucs-toast-content{
     max-width: 80%;
     padding: 10px 20px;
     border-radius: 5px;
     -webkit-border-radius: 5px;
+    text-align: center;
     font-size: 16px;
     color: #fff;
     background: rgba(58, 58, 58, .9);
