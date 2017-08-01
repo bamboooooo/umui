@@ -63,12 +63,79 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 96);
+/******/ 	return __webpack_require__(__webpack_require__.s = 105);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 3:
+/***/ 105:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var Numberbox = __webpack_require__(82);
+var Root = React.createClass({
+    displayName: 'Root',
+
+    getDefaultProps: function getDefaultProps() {
+        return {
+            id: '1',
+            name: 'numberbox',
+            max: 100,
+            min: 3,
+            step: 10,
+            onChange: function onChange() {
+                console.log(1);
+            },
+            defaultValue: '100',
+            formatter: function formatter(v) {
+                return v + '.00';
+            }
+        };
+    },
+    clickHandle: function clickHandle(e) {
+        this.refs.numberbox.reset();
+    },
+    clickHandle1: function clickHandle1(e) {
+        this.refs.numberbox1.setDisabled(true);
+    },
+    render: function render() {
+        return React.createElement(
+            'div',
+            null,
+            React.createElement(
+                'p',
+                null,
+                '\u91CD\u7F6E\u7EC4\u4EF6\u7684\u503C'
+            ),
+            React.createElement(Numberbox, _extends({ ref: 'numberbox' }, this.props)),
+            React.createElement('input', { type: 'button', value: 'reset', onClick: this.clickHandle, className: 'btn' }),
+            React.createElement('br', null),
+            React.createElement(
+                'p',
+                null,
+                '\u7981\u7528'
+            ),
+            React.createElement(Numberbox, _extends({ ref: 'numberbox1' }, this.props)),
+            React.createElement('input', { type: 'button', value: 'disabled', onClick: this.clickHandle1, className: 'btn' }),
+            React.createElement('br', null),
+            React.createElement(
+                'p',
+                null,
+                '\u6B63\u5E38\u4F7F\u7528'
+            ),
+            React.createElement(Numberbox, _extends({ ref: 'numberbox2' }, this.props))
+        );
+    }
+});
+ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
+
+/***/ }),
+
+/***/ 2:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -124,13 +191,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 80:
+/***/ 82:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var classnames = __webpack_require__(3);
+var classnames = __webpack_require__(2);
 var Numberbox = React.createClass({
     displayName: 'Numberbox',
 
@@ -157,12 +224,13 @@ var Numberbox = React.createClass({
     },
     setValue: function setValue(v) {
         this.setState({
-            value: v
+            value: v,
+            formalValue: v
         });
     },
 
     getValue: function getValue() {
-        return this.setState.value;
+        return this.state.formalValue;
     },
     setDisabled: function setDisabled(v) {
         if (v) {
@@ -181,7 +249,6 @@ var Numberbox = React.createClass({
         this.setValue('');
     },
     reset: function reset() {
-        console.log('reset');
         if (this.props.defaultValue) {
             this.setValue(this.props.defaultValue);
             this._setformalValue(this.props.defaultValue);
@@ -203,10 +270,14 @@ var Numberbox = React.createClass({
             }
         }
         if (c === '') {
-            this._setFormatValue('0');
+            c = 0;
         }
         this.setValue(c);
         this._setformalValue(c);
+        this._setFormatValue(c);
+    },
+    getformatValue: function getformatValue(v) {
+        return this.state.formatterValue;
     },
     _setFormatValue: function _setFormatValue(v) {
         if (v === 0 && v === '') {
@@ -214,15 +285,19 @@ var Numberbox = React.createClass({
                 formatterValue: '0'
             });
         } else {
-            var formatterVal = this.props.formatter(v);
-            this.setState({
-                formatterValue: formatterVal
-            });
+            if (this.props.formatter) {
+                var formatterVal = this.props.formatter(v);
+                this.setState({
+                    formatterValue: formatterVal
+                });
+            } else {
+                this.setState({
+                    formatterValue: v
+                });
+            }
         }
     },
-    getformalValue: function getformalValue(v) {
-        return this.state.formatterValue;
-    },
+
     _setformalValue: function _setformalValue(v) {
         this.setState({
             formalValue: v
@@ -234,6 +309,7 @@ var Numberbox = React.createClass({
         } else {
             this.setValue(this.state.formatterValue);
         }
+        this.props.onBlur && this.props.onBlur();
     },
     _focusHandle: function _focusHandle() {
         this.setValue(this.state.formalValue);
@@ -302,73 +378,6 @@ var Numberbox = React.createClass({
     }
 });
 module.exports = Numberbox;
-
-/***/ }),
-
-/***/ 96:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var Numberbox = __webpack_require__(80);
-var Root = React.createClass({
-    displayName: 'Root',
-
-    getDefaultProps: function getDefaultProps() {
-        return {
-            id: '1',
-            name: 'numberbox',
-            max: 100,
-            min: 3,
-            step: 10,
-            onChange: function onChange() {
-                console.log(1);
-            },
-            defaultValue: '100',
-            formatter: function formatter(v) {
-                return v + '.00';
-            }
-        };
-    },
-    clickHandle: function clickHandle(e) {
-        this.refs.numberbox.reset();
-    },
-    clickHandle1: function clickHandle1(e) {
-        this.refs.numberbox1.setDisabled(true);
-    },
-    render: function render() {
-        return React.createElement(
-            'div',
-            null,
-            React.createElement(
-                'p',
-                null,
-                '\u91CD\u7F6E\u7EC4\u4EF6\u7684\u503C'
-            ),
-            React.createElement(Numberbox, _extends({ ref: 'numberbox' }, this.props)),
-            React.createElement('input', { type: 'button', value: 'reset', onClick: this.clickHandle, className: 'btn' }),
-            React.createElement('br', null),
-            React.createElement(
-                'p',
-                null,
-                '\u7981\u7528'
-            ),
-            React.createElement(Numberbox, _extends({ ref: 'numberbox1' }, this.props)),
-            React.createElement('input', { type: 'button', value: 'disabled', onClick: this.clickHandle1, className: 'btn' }),
-            React.createElement('br', null),
-            React.createElement(
-                'p',
-                null,
-                '\u6B63\u5E38\u4F7F\u7528'
-            ),
-            React.createElement(Numberbox, _extends({ ref: 'numberbox2' }, this.props))
-        );
-    }
-});
-ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
 
 /***/ })
 

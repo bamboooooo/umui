@@ -23,12 +23,14 @@ var Numberbox = React.createClass({
     },
     setValue: function (v) {
         this.setState({
-            value: v
+            value: v,
+            formalValue: v
         });
+
     },
 
     getValue: function () {
-        return this.setState.value;
+        return this.state.formalValue;
     },
     setDisabled: function (v) {
         if (v) {
@@ -47,7 +49,6 @@ var Numberbox = React.createClass({
         this.setValue('');
     },
     reset: function () {
-        console.log('reset');
         if (this.props.defaultValue) {
             this.setValue(this.props.defaultValue);
             this._setformalValue(this.props.defaultValue);
@@ -68,10 +69,14 @@ var Numberbox = React.createClass({
             }
         }
         if (c === '') {
-            this._setFormatValue('0');
+          c = 0;
         }
         this.setValue(c);
         this._setformalValue(c);
+        this._setFormatValue(c);
+    },
+    getformatValue: function (v) {
+        return this.state.formatterValue;
     },
     _setFormatValue: function (v) {
         if (v === 0 && v === '') {
@@ -79,16 +84,21 @@ var Numberbox = React.createClass({
                 formatterValue: '0'
             });
         } else {
-            var formatterVal = this.props.formatter(v);
-            this.setState({
-                formatterValue: formatterVal
-            });
+            if (this.props.formatter) {
+                var formatterVal = this.props.formatter(v);
+                this.setState({
+                    formatterValue: formatterVal
+                });
+            } else {
+                this.setState({
+                    formatterValue: v
+                });
+            }
+
         }
 
     },
-    getformalValue: function (v) {
-        return this.state.formatterValue;
-    },
+
     _setformalValue: function (v) {
         this.setState({
             formalValue: v
@@ -100,13 +110,14 @@ var Numberbox = React.createClass({
         } else {
             this.setValue(this.state.formatterValue);
         }
+        this.props.onBlur && this.props.onBlur();
     },
     _focusHandle: function () {
         this.setValue(this.state.formalValue);
         this.props.onFocus && this.props.onFocus();
     },
     _plusHandle: function () {
-        if(this.state.disabled){
+        if (this.state.disabled) {
             return false;
         }
         this.refs.numberbox.focus();
@@ -128,7 +139,7 @@ var Numberbox = React.createClass({
         }
     },
     _reduceHandle: function () {
-        if(this.state.disabled){
+        if (this.state.disabled) {
             return false;
         }
         this.refs.numberbox.focus();
