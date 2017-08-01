@@ -22,29 +22,20 @@ onClose | 关闭之后的回调事件 | function | 无
 
 ## 三、方法说明
 
-### 1.Toast.success(content,duration,mask,onClose)
+### 1.Toast.success(obj)
 ### 2.Toast.fail(content,duration,mask,onClose)
 ### 3.Toast.info(content,duration,mask,onClose)
 ### 4.Toast.loading(content,duration,mask,onClose)
 > 调用成功/失败/信息/加载的Toast
 
 #### 参数
-- content: 对应props参数
-- duration: 对应props参数
-- mask: 对应props参数
-- onClose: 对应props参数 
+- obj:{
+        content: 对应props参数
+        duration: 对应props参数
+        mask: 对应props参数
+        onClose: 对应props参数
+    }
 
 #### 返回值
 - void
 
-
-> 注： duration = 0 时，onClose 无效，toast 不会消失；隐藏 toast 需要手动调用 hide
-
-### 5.Toast.hide()
-> 手动关闭Toast
-
-#### 参数
-- void
-
-#### 返回值
-- void

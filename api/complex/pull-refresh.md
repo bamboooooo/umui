@@ -20,4 +20,11 @@ onRefresh  | 刷新回调函数 | function | 无
 ---
 
 ## 三、方法说明
-无
+### setTips(v)
+> 修改加载中的提示文字
+
+#### 参数
+- v: string
+
+#### 返回值
+void
