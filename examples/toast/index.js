@@ -63,12 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 101);
+/******/ 	return __webpack_require__(__webpack_require__.s = 107);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 101:
+/***/ 107:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -79,65 +79,64 @@
  * 创建时间：2017/7/17
  * 说明：
  */
-var Toast = __webpack_require__(81);
+var Toast = __webpack_require__(84);
 var Root = React.createClass({
-    displayName: "Root",
+    displayName: 'Root',
 
-    componentDidMount: function componentDidMount() {},
     _toast1: function _toast1() {
         Toast.success({
-            content: "默认有mask,3秒消失"
+            content: '默认有mask,3秒消失'
         });
     },
     _toast2: function _toast2() {
         Toast.success({
-            content: "mask:false",
+            content: 'mask:false',
             mask: false
         });
     },
     _toast3: function _toast3() {
         Toast.success({
-            content: "duration:5000",
+            content: 'duration:5000',
             duration: 5000
         });
     },
     _toast4: function _toast4() {
         Toast.success({
-            content: "onClose()回调函数",
+            content: 'onClose()回调函数',
             onClose: function onClose() {
-                console.log("onClose()触发了");
+                console.log('onClose()触发了');
             }
         });
     },
     render: function render() {
         return React.createElement(
-            "div",
+            'div',
             null,
             React.createElement(
-                "button",
+                'button',
                 { onClick: this._toast1 },
-                "\u9ED8\u8BA4\u7684Toast"
+                '\u9ED8\u8BA4\u7684Toast'
             ),
-            React.createElement("br", null),
-            React.createElement("br", null),
+            React.createElement('br', null),
+            React.createElement('br', null),
             React.createElement(
-                "button",
+                'button',
                 { onClick: this._toast2 },
-                "mask:false\u7684Toast"
+                'mask:false\u7684Toast'
             ),
-            React.createElement("br", null),
-            React.createElement("br", null),
+            React.createElement('br', null),
+            React.createElement('br', null),
             React.createElement(
-                "button",
+                'button',
                 { onClick: this._toast3 },
-                "duration:5000\u7684Toast"
+                'duration:5000\u7684Toast'
             ),
-            React.createElement("br", null),
-            React.createElement("br", null),
+            React.createElement('br', null),
+            React.createElement('br', null),
             React.createElement(
-                "button",
+                'button',
                 { onClick: this._toast4 },
-                "\u6709onClose()\u7684Toast"
+                '\u6709onClose()\u7684Toast'
             )
         );
     }
@@ -146,7 +145,7 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'
 
 /***/ }),
 
-/***/ 3:
+/***/ 2:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -202,7 +201,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 81:
+/***/ 84:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -215,7 +214,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * 1. 自动消失弹窗组件
  * 2. 轻量级反馈/提示，可以用来显示不会打断用户操作的内容
  */
-var classnames = __webpack_require__(3);
+var classnames = __webpack_require__(2);
 var Toast = function () {
     var msgArea = document.createElement('div');
 
@@ -232,7 +231,6 @@ var Toast = function () {
         },
         getInitialState: function getInitialState() {
             return {
-                hide: false,
                 content: this.props.content,
                 duration: this.props.duration,
                 mask: this.props.mask,
@@ -256,9 +254,8 @@ var Toast = function () {
             this._toDisappear();
         },
         render: function render() {
-            var _class = classnames('ucs-toast', this.props.className, { 'ucs-toast-nomask': !this.state.mask });
+            var _class = classnames('ucs-toast', this.props.className, { 'ucs-toast-nomask': !this.props.mask });
             document.body.appendChild(msgArea);
-
             return React.createElement(
                 'div',
                 { className: _class },
@@ -271,9 +268,6 @@ var Toast = function () {
         }
     });
     return {
-        /*hide: function () {
-            document.body.removeChild(msgArea);
-        },*/
         success: function success(obj) {
             ReactDOM.render(React.createElement(ToastItem, { className: 'toast-success', content: obj.content, duration: obj.duration, mask: obj.mask, onClose: obj.onClose }), msgArea);
         },

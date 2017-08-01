@@ -20,7 +20,6 @@ var Toast = (function () {
         },
         getInitialState: function () {
             return {
-                hide: false,
                 content: this.props.content,
                 duration: this.props.duration,
                 mask: this.props.mask,
@@ -29,13 +28,13 @@ var Toast = (function () {
         },
         _toDisappear: function () {
             var _this = this;
-            if(this._disappear){
+            if (this._disappear) {
                 clearTimeout(this._disappear);
             }
             this._disappear = setTimeout(function () {
                 document.body.removeChild(msgArea);
                 _this.props.onClose && _this.props.onClose();
-            },3000);
+            }, 3000);
         },
         componentDidMount: function () {
             this._toDisappear();
@@ -44,9 +43,8 @@ var Toast = (function () {
             this._toDisappear();
         },
         render: function () {
-            var _class = classnames('ucs-toast', this.props.className, {'ucs-toast-nomask': !this.state.mask});
+            var _class = classnames('ucs-toast', this.props.className, {'ucs-toast-nomask': !this.props.mask});
             document.body.appendChild(msgArea);
-
             return (
                 <div className={_class}>
                     <div className="ucs-toast-content">{this.props.content}</div>
@@ -55,9 +53,6 @@ var Toast = (function () {
         }
     });
     return {
-        /*hide: function () {
-            document.body.removeChild(msgArea);
-        },*/
         success: function (obj) {
             ReactDOM.render(<ToastItem className="toast-success" content={obj.content} duration={obj.duration} mask={obj.mask} onClose={obj.onClose}/>, msgArea);
         },

@@ -5,31 +5,28 @@
  */
 var Toast = require('../../src/base/toast');
 var Root = React.createClass({
-    componentDidMount: function () {
-
-    },
     _toast1: function () {
         Toast.success({
-            content: "默认有mask,3秒消失"
+            content: '默认有mask,3秒消失'
         });
     },
     _toast2: function () {
         Toast.success({
-            content: "mask:false",
+            content: 'mask:false',
             mask: false
         });
     },
     _toast3: function () {
         Toast.success({
-            content: "duration:5000",
+            content: 'duration:5000',
             duration: 5000
         });
     },
     _toast4: function () {
         Toast.success({
-            content: "onClose()回调函数",
+            content: 'onClose()回调函数',
             onClose: function () {
-                console.log("onClose()触发了");
+                console.log('onClose()触发了');
             }
         });
     },
