@@ -63,10 +63,51 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 97);
+/******/ 	return __webpack_require__(__webpack_require__.s = 106);
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ 106:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Progress = __webpack_require__(80);
+var Root = React.createClass({
+    displayName: 'Root',
+
+    setValue: function setValue() {
+        this.refs.myProgress.setValue(60);
+    },
+    render: function render() {
+        return React.createElement(
+            'div',
+            null,
+            React.createElement(Progress, { radius: 50, border: 4, color: ['orange', '#f00', '#000'], value: 30 }),
+            React.createElement(Progress, { radius: 100, border: 6, color: ['#ccc', '#0f0', '#000'], value: 80 }),
+            React.createElement(
+                Progress,
+                { radius: 200, color: ['#ccc', '#00f', '#999'], value: 100, ref: 'myProgress', className: 'myProgress' },
+                React.createElement(
+                    'div',
+                    { className: 'full', style: { width: '100%', height: '30px', lineHeight: '30px', position: 'absolute', left: '0', bottom: '45px', fontSize: '30px', color: '#999' } },
+                    '\u6EE1\u6807'
+                )
+            ),
+            React.createElement(
+                'button',
+                { onClick: this.setValue },
+                '\u8BBE\u503C60%'
+            ),
+            React.createElement(Progress, { type: 'line', color: ['#ccc', 'orange', 'orange'], value: 80 })
+        );
+    }
+});
+ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
+
+/***/ }),
 
 /***/ 2:
 /***/ (function(module, exports, __webpack_require__) {
@@ -124,7 +165,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 77:
+/***/ 80:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -374,47 +415,6 @@ var Progress = React.createClass({
     }
 });
 module.exports = Progress;
-
-/***/ }),
-
-/***/ 97:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Progress = __webpack_require__(77);
-var Root = React.createClass({
-    displayName: 'Root',
-
-    setValue: function setValue() {
-        this.refs.myProgress.setValue(60);
-    },
-    render: function render() {
-        return React.createElement(
-            'div',
-            null,
-            React.createElement(Progress, { radius: 50, border: 4, color: ['orange', '#f00', '#000'], value: 30 }),
-            React.createElement(Progress, { radius: 100, border: 6, color: ['#ccc', '#0f0', '#000'], value: 80 }),
-            React.createElement(
-                Progress,
-                { radius: 200, color: ['#ccc', '#00f', '#999'], value: 100, ref: 'myProgress', className: 'myProgress' },
-                React.createElement(
-                    'div',
-                    { className: 'full', style: { width: '100%', height: '30px', lineHeight: '30px', position: 'absolute', left: '0', bottom: '45px', fontSize: '30px', color: '#999' } },
-                    '\u6EE1\u6807'
-                )
-            ),
-            React.createElement(
-                'button',
-                { onClick: this.setValue },
-                '\u8BBE\u503C60%'
-            ),
-            React.createElement(Progress, { type: 'line', color: ['#ccc', 'orange', 'orange'], value: 80 })
-        );
-    }
-});
-ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
 
 /***/ })
 
