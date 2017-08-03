@@ -19,35 +19,95 @@ var Root = React.createClass({
                         visible={false}
                         placement={'bottomLeft'}
                         overlay={[
-                            (<Item key="4" value="scan" icon={'1'} onSelect={this.onSelect}>扫一扫</Item>),
-                            (<Item key="5" value="special" icon={'2'} style={{ whiteSpace: 'nowrap' }} onSelect={this.onSelect}>我的二维码</Item>),
-                            (<Item key="6" value="button ct" icon={'3'} onSelect={this.onSelect}>
+                            (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)} onSelect={this.onSelect}>扫一扫</Item>),
+                            (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }} onSelect={this.onSelect}>我的二维码</Item>),
+                            (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} disabled={true} onSelect={this.onSelect}>
                                 <span style={{ marginRight: 5 }}>帮助</span>
                             </Item>)
                         ]}
                     >
                         <div>
-                            更多
+                            更多（下左）
                         </div>
                     </Popover>
                 </div>
                 <div style={{position: 'absolute', right: '30px', top: '100px'}}>
                     <Popover
-                        mask={true}
+                        mask={false}
                         overlayClassName={'fortest'}
                         overlayStyle={{right: '30px', top: '130px'}}
                         visible={false}
                         placement={'bottomRight'}
                         overlay={[
-                            (<Item key="4" value="scan" icon={'1'}>扫一扫</Item>),
-                            (<Item key="5" value="special" icon={'2'} style={{ whiteSpace: 'nowrap' }}>我的二维码</Item>),
-                            (<Item key="6" value="button ct" icon={'3'}>
+                            (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)} onSelect={this.onSelect}>扫一扫</Item>),
+                            (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }} onSelect={this.onSelect}>我的二维码</Item>),
+                            (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} onSelect={this.onSelect}>
                                 <span style={{ marginRight: 5 }}>帮助</span>
                             </Item>)
                         ]}
                     >
                         <div>
-                            更多
+                            更多（下右）
+                        </div>
+                    </Popover>
+                </div>
+                <div style={{position: 'absolute', left: '150px', top: '200px'}}>
+                    <Popover
+                        mask={true}
+                        overlayClassName={'fortest'}
+                        overlayStyle={{left: '95px', top: '70px'}}
+                        visible={false}
+                        placement={'top'}
+                        overlay={[
+                            (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)} onSelect={this.onSelect}>扫一扫</Item>),
+                            (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }} onSelect={this.onSelect}>我的二维码</Item>),
+                            (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} onSelect={this.onSelect}>
+                                <span style={{ marginRight: 5 }}>帮助</span>
+                            </Item>)
+                        ]}
+                    >
+                        <div>
+                            更多（上）
+                        </div>
+                    </Popover>
+                </div>
+                <div style={{position: 'absolute', left: '30px', top: '300px'}}>
+                    <Popover
+                        mask={true}
+                        overlayClassName={'fortest'}
+                        overlayStyle={{left: '105px', top: '245px'}}
+                        visible={false}
+                        placement={'right'}
+                        overlay={[
+                            (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)} onSelect={this.onSelect}>扫一扫</Item>),
+                            (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }} onSelect={this.onSelect}>我的二维码</Item>),
+                            (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} onSelect={this.onSelect}>
+                                <span style={{ marginRight: 5 }}>帮助</span>
+                            </Item>)
+                        ]}
+                    >
+                        <div>
+                            更多（右）
+                        </div>
+                    </Popover>
+                </div>
+                <div style={{position: 'absolute', right: '30px', top: '300px'}}>
+                    <Popover
+                        mask={true}
+                        overlayClassName={'fortest'}
+                        overlayStyle={{right: '110px', top: '245px'}}
+                        visible={false}
+                        placement={'left'}
+                        overlay={[
+                            (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)} onSelect={this.onSelect}>扫一扫</Item>),
+                            (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }} onSelect={this.onSelect}>我的二维码</Item>),
+                            (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} onSelect={this.onSelect}>
+                                <span style={{ marginRight: 5 }}>帮助</span>
+                            </Item>)
+                        ]}
+                    >
+                        <div>
+                            更多（左）
                         </div>
                     </Popover>
                 </div>

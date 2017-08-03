@@ -3,7 +3,12 @@ var Popover = React.createClass({
     getDefaultProps: function () {
         return {
             visible: false,
-            mask: true
+            mask: true,
+            onVisibleChange: null,
+            overlayClassName: '',
+            overlayStyle: '',
+            placement: 'bottomLeft',
+            overlay: []
         };
     },
     getInitialState: function () {
@@ -44,7 +49,7 @@ var Popover = React.createClass({
         return (
             <div>
                 <div className={maskCls} onClick={_this.clickHandler}></div>
-                <div className={popoverCls} style={_this.props.overlayStyle}>
+                <div className={popoverCls} style={_this.props.overlayStyle} onClick={_this.clickHandler}>
                     <div className="ucs-popover-content">
                         <div className="ucs-popover-arrow"></div>
                         <div className="ucs-popover-inner">
@@ -76,7 +81,7 @@ module.exports = Popover;
 Popover.Item = React.createClass({
     getDefaultProps: function () {
         return {
-
+            disabled: false
         };
     },
     getInitialState: function () {
@@ -87,7 +92,11 @@ Popover.Item = React.createClass({
     componentDidMount: function () {
         console.log(123);
     },
-    clickHandler: function () {
+    clickHandler: function (e) {
+        if (this.props.disabled) {
+            e.stopPropagation();
+            return;
+        }
         this.props.onSelect && this.props.onSelect();
     },
     render: function () {
@@ -95,7 +104,7 @@ Popover.Item = React.createClass({
             <div className="ucs-popover-item" value={this.props.value} onClick={this.clickHandler}>
                 <div className="ucs-popover-item-container">
                     <span className="ucs-popover-item-icon" aria-hidden="true">
-                        <img src={this.props.icon} alt=""/>
+                        {this.props.icon}
                     </span>
                     <span className="ucs-popover-item-content">
                         {this.props.children}
