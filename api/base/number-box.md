@@ -20,7 +20,7 @@ max|最大值|number|无
 step|阀值|number|无
 formatter|指定输入框展示值的格式|`function(value: number)`|无
 value | 值，达到最大最小值时对应的按钮不可点击 | string | 0
-defaultValue | 初始默认值（对应data中的value值）|string|无
+defaultValue | 初始默认值（对应value值）|string|无
 onChange|绑定change事件的监控事件|`function(value: number)`|无
 
 
