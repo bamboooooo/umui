@@ -79,8 +79,8 @@ var Item = Popover.Item;
 var Root = React.createClass({
     displayName: 'Root',
 
-    onSelect: function onSelect() {
-        console.log('onSelect');
+    onSelect: function onSelect(v) {
+        console.log('选中值：', v);
     },
     onVisibleChange: function onVisibleChange() {
         console.log('onVisibleChange');
@@ -103,15 +103,15 @@ var Root = React.createClass({
                         placement: 'bottomLeft',
                         overlay: [React.createElement(
                             Item,
-                            { key: '4', value: 'scan', icon: React.createElement('img', { src: '../images/1.png' }), onSelect: this.onSelect },
+                            { key: '4', value: 'scan', icon: React.createElement('img', { src: '../images/1.png' }) },
                             '\u626B\u4E00\u626B'
                         ), React.createElement(
                             Item,
-                            { key: '5', value: 'special', icon: React.createElement('img', { src: '../images/1.png' }), style: { whiteSpace: 'nowrap' }, onSelect: this.onSelect },
+                            { key: '5', value: 'special', icon: React.createElement('img', { src: '../images/1.png' }), style: { whiteSpace: 'nowrap' } },
                             '\u6211\u7684\u4E8C\u7EF4\u7801'
                         ), React.createElement(
                             Item,
-                            { key: '6', value: 'button ct', icon: React.createElement('img', { src: '../images/1.png' }), disabled: true, onSelect: this.onSelect },
+                            { key: '6', value: 'button ct', icon: React.createElement('img', { src: '../images/1.png' }), disabled: true },
                             React.createElement(
                                 'span',
                                 { style: { marginRight: 5 } },
@@ -139,21 +139,22 @@ var Root = React.createClass({
                         placement: 'bottomRight',
                         overlay: [React.createElement(
                             Item,
-                            { key: '4', value: 'scan', icon: React.createElement('img', { src: '../images/1.png' }), onSelect: this.onSelect },
+                            { key: '4', value: 'scan', icon: React.createElement('img', { src: '../images/1.png' }) },
                             '\u626B\u4E00\u626B'
                         ), React.createElement(
                             Item,
-                            { key: '5', value: 'special', icon: React.createElement('img', { src: '../images/1.png' }), style: { whiteSpace: 'nowrap' }, onSelect: this.onSelect },
+                            { key: '5', value: 'special', icon: React.createElement('img', { src: '../images/1.png' }), style: { whiteSpace: 'nowrap' } },
                             '\u6211\u7684\u4E8C\u7EF4\u7801'
                         ), React.createElement(
                             Item,
-                            { key: '6', value: 'button ct', icon: React.createElement('img', { src: '../images/1.png' }), onSelect: this.onSelect },
+                            { key: '6', value: 'button ct', icon: React.createElement('img', { src: '../images/1.png' }) },
                             React.createElement(
                                 'span',
                                 { style: { marginRight: 5 } },
                                 '\u5E2E\u52A9'
                             )
-                        )]
+                        )],
+                        onSelect: this.onSelect
                     },
                     React.createElement(
                         'div',
@@ -175,15 +176,15 @@ var Root = React.createClass({
                         placement: 'top',
                         overlay: [React.createElement(
                             Item,
-                            { key: '4', value: 'scan', icon: React.createElement('img', { src: '../images/1.png' }), onSelect: this.onSelect },
+                            { key: '4', value: 'scan', icon: React.createElement('img', { src: '../images/1.png' }) },
                             '\u626B\u4E00\u626B'
                         ), React.createElement(
                             Item,
-                            { key: '5', value: 'special', icon: React.createElement('img', { src: '../images/1.png' }), style: { whiteSpace: 'nowrap' }, onSelect: this.onSelect },
+                            { key: '5', value: 'special', icon: React.createElement('img', { src: '../images/1.png' }), style: { whiteSpace: 'nowrap' } },
                             '\u6211\u7684\u4E8C\u7EF4\u7801'
                         ), React.createElement(
                             Item,
-                            { key: '6', value: 'button ct', icon: React.createElement('img', { src: '../images/1.png' }), onSelect: this.onSelect },
+                            { key: '6', value: 'button ct', icon: React.createElement('img', { src: '../images/1.png' }) },
                             React.createElement(
                                 'span',
                                 { style: { marginRight: 5 } },
@@ -211,15 +212,15 @@ var Root = React.createClass({
                         placement: 'right',
                         overlay: [React.createElement(
                             Item,
-                            { key: '4', value: 'scan', icon: React.createElement('img', { src: '../images/1.png' }), onSelect: this.onSelect },
+                            { key: '4', value: 'scan', icon: React.createElement('img', { src: '../images/1.png' }) },
                             '\u626B\u4E00\u626B'
                         ), React.createElement(
                             Item,
-                            { key: '5', value: 'special', icon: React.createElement('img', { src: '../images/1.png' }), style: { whiteSpace: 'nowrap' }, onSelect: this.onSelect },
+                            { key: '5', value: 'special', icon: React.createElement('img', { src: '../images/1.png' }), style: { whiteSpace: 'nowrap' } },
                             '\u6211\u7684\u4E8C\u7EF4\u7801'
                         ), React.createElement(
                             Item,
-                            { key: '6', value: 'button ct', icon: React.createElement('img', { src: '../images/1.png' }), onSelect: this.onSelect },
+                            { key: '6', value: 'button ct', icon: React.createElement('img', { src: '../images/1.png' }) },
                             React.createElement(
                                 'span',
                                 { style: { marginRight: 5 } },
@@ -247,15 +248,15 @@ var Root = React.createClass({
                         placement: 'left',
                         overlay: [React.createElement(
                             Item,
-                            { key: '4', value: 'scan', icon: React.createElement('img', { src: '../images/1.png' }), onSelect: this.onSelect },
+                            { key: '4', value: 'scan', icon: React.createElement('img', { src: '../images/1.png' }) },
                             '\u626B\u4E00\u626B'
                         ), React.createElement(
                             Item,
-                            { key: '5', value: 'special', icon: React.createElement('img', { src: '../images/1.png' }), style: { whiteSpace: 'nowrap' }, onSelect: this.onSelect },
+                            { key: '5', value: 'special', icon: React.createElement('img', { src: '../images/1.png' }), style: { whiteSpace: 'nowrap' } },
                             '\u6211\u7684\u4E8C\u7EF4\u7801'
                         ), React.createElement(
                             Item,
-                            { key: '6', value: 'button ct', icon: React.createElement('img', { src: '../images/1.png' }), onSelect: this.onSelect },
+                            { key: '6', value: 'button ct', icon: React.createElement('img', { src: '../images/1.png' }) },
                             React.createElement(
                                 'span',
                                 { style: { marginRight: 5 } },
@@ -391,6 +392,7 @@ var Popover = React.createClass({
             'ucs-popover': true,
             'ucs-popover-hidden': !_this.state.visible
         }, _defineProperty(_classnames, 'ucs-popover-placement-' + _this.props.placement, !!_this.props.placement), _defineProperty(_classnames, _this.props.overlayClassName, !!_this.props.overlayClassName), _classnames));
+
         return React.createElement(
             'div',
             null,
@@ -405,7 +407,13 @@ var Popover = React.createClass({
                     React.createElement(
                         'div',
                         { className: 'ucs-popover-inner' },
-                        _this.props.overlay
+                        _this.props.overlay.map(function (item, index) {
+                            return React.createElement(
+                                'div',
+                                { key: index, className: 'ucs-popover-item', value: item.props.value, onClick: _this.onSelect.bind(_this, item.props.value) },
+                                item
+                            );
+                        })
                     )
                 )
             )
@@ -416,6 +424,9 @@ var Popover = React.createClass({
         this.setState({
             visible: !this.state.visible
         });
+    },
+    onSelect: function onSelect(v) {
+        this.props.onSelect && this.props.onSelect(v);
     },
     render: function render() {
         return React.createElement(
@@ -446,25 +457,20 @@ Popover.Item = React.createClass({
             e.stopPropagation();
             return;
         }
-        this.props.onSelect && this.props.onSelect();
     },
     render: function render() {
         return React.createElement(
             'div',
-            { className: 'ucs-popover-item', value: this.props.value, onClick: this.clickHandler },
+            { className: 'ucs-popover-item-container', onClick: this.clickHandler },
             React.createElement(
-                'div',
-                { className: 'ucs-popover-item-container' },
-                React.createElement(
-                    'span',
-                    { className: 'ucs-popover-item-icon', 'aria-hidden': 'true' },
-                    this.props.icon
-                ),
-                React.createElement(
-                    'span',
-                    { className: 'ucs-popover-item-content' },
-                    this.props.children
-                )
+                'span',
+                { className: 'ucs-popover-item-icon', 'aria-hidden': 'true' },
+                this.props.icon
+            ),
+            React.createElement(
+                'span',
+                { className: 'ucs-popover-item-content' },
+                this.props.children
             )
         );
     }

@@ -1,8 +1,8 @@
 var Popover = require('../../src/base/popover');
 var Item = Popover.Item;
 var Root = React.createClass({
-    onSelect: function () {
-        console.log('onSelect');
+    onSelect: function (v) {
+        console.log('选中值：', v);
     },
     onVisibleChange: function () {
         console.log('onVisibleChange');
@@ -19,9 +19,9 @@ var Root = React.createClass({
                         visible={false}
                         placement={'bottomLeft'}
                         overlay={[
-                            (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)} onSelect={this.onSelect}>扫一扫</Item>),
-                            (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }} onSelect={this.onSelect}>我的二维码</Item>),
-                            (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} disabled={true} onSelect={this.onSelect}>
+                            (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)}>扫一扫</Item>),
+                            (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }}>我的二维码</Item>),
+                            (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} disabled={true}>
                                 <span style={{ marginRight: 5 }}>帮助</span>
                             </Item>)
                         ]}
@@ -39,12 +39,13 @@ var Root = React.createClass({
                         visible={false}
                         placement={'bottomRight'}
                         overlay={[
-                            (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)} onSelect={this.onSelect}>扫一扫</Item>),
-                            (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }} onSelect={this.onSelect}>我的二维码</Item>),
-                            (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} onSelect={this.onSelect}>
+                            (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)}>扫一扫</Item>),
+                            (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }}>我的二维码</Item>),
+                            (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)}>
                                 <span style={{ marginRight: 5 }}>帮助</span>
                             </Item>)
                         ]}
+                        onSelect={this.onSelect}
                     >
                         <div>
                             更多（下右）
@@ -59,9 +60,9 @@ var Root = React.createClass({
                         visible={false}
                         placement={'top'}
                         overlay={[
-                            (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)} onSelect={this.onSelect}>扫一扫</Item>),
-                            (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }} onSelect={this.onSelect}>我的二维码</Item>),
-                            (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} onSelect={this.onSelect}>
+                            (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)}>扫一扫</Item>),
+                            (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }}>我的二维码</Item>),
+                            (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)}>
                                 <span style={{ marginRight: 5 }}>帮助</span>
                             </Item>)
                         ]}
@@ -79,9 +80,9 @@ var Root = React.createClass({
                         visible={false}
                         placement={'right'}
                         overlay={[
-                            (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)} onSelect={this.onSelect}>扫一扫</Item>),
-                            (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }} onSelect={this.onSelect}>我的二维码</Item>),
-                            (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} onSelect={this.onSelect}>
+                            (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)}>扫一扫</Item>),
+                            (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }}>我的二维码</Item>),
+                            (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)}>
                                 <span style={{ marginRight: 5 }}>帮助</span>
                             </Item>)
                         ]}
@@ -99,9 +100,9 @@ var Root = React.createClass({
                         visible={false}
                         placement={'left'}
                         overlay={[
-                            (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)} onSelect={this.onSelect}>扫一扫</Item>),
-                            (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }} onSelect={this.onSelect}>我的二维码</Item>),
-                            (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} onSelect={this.onSelect}>
+                            (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)}>扫一扫</Item>),
+                            (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }}>我的二维码</Item>),
+                            (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)}>
                                 <span style={{ marginRight: 5 }}>帮助</span>
                             </Item>)
                         ]}

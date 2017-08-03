@@ -46,6 +46,7 @@ var Popover = React.createClass({
             ['ucs-popover-placement-' + _this.props.placement]: !!_this.props.placement,
             [_this.props.overlayClassName]: !!_this.props.overlayClassName
         });
+
         return (
             <div>
                 <div className={maskCls} onClick={_this.clickHandler}></div>
@@ -54,7 +55,15 @@ var Popover = React.createClass({
                         <div className="ucs-popover-arrow"></div>
                         <div className="ucs-popover-inner">
                             {
-                                _this.props.overlay
+                                _this.props.overlay.map(function (item, index) {
+                                    return (
+                                        <div key={index} className="ucs-popover-item" value={item.props.value} onClick={_this.onSelect.bind(_this,item.props.value)}>
+                                            {
+                                                item
+                                            }
+                                        </div>
+                                    )
+                                })
                             }
                         </div>
                     </div>
@@ -67,6 +76,9 @@ var Popover = React.createClass({
         this.setState({
             visible: !this.state.visible
         });
+    },
+    onSelect: function (v) {
+        this.props.onSelect && this.props.onSelect(v);
     },
     render: function () {
         return (
@@ -84,32 +96,21 @@ Popover.Item = React.createClass({
             disabled: false
         };
     },
-    getInitialState: function () {
-        return {
-
-        };
-    },
-    componentDidMount: function () {
-        console.log(123);
-    },
     clickHandler: function (e) {
         if (this.props.disabled) {
             e.stopPropagation();
             return;
         }
-        this.props.onSelect && this.props.onSelect();
     },
     render: function () {
         return (
-            <div className="ucs-popover-item" value={this.props.value} onClick={this.clickHandler}>
-                <div className="ucs-popover-item-container">
-                    <span className="ucs-popover-item-icon" aria-hidden="true">
-                        {this.props.icon}
-                    </span>
-                    <span className="ucs-popover-item-content">
-                        {this.props.children}
-                    </span>
-                </div>
+            <div className="ucs-popover-item-container" onClick={this.clickHandler}>
+                <span className="ucs-popover-item-icon" aria-hidden="true">
+                    {this.props.icon}
+                </span>
+                <span className="ucs-popover-item-content">
+                    {this.props.children}
+                </span>
             </div>
         );
     }
