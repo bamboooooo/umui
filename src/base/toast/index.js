@@ -35,7 +35,7 @@ var Toast = (function () {
             this._disappear = setTimeout(function () {
                 document.body.removeChild(msgArea);
                 _this.props.onClose && _this.props.onClose();
-            }, 3000);
+            }, _this.props.duration);
         },
         componentDidMount: function () {
             this._toDisappear();
