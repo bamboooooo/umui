@@ -2,7 +2,7 @@ var Popover = require('../../src/base/popover');
 var Item = Popover.Item;
 var Root = React.createClass({
     onSelect: function () {
-      console.log('onSelect');
+        console.log('onSelect');
     },
     onVisibleChange: function () {
         console.log('onVisibleChange');
