@@ -13,44 +13,47 @@ var Search = React.createClass({
             onChange: null,
             onFocus: null,
             onBlur: null,
-            onSubmit: null
+            onSubmit: null,
+            onClick: null
         };
     },
 
     getInitialState: function () {
         return {
-            className: classnames('ucs-search-value', this.props.className, this.props.disabled ? 'disabled' : ''),
+            className: classnames('ucs-search-value', this.props.className),
             value: this.props.value !== '' ? this.props.value : this.props.defaultValue,
+            isShowClear: (this.props.value !== '' && !this.props.disabled) || false,
             disabled: this.props.disabled || false,
-            isShowClear: (!this.props.disabled && this.props.value !== '') ? true : false,
             focus: false
         };
     },
 
+    componentDidMount: function () {
+        if (this.state.value !== '') {
+            this.setState({
+                focus: true
+            });
+            !this.state.disabled &&
+            this.setState({
+                isShowClear: true
+            });
+        }
+    },
+
     componentDidUpdate: function () {
-        const realWidth = this.refs.searchCoverContainerRef.getBoundingClientRect().width;
-        if(this.state.focus) {
+        var realWidth = this.refs.searchCoverContainerRef.getBoundingClientRect().width;
+        if (this.state.focus) {
             this.refs.searchCoverRef.style.width = Math.ceil(realWidth) + 'px';
-        }else{
+        } else {
             this.refs.searchCoverRef.style.width = '100%';
         }
     },
 
-    componentDidMount: function () {
-        if(this.state.value !== '' && !this.state.disabled){
-            this.setState({
-                focus: true,
-                isShowClear: true
-            })
-        }
-    },
-
     _onChange: function (e) {
-        this.setState({value: e.target.value});
+        this.setState({
+            value: e.target.value
+        });
         this._showCloseHandler(this.refs.searchRef.value);
-        if(e.target.value !== ''){
-
-        }
         this.props.onChange && this.props.onChange(e);
     },
 
@@ -62,7 +65,7 @@ var Search = React.createClass({
     },
 
     _onBlur: function (e) {
-        if(this.state.value === ''){
+        if (this.state.value === '') {
             this.setState({
                 focus: false
             });
@@ -70,8 +73,17 @@ var Search = React.createClass({
         this.props.onBlur && this.props.onBlur(e);
     },
 
+    _onSubmit: function (e) {
+        e.preventDefault();
+        this.props.onSubmit && this.props.onSubmit(this.state.value);
+    },
+
+    _onClick: function () {
+        this.props.onClick && this.props.onClick(this.state.value);
+    },
+
     _showCloseHandler: function (value) {
-        if (value !== '' && !this.state.disabled) {
+        if (value !== '') {
             this.setState({
                 isShowClear: true
             });
@@ -95,20 +107,9 @@ var Search = React.createClass({
             isShowClear: false
         });
     },
-    _onSubmit: function () {
-        event.preventDefault();
-        if(this.props.onSubmit){
-            this.props.onSubmit(this.state.value);
-        }
-        this.refs.searchRef.blur();
-        return false;
-    },
 
     setValue: function (v) {
-        if(this.state.disabled) {
-            return;
-        }
-        this.setState({
+        !this.state.disabled && this.setState({
             value: v,
             focus: true,
             isShowClear: true
@@ -127,39 +128,53 @@ var Search = React.createClass({
             });
         } else {
             this.setState({
-                disabled: false,
-                isShowClear: true
+                disabled: false
             });
+            if (this.state.value === '') {
+                this.setState({
+                    isShowClear: false
+                });
+            } else {
+                this.setState({
+                    isShowClear: true
+                });
+            }
         }
     },
 
     clear: function () {
-        this.setState({value: ''});
+        if (!this.state.disabled) {
+            this.setState({
+                value: '',
+                isShowClear: false
+            });
+        }
     },
 
     reset: function () {
-        if (this.props.defaultValue) {
-            this.setState({value: this.props.defaultValue});
-        } else {
-            this.clear();
+        if (!this.state.disabled) {
+            if (this.props.defaultValue) {
+                this.setState({value: this.props.defaultValue});
+            } else {
+                this.clear();
+            }
         }
     },
 
     render: function () {
-        console.log(this.state.isShowClear);
         var wrapCls = classnames({
             'ucs-search': true,
-            'ucs-search-start': this.state.focus
+            'ucs-search-focus': this.state.focus
         });
         var spanShowClose = {
-            display: this.state.isShowClear ? 'block' : 'none'
+            display: this.state.isShowClear && !this.state.disabled ? 'block' : 'none'
         };
         var coverPlaceholderStyle = {
             visibility: this.state.value !== '' ? 'hidden' : 'visible'
         };
         return (
             <form onSubmit={this._onSubmit} action="#" className={wrapCls}>
-                <div className="ucs-search-input">
+                <div className="ucs-search-input" onClick={this._onClick}>
                     <div className="ucs-search-cover" ref="searchCoverRef">
                         <span ref="searchCoverContainerRef">
                             <i className="ucs-search-cover-icon"></i>
@@ -170,9 +185,9 @@ var Search = React.createClass({
                         ref="searchRef"
                         type="search"
                         className={this.state.className}
-                        disabled={this.state.disabled}
                         id={this.props.id}
                         name={this.props.name}
+                        disabled={this.state.disabled}
                         value={this.state.value}
                         onChange={this._onChange}
                         onFocus={this._onFocus}

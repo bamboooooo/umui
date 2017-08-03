@@ -1,14 +1,5 @@
 var Search = require('../../src/base/search');
 var Root = React.createClass({
-    getInitialState: function () {
-        return {
-            msg: ''
-        };
-    },
-    getDefaultProps: function () {
-        return {
-        };
-    },
     setValue: function () {
         this.refs.search.setValue('吃饭');
     },
@@ -37,26 +28,33 @@ var Root = React.createClass({
     },
     render: function () {
         var config1 = {
-            id: "search-id",
-            className: "custom-className",
-            defaultValue: "基金",
-            value: "股票",
-            disabled: false,
-            name: "search-name",
-            placeholder: "搜一下",
-            onChange: function(e){
+            id: 'search-id',
+            className: 'custom-className',
+            defaultValue: '基金',
+            value: '股票',
+            name: 'search-name',
+            placeholder: '搜一下',
+            onChange: function (e) {
+                console.log('onChange');
                 console.log(e.target.value);
             },
             onFocus: function (e) {
+                console.log('onFocus');
                 console.log(e.target.value);
             },
             onBlur: function (e) {
-                //console.log(e.target.value);
+                console.log('onBlur');
+                console.log(e.target.value);
             },
             onSubmit: function (e) {
-                console.log();
+                console.log('onSubmit');
+                console.log(e);
+            },
+            onClick: function (e) {
+                console.log('onclick');
+                console.log(e);
             }
-        }
+        };
         return (
             <div className="ucs-search-example">
                 基础:
