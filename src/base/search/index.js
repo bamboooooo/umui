@@ -192,7 +192,6 @@ var Search = React.createClass({
                         onChange={this._onChange}
                         onFocus={this._onFocus}
                         onBlur={this._onBlur}
-                        onSubmit={this._onSubmit}
                     />
                     <a href="javascript:;" onClick={this._clearClick}>
                         <span className="ucs-search-showClose" style={spanShowClose}></span>
