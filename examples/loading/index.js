@@ -63,22 +63,42 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 107);
+/******/ 	return __webpack_require__(__webpack_require__.s = 111);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 107:
+/***/ 111:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 /**
- * Created by maxuezhu on 2017/8/1.
+ * Created by maxuezhu on 2017/8/4.
  */
 var Loading = __webpack_require__(81);
-ReactDOM.render(React.createElement(Loading, null), document.getElementById('merry'));
+var Root = React.createClass({
+    displayName: 'Root',
+
+    _clickHandle: function _clickHandle() {
+        Loading.show();
+        console.log(Loading.show);
+    },
+    componentDidMount: function componentDidMount() {
+        setTimeout(function () {
+            Loading.hide();
+        }, 5000);
+    },
+    render: function render() {
+        return React.createElement(
+            'button',
+            { onClick: this._clickHandle },
+            'loading'
+        );
+    }
+});
+ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
 
 /***/ }),
 
@@ -92,30 +112,42 @@ ReactDOM.render(React.createElement(Loading, null), document.getElementById('mer
  * Created by maxuezhu on 2017/8/1.
  * 说明：Loading组件
  */
-var Loading = React.createClass({
-    displayName: "Loading",
+var Loading = function () {
+    var div = document.createElement('div');
+    var LoadingItem = React.createClass({
+        displayName: 'LoadingItem',
 
-    getDefaultProps: function getDefaultProps() {
-        return {};
-    },
-    getInitialState: function getInitialState() {
-        return {};
-    },
-    show: function show() {},
-    hide: function hide() {},
-    render: function render() {
-        return React.createElement(
-            "div",
-            { className: "ucs-loading-mask" },
-            React.createElement(
-                "div",
-                { className: "ucs-loading" },
-                "\u52A0\u8F7D\u4E2D..."
-            )
-        );
-    }
+        render: function render() {
 
-});
+            document.body.appendChild(div);
+            return React.createElement(
+                'div',
+                { className: 'ucs-loading' },
+                React.createElement('div', { className: 'ucs-loading-mask' }),
+                React.createElement(
+                    'div',
+                    { className: 'ucs-loading-con' },
+                    React.createElement(
+                        'div',
+                        { className: 'loading' },
+                        React.createElement('i', { className: 'iconfont icon-loading', ref: 'loading' })
+                    )
+                )
+            );
+        }
+
+    });
+
+    return {
+        show: function show() {
+            ReactDOM.render(React.createElement(LoadingItem, null), div);
+        },
+        hide: function hide() {
+            document.body.removeChild(div);
+        }
+    };
+}();
+
 module.exports = Loading;
 
 /***/ })
