@@ -1,0 +1,99 @@
+
+.ucs-pullrefresh {
+  position: relative;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none
+}
+
+.ucs-pullrefresh-scroller {
+  -webkit-transform-origin: left top;
+  -ms-transform-origin: left top;
+  transform-origin: left top;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0)
+}
+
+.ucs-pullrefresh-control-top {
+  color: grey;
+  text-align: center;
+  height: 2rem;
+  line-height: 2rem;
+  margin-top: -2rem;
+  overflow: hidden
+}
+.ucs-pullrefresh-control-bottom {
+  color: grey;
+  text-align: center;
+  height: 2rem;
+  line-height: 2rem;
+  margin-bottom: -2rem;
+  overflow: hidden
+
+}
+
+.ucs-pullrefresh-control-top-icon, .ucs-pullrefresh-control-bottom-icon {
+  display: block
+}
+
+.ucs-pullrefresh-control-loading .ucs-pullrefresh-control-top-icon,.ucs-pullrefresh-control-top-loading,
+.ucs-pullrefresh-control-loading .ucs-pullrefresh-control-bottom-icon,.ucs-pullrefresh-control-bottom-loading{
+  display: none
+}
+
+.ucs-pullrefresh-control-loading .ucs-pullrefresh-control-top-loading,
+.ucs-pullrefresh-control-loading .ucs-pullrefresh-control-bototm-loading {
+  display: block
+}
+
+.ucs-pullrefresh-control-pull {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex
+}
+
+.ucs-pullrefresh-control-release {
+  display: none
+}
+
+.ucs-pullrefresh-control-pull,.ucs-pullrefresh-control-release {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center
+}
+
+.ucs-pullrefresh-control-pull .ucs-icon,.ucs-pullrefresh-control-pull span,.ucs-pullrefresh-control-release .ucs-icon,.ucs-pullrefresh-control-release span {
+  display: block
+}
+
+.ucs-pullrefresh-control-active .ucs-pullrefresh-control-pull {
+  display: none
+}
+
+.ucs-pullrefresh-control-active .ucs-pullrefresh-control-release {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex
+}
+
+.ucs-pullrefresh-control-deactive .ucs-pullrefresh-control-ptr-icon,.ucs-pullrefresh-control-deactive .ucs-pullrefresh-control-ptr-loading {
+  display: none
+}
+.ucs-pullrefresh-list {
+  border:1px solid #ccc;
+  li {
+    height: 3rem;
+    line-height: 3rem;
+    border-bottom:1px solid #eee;
+    text-align: center;
+  }
+}
