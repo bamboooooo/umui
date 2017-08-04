@@ -25,7 +25,7 @@ describe('OffCanvas', function () {
                 expect(offcanvas.props.open).to.not.be.ok;
             })
         });
-        describe('Numberbox-porps-onOpenChange', function () {
+        describe('OffCanvas-porps-onOpenChange', function () {
             it('-------------porps-onOpenChange()-----------测试', function () {
                 const offcanvas = TestUtils.renderIntoDocument(<OffCanvas id="123" onOpenChange = {function(){document.body.innerHTML = 'testtest'}}/>);
                 offcanvas.show();
