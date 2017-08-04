@@ -31,7 +31,7 @@ cancelBack | 点击取消按钮的回调事件(仅当confirm起效) | function |
 
 
 ### 2.Modal.confirm(v)
-> 获取组件的value
+> 调用confirm弹窗 
 
 #### 参数
 - v: json，{title:'',content:''}
