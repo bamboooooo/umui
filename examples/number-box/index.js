@@ -63,12 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 105);
+/******/ 	return __webpack_require__(__webpack_require__.s = 110);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 105:
+/***/ 110:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -76,7 +76,7 @@
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var Numberbox = __webpack_require__(82);
+var NumberBox = __webpack_require__(82);
 var Root = React.createClass({
     displayName: 'Root',
 
@@ -111,7 +111,7 @@ var Root = React.createClass({
                 null,
                 '\u91CD\u7F6E\u7EC4\u4EF6\u7684\u503C'
             ),
-            React.createElement(Numberbox, _extends({ ref: 'numberbox' }, this.props)),
+            React.createElement(NumberBox, _extends({ ref: 'numberbox' }, this.props)),
             React.createElement('input', { type: 'button', value: 'reset', onClick: this.clickHandle, className: 'btn' }),
             React.createElement('br', null),
             React.createElement(
@@ -119,7 +119,7 @@ var Root = React.createClass({
                 null,
                 '\u7981\u7528'
             ),
-            React.createElement(Numberbox, _extends({ ref: 'numberbox1' }, this.props)),
+            React.createElement(NumberBox, _extends({ ref: 'numberbox1' }, this.props)),
             React.createElement('input', { type: 'button', value: 'disabled', onClick: this.clickHandle1, className: 'btn' }),
             React.createElement('br', null),
             React.createElement(
@@ -127,7 +127,7 @@ var Root = React.createClass({
                 null,
                 '\u6B63\u5E38\u4F7F\u7528'
             ),
-            React.createElement(Numberbox, _extends({ ref: 'numberbox2' }, this.props))
+            React.createElement(NumberBox, _extends({ ref: 'numberbox2' }, this.props))
         );
     }
 });
@@ -198,8 +198,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 
 var classnames = __webpack_require__(2);
-var Numberbox = React.createClass({
-    displayName: 'Numberbox',
+var NumberBox = React.createClass({
+    displayName: 'NumberBox',
 
     getDefaultProps: function getDefaultProps() {
         return {
@@ -379,7 +379,7 @@ var Numberbox = React.createClass({
         );
     }
 });
-module.exports = Numberbox;
+module.exports = NumberBox;
 
 /***/ })
 

@@ -1,4 +1,4 @@
-var Numberbox = require('../../src/base/number-box');
+var NumberBox = require('../../src/base/number-box');
 var Root = React.createClass({
     getDefaultProps: function () {
         return {
@@ -26,15 +26,15 @@ var Root = React.createClass({
         return (
             <div>
                 <p>重置组件的值</p>
-                <Numberbox ref="numberbox" {...this.props} />
+                <NumberBox ref="numberbox" {...this.props} />
                 <input type = "button" value="reset" onClick={this.clickHandle} className="btn" />
                 <br/>
                 <p>禁用</p>
-                <Numberbox ref="numberbox1" {...this.props}/>
+                <NumberBox ref="numberbox1" {...this.props}/>
                 <input type = "button" value="disabled" onClick={this.clickHandle1} className="btn"/>
                 <br/>
                 <p>正常使用</p>
-                <Numberbox ref="numberbox2" {...this.props} />
+                <NumberBox ref="numberbox2" {...this.props} />
             </div>
 
         );

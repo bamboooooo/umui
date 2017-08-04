@@ -1,5 +1,5 @@
 var classnames = require('classnames');
-var Numberbox = React.createClass({
+var NumberBox = React.createClass({
     getDefaultProps: function () {
         return {
             id: '',
@@ -107,8 +107,8 @@ var Numberbox = React.createClass({
             this.setValue('0');
         } else {
             this.setState({
-                value:this.state.formatterValue
-            })
+                value: this.state.formatterValue
+            });
         }
         this.props.onBlur && this.props.onBlur();
     },
@@ -170,4 +170,4 @@ var Numberbox = React.createClass({
         );
     }
 });
-module.exports = Numberbox;
+module.exports = NumberBox;
