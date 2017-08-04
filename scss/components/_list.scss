@@ -1,0 +1,35 @@
+@charset "UTF-8";
+@import "css3";
+
+.ucs-list{
+
+}
+.ucs-list-item{
+  .list-front-layer{
+    @include display-flex;
+    @include align-items(center);
+  }
+  .list-left-content{
+    @include flex(1);
+  }
+  .list-thumb{
+    width: 20%;
+    img{
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+    }
+  }
+  .arrow-up{
+    @include rotate(-90deg);
+  }
+  .arrow-down{
+    @include rotate(90deg);
+  }
+  .extra-align-top{
+    @include align-self(flex-start);
+  }
+  .extra-align-bottom{
+    @include align-self(flex-end);
+  }
+}
