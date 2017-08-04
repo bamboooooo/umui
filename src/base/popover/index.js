@@ -57,12 +57,12 @@ var Popover = React.createClass({
                             {
                                 _this.props.overlay.map(function (item, index) {
                                     return (
-                                        <div key={index} className="ucs-popover-item" value={item.props.value} onClick={_this.onSelect.bind(_this,item.props.value)}>
+                                        <div key={index} className="ucs-popover-item" value={item.props.value} onClick={_this.onSelect.bind(_this, item.props.value)}>
                                             {
                                                 item
                                             }
                                         </div>
-                                    )
+                                    );
                                 })
                             }
                         </div>
