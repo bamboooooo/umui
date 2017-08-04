@@ -49,10 +49,9 @@ describe('CheckCode-props测试', function () {
                 checkcode.start();
                 const btnText = buttonDOM.innerHTML;
                 expect(btnText).to.not.equal('获取验证码');
-                setTimeout(function () {
-                    checkcode.reset();
-                    expect(btnText).to.equal('获取验证码');
-                },2000);
+                checkcode.reset();
+                const btnText1 = buttonDOM.innerHTML;
+                expect(btnText1).to.equal('获取验证码');
             });
         });
     });
