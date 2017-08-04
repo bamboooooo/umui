@@ -12,6 +12,8 @@
 
 参数 | 说明 | 类型 | 默认值
 ---|---|---|---|---
+className | 样式类名 | string |无
+id|dom元素id|string|无
 leftItem | 导航左边内容 | any | 无
 rightItem | 导航右边内容。当控件超过一个时，默认显示更多按钮，点击再展示所有控件 | amy | 无
 

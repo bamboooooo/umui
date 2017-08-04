@@ -23,10 +23,53 @@ onClose | 关闭之后的回调事件 | function | 无
 ## 三、方法说明
 
 ### 1.Toast.success(obj)
+
+> 调用成功的Toast
+
+#### 参数
+- obj:{
+        content: 对应props参数
+        duration: 对应props参数
+        mask: 对应props参数
+        onClose: 对应props参数
+    }
+
+#### 返回值
+- void
+
 ### 2.Toast.fail(obj)
+
+> 调用失败的Toast
+
+#### 参数
+- obj:{
+        content: 对应props参数
+        duration: 对应props参数
+        mask: 对应props参数
+        onClose: 对应props参数
+    }
+
+#### 返回值
+- void
+
 ### 3.Toast.info(obj)
+
+> 调用一般的Toast
+
+#### 参数
+- obj:{
+        content: 对应props参数
+        duration: 对应props参数
+        mask: 对应props参数
+        onClose: 对应props参数
+    }
+
+#### 返回值
+- void
+
 ### 4.Toast.warning(obj)
-> 调用成功/失败/信息/加载的Toast
+
+> 调用警告的Toast
 
 #### 参数
 - obj:{
