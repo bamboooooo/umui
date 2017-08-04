@@ -62,14 +62,12 @@ describe('Modal', function () {
         /*confirm()方法测试*/
         describe('Modal-confirm()方法测试', function () {
             it('----------confirm()方法测试---------------', function () {
-                it('----------alert()方法测试---------------', function () {
                     Modal.alert({
                         title: '提示1',
                         content: '确认删除xxx嘛？',
                         confirmText:'确定'
                     });
                     expect(document.getElementsByClassName('ucs-modal')[0]).to.not.equal(undefined);
-                });
             });
         });
     });
