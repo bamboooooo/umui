@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 97);
+/******/ 	return __webpack_require__(__webpack_require__.s = 98);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -192,62 +192,158 @@ module.exports = Button;
 
 /***/ }),
 
-/***/ 97:
+/***/ 86:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+/**
+ * Created by chenzefang on 2017/8/4.
+ */
+var classnames = __webpack_require__(2);
 var Button = __webpack_require__(29);
+var CheckCode = React.createClass({
+    displayName: 'CheckCode',
+
+    getDefaultProps: function getDefaultProps() {
+        return {
+            className: null,
+            id: null,
+            disabled: false,
+            count: 10,
+            temp: '秒后获取',
+            text: '获取验证码',
+            onClick: null
+        };
+    },
+    getInitialState: function getInitialState() {
+        return {
+            className: classnames('ucs-checkcode', this.props.className),
+            disabled: this.props.disabled,
+            text: this.props.text
+        };
+    },
+    /*
+     * 设置不可用
+     * */
+    setDisabled: function setDisabled(v) {
+        var _this = this;
+        if (_this.time !== 'undefined') {
+            clearInterval(_this.time);
+            _this.setState({
+                text: _this.props.text
+            });
+        }
+        this.setState({
+            className: classnames('ucs-checkcode', this.props.className, { 'disabled': v }),
+            disabled: v
+        });
+    },
+    /*
+    * 开始倒计时
+    * */
+    start: function start() {
+        var _this = this;
+        var count = _this.props.count;
+        var className = this.state.className;
+        _this.setState({
+            className: classnames('ucs-checkcode', this.props.className, 'disabled'),
+            text: count + _this.props.temp,
+            disabled: true
+        });
+        _this.time = setInterval(function () {
+            if (count > 0) {
+                count--;
+                _this.setState({
+                    text: count + _this.props.temp
+                });
+            } else {
+                clearInterval(_this.time);
+                _this.setState({
+                    className: className,
+                    text: _this.props.text,
+                    disabled: false
+                });
+            }
+        }, 1000);
+    },
+    /*
+    *
+    * */
+    reset: function reset() {
+        this.setState({
+            className: classnames('ucs-checkcode', this.props.className, { 'disabled': false }),
+            text: this.props.text,
+            disabled: this.props.disabled
+        });
+        clearInterval(this.time);
+    },
+    render: function render() {
+        return React.createElement(Button, { id: this.props.id, className: this.state.className, value: this.state.text, disabled: this.state.disabled, onClick: this.props.onClick });
+    }
+});
+
+module.exports = CheckCode;
+
+/***/ }),
+
+/***/ 98:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var CheckCode = __webpack_require__(86);
 var Root = React.createClass({
-    displayName: 'Root',
+    displayName: "Root",
 
     onClick1: function onClick1() {
-        console.log('click');
+        this.refs.checkCode.start();
     },
     onClick2: function onClick2() {
-        console.log('取消');
+        this.refs.checkCode2.start();
+    },
+    onClick3: function onClick3() {
+        this.refs.checkCode2.setDisabled(true);
     },
     onClick4: function onClick4() {
-        this.refs.button4.setDisabled(true);
-    },
-    onClick5: function onClick5() {
-        this.refs.button5.setValue('我变了');
+        this.refs.checkCode2.reset();
     },
     render: function render() {
         return React.createElement(
-            'div',
+            "div",
             null,
             React.createElement(
-                'p',
+                "h3",
                 null,
-                '\u6B63\u5E38\u7684\u4F7F\u7528'
+                "\u6B63\u5E38\u7684\u4F7F\u7528"
             ),
-            React.createElement(Button, { ref: 'button1', id: 'test', value: '\u786E\u5B9A', onClick: this.onClick1 }),
+            React.createElement(CheckCode, { ref: "checkCode", id: "test", onClick: this.onClick1 }),
             React.createElement(
-                'p',
+                "h3",
                 null,
-                '\u53D6\u6D88\u7684\u60C5\u51B5'
+                "\u7981\u7528"
             ),
-            React.createElement(Button, { ref: 'button2', className: 'ucs-btn-cancel', value: '\u53D6\u6D88', onClick: this.onClick2 }),
+            React.createElement(CheckCode, { ref: "checkCode1", disabled: true }),
             React.createElement(
-                'p',
+                "h3",
                 null,
-                '\u7981\u7528\u7684\u60C5\u51B5'
+                "\u529F\u80FD\u6D4B\u8BD5"
             ),
-            React.createElement(Button, { ref: 'button3', disabled: true, value: '\u4E0D\u53EF\u70B9\u51FB' }),
+            React.createElement(CheckCode, { ref: "checkCode2", text: "\u70B9\u51FB\u83B7\u53D6", temp: "s", onClick: this.onClick2 }),
+            React.createElement("br", null),
             React.createElement(
-                'p',
-                null,
-                '\u8BBE\u7F6E\u7981\u7528\u7684\u60C5\u51B5'
+                "a",
+                { onClick: this.onClick3 },
+                "\u8BBE\u4E3A\u7981\u7528"
             ),
-            React.createElement(Button, { ref: 'button4', value: '\u70B9\u51FB/\u4E0D\u53EF\u70B9\u51FB', onClick: this.onClick4 }),
+            React.createElement("br", null),
             React.createElement(
-                'p',
-                null,
-                '\u8BBE\u7F6Evalue\u7684\u60C5\u51B5'
-            ),
-            React.createElement(Button, { ref: 'button5', value: '\u6539\u53D8\u6211', onClick: this.onClick5 })
+                "a",
+                { onClick: this.onClick4 },
+                "\u91CD\u7F6E"
+            )
         );
     }
 });

@@ -16,6 +16,15 @@ var Button = React.createClass({
             value: this.props.value
         };
     },
+    componentWillReceiveProps: function (newProps) {
+        if (newProps !== this.props) {
+            this.setState({
+                value: newProps.value,
+                className: classnames('ucs-button', newProps.className),
+                disabled: newProps.disabled
+            });
+        }
+    },
     _onClick: function () {
         this.props.onClick && this.props.onClick();
     },
