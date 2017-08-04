@@ -1,0 +1,25 @@
+.ucs-nav-bar{
+  height:2rem;
+  display:flex;
+  background:#333;
+  display:flex;
+  align-items:center;
+}
+.ucs-nav-bar-left,
+.ucs-nav-bar-title,
+.ucs-nav-bar-right{
+  display:flex;
+  flex:1;
+  height:100%;
+  align-items:center;
+}
+.ucs-nav-bar-left{
+
+}
+.ucs-nav-bar-title{
+  flex:4;
+  justify-content:center;
+}
+.ucs-nav-bar-right{
+  justify-content:flex-end;
+}
