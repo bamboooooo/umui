@@ -63,12 +63,68 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 106);
+/******/ 	return __webpack_require__(__webpack_require__.s = 112);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 106:
+/***/ 1:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+  Copyright (c) 2016 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames () {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg)) {
+				classes.push(classNames.apply(null, arg));
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if (typeof module !== 'undefined' && module.exports) {
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+			return classNames;
+		}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {
+		window.classNames = classNames;
+	}
+}());
+
+
+/***/ }),
+
+/***/ 112:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -79,7 +135,7 @@
  * 创建时间：2017/7/17
  * 说明：
  */
-var List = __webpack_require__(90);
+var List = __webpack_require__(93);
 var Root = React.createClass({
     displayName: 'Root',
 
@@ -95,7 +151,7 @@ var Root = React.createClass({
                 { className: 'project-list', header: '\u8FD9\u662F\u5217\u8868\u5934\u90E8', footer: '\u8FD9\u662F\u5217\u8868\u5E95\u90E8' },
                 React.createElement(
                     List.Item,
-                    { className: 'Item', thumb: 'https://www.baidu.com/img/bd_logo1.png', extra: '2017-08-06', arrow: 'down', align: 'top', onClick: this._handleClick },
+                    { className: 'Item', thumb: 'https://www.baidu.com/img/bd_logo1.png', extra: '2017-08-06', arrow: 'right', align: 'top', touchExtra: 'hello world', onClick: this._handleClick },
                     React.createElement(
                         'p',
                         null,
@@ -104,7 +160,7 @@ var Root = React.createClass({
                 ),
                 React.createElement(
                     List.Item,
-                    { className: 'Item', thumb: 'https://www.baidu.com/img/bd_logo1.png', extra: '2017-08-06', arrow: 'down', align: 'bottom', activeClass: 'active', onClick: this._handleClick },
+                    { className: 'Item', thumb: 'https://www.baidu.com/img/bd_logo1.png', extra: '2017-08-06', arrow: 'right', align: 'bottom', activeClass: 'active', onClick: this._handleClick },
                     React.createElement(
                         'p',
                         null,
@@ -119,11 +175,185 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'
 
 /***/ }),
 
-/***/ 90:
-/***/ (function(module, exports) {
+/***/ 93:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-throw new Error("Module build failed: SyntaxError: D:/workplace/gitlab/UMUI/src/complex/list/index.js: JSX attributes must only be assigned a non-empty expression (47:63)\n\n\u001b[0m \u001b[90m 45 | \u001b[39m        \u001b[36mreturn\u001b[39m (\n \u001b[90m 46 | \u001b[39m            \u001b[33m<\u001b[39m\u001b[33mli\u001b[39m className\u001b[33m=\u001b[39m{_itemClass} onClick\u001b[33m=\u001b[39m{\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mprops\u001b[33m.\u001b[39monClick}\u001b[33m>\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 47 | \u001b[39m                \u001b[33m<\u001b[39m\u001b[33mdiv\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"list-front-layer\"\u001b[39m onTouchStart\u001b[33m=\u001b[39m{} onTouchMove\u001b[33m=\u001b[39m{} onTouchEnd\u001b[33m=\u001b[39m{}\u001b[33m>\u001b[39m\n \u001b[90m    | \u001b[39m                                                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 48 | \u001b[39m                    {\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mprops\u001b[33m.\u001b[39mthumb\n \u001b[90m 49 | \u001b[39m                        \u001b[33m?\u001b[39m \u001b[33m<\u001b[39m\u001b[33mdiv\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"list-thumb\"\u001b[39m\u001b[33m>\u001b[39m\u001b[33m<\u001b[39m\u001b[33mimg\u001b[39m src\u001b[33m=\u001b[39m{\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mprops\u001b[33m.\u001b[39mthumb} alt\u001b[33m=\u001b[39m\u001b[32m\"\"\u001b[39m\u001b[33m/\u001b[39m\u001b[33m>\u001b[39m\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mdiv\u001b[39m\u001b[33m>\u001b[39m \u001b[33m:\u001b[39m \u001b[32m''\u001b[39m\n \u001b[90m 50 | \u001b[39m                    }\u001b[0m\n");
+
+
+/**
+ * 创建人：DuHuiling
+ * 创建时间：2017/8/3
+ * 说明：List组件
+ */
+var classnames = __webpack_require__(1);
+var List = React.createClass({
+    displayName: 'List',
+
+    getDefaultProps: function getDefaultProps() {
+        return {
+            id: null,
+            className: null
+        };
+    },
+    render: function render() {
+        var _class = classnames('ucs-list', this.props.className);
+        return React.createElement(
+            'div',
+            { id: this.props.id, className: _class },
+            React.createElement(
+                'p',
+                { className: 'ucs-list-header' },
+                this.props.header
+            ),
+            React.createElement(
+                'ul',
+                null,
+                this.props.children
+            ),
+            React.createElement(
+                'p',
+                { className: 'ucs-list-footer' },
+                this.props.footer
+            )
+        );
+    }
+});
+List.Item = React.createClass({
+    displayName: 'Item',
+
+    getDefaultProps: function getDefaultProps() {
+        return {
+            className: null,
+            thumb: null, // 左边缩略图 src
+            extra: null, // 右侧内容文字
+            arrow: 'right', // 箭头方向
+            align: 'middle', // 内容文字垂直对齐
+            activeClass: null,
+            touchExtra: '',
+            onClick: null,
+            touchMove: null
+        };
+    },
+    getInitialState: function getInitialState() {
+        return {
+            startX: 0,
+            startY: 0,
+            moveArrow: null
+        };
+    },
+    _animation: function _animation(position, callback) {
+        var _style = this.refs.float_btn.style;
+        var tagWidth = this.state.tagSize.width;
+        var tagHeight = this.state.tagSize.height;
+        _style.left = position.x - tagWidth / 2 + 'px';
+        _style.top = position.y - tagHeight / 2 + 'px';
+    },
+    _onTouchStart: function _onTouchStart(e) {
+        if (!this.props.touchExtra) {
+            return;
+        }
+        var _touch = e.touches[0];
+        this.state.startX = _touch.clientX;
+        this.state.startY = _touch.clientY;
+        // this.props.onTouchStart && this.props.onTouchStart(e);
+    },
+    _onTouchMove: function _onTouchMove(e) {
+        if (!this.props.touchExtra) {
+            return;
+        }
+        var _touch = e.touches[0];
+        // var _move = {
+        //     x: _touch.clientX,
+        //     y: _touch.clientY
+        // };
+        var _setLeft = this.refs.listBackLayer.offsetWidth;
+        var _left = this.refs.listFrontLayer.style.left;
+        _left = Number(_left.slice(0, -2));
+        if (_touch.clientX < this.state.startX) {
+            var _start = _left < 0 ? _touch.clientX - this.state.startX - _setLeft : _touch.clientX - this.state.startX;
+            this.refs.listFrontLayer.style.left = _start + 'px';
+            this.state.moveArrow = 'left';
+        } else {
+            this.refs.listFrontLayer.style.left = _touch.clientX - this.state.startX + 'px';
+            this.state.moveArrow = 'right';
+        }
+        this.props.touchMove && this.props.touchMove();
+        // console.log(_move);
+        // this._animation(_move);
+    },
+    _onTouchEnd: function _onTouchEnd(e) {
+        if (!this.props.touchExtra) {
+            return;
+        }
+
+        var _setLeft = this.refs.listBackLayer.offsetWidth;
+        if (this.state.moveArrow === 'left') {
+            this.refs.listFrontLayer.style.left = -_setLeft + 'px';
+        } else {
+            this.refs.listFrontLayer.style.left = '0px';
+        }
+        // var _touch = e.changedTouches[0];
+        // this.state.startX = _touch.clientX;
+        // this.state.startY = _touch.clientY;
+        // var _docWidth = document.documentElement.clientWidth ;
+        // var _docHeight = document.documentElement.clientHeight;
+        // var tagWidth = this.state.tagSize.width;
+        // var tagHeight = this.state.tagSize.height;
+        // var _x = 0, _y = 0;
+        // if (_touch.clientX >= (_docWidth / 2)) {
+        //     _x = _docWidth - tagWidth / 2 - this.state.xSpace;
+        // } else {
+        //     _x = tagWidth / 2 + this.state.xSpace;
+        // }
+        // if (_touch.clientY >= _docHeight) {
+        //     _y = _docHeight - tagHeight / 2 - this.state.ySpace;
+        // } else if (_touch.clientY < (tagHeight / 2 + this.state.ySpace)) {
+        //     _y = tagHeight / 2 + this.state.ySpace;
+        // } else {
+        //     _y = _touch.clientY;
+        // }
+        // this._animation({
+        //     x: _x,
+        //     y: _y
+        // });
+    },
+    render: function render() {
+        var _itemClass = classnames('ucs-list-item', this.props.activeClass, this.props.className);
+        var _arrowClass = classnames('iconfont', 'icon-arrow', 'arrow-' + this.props.arrow);
+        var _extraClass = classnames('list-extra', 'extra-align-' + this.props.align);
+        return React.createElement(
+            'li',
+            { className: _itemClass, onClick: this.props.onClick },
+            React.createElement(
+                'div',
+                { className: 'list-front-layer', ref: 'listFrontLayer', onTouchStart: this._onTouchStart, onTouchMove: this._onTouchMove, onTouchEnd: this._onTouchEnd },
+                this.props.thumb ? React.createElement(
+                    'div',
+                    { className: 'list-thumb' },
+                    React.createElement('img', { src: this.props.thumb, alt: '' })
+                ) : '',
+                React.createElement(
+                    'div',
+                    { className: 'list-left-content' },
+                    this.props.children
+                ),
+                this.props.extra ? React.createElement(
+                    'div',
+                    { className: _extraClass },
+                    this.props.extra
+                ) : '',
+                this.props.arrow !== 'empty' ? React.createElement('i', { className: _arrowClass }) : ''
+            ),
+            this.props.touchExtra ? React.createElement(
+                'div',
+                { className: 'list-back-layer', ref: 'listBackLayer' },
+                this.props.touchExtra
+            ) : ''
+        );
+    }
+});
+module.exports = List;
 
 /***/ })
 

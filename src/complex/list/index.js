@@ -28,38 +28,77 @@ List.Item = React.createClass({
     getDefaultProps: function () {
         return {
             className: null,
-            thumb: null,//左边缩略图 src
-            extra: null,//右侧内容文字
-            arrow: 'right',//箭头方向
-            align: 'middle',//内容文字垂直对齐
+            thumb: null, // 左边缩略图 src
+            extra: null, // 右侧内容文字
+            arrow: 'right', // 箭头方向
+            align: 'middle', // 内容文字垂直对齐
             activeClass: null,
             touchExtra: '',
             onClick: null,
             touchMove: null
         };
     },
+    getInitialState: function(){
+        return {
+            startX: 0,
+            startY: 0,
+            moveArrow: null
+        }
+    },
+    _animation: function (position, callback) {
+        var _style = this.refs.float_btn.style;
+        var tagWidth = this.state.tagSize.width;
+        var tagHeight = this.state.tagSize.height;
+        _style.left = (position.x - tagWidth / 2) + 'px';
+        _style.top = (position.y - tagHeight / 2) + 'px';
+    },
     _onTouchStart: function (e) {
-        if(!this.props.touchExtra){
+        if (!this.props.touchExtra) {
             return;
         }
+        var _touch = e.touches[0];
+        this.state.startX = _touch.clientX;
+        this.state.startY = _touch.clientY;
         // this.props.onTouchStart && this.props.onTouchStart(e);
     },
     _onTouchMove: function (e) {
-        if(!this.props.touchExtra){
+        if (!this.props.touchExtra) {
             return;
         }
-        // var _touch = e.touches[0];
+        var _touch = e.touches[0];
         // var _move = {
         //     x: _touch.clientX,
         //     y: _touch.clientY
         // };
+        var _setLeft = this.refs.listBackLayer.offsetWidth;
+        var _left = this.refs.listFrontLayer.style.left;
+        _left = Number(_left.slice(0, -2));
+        if (_touch.clientX < this.state.startX) {
+            var _start = _left < 0 ? _touch.clientX - this.state.startX - _setLeft : _touch.clientX - this.state.startX;
+            this.refs.listFrontLayer.style.left = _start + 'px';
+            this.state.moveArrow = 'left';
+        } else {
+            this.refs.listFrontLayer.style.left = (_touch.clientX - this.state.startX) + 'px';
+            this.state.moveArrow = 'right';
+        }
+        this.props.touchMove && this.props.touchMove();
+        // console.log(_move);
         // this._animation(_move);
     },
     _onTouchEnd: function (e) {
-        if(!this.props.touchExtra){
+        if (!this.props.touchExtra) {
             return;
         }
+
+        var _setLeft = this.refs.listBackLayer.offsetWidth;
+        if (this.state.moveArrow === 'left') {
+            this.refs.listFrontLayer.style.left = -_setLeft + 'px';
+        } else {
+            this.refs.listFrontLayer.style.left = '0px';
+        }
         // var _touch = e.changedTouches[0];
+        // this.state.startX = _touch.clientX;
+        // this.state.startY = _touch.clientY;
         // var _docWidth = document.documentElement.clientWidth ;
         // var _docHeight = document.documentElement.clientHeight;
         // var tagWidth = this.state.tagSize.width;
@@ -88,7 +127,7 @@ List.Item = React.createClass({
         var _extraClass = classnames('list-extra', 'extra-align-' + this.props.align);
         return (
             <li className={_itemClass} onClick={this.props.onClick}>
-                <div className="list-front-layer" onTouchStart={this._onTouchStart} onTouchMove={this._onTouchMove} onTouchEnd={this._onTouchEnd}>
+                <div className="list-front-layer" ref="listFrontLayer" onTouchStart={this._onTouchStart} onTouchMove={this._onTouchMove} onTouchEnd={this._onTouchEnd}>
                     {this.props.thumb
                         ? <div className="list-thumb"><img src={this.props.thumb} alt=""/></div> : ''
                     }
@@ -103,9 +142,8 @@ List.Item = React.createClass({
                     }
                 </div>
                 {this.props.touchExtra
-                    ? <div className="list-back-layer">{this.props.touchExtra}</div> : ''
+                    ? <div className="list-back-layer" ref="listBackLayer">{this.props.touchExtra}</div> : ''
                 }
-
             </li>
         );
     }
