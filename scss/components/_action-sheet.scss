@@ -1,0 +1,35 @@
+.ucs-actionsheet-mask{
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 101;
+  display: none;
+}
+.ucs-actionsheet-container{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  margin: auto;
+  z-index: 102;
+  width: 90%;
+  text-align: center;
+  display: none;
+  ul{
+    background: #fff;
+    border-radius: 4px;
+    li{
+      height: 3rem;
+      line-height: 3rem;
+      font-size: 16px;
+      border-bottom: 1px solid #ddd;
+      &.ucs-actionsheet-title{
+        font-size:14px;
+        color: #808080;
+      }
+    }
+  }
+}
