@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 116);
+/******/ 	return __webpack_require__(__webpack_require__.s = 122);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -124,7 +124,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 116:
+/***/ 122:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -135,7 +135,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * 创建时间：2017/7/17
  * 说明：
  */
-var List = __webpack_require__(95);
+var List = __webpack_require__(97);
 var _touchExtra = [{
     'text': '删除',
     'onClick': function onClick() {
@@ -160,8 +160,8 @@ var _touchExtra = [{
 var Root = React.createClass({
     displayName: 'Root',
 
-    _handleClick: function _handleClick() {
-        console.log('test');
+    _handleClick: function _handleClick(e) {
+        console.log(e.target);
     },
     render: function render() {
         return React.createElement(
@@ -176,16 +176,16 @@ var Root = React.createClass({
                     React.createElement(
                         'p',
                         null,
-                        'abcdefghijklmnopqrst'
+                        '\u8FD9\u662F\u4E2D\u95F4\u5185\u5BB9'
                     )
                 ),
                 React.createElement(
                     List.Item,
-                    { className: 'Item', thumb: 'https://www.baidu.com/img/bd_logo1.png', extra: '2017-08-06', arrow: 'right', align: 'bottom', activeClass: 'active', onClick: this._handleClick },
+                    { className: 'Item', thumb: 'https://www.baidu.com/img/bd_logo1.png', extra: '2017-08-06', arrow: 'right', align: 'bottom', activeClassName: 'active', onClick: this._handleClick },
                     React.createElement(
                         'p',
                         null,
-                        'abcdefghijklmnopqrst'
+                        '\u8FD9\u662F\u4E2D\u95F4\u5185\u5BB9'
                     )
                 )
             )
@@ -264,7 +264,7 @@ module.exports = Button;
 
 /***/ }),
 
-/***/ 95:
+/***/ 97:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -319,7 +319,7 @@ List.Item = React.createClass({
             extra: null, // 右侧内容文字
             arrow: 'right', // 箭头方向
             align: 'middle', // 内容文字垂直对齐
-            activeClass: null,
+            activeClassName: null,
             touchExtra: '',
             onClick: null,
             touchMove: null
@@ -363,7 +363,7 @@ List.Item = React.createClass({
             this.refs.listFrontLayer.style.left = _touch.clientX - this.state.startX + 'px';
             this.state.moveArrow = 'right';
         }
-        this.props.touchMove && this.props.touchMove();
+        this.props.touchMove && this.props.touchMove(e, this.state.moveArrow);
     },
     _onTouchEnd: function _onTouchEnd(e) {
         if (!this.props.touchExtra) {
@@ -377,8 +377,11 @@ List.Item = React.createClass({
             this.refs.listFrontLayer.style.left = '0px';
         }
     },
+    _handleClick: function _handleClick(e) {
+        this.props.onClick && this.props.onClick(e);
+    },
     render: function render() {
-        var _itemClass = classnames('ucs-list-item', this.props.activeClass, this.props.className);
+        var _itemClass = classnames('ucs-list-item', this.props.activeClassName, this.props.className);
         var _arrowClass = classnames('iconfont', 'icon-arrow', 'arrow-' + this.props.arrow);
         var _extraClass = classnames('list-extra', 'extra-align-' + this.props.align);
         return React.createElement(
@@ -386,7 +389,7 @@ List.Item = React.createClass({
             { className: _itemClass },
             React.createElement(
                 'div',
-                { className: 'list-front-layer', ref: 'listFrontLayer', onClick: this.props.onClick, onTouchStart: this._onTouchStart, onTouchMove: this._onTouchMove, onTouchEnd: this._onTouchEnd },
+                { className: 'list-front-layer', ref: 'listFrontLayer', onClick: this._handleClick, onTouchStart: this._onTouchStart, onTouchMove: this._onTouchMove, onTouchEnd: this._onTouchEnd },
                 this.props.thumb ? React.createElement(
                     'div',
                     { className: 'list-thumb' },

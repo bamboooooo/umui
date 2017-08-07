@@ -33,7 +33,7 @@ List.Item = React.createClass({
             extra: null, // 右侧内容文字
             arrow: 'right', // 箭头方向
             align: 'middle', // 内容文字垂直对齐
-            activeClass: null,
+            activeClassName: null,
             touchExtra: '',
             onClick: null,
             touchMove: null
@@ -77,7 +77,7 @@ List.Item = React.createClass({
             this.refs.listFrontLayer.style.left = (_touch.clientX - this.state.startX) + 'px';
             this.state.moveArrow = 'right';
         }
-        this.props.touchMove && this.props.touchMove();
+        this.props.touchMove && this.props.touchMove(e, this.state.moveArrow);
     },
     _onTouchEnd: function (e) {
         if (!this.props.touchExtra) {
@@ -91,13 +91,16 @@ List.Item = React.createClass({
             this.refs.listFrontLayer.style.left = '0px';
         }
     },
+    _handleClick: function (e) {
+        this.props.onClick && this.props.onClick(e);
+    },
     render: function () {
-        var _itemClass = classnames('ucs-list-item', this.props.activeClass, this.props.className);
+        var _itemClass = classnames('ucs-list-item', this.props.activeClassName, this.props.className);
         var _arrowClass = classnames('iconfont', 'icon-arrow', 'arrow-' + this.props.arrow);
         var _extraClass = classnames('list-extra', 'extra-align-' + this.props.align);
         return (
             <li className={_itemClass}>
-                <div className="list-front-layer" ref="listFrontLayer" onClick={this.props.onClick} onTouchStart={this._onTouchStart} onTouchMove={this._onTouchMove} onTouchEnd={this._onTouchEnd}>
+                <div className="list-front-layer" ref="listFrontLayer" onClick={this._handleClick} onTouchStart={this._onTouchStart} onTouchMove={this._onTouchMove} onTouchEnd={this._onTouchEnd}>
                     {this.props.thumb
                         ? <div className="list-thumb"><img src={this.props.thumb} alt=""/></div> : ''
                     }
