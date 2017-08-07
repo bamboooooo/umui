@@ -62,31 +62,12 @@ thumb | 左边缩略图(string类型为img src) | string | 无
 extra | 内容文字 | string | 无
 arrow | 右边箭头方向(右，上，下，不显示)，可选`right`,`up`,`down`,`empty` | string | `right`
 align | 内容文字垂直对齐，可选`top`，`middle`，`bottom` | string | `middle`
-multipleLine | 多行显示 | boolean | `false`
-wrap | 是否换行 | boolean | `false`
 activeClassName | active样式表现 | string | 无
-touchExtra | 滑动后显示的内容 | string | 无
+touchExtra | 滑动后显示的内容 | array | 无
 onClick | 点击事件 | function | 无
 touchMove | 滑动事件 | function | 无
 
 ---
-
-### List.Item.Brief
-
-辅助显示副标题
-
-```html
-// 示例
-function getHeader(){
-  return '带副标题';  
-}
-
-<List header={getHeader} className="my-list">
-  <Item>
-    标题文字 <Brief>副标题</Brief>
-  </Item>
-</List>
-```
 
 
 ## 三、方法说明
