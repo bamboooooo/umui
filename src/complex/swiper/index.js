@@ -19,7 +19,7 @@ var Swiper = React.createClass({
     },
     componentDidMount: function () {
         this.onValueChange(this.state.value, 0);
-        if(this.props.autoPlay){
+        if (this.props.autoPlay) {
             this.playHandler();
         }
     },

@@ -28,12 +28,12 @@ var Popover = React.createClass({
         this._renderLayer();
     },
     setValue: function (v) {
-      this.setState({
-          value: v
-      });
+        this.setState({
+            value: v
+        });
     },
     getValue: function () {
-      return this.state.value
+        return this.state.value;
     },
     _renderLayer: function () {
         var layerElement = this.renderLayer();

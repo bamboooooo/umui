@@ -70,7 +70,7 @@ describe('Popover组件测试', function () {
         describe('Popover-onSelect()方法测试', function () {
             it('--------------onSelect()方法测试-----------------', function () {
                 var onSelect = function (v) {
-                    console.log(v);
+                    console.log('返回值', v);
                 };
                 const popover = TestUtils.renderIntoDocument(<Popover
                     mask={true}
@@ -93,6 +93,7 @@ describe('Popover组件测试', function () {
                 </Popover>);
                 const item = document.querySelectorAll('.ucs-popover-item')[0];
                 TestUtils.Simulate.click(item);
+                // popover.onSelect();
             });
         });
     });
