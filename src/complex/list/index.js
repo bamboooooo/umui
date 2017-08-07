@@ -4,6 +4,7 @@
  * 说明：List组件
  */
 var classnames = require('classnames');
+var Button = require('../../base/button');
 var List = React.createClass({
     getDefaultProps: function () {
         return {
@@ -38,12 +39,12 @@ List.Item = React.createClass({
             touchMove: null
         };
     },
-    getInitialState: function(){
+    getInitialState: function () {
         return {
             startX: 0,
             startY: 0,
             moveArrow: null
-        }
+        };
     },
     _animation: function (position, callback) {
         var _style = this.refs.float_btn.style;
@@ -59,17 +60,12 @@ List.Item = React.createClass({
         var _touch = e.touches[0];
         this.state.startX = _touch.clientX;
         this.state.startY = _touch.clientY;
-        // this.props.onTouchStart && this.props.onTouchStart(e);
     },
     _onTouchMove: function (e) {
         if (!this.props.touchExtra) {
             return;
         }
         var _touch = e.touches[0];
-        // var _move = {
-        //     x: _touch.clientX,
-        //     y: _touch.clientY
-        // };
         var _setLeft = this.refs.listBackLayer.offsetWidth;
         var _left = this.refs.listFrontLayer.style.left;
         _left = Number(_left.slice(0, -2));
@@ -82,8 +78,6 @@ List.Item = React.createClass({
             this.state.moveArrow = 'right';
         }
         this.props.touchMove && this.props.touchMove();
-        // console.log(_move);
-        // this._animation(_move);
     },
     _onTouchEnd: function (e) {
         if (!this.props.touchExtra) {
@@ -96,38 +90,14 @@ List.Item = React.createClass({
         } else {
             this.refs.listFrontLayer.style.left = '0px';
         }
-        // var _touch = e.changedTouches[0];
-        // this.state.startX = _touch.clientX;
-        // this.state.startY = _touch.clientY;
-        // var _docWidth = document.documentElement.clientWidth ;
-        // var _docHeight = document.documentElement.clientHeight;
-        // var tagWidth = this.state.tagSize.width;
-        // var tagHeight = this.state.tagSize.height;
-        // var _x = 0, _y = 0;
-        // if (_touch.clientX >= (_docWidth / 2)) {
-        //     _x = _docWidth - tagWidth / 2 - this.state.xSpace;
-        // } else {
-        //     _x = tagWidth / 2 + this.state.xSpace;
-        // }
-        // if (_touch.clientY >= _docHeight) {
-        //     _y = _docHeight - tagHeight / 2 - this.state.ySpace;
-        // } else if (_touch.clientY < (tagHeight / 2 + this.state.ySpace)) {
-        //     _y = tagHeight / 2 + this.state.ySpace;
-        // } else {
-        //     _y = _touch.clientY;
-        // }
-        // this._animation({
-        //     x: _x,
-        //     y: _y
-        // });
     },
     render: function () {
         var _itemClass = classnames('ucs-list-item', this.props.activeClass, this.props.className);
         var _arrowClass = classnames('iconfont', 'icon-arrow', 'arrow-' + this.props.arrow);
         var _extraClass = classnames('list-extra', 'extra-align-' + this.props.align);
         return (
-            <li className={_itemClass} onClick={this.props.onClick}>
-                <div className="list-front-layer" ref="listFrontLayer" onTouchStart={this._onTouchStart} onTouchMove={this._onTouchMove} onTouchEnd={this._onTouchEnd}>
+            <li className={_itemClass}>
+                <div className="list-front-layer" ref="listFrontLayer" onClick={this.props.onClick} onTouchStart={this._onTouchStart} onTouchMove={this._onTouchMove} onTouchEnd={this._onTouchEnd}>
                     {this.props.thumb
                         ? <div className="list-thumb"><img src={this.props.thumb} alt=""/></div> : ''
                     }
@@ -142,7 +112,15 @@ List.Item = React.createClass({
                     }
                 </div>
                 {this.props.touchExtra
-                    ? <div className="list-back-layer" ref="listBackLayer">{this.props.touchExtra}</div> : ''
+                    ? <div className="list-back-layer" ref="listBackLayer">
+                        {this.props.touchExtra.map(function (val, index) {
+                            if (index < 3) {
+                                return <Button value={val.text} onClick={val.onClick} key={index}/>;
+                            } else {
+                                return ;
+                            }
+                        })}
+                    </div> : ''
                 }
             </li>
         );

@@ -63,12 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 112);
+/******/ 	return __webpack_require__(__webpack_require__.s = 116);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 1:
+/***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -124,7 +124,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 112:
+/***/ 116:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -135,7 +135,28 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * 创建时间：2017/7/17
  * 说明：
  */
-var List = __webpack_require__(93);
+var List = __webpack_require__(95);
+var _touchExtra = [{
+    'text': '删除',
+    'onClick': function onClick() {
+        console.log('删除');
+    }
+}, {
+    'text': '关注',
+    'onClick': function onClick() {
+        console.log('关注');
+    }
+}, {
+    'text': '收藏',
+    'onClick': function onClick() {
+        console.log('收藏');
+    }
+}, {
+    'text': '收藏1',
+    'onClick': function onClick() {
+        console.log('收藏1');
+    }
+}];
 var Root = React.createClass({
     displayName: 'Root',
 
@@ -151,7 +172,7 @@ var Root = React.createClass({
                 { className: 'project-list', header: '\u8FD9\u662F\u5217\u8868\u5934\u90E8', footer: '\u8FD9\u662F\u5217\u8868\u5E95\u90E8' },
                 React.createElement(
                     List.Item,
-                    { className: 'Item', thumb: 'https://www.baidu.com/img/bd_logo1.png', extra: '2017-08-06', arrow: 'right', align: 'top', touchExtra: 'hello world', onClick: this._handleClick },
+                    { className: 'Item', thumb: 'https://www.baidu.com/img/bd_logo1.png', extra: '2017-08-06', arrow: 'right', align: 'top', touchExtra: _touchExtra, onClick: this._handleClick },
                     React.createElement(
                         'p',
                         null,
@@ -175,7 +196,75 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'
 
 /***/ }),
 
-/***/ 93:
+/***/ 7:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var classnames = __webpack_require__(0);
+var Button = React.createClass({
+    displayName: 'Button',
+
+    getDefaultProps: function getDefaultProps() {
+        return {
+            id: null,
+            className: null,
+            name: null,
+            disabled: false,
+            onClick: null
+        };
+    },
+    getInitialState: function getInitialState() {
+        return {
+            className: classnames('ucs-button', this.props.className, this.props.disabled ? 'disabled' : ''),
+            disabled: this.props.disabled ? this.props.disabled : false,
+            value: this.props.value
+        };
+    },
+    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
+        if (newProps !== this.props) {
+            this.setState({
+                value: newProps.value,
+                className: classnames('ucs-button', newProps.className),
+                disabled: newProps.disabled
+            });
+        }
+    },
+    _onClick: function _onClick() {
+        this.props.onClick && this.props.onClick();
+    },
+    setValue: function setValue(v) {
+        this.setState({
+            value: v
+        });
+    },
+    setDisabled: function setDisabled(v) {
+        if (v) {
+            this.setState({
+                className: classnames(this.state.className, 'disabled'),
+                disabled: true
+            });
+        } else {
+            this.setState({
+                className: classnames('ucs-button', this.props.className),
+                disabled: false
+            });
+        }
+    },
+    render: function render() {
+        return React.createElement(
+            'button',
+            { ref: 'button', id: this.props.id, name: this.props.name, className: this.state.className, disabled: this.state.disabled, onClick: this._onClick },
+            this.state.value
+        );
+    }
+});
+module.exports = Button;
+
+/***/ }),
+
+/***/ 95:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -186,7 +275,8 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'
  * 创建时间：2017/8/3
  * 说明：List组件
  */
-var classnames = __webpack_require__(1);
+var classnames = __webpack_require__(0);
+var Button = __webpack_require__(7);
 var List = React.createClass({
     displayName: 'List',
 
@@ -256,17 +346,12 @@ List.Item = React.createClass({
         var _touch = e.touches[0];
         this.state.startX = _touch.clientX;
         this.state.startY = _touch.clientY;
-        // this.props.onTouchStart && this.props.onTouchStart(e);
     },
     _onTouchMove: function _onTouchMove(e) {
         if (!this.props.touchExtra) {
             return;
         }
         var _touch = e.touches[0];
-        // var _move = {
-        //     x: _touch.clientX,
-        //     y: _touch.clientY
-        // };
         var _setLeft = this.refs.listBackLayer.offsetWidth;
         var _left = this.refs.listFrontLayer.style.left;
         _left = Number(_left.slice(0, -2));
@@ -279,8 +364,6 @@ List.Item = React.createClass({
             this.state.moveArrow = 'right';
         }
         this.props.touchMove && this.props.touchMove();
-        // console.log(_move);
-        // this._animation(_move);
     },
     _onTouchEnd: function _onTouchEnd(e) {
         if (!this.props.touchExtra) {
@@ -293,30 +376,6 @@ List.Item = React.createClass({
         } else {
             this.refs.listFrontLayer.style.left = '0px';
         }
-        // var _touch = e.changedTouches[0];
-        // this.state.startX = _touch.clientX;
-        // this.state.startY = _touch.clientY;
-        // var _docWidth = document.documentElement.clientWidth ;
-        // var _docHeight = document.documentElement.clientHeight;
-        // var tagWidth = this.state.tagSize.width;
-        // var tagHeight = this.state.tagSize.height;
-        // var _x = 0, _y = 0;
-        // if (_touch.clientX >= (_docWidth / 2)) {
-        //     _x = _docWidth - tagWidth / 2 - this.state.xSpace;
-        // } else {
-        //     _x = tagWidth / 2 + this.state.xSpace;
-        // }
-        // if (_touch.clientY >= _docHeight) {
-        //     _y = _docHeight - tagHeight / 2 - this.state.ySpace;
-        // } else if (_touch.clientY < (tagHeight / 2 + this.state.ySpace)) {
-        //     _y = tagHeight / 2 + this.state.ySpace;
-        // } else {
-        //     _y = _touch.clientY;
-        // }
-        // this._animation({
-        //     x: _x,
-        //     y: _y
-        // });
     },
     render: function render() {
         var _itemClass = classnames('ucs-list-item', this.props.activeClass, this.props.className);
@@ -324,10 +383,10 @@ List.Item = React.createClass({
         var _extraClass = classnames('list-extra', 'extra-align-' + this.props.align);
         return React.createElement(
             'li',
-            { className: _itemClass, onClick: this.props.onClick },
+            { className: _itemClass },
             React.createElement(
                 'div',
-                { className: 'list-front-layer', ref: 'listFrontLayer', onTouchStart: this._onTouchStart, onTouchMove: this._onTouchMove, onTouchEnd: this._onTouchEnd },
+                { className: 'list-front-layer', ref: 'listFrontLayer', onClick: this.props.onClick, onTouchStart: this._onTouchStart, onTouchMove: this._onTouchMove, onTouchEnd: this._onTouchEnd },
                 this.props.thumb ? React.createElement(
                     'div',
                     { className: 'list-thumb' },
@@ -348,7 +407,13 @@ List.Item = React.createClass({
             this.props.touchExtra ? React.createElement(
                 'div',
                 { className: 'list-back-layer', ref: 'listBackLayer' },
-                this.props.touchExtra
+                this.props.touchExtra.map(function (val, index) {
+                    if (index < 3) {
+                        return React.createElement(Button, { value: val.text, onClick: val.onClick, key: index });
+                    } else {
+                        return;
+                    }
+                })
             ) : ''
         );
     }
