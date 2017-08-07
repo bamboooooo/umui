@@ -17,8 +17,6 @@ overflowNum | 超过多少个分段，滑动显示 | number | 5
 selectedIndex | 默认选中的分段 | string | 1
 values | 显示在每个分段的文本内容 | json | [{'icon': 'icon1', 'text': '分段一', 'value': '1'}, {'icon': 'icon2', 'text': '分段二', 'value': '2'}, {'icon': 'icon3', 'text': '分段三', 'value': '3'}]
 onClick|绑定click事件|function(index)|无
-onSwipeLeft|绑定左滑动事件|function|无
-onSwipeRight|绑定右滑动事件|function|无
 
 ---
 
