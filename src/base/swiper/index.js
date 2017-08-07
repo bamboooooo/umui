@@ -5,7 +5,8 @@ var Swiper = React.createClass({
             dots: true,
             arrows: true,
             autoPlay: false,
-            autoPlaySpeed: 3000
+            autoPlaySpeed: 3000,
+            defaultValue: 0
         };
     },
     getInitialState: function () {

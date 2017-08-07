@@ -34,5 +34,33 @@ describe('Popover组件测试', function () {
             });
         });
     });
+    describe('function测试', function () {
+        /*ringHandler()方法测试*/
+        describe('Popover-clickHandler()方法测试', function () {
+            it('--------------clickHandler()方法测试-----------------', function () {
+                const popover = TestUtils.renderIntoDocument(<Popover
+                    mask={true}
+                    overlayClassName={'fortest'}
+                    overlayStyle={{left: '30px', top: '60px'}}
+                    visible={false}
+                    placement={'bottomLeft'}
+                    overlay={[
+                            (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)}>扫一扫</Item>),
+                            (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }}>我的二维码</Item>),
+                            (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} disabled={true}>
+                                <span style={{ marginRight: 5 }}>帮助</span>
+                            </Item>)
+                        ]}
+                >
+                    <div>
+                        更多（下左）
+                    </div>
+                </Popover>);
+                const popoverDOM = findDOMNode(popover);
+                TestUtils.Simulate.click(popoverDOM);
+                expect(popover.state.visible).to.be.ok;
+            });
+        });
+    });
 });
 

@@ -63,12 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 121);
+/******/ 	return __webpack_require__(__webpack_require__.s = 127);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 1:
+/***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -124,13 +124,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 121:
+/***/ 127:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Popover = __webpack_require__(80);
+var Popover = __webpack_require__(81);
 var Item = Popover.Item;
 var Root = React.createClass({
     displayName: 'Root',
@@ -334,7 +334,7 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'
 
 /***/ }),
 
-/***/ 80:
+/***/ 81:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -342,7 +342,7 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var classnames = __webpack_require__(1);
+var classnames = __webpack_require__(0);
 var Popover = React.createClass({
     displayName: 'Popover',
 
@@ -354,7 +354,8 @@ var Popover = React.createClass({
             overlayClassName: '',
             overlayStyle: '',
             placement: 'bottomLeft',
-            overlay: []
+            overlay: [],
+            onSelect: null
         };
     },
     getInitialState: function getInitialState() {

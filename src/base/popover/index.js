@@ -8,7 +8,8 @@ var Popover = React.createClass({
             overlayClassName: '',
             overlayStyle: '',
             placement: 'bottomLeft',
-            overlay: []
+            overlay: [],
+            onSelect: null
         };
     },
     getInitialState: function () {

@@ -29,8 +29,6 @@ describe('Progress组件测试', function () {
                 expect(num.childNodes[0].innerHTML).to.be.equal('80');
             });
         });
-    });
-    describe('function测试', function () {
         /*lineHandler()方法测试*/
         describe('Progress-lineHandler()方法测试', function () {
             it('--------------lineHandler()方法测试-----------------', function () {
@@ -41,8 +39,6 @@ describe('Progress组件测试', function () {
                 expect(num.childNodes[0].innerHTML).to.be.equal('80');
             });
         });
-    });
-    describe('function测试', function () {
         /*setValue()方法测试*/
         describe('Progress-setValue()方法测试', function () {
             it('--------------setValue()方法测试-----------------', function () {
