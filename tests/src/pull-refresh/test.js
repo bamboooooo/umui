@@ -1,4 +1,4 @@
-import PullRefresh  from '../../../src/base/pull-refresh/index.js'; // 引入组件
+import PullRefresh  from '../../../src/complex/pull-refresh/index.js'; // 引入组件
 describe('PullRefresh-props测试', function () {
     describe('props测试', function () {
         // props测试
