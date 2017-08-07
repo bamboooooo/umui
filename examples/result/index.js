@@ -63,18 +63,18 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 130);
+/******/ 	return __webpack_require__(__webpack_require__.s = 131);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 130:
+/***/ 131:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Result = __webpack_require__(84);
+var Result = __webpack_require__(97);
 var Root = React.createClass({
     displayName: 'Root',
 
@@ -100,7 +100,7 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'
 
 /***/ }),
 
-/***/ 84:
+/***/ 97:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

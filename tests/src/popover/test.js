@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/7/18.
  */
-import Popover, { Item }  from '../../../src/base/popover/index.js'; // 引入组件
+import Popover, { Item }  from '../../../src/complex/popover/index.js'; // 引入组件
 
 describe('Popover组件测试', function () {
     describe('props测试', function () {

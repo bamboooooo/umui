@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 132);
+/******/ 	return __webpack_require__(__webpack_require__.s = 134);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -124,13 +124,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 132:
+/***/ 134:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Swiper = __webpack_require__(86);
+var Swiper = __webpack_require__(99);
 var Root = React.createClass({
     displayName: 'Root',
 
@@ -160,7 +160,7 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'
 
 /***/ }),
 
-/***/ 86:
+/***/ 99:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -175,7 +175,8 @@ var Swiper = React.createClass({
             dots: true,
             arrows: true,
             autoPlay: false,
-            autoPlaySpeed: 3000
+            autoPlaySpeed: 3000,
+            defaultValue: 0
         };
     },
     getInitialState: function getInitialState() {
