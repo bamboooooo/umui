@@ -13,14 +13,12 @@ var SegmentedControl = React.createClass({
             overflowNum: 5,
             selectedIndex: 1,
             values: [],
-            onClick: null,
-            onSwipeLeft: null,
-            onSwipeRight: null
+            onClick: null
         };
     },
     getInitialState: function () {
         return {
-            active: 0,
+            active: this.props.selectedIndex - 1,
             itemWrapWidth: 0,
             itemWidth: 0
         };
@@ -67,7 +65,7 @@ var SegmentedControl = React.createClass({
                                         className={index === _this.state.active ? 'active' : ''}
                                         style={{'width': _this.state.itemWidth + 'px'}}
                                         onClick={_this._handlerClick.bind(_this, index)}>
-                                        {!_this.props.displayIcon
+                                        {_this.props.displayIcon
                                             ? <i className={'iconfont icon-' + val.icon}></i> : ''
                                         }
                                         {val.text}
