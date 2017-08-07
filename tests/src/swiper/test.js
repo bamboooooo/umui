@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/7/18.
  */
-import Swiper  from '../../../src/base/swiper/index.js'; // 引入组件
+import Swiper  from '../../../src/complex/swiper/index.js'; // 引入组件
 
 describe('Swiper组件测试', function () {
     describe('props测试', function () {
@@ -21,4 +21,12 @@ describe('Swiper组件测试', function () {
         });
     });
 });
-
+function createClientXY(x, y) {
+    return { pageX: x, pageY: y };
+}
+function createStartTouchEventObject({ x = 0, y = 0 }) {
+    return { touches: [createClientXY(x, y)] };
+}
+function createMoveTouchEventObject({ x = 0, y = 0}) {
+    return {touches: [createClientXY(x, y)]};
+}
