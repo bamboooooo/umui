@@ -1,4 +1,4 @@
-var PullRefresh = require('../../src/base/pull-refresh');
+var PullRefresh = require('../../src/complex/pull-refresh');
 var Root = React.createClass({
     getInitialState: function () {
         return {
@@ -72,7 +72,7 @@ var Root = React.createClass({
         });
         return (
             <div>
-                <PullRefresh onRefresh={this.onRefresh} ref="pullRefresh" direction="up">
+                <PullRefresh onRefresh={this.onRefresh} ref="pullRefresh" direction="down">
                     <ul>
                         {_data}
                     </ul>

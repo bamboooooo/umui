@@ -27,7 +27,7 @@ var PullRefresh = React.createClass({
     _getPoint: function (event) {
         var touch = event.touches[0];
         return {
-            y: touch.pageY
+            y: touch.clientY
         };
     },
     _doTransition: function (offset, duration) {
@@ -56,7 +56,7 @@ var PullRefresh = React.createClass({
             pointEnd: pointY
         });
         if (this.props.direction === 'down' || this.props.direction === 'both') {
-            if (offset > Number(this.props.distance)) {
+            if (offset >= Number(this.props.distance)) {
                 this.setState({
                     pullTopState: 'release'
                 });
@@ -67,7 +67,7 @@ var PullRefresh = React.createClass({
             }
         }
         if (this.props.direction === 'up' || this.props.direction === 'both') {
-            if (-offset > Number(this.props.distance)) {
+            if (-offset >= Number(this.props.distance)) {
                 this.setState({
                     pullBottomState: 'release'
                 });
@@ -81,7 +81,7 @@ var PullRefresh = React.createClass({
     _onTouchEnd: function (event) {
         var offset = this.state.translateY + (this.state.pointEnd - this.state.pointStart);
         if (this.props.direction === 'down') {
-            if (offset > Number(this.props.distance)) {
+            if (offset >= Number(this.props.distance)) {
                 this._doTransition(this._top, 300);
                 this.setState({
                     pullTopState: 'loading'
@@ -92,7 +92,7 @@ var PullRefresh = React.createClass({
             }
         }
         if (this.props.direction === 'up') {
-            if (-offset > Number(this.props.distance)) {
+            if (-offset >= Number(this.props.distance)) {
                 this._doTransition(-this._bottom, 300);
                 this.setState({
                     pullBottomState: 'loading'
@@ -104,9 +104,9 @@ var PullRefresh = React.createClass({
         }
     },
     onRefresh: function () {
-        this.props.onRefresh && this.props.onRefresh(this.onRefreshCallback);
+        this.props.onRefresh && this.props.onRefresh(this._onRefreshCallback);
     },
-    onRefreshCallback: function () {
+    _onRefreshCallback: function () {
         this._doTransition(0, 300);
     },
     render: function () {
@@ -121,17 +121,11 @@ var PullRefresh = React.createClass({
             pullrefreshPullTopStyle = {
                 display: 'block'
             };
-            pullrefreshReleaseTopStyle = {
-                display: 'none'
-            };
-            pullrefreshLoadingTopStyle = {
+            pullrefreshReleaseTopStyle = pullrefreshLoadingTopStyle = {
                 display: 'none'
             };
         } else if (this.state.pullTopState === 'loading') {
-            pullrefreshPullTopStyle = {
-                display: 'none'
-            };
-            pullrefreshReleaseTopStyle = {
+            pullrefreshPullTopStyle = pullrefreshReleaseTopStyle = {
                 display: 'none'
             };
             pullrefreshLoadingTopStyle = {
@@ -139,31 +133,22 @@ var PullRefresh = React.createClass({
             };
 
         } else if (this.state.pullTopState === 'release') {
-            pullrefreshPullTopStyle = {
+            pullrefreshPullTopStyle = pullrefreshLoadingTopStyle = {
                 display: 'none'
             };
             pullrefreshReleaseTopStyle = {
                 display: 'block'
-            };
-            pullrefreshLoadingTopStyle = {
-                display: 'none'
             };
         }
         if (this.state.pullBottomState === 'pull') {
             pullrefreshPullBottomStyle = {
                 display: 'block'
             };
-            pullrefreshReleaseBottomStyle = {
-                display: 'none'
-            };
-            pullrefreshLoadingBottomStyle = {
+            pullrefreshReleaseBottomStyle = pullrefreshLoadingBottomStyle = {
                 display: 'none'
             };
         } else if (this.state.pullBottomState === 'loading') {
-            pullrefreshPullBottomStyle = {
-                display: 'none'
-            };
-            pullrefreshReleaseBottomStyle = {
+            pullrefreshPullBottomStyle = pullrefreshReleaseBottomStyle = {
                 display: 'none'
             };
             pullrefreshLoadingBottomStyle = {
@@ -171,14 +156,11 @@ var PullRefresh = React.createClass({
             };
 
         } else if (this.state.pullBottomState === 'release') {
-            pullrefreshPullBottomStyle = {
+            pullrefreshPullBottomStyle = pullrefreshLoadingBottomStyle = {
                 display: 'none'
             };
             pullrefreshReleaseBottomStyle = {
                 display: 'block'
-            };
-            pullrefreshLoadingBottomStyle = {
-                display: 'none'
             };
         }
         return (
@@ -188,7 +170,7 @@ var PullRefresh = React.createClass({
                     onTouchStart={this._onTouchStart}
                     onTouchMove={this._onTouchMove}
                     onTouchEnd={this._onTouchEnd}>
-                    { (this.props.direction === 'down' || this.props.direction === 'both') && <div className="ucs-pullrefresh-control-top" ref="pullrefreshTop">
+                    { (this.props.direction === 'down') && <div className="ucs-pullrefresh-control-top" ref="pullrefreshTop">
                         <div className="ucs-pullrefresh-control-top-icon">
                             <div className="ucs-pullrefresh-control-pull" style={pullrefreshPullTopStyle}>
                                 <span>下拉可以刷新</span>
@@ -204,7 +186,7 @@ var PullRefresh = React.createClass({
                     <div className="ucs-pullrefresh-list">
                         {this.props.children}
                     </div>
-                    { (this.props.direction === 'up' || this.props.direction === 'both') && <div className="ucs-pullrefresh-control-bottom" ref="pullrefreshBottom">
+                    { (this.props.direction === 'up') && <div className="ucs-pullrefresh-control-bottom" ref="pullrefreshBottom">
                         <div className="ucs-pullrefresh-control-bottom-icon">
                             <div className="ucs-pullrefresh-control-pull" style={pullrefreshPullBottomStyle}>
                                 <span>上拉可以刷新</span>
