@@ -124,7 +124,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 102:
+/***/ 101:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -147,14 +147,12 @@ var SegmentedControl = React.createClass({
             overflowNum: 5,
             selectedIndex: 1,
             values: [],
-            onClick: null,
-            onSwipeLeft: null,
-            onSwipeRight: null
+            onClick: null
         };
     },
     getInitialState: function getInitialState() {
         return {
-            active: 0,
+            active: this.props.selectedIndex - 1,
             itemWrapWidth: 0,
             itemWidth: 0
         };
@@ -205,7 +203,7 @@ var SegmentedControl = React.createClass({
                             className: index === _this.state.active ? 'active' : '',
                             style: { 'width': _this.state.itemWidth + 'px' },
                             onClick: _this._handlerClick.bind(_this, index) },
-                        !_this.props.displayIcon ? React.createElement('i', { className: 'iconfont icon-' + val.icon }) : '',
+                        _this.props.displayIcon ? React.createElement('i', { className: 'iconfont icon-' + val.icon }) : '',
                         val.text
                     );
                 })
@@ -228,7 +226,7 @@ module.exports = SegmentedControl;
  * 创建时间：2017/7/17
  * 说明：
  */
-var SegmentedControl = __webpack_require__(102);
+var SegmentedControl = __webpack_require__(101);
 var values = [{ 'icon': 'icon1', 'text': '分段一', 'value': '1' }, { 'icon': 'icon2', 'text': '分段二', 'value': '2' }, { 'icon': 'icon3', 'text': '分段三', 'value': '3' }, { 'icon': 'icon3', 'text': '分段三', 'value': '3' }, { 'icon': 'icon3', 'text': '分段三', 'value': '3' }, { 'icon': 'icon3', 'text': '分段三', 'value': '3' }];
 var Root = React.createClass({
     displayName: 'Root',

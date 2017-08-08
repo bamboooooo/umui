@@ -31,18 +31,18 @@ var _touchExtra = [
     }
 ];
 var Root = React.createClass({
-    _handleClick: function () {
-        console.log('test');
+    _handleClick: function (e) {
+        console.log(e.target);
     },
     render: function () {
         return (
             <div>
                 <List className='project-list' header='这是列表头部' footer='这是列表底部'>
                     <List.Item className='Item' thumb='https://www.baidu.com/img/bd_logo1.png' extra='2017-08-06' arrow='right' align='top' touchExtra={_touchExtra} onClick={this._handleClick}>
-                        <p>abcdefghijklmnopqrst</p>
+                        <p>这是中间内容</p>
                     </List.Item>
-                    <List.Item className='Item' thumb='https://www.baidu.com/img/bd_logo1.png' extra='2017-08-06' arrow='right' align='bottom' activeClass='active' onClick={this._handleClick}>
-                        <p>abcdefghijklmnopqrst</p>
+                    <List.Item className='Item' thumb='https://www.baidu.com/img/bd_logo1.png' extra='2017-08-06' arrow='right' align='bottom' activeClassName='active' onClick={this._handleClick}>
+                        <p>这是中间内容</p>
                     </List.Item>
                 </List>
             </div>

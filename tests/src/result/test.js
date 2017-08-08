@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/7/18.
  */
-import Result  from '../../../src/base/result/index.js'; // 引入组件
+import Result  from '../../../src/complex/result/index.js'; // 引入组件
 
 describe('Result组件测试', function () {
     describe('props测试', function () {

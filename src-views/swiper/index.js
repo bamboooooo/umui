@@ -1,4 +1,4 @@
-var Swiper = require('../../src/base/swiper');
+var Swiper = require('../../src/complex/swiper');
 var Root = React.createClass({
     render: function () {
         return (

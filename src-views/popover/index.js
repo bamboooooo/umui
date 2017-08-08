@@ -1,4 +1,4 @@
-var Popover = require('../../src/base/popover');
+var Popover = require('../../src/complex/popover');
 var Item = Popover.Item;
 var Root = React.createClass({
     onSelect: function (v) {

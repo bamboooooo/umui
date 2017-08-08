@@ -19,7 +19,6 @@
 className | 样式类名 | string | 无
 id|dom元素id|string|无
 name|dom元素name|string|无
-checked | 指定当前是否选中 | boolean | false
 defaultChecked | 初始是否选中 | boolean | false
 text | 关联的文案 | string | 无
 disabled | 是否禁用 | boolean | false

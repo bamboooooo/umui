@@ -63,12 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 121);
+/******/ 	return __webpack_require__(__webpack_require__.s = 128);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 1:
+/***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -124,13 +124,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 121:
+/***/ 128:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Popover = __webpack_require__(80);
+var Popover = __webpack_require__(95);
 var Item = Popover.Item;
 var Root = React.createClass({
     displayName: 'Root',
@@ -334,7 +334,7 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'
 
 /***/ }),
 
-/***/ 80:
+/***/ 95:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -342,7 +342,7 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var classnames = __webpack_require__(1);
+var classnames = __webpack_require__(0);
 var Popover = React.createClass({
     displayName: 'Popover',
 
@@ -352,14 +352,17 @@ var Popover = React.createClass({
             mask: true,
             onVisibleChange: null,
             overlayClassName: '',
-            overlayStyle: '',
+            overlayStyle: { left: 0, top: 0 },
             placement: 'bottomLeft',
-            overlay: []
+            overlay: [],
+            onSelect: null,
+            defaultValue: ''
         };
     },
     getInitialState: function getInitialState() {
         return {
-            visible: this.props.visible
+            visible: this.props.visible,
+            value: this.props.defaultValue
         };
     },
     componentDidMount: function componentDidMount() {
@@ -369,6 +372,14 @@ var Popover = React.createClass({
     },
     componentDidUpdate: function componentDidUpdate() {
         this._renderLayer();
+    },
+    setValue: function setValue(v) {
+        this.setState({
+            value: v
+        });
+    },
+    getValue: function getValue() {
+        return this.state.value;
     },
     _renderLayer: function _renderLayer() {
         var layerElement = this.renderLayer();
@@ -427,6 +438,9 @@ var Popover = React.createClass({
     },
     onSelect: function onSelect(v) {
         this.props.onSelect && this.props.onSelect(v);
+        this.setState({
+            value: v
+        });
     },
     render: function render() {
         return React.createElement(

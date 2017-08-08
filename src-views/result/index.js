@@ -1,4 +1,4 @@
-var Result = require('../../src/base/result');
+var Result = require('../../src/complex/result');
 var Root = React.createClass({
     render: function () {
         return (

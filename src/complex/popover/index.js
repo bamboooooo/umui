@@ -6,14 +6,17 @@ var Popover = React.createClass({
             mask: true,
             onVisibleChange: null,
             overlayClassName: '',
-            overlayStyle: '',
+            overlayStyle: {left: 0, top: 0},
             placement: 'bottomLeft',
-            overlay: []
+            overlay: [],
+            onSelect: null,
+            defaultValue: ''
         };
     },
     getInitialState: function () {
         return {
-            visible: this.props.visible
+            visible: this.props.visible,
+            value: this.props.defaultValue
         };
     },
     componentDidMount: function () {
@@ -23,6 +26,14 @@ var Popover = React.createClass({
     },
     componentDidUpdate: function () {
         this._renderLayer();
+    },
+    setValue: function (v) {
+        this.setState({
+            value: v
+        });
+    },
+    getValue: function () {
+        return this.state.value;
     },
     _renderLayer: function () {
         var layerElement = this.renderLayer();
@@ -79,6 +90,9 @@ var Popover = React.createClass({
     },
     onSelect: function (v) {
         this.props.onSelect && this.props.onSelect(v);
+        this.setState({
+            value: v
+        });
     },
     render: function () {
         return (
