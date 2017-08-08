@@ -2,10 +2,11 @@
 @import "_config";
 
 .ucs-input-control{ display: inline-block; position: relative;
+  width:100%;
   .ucs-placeholder{ left: 10px; top: 0; display: inline-block; position: absolute; line-height: nth($global-input, 6); color: $global-placeholder }
   @at-root{
     .ucs-input{ background-color: nth($global-input, 1); border: 1px solid nth($global-input, 2); height: nth($global-input, 6); line-height: 100%; line-height: (nth($global-input, 6)) \9
-    ; padding: 0 10px; width: nth($global-input, 5)- 20; overflow: hidden; color: nth($global-input, 3); font-size: nth($global-input, 4); font-family: $global-font-family; transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out 0s; //input输入类
+    ; padding: 0 10px; width: 90%; overflow: hidden; color: nth($global-input, 3); font-size: nth($global-input, 4); font-family: $global-font-family; transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out 0s; //input输入类
       //禁止输入类
       &.disabled{ background-color: nth($global-input-event, 5); }
       //输入错误
