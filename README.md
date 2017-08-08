@@ -2,7 +2,7 @@
 黄金梅丽号 Going Merry是基于React.js V15.5.4进行开发的，支持双向数据绑定的组件化前端库，兼容IE9+，Chrome，Safari，Firefox。
 ***
 ## 项目目录结构说明
-- **dist **
+- **dist**
 
     - **assets** &nbsp&nbsp移动版UI静态资源库，包括css、font、images
 	- **ucsmy-mui.js** &nbsp&nbsp移动版UI组件库的UMD(Universal Module Definition)发布版本，未压缩版本，适用于开发模式下，方便调试。
