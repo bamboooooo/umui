@@ -37,7 +37,7 @@ describe('ActionSheet组件测试', function() {
                 const actionSheetDom = findDOMNode(actionSheet);
                 let testValue = 'test';
                 function _clickHandler (index) {
-                    testValue = 'test' + index;
+                    testValue = 'test' + (index + 1);
                 }
                 TestUtils.Simulate.click(actionSheetDom.querySelectorAll('li')[2]);
                 expect(testValue).to.be.equal('test2');
