@@ -24,6 +24,9 @@ overlayStyle|弹出层样式|object|无
 
 
 ### Popover.Item
+
+参数 | 说明 | 类型 | 默认值
+---|---|---|---|---
 disabled|是否不可用|bool|false
 style|样式|object|无
 icon|图标|string|无
