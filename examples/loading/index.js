@@ -63,12 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 111);
+/******/ 	return __webpack_require__(__webpack_require__.s = 126);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 111:
+/***/ 126:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -77,7 +77,7 @@
 /**
  * Created by maxuezhu on 2017/8/4.
  */
-var Loading = __webpack_require__(81);
+var Loading = __webpack_require__(82);
 var Root = React.createClass({
     displayName: 'Root',
 
@@ -102,7 +102,7 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'
 
 /***/ }),
 
-/***/ 81:
+/***/ 82:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -143,7 +143,9 @@ var Loading = function () {
             ReactDOM.render(React.createElement(LoadingItem, null), div);
         },
         hide: function hide() {
-            document.body.removeChild(div);
+            if (div.innerHTML) {
+                document.body.removeChild(div);
+            }
         }
     };
 }();

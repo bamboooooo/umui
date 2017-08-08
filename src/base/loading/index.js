@@ -27,7 +27,9 @@ var Loading = (function () {
             ReactDOM.render(<LoadingItem/>, div);
         },
         hide: function () {
-            document.body.removeChild(div);
+            if (div.innerHTML) {
+                document.body.removeChild(div);
+            }
         }
     };
 })();
