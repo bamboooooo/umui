@@ -5,9 +5,8 @@ describe('Layer组件测试', function() {
         // props测试
         describe('Layer-props测试', function() {
             it('----------ActionSheet-props测试---------------', function() {
-                const title = <div className="ucs-layer-title">我是标题</div>;
-                const Root = (<Layer className='testClass' id="testId" confirmText="按钮一" cancelText="按钮二" isShowClose={false} title={title}>
-                    <div className="ucs-layer-text">内容内容内容内容</div>
+                const Root = (<Layer className='testClass' id="testId" confirmText="按钮一" cancelText="按钮二" isShowClose={false} title={'我是标题'}>
+                    内容内容内容内容
                 </Layer>);
 
                 const layer = TestUtils.renderIntoDocument(Root);

@@ -24,8 +24,7 @@ describe('ActionSheet组件测试', function() {
                 expect(actionSheetDom.querySelectorAll('li')[3].innerHTML).to.be.equal('取消');
                 actionSheet.show();
                 TestUtils.Simulate.click(actionSheetDom.querySelector('.ucs-actionsheet-mask'));
-                expect(actionSheetDom.querySelector('aside').style.display).to.be.equal('block');
-                expect(actionSheetDom.querySelector('.ucs-actionsheet-mask').style.display).to.be.equal('block');
+                expect(actionSheetDom.style.display).to.be.equal('block');
             });
         });
 
@@ -51,8 +50,7 @@ describe('ActionSheet组件测试', function() {
                 const actionSheet = TestUtils.renderIntoDocument(<ActionSheet/>);
                 const actionSheetDom = findDOMNode(actionSheet);
                 actionSheet.show();
-                expect(actionSheetDom.querySelector('aside').style.display).to.be.equal('block');
-                expect(actionSheetDom.querySelector('.ucs-actionsheet-mask').style.display).to.be.equal('block');
+                expect(actionSheetDom.style.display).to.be.equal('block');
             });
         });
         // hide()方法测试
@@ -62,8 +60,7 @@ describe('ActionSheet组件测试', function() {
                 const actionSheetDom = findDOMNode(actionSheet);
                 actionSheet.show();
                 actionSheet.hide();
-                expect(actionSheetDom.querySelector('aside').style.display).to.be.equal('none');
-                expect(actionSheetDom.querySelector('.ucs-actionsheet-mask').style.display).to.be.equal('none');
+                expect(actionSheetDom.style.display).to.be.equal('none');
             });
         });
     });
