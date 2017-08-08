@@ -66,9 +66,7 @@ var Modal = (function () {
             this.props.confirmBack ? this.props.confirmBack() : null;
         },
         render: function () {
-            if (div.innerHTML === '') {
-                document.body.appendChild(div);
-            }
+            document.body.appendChild(div);
             return (
                 <div className={this.state.className}>
                     <div className="ucs-modal-mask"></div>

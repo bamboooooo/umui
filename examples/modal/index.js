@@ -329,9 +329,7 @@ var Modal = function () {
             this.props.confirmBack ? this.props.confirmBack() : null;
         },
         render: function render() {
-            if (div.innerHTML === '') {
-                document.body.appendChild(div);
-            }
+            document.body.appendChild(div);
             return React.createElement(
                 'div',
                 { className: this.state.className },
