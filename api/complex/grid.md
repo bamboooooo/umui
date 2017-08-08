@@ -16,6 +16,5 @@
 className | 样式类名 | string |无
 id | dom元素id | string | 无
 data | 传入的数据 | Array | [{icon: 'http://imgdemo.png', text: '标题一'}, {icon: 'http://imgdemo.png', text: '标题二'}]
-columnNum | 列数 | number | 3
 hasLine | 是否有边框 | boolean | true
 onClick | 项目点击事件 | function | 无
