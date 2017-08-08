@@ -15,6 +15,9 @@ describe('Progress组件测试', function () {
                 expect(progress.props.animate).to.be.ok;
                 expect(progress.props.speed).to.be.equal(10);
                 expect(progress.props.className).to.be.empty;
+                expect(progress.props.id).to.be.empty;
+                expect(progress.props.doc).to.not.be.ok;
+                expect(progress.props.showInfo).to.be.ok;
             });
         });
     });
