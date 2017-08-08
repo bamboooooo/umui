@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 124);
+/******/ 	return __webpack_require__(__webpack_require__.s = 122);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -124,15 +124,15 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 124:
+/***/ 122:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Layer = __webpack_require__(96);
+var Layer = __webpack_require__(93);
 var Root = React.createClass({
-    displayName: "Root",
+    displayName: 'Root',
 
     _clickOpen: function _clickOpen() {
         this.refs.layer1.show();
@@ -140,28 +140,25 @@ var Root = React.createClass({
     _clickClose: function _clickClose() {
         this.refs.layer1.hide();
     },
+    _clickConfirm: function _clickConfirm() {
+        alert('我是确认按钮');
+    },
+    _clickCancel: function _clickCancel() {
+        this.refs.layer1.hide();
+    },
     render: function render() {
         return React.createElement(
-            "div",
+            'div',
             null,
             React.createElement(
                 Layer,
-                { ref: "layer1", closeBack: this._clickClose },
-                React.createElement(
-                    Layer.Title,
-                    null,
-                    "\u6807\u9898"
-                ),
-                React.createElement(
-                    "div",
-                    { className: "ucs-layer-text" },
-                    "\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9"
-                )
+                { ref: 'layer1', closeBack: this._clickClose, title: '我是标题', confirmBack: this._clickConfirm, cancelBack: this._clickCancel },
+                '\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9\u5185\u5BB9'
             ),
             React.createElement(
-                "button",
+                'button',
                 { onClick: this._clickOpen },
-                "\u663E\u793A\u5F39\u7A97"
+                '\u663E\u793A\u5F39\u7A97'
             )
         );
     }
@@ -170,7 +167,7 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'
 
 /***/ }),
 
-/***/ 96:
+/***/ 93:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -189,7 +186,8 @@ var Layer = React.createClass({
             confirmBack: null,
             cancelBack: null,
             isShowClose: true,
-            closeBack: null
+            closeBack: null,
+            isShow: false
         };
     },
     getInitialState: function getInitialState() {
@@ -198,15 +196,20 @@ var Layer = React.createClass({
         };
     },
     show: function show() {
-        this.refs.layer.style.display = 'block';
+        this.setState({
+            isShow: true
+        });
     },
     hide: function hide() {
-        this.refs.layer.style.display = 'none';
+        this.setState({
+            isShow: false
+        });
     },
     render: function render() {
+        var isShow = { display: this.state.isShow ? 'block' : 'none' };
         return React.createElement(
             'div',
-            { className: 'alert-layer', ref: 'layer' },
+            { ref: 'layer', style: isShow },
             React.createElement('div', { className: 'ucs-layer-mask' }),
             React.createElement(
                 'div',
@@ -221,7 +224,16 @@ var Layer = React.createClass({
                         { href: 'javascript:;', className: 'alert-close', style: { display: this.props.isShowClose ? 'block' : 'none' }, onClick: this.props.closeBack },
                         '\xD7'
                     ),
-                    this.props.children,
+                    React.createElement(
+                        'div',
+                        { className: 'ucs-layer-title' },
+                        this.props.title
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'ucs-layer-text' },
+                        this.props.children
+                    ),
                     React.createElement(
                         'div',
                         { className: 'ucs-layer-button' },
@@ -238,17 +250,6 @@ var Layer = React.createClass({
                     )
                 )
             )
-        );
-    }
-});
-Layer.Title = React.createClass({
-    displayName: 'Title',
-
-    render: function render() {
-        return React.createElement(
-            'div',
-            { className: 'ucs-layer-title' },
-            this.props.children
         );
     }
 });

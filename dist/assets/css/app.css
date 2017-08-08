@@ -688,7 +688,8 @@ table {
 
 .ucs-input-control {
   display: inline-block;
-  position: relative; }
+  position: relative;
+  width: 100%; }
   .ucs-input-control .ucs-placeholder {
     left: 10px;
     top: 0;
@@ -701,9 +702,9 @@ table {
     border: 1px solid #e2e2e2;
     height: 38px;
     line-height: 100%;
-    line-height: 38px \9 ;
+    line-height: 38px \9 ;
     padding: 0 10px;
-    width: 310px;
+    width: 90%;
     overflow: hidden;
     color: #666;
     font-size: 14px;
@@ -878,9 +879,13 @@ table {
       position: absolute; }
       .line-wrap .line-bg .line-info .num-info i {
         font-style: normal; }
+    .line-wrap .line-bg .line-doc {
+      position: absolute;
+      border-radius: 50%; }
 
 .ucs-noticeBar {
-  position: relative; }
+  position: relative;
+  width: 100%; }
 
 .ucs-seamless-scroll {
   background: #fff;
@@ -1649,8 +1654,7 @@ table {
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 101;
-  display: none; }
+  z-index: 101; }
 
 .ucs-actionsheet-container {
   position: fixed;
@@ -1660,8 +1664,7 @@ table {
   margin: auto;
   z-index: 102;
   width: 90%;
-  text-align: center;
-  display: none; }
+  text-align: center; }
   .ucs-actionsheet-container ul {
     background: #fff;
     border-radius: 4px; }
@@ -1673,9 +1676,6 @@ table {
       .ucs-actionsheet-container ul li.ucs-actionsheet-title {
         font-size: 14px;
         color: #808080; }
-
-.alert-layer {
-  display: none; }
 
 .ucs-layer-mask {
   background: rgba(0, 0, 0, 0.4);

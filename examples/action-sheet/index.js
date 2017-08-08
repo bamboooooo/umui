@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 115);
+/******/ 	return __webpack_require__(__webpack_require__.s = 113);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -124,42 +124,40 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 115:
+/***/ 113:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var ActionSheet = __webpack_require__(92);
+var ActionSheet = __webpack_require__(89);
 var Root = React.createClass({
     displayName: 'Root',
 
     getInitialState: function getInitialState() {
         return {
             option: [{
-                text: '操作一',
-                clickHandler: null
+                text: '操作一'
             }, {
-                text: '操作二',
-                clickHandler: null
+                text: '取消'
             }, {
-                text: '操作三',
-                clickHandler: null
+                text: '操作三'
+            }, {
+                text: '操作二'
             }],
             option2: [{
-                text: '按钮一',
-                clickHandler: null
+                text: '按钮一'
             }, {
-                text: '按钮二',
-                clickHandler: null
+                text: '按钮二'
             }, {
-                text: '按钮三',
-                clickHandler: null
+                text: '按钮三'
+            }, {
+                text: '取消'
             }]
         };
     },
-    _listClickHandler: function _listClickHandler() {
-        alert('你点击了动作面板组件');
+    _listClickHandler: function _listClickHandler(index) {
+        alert('你点击了第' + (index + 1) + '个按钮');
     },
     _openActionSheet: function _openActionSheet() {
         this.refs.actionSheet1.show();
@@ -177,8 +175,8 @@ var Root = React.createClass({
         return React.createElement(
             'div',
             null,
-            React.createElement(ActionSheet, { ref: 'actionSheet1', title: '\u6211\u662F\u63CF\u8FF0', option: this.state.option, onClick: this._listClickHandler, cancelButtonIndex: 0 }),
-            React.createElement(ActionSheet, { ref: 'actionSheet2', title: '\u6211\u662F\u63CF\u8FF02', option: this.state.option2, maskClosable: false, cancelButtonIndex: 2 }),
+            React.createElement(ActionSheet, { ref: 'actionSheet1', title: '\u6211\u662F\u63CF\u8FF0', option: this.state.option, onClick: this._listClickHandler }),
+            React.createElement(ActionSheet, { ref: 'actionSheet2', title: '\u6211\u662F\u63CF\u8FF02', option: this.state.option2, maskClosable: false }),
             React.createElement(
                 'button',
                 { onClick: this._openActionSheet },
@@ -196,7 +194,7 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'
 
 /***/ }),
 
-/***/ 92:
+/***/ 89:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -214,7 +212,8 @@ var ActionSheet = React.createClass({
             title: '',
             cancelButtonIndex: null,
             maskClosable: true,
-            onClick: null
+            onClick: null,
+            isShow: false
         };
     },
     getInitialState: function getInitialState() {
@@ -224,39 +223,41 @@ var ActionSheet = React.createClass({
     },
     _closeMask: function _closeMask() {
         if (this.props.maskClosable) {
-            this.refs.mask.style.display = 'none';
-            this.refs.actionSheet.style.display = 'none';
+            this.setState({
+                isShow: false
+            });
         }
     },
-    _onClick: function _onClick() {
-        this.props.onClick && this.props.onClick();
+    _onClick: function _onClick(index) {
+        this.props.onClick && this.props.onClick(index);
     },
     show: function show() {
-        this.refs.mask.style.display = 'block';
-        this.refs.actionSheet.style.display = 'block';
+        this.setState({
+            isShow: true
+        });
     },
     hide: function hide() {
-        this.refs.mask.style.display = 'none';
-        this.refs.actionSheet.style.display = 'none';
+        this.setState({
+            isShow: false
+        });
     },
     render: function render() {
         var optionArray = this.props.option;
-        if (this.props.cancelButtonIndex || this.props.cancelButtonIndex === 0) {
-            optionArray.splice(this.props.cancelButtonIndex, 0, { text: '取消', clickHandler: this.hide });
-        } else {
-            optionArray.push({ text: '取消', clickHandler: this.hide });
-        }
+        var _this = this;
+        var isShow = { display: this.state.isShow ? 'block' : 'none' };
         return React.createElement(
             'div',
-            null,
-            React.createElement('div', { className: 'ucs-actionsheet-mask', onClick: this._closeMask, ref: 'mask' }),
+            { style: isShow },
+            React.createElement(
+                'div',
+                { className: 'ucs-actionsheet-mask', onClick: this._closeMask },
+                this.props.title
+            ),
             React.createElement(
                 'aside',
                 {
                     id: this.props.id,
-                    className: this.state.className,
-                    ref: 'actionSheet',
-                    onClick: this._onClick },
+                    className: this.state.className },
                 React.createElement(
                     'ul',
                     null,
@@ -268,7 +269,7 @@ var ActionSheet = React.createClass({
                     optionArray.map(function (item, index) {
                         return React.createElement(
                             'li',
-                            { key: index, onClick: item.clickHandler },
+                            { key: index, onClick: _this._onClick.bind(_this, index) },
                             item.text
                         );
                     })

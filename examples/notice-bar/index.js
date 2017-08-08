@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 129);
+/******/ 	return __webpack_require__(__webpack_require__.s = 127);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -124,13 +124,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 129:
+/***/ 127:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var NoticeBar = __webpack_require__(83);
+var NoticeBar = __webpack_require__(80);
 var Root = React.createClass({
     displayName: 'Root',
 
@@ -150,6 +150,7 @@ var Root = React.createClass({
     },
     _setValue: function _setValue() {
         this.refs.noticeBar1.setValue('测试通告测试通告测试通告测试通告测试通告测试通告测试通告测试通告测试通告测试通告测试通告');
+        // this.refs.noticeBar1.setValue('测试通告');
     },
     _show: function _show() {
         this.refs.noticeBar1.show();
@@ -161,7 +162,7 @@ var Root = React.createClass({
         return React.createElement(
             'div',
             null,
-            React.createElement(NoticeBar, { scroll: false, value: '\u8FD9\u662F\u4E00\u6761\u901A\u544A\u4FE1\u606F\u8FD9\u662F\u4E00\u6761\u901A\u544A\u4FE1\u606F\u8FD9\u662F\u4E00\u6761\u901A\u544A\u4FE1\u606F\u8FD9\u662F\u4E00\u6761\u901A\u544A\u4FE1\u606F', ref: 'noticeBar1', displayCloseBtn: false }),
+            React.createElement(NoticeBar, { scroll: true, value: '\u8FD9\u662F\u4E00\u6761\u901A\u544A\u4FE1\u606F\u8FD9\u662F\u4E00\u6761\u901A\u544A\u4FE1\u606F\u8FD9\u662F\u4E00\u6761\u901A\u544A\u4FE1\u606F\u8FD9\u662F\u4E00\u6761\u901A\u544A\u4FE1\u606F', ref: 'noticeBar1', displayCloseBtn: false }),
             React.createElement(NoticeBar, { scroll: true, onClick: this._onClick, onClose: this._onClose, value: '\u8FD9\u662F\u4E00\u6761\u901A\u544A\u4FE1\u606F' }),
             React.createElement(NoticeBar, { scroll: true, onClick: this._onClick, onClose: this._onClose, value: '\u8FD9\u662F\u4E00\u6761\u901A\u544A\u4FE1\u606F\u8FD9\u662F\u4E00\u6761\u901A\u544A\u4FE1\u606F\u8FD9\u662F\u4E00\u6761\u901A\u544A\u4FE1\u606F\u8FD9\u662F\u4E00\u6761\u901A\u544A\u4FE1\u606F', scrollSpeed: 10 }),
             React.createElement('input', { type: 'button', value: 'setValue', onClick: this._setValue }),
@@ -174,7 +175,7 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'
 
 /***/ }),
 
-/***/ 83:
+/***/ 80:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -209,9 +210,10 @@ var NoticeBar = React.createClass({
         var _wrapIn = this.refs.ucsSeamlessScrollIn;
         var _block1 = this.refs.seamlessScrollList1;
         var _block2 = this.refs.seamlessScrollList2;
+        _block2.innerHTML = '';
         var _scrollBlock = _block1.getElementsByTagName('p')[0];
         var _scrollBlockWidth = _scrollBlock.offsetWidth;
-        if (_scrollBlock < _wrap.offsetWidth) {
+        if (_scrollBlock.offsetWidth < _wrap.offsetWidth) {
             return;
         } else {
             _block2.innerHTML = _block1.innerHTML;
@@ -228,7 +230,7 @@ var NoticeBar = React.createClass({
         var _speed = this.props.scrollSpeed;
 
         var _scrollBlockWidth = _scrollBlock.offsetWidth;
-        if (_scrollBlock < _wrap.offsetWidth) {
+        if (_scrollBlock.offsetWidth < _wrap.offsetWidth) {
             return;
         } else {
             _block2.innerHTML = _block1.innerHTML;
