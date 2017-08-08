@@ -63,18 +63,74 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 131);
+/******/ 	return __webpack_require__(__webpack_require__.s = 109);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 131:
+/***/ 0:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+  Copyright (c) 2016 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames () {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg)) {
+				classes.push(classNames.apply(null, arg));
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if (typeof module !== 'undefined' && module.exports) {
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+			return classNames;
+		}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {
+		window.classNames = classNames;
+	}
+}());
+
+
+/***/ }),
+
+/***/ 109:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Result = __webpack_require__(97);
+var ResultSection = __webpack_require__(97);
 var Root = React.createClass({
     displayName: 'Root',
 
@@ -82,13 +138,13 @@ var Root = React.createClass({
         return React.createElement(
             'div',
             null,
-            React.createElement(Result, {
+            React.createElement(ResultSection, {
                 img: React.createElement('img', { src: '../images/1.png', alt: '' }),
                 title: '验证成功',
                 message: '所提交内容已成功完成验证'
             }),
             React.createElement('div', { className: 'ucs-whitespace', style: { height: '30px' } }),
-            React.createElement(Result, {
+            React.createElement(ResultSection, {
                 img: React.createElement('img', { src: '../images/1.png', alt: '' }),
                 title: '支付失败',
                 message: '所选银行卡余额不足'
@@ -106,6 +162,9 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'
 "use strict";
 
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var classnames = __webpack_require__(0);
 var Result = React.createClass({
     displayName: 'Result',
 
@@ -113,27 +172,32 @@ var Result = React.createClass({
         return {
             img: '',
             title: '',
-            message: ''
+            message: '',
+            sign: 'icon-xx'
         };
     },
     render: function render() {
+        var _this = this;
+        var cls = classnames(_defineProperty({
+            'ucs-result-pic': true
+        }, _this.props.sign, !!_this.props.sign));
         return React.createElement(
             'div',
             { className: 'ucs-result' },
             React.createElement(
                 'div',
-                { className: 'ucs-result-pic' },
-                this.props.img
+                { className: cls },
+                _this.props.img
             ),
             React.createElement(
                 'div',
                 { className: 'ucs-result-title' },
-                this.props.title
+                _this.props.title
             ),
             React.createElement(
                 'div',
                 { className: 'ucs-result-message' },
-                this.props.message
+                _this.props.message
             )
         );
     }
