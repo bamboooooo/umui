@@ -8,7 +8,8 @@ var ActionSheet = React.createClass({
             title: '',
             cancelButtonIndex: null,
             maskClosable: true,
-            onClick: null
+            onClick: null,
+            isShow: false
         };
     },
     getInitialState: function () {
@@ -18,36 +19,40 @@ var ActionSheet = React.createClass({
     },
     _closeMask: function () {
         if (this.props.maskClosable) {
-            this.refs.mask.style.display = 'none';
-            this.refs.actionSheet.style.display = 'none';
+            this.setState({
+                isShow: false
+            })
         }
     },
     _onClick: function (index) {
         this.props.onClick && this.props.onClick(index);
     },
     show: function () {
-        this.refs.mask.style.display = 'block';
-        this.refs.actionSheet.style.display = 'block';
+        this.setState({
+            isShow: true
+        })
     },
     hide: function () {
-        this.refs.mask.style.display = 'none';
-        this.refs.actionSheet.style.display = 'none';
+        this.setState({
+            isShow: false
+        })
     },
     render: function () {
         var optionArray = this.props.option;
         var _this = this;
+        var isShow = {display: this.state.isShow? 'block' : 'none'};
         return (
             <div>
-                <div className="ucs-actionsheet-mask" onClick={this._closeMask} ref="mask">{this.props.title}</div>
+                <div className="ucs-actionsheet-mask" onClick={this._closeMask} style={isShow}>{this.props.title}</div>
                 <aside
                     id={this.props.id}
                     className={this.state.className}
-                    ref='actionSheet'>
+                    style={isShow}>
                     <ul>
                         <li style={{display: this.props.title === '' ? 'none' : 'block'}} className="ucs-actionsheet-title">{this.props.title}</li>
                         {optionArray.map(function (item, index) {
                             return (
-                                <li key={index} onClick={_this._onClick.bind(_this, index + 1)}>{item.text}</li>
+                                <li key={index} onClick={_this._onClick.bind(_this, index)}>{item.text}</li>
                             );
                         })}
                     </ul>

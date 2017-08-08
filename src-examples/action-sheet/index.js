@@ -33,7 +33,7 @@ var Root = React.createClass({
         };
     },
     _listClickHandler: function (index) {
-        alert('你点击了第' + index + '个按钮');
+        alert('你点击了第' + (index + 1) + '个按钮');
     },
     _openActionSheet: function () {
         this.refs.actionSheet1.show();
@@ -50,8 +50,8 @@ var Root = React.createClass({
     render: function () {
         return (
             <div>
-                <ActionSheet ref="actionSheet1" title="我是描述" option={this.state.option} onClick={this._listClickHandler} cancelButtonIndex={0}/>
-                <ActionSheet ref="actionSheet2" title="我是描述2" option={this.state.option2} maskClosable={false} cancelButtonIndex={2}/>
+                <ActionSheet ref="actionSheet1" title="我是描述" option={this.state.option} onClick={this._listClickHandler}/>
+                <ActionSheet ref="actionSheet2" title="我是描述2" option={this.state.option2} maskClosable={false}/>
                 <button onClick={this._openActionSheet}>打开动作面板组件1</button>
                 <button onClick={this._openActionSheet2}>打开动作面板组件2</button>
             </div>
