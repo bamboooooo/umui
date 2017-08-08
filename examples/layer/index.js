@@ -186,13 +186,13 @@ var Layer = React.createClass({
             confirmBack: null,
             cancelBack: null,
             isShowClose: true,
-            closeBack: null,
-            isShow: false
+            closeBack: null
         };
     },
     getInitialState: function getInitialState() {
         return {
-            className: classnames('ucs-layer-container', this.props.className)
+            className: classnames('ucs-layer-container', this.props.className),
+            isShow: false
         };
     },
     show: function show() {

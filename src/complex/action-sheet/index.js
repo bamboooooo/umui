@@ -8,13 +8,13 @@ var ActionSheet = React.createClass({
             title: '',
             cancelButtonIndex: null,
             maskClosable: true,
-            onClick: null,
-            isShow: false
+            onClick: null
         };
     },
     getInitialState: function () {
         return {
-            className: classnames('ucs-actionsheet-container', this.props.className)
+            className: classnames('ucs-actionsheet-container', this.props.className),
+            isShow: false
         };
     },
     _closeMask: function () {
