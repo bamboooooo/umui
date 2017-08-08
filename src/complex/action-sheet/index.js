@@ -42,12 +42,11 @@ var ActionSheet = React.createClass({
         var _this = this;
         var isShow = {display: this.state.isShow ? 'block' : 'none'};
         return (
-            <div>
-                <div className="ucs-actionsheet-mask" onClick={this._closeMask} style={isShow}>{this.props.title}</div>
+            <div style={isShow}>
+                <div className="ucs-actionsheet-mask" onClick={this._closeMask} >{this.props.title}</div>
                 <aside
                     id={this.props.id}
-                    className={this.state.className}
-                    style={isShow}>
+                    className={this.state.className}>
                     <ul>
                         <li style={{display: this.props.title === '' ? 'none' : 'block'}} className="ucs-actionsheet-title">{this.props.title}</li>
                         {optionArray.map(function (item, index) {

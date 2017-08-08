@@ -6,7 +6,6 @@
   left: 0;
   top: 0;
   z-index: 101;
-  display: none;
 }
 .ucs-actionsheet-container{
   position: fixed;
@@ -17,7 +16,6 @@
   z-index: 102;
   width: 90%;
   text-align: center;
-  display: none;
   ul{
     background: #fff;
     border-radius: 4px;
