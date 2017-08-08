@@ -93,7 +93,7 @@ var Progress = React.createClass({
             _doc.style.height = (bd + 4) + 'px';
             _doc.style.backgroundColor = fnc;
             _doc.style.top = '-2px';
-            _doc.style.marginLeft = (-(bd + 4)/2) + 'px';
+            _doc.style.marginLeft = (-(bd + 4) / 2) + 'px';
         }
 
         if (_animate) {

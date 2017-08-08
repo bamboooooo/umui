@@ -3,14 +3,17 @@ var Popover = React.createClass({
     getDefaultProps: function () {
         return {
             visible: false,
-            mask: true,
+            displayMaskLayer: true,
             onVisibleChange: null,
-            overlayClassName: '',
+            className: '',
             overlayStyle: {left: 0, top: 0},
             placement: 'bottomLeft',
             overlay: [],
             onSelect: null,
-            defaultValue: ''
+            defaultValue: '',
+            id: '',
+            autoSlideUp: true,
+            style: {}
         };
     },
     getInitialState: function () {
@@ -49,19 +52,19 @@ var Popover = React.createClass({
 
         var maskCls = classnames({
             'ucs-popover-mask': true,
-            'ucs-popover-mask-hidden': !_this.props.mask || (_this.props.mask && !_this.state.visible)
+            'ucs-popover-mask-hidden': !_this.props.displayMaskLayer || (_this.props.displayMaskLayer && !_this.state.visible)
         });
         var popoverCls = classnames({
             'ucs-popover': true,
             'ucs-popover-hidden': !_this.state.visible,
             ['ucs-popover-placement-' + _this.props.placement]: !!_this.props.placement,
-            [_this.props.overlayClassName]: !!_this.props.overlayClassName
+            [_this.props.className]: !!_this.props.className
         });
 
         return (
             <div>
-                <div className={maskCls} onClick={_this.clickHandler}></div>
-                <div className={popoverCls} style={_this.props.overlayStyle} onClick={_this.clickHandler}>
+                <div className={maskCls} onClick={_this.props.autoSlideUp ? _this.clickHandler : ''}></div>
+                <div id={_this.props.id} className={popoverCls} style={_this.props.overlayStyle} onClick={_this.clickHandler}>
                     <div className="ucs-popover-content">
                         <div className="ucs-popover-arrow"></div>
                         <div className="ucs-popover-inner">
@@ -89,14 +92,35 @@ var Popover = React.createClass({
         });
     },
     onSelect: function (v) {
-        this.props.onSelect && this.props.onSelect(v);
         this.setState({
             value: v
+        }, function () {
+            this.props.onSelect && this.props.onSelect();
+        });
+    },
+    clear: function () {
+        this.setState({
+            value: ''
+        });
+    },
+    reset: function () {
+        this.setState({
+            value: this.props.defaultValue
+        });
+    },
+    show: function () {
+        this.setState({
+            visible: true
+        });
+    },
+    hide: function () {
+        this.setState({
+            visible: false
         });
     },
     render: function () {
         return (
-            <div ref="popover" onClick={this.clickHandler}>
+            <div ref="popover" onClick={this.clickHandler} style={this.props.style}>
                 {this.props.children}
             </div>
         );

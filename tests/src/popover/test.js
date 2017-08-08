@@ -14,12 +14,12 @@ describe('Popover组件测试', function () {
                     visible={false}
                     placement={'bottomLeft'}
                     overlay={[
-                            (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)}>扫一扫</Item>),
-                            (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }}>我的二维码</Item>),
-                            (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} disabled={true}>
-                                <span style={{ marginRight: 5 }}>帮助</span>
-                            </Item>)
-                        ]}
+                        (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)}>扫一扫</Item>),
+                        (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }}>我的二维码</Item>),
+                        (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} disabled={true}>
+                            <span style={{ marginRight: 5 }}>帮助</span>
+                        </Item>)
+                    ]}
                 >
                     <div>
                         更多（下左）
@@ -44,12 +44,12 @@ describe('Popover组件测试', function () {
                     visible={false}
                     placement={'bottomLeft'}
                     overlay={[
-                            (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)}>扫一扫</Item>),
-                            (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }}>我的二维码</Item>),
-                            (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} disabled={true}>
-                                <span style={{ marginRight: 5 }}>帮助</span>
-                            </Item>)
-                        ]}
+                        (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)}>扫一扫</Item>),
+                        (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }}>我的二维码</Item>),
+                        (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} disabled={true}>
+                            <span style={{ marginRight: 5 }}>帮助</span>
+                        </Item>)
+                    ]}
                 >
                     <div>
                         更多（下左）
@@ -69,9 +69,6 @@ describe('Popover组件测试', function () {
         });
         describe('Popover-onSelect()方法测试', function () {
             it('--------------onSelect()方法测试-----------------', function () {
-                var onSelect = function (v) {
-                    console.log('返回值', v);
-                };
                 const popover = TestUtils.renderIntoDocument(<Popover
                     mask={true}
                     overlayClassName={'fortest'}
@@ -79,21 +76,167 @@ describe('Popover组件测试', function () {
                     visible={false}
                     placement={'bottomLeft'}
                     overlay={[
-                            (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)}>扫一扫</Item>),
-                            (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }}>我的二维码</Item>),
-                            (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} disabled={true}>
-                                <span style={{ marginRight: 5 }}>帮助</span>
-                            </Item>)
-                        ]}
-                    onSelect={onSelect}
+                        (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)}>扫一扫</Item>),
+                        (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }}>我的二维码</Item>),
+                        (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} disabled={true}>
+                            <span style={{ marginRight: 5 }}>帮助</span>
+                        </Item>)
+                    ]}
                 >
                     <div>
                         更多（下左）
                     </div>
                 </Popover>);
-                const item = document.querySelectorAll('.ucs-popover-item')[0];
+                const item = document.querySelectorAll('.ucs-popover-item')[1];
                 TestUtils.Simulate.click(item);
-                // popover.onSelect();
+                console.log('onselect', popover.getValue());
+            });
+        });
+        describe('Popover-setValue()方法测试', function () {
+            it('--------------setValue()方法测试-----------------', function () {
+                const popover = TestUtils.renderIntoDocument(<Popover
+                    mask={true}
+                    overlayClassName={'fortest'}
+                    overlayStyle={{left: '30px', top: '60px'}}
+                    visible={false}
+                    placement={'bottomLeft'}
+                    overlay={[
+                        (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)}>扫一扫</Item>),
+                        (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }}>我的二维码</Item>),
+                        (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} disabled={true}>
+                            <span style={{ marginRight: 5 }}>帮助</span>
+                        </Item>)
+                    ]}
+                >
+                    <div>
+                        更多（下左）
+                    </div>
+                </Popover>);
+                popover.setValue('special');
+                expect(popover.state.value).to.be.equal('special');
+            });
+        });
+        describe('Popover-getValue()方法测试', function () {
+            it('--------------getValue()方法测试-----------------', function () {
+                const popover = TestUtils.renderIntoDocument(<Popover
+                    mask={true}
+                    overlayClassName={'fortest'}
+                    overlayStyle={{left: '30px', top: '60px'}}
+                    visible={false}
+                    placement={'bottomLeft'}
+                    overlay={[
+                        (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)}>扫一扫</Item>),
+                        (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }}>我的二维码</Item>),
+                        (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} disabled={true}>
+                            <span style={{ marginRight: 5 }}>帮助</span>
+                        </Item>)
+                    ]}
+                >
+                    <div>
+                        更多（下左）
+                    </div>
+                </Popover>);
+                popover.setValue('special');
+                expect(popover.getValue()).to.be.equal('special');
+            });
+        });
+        describe('Popover-clear()方法测试', function () {
+            it('--------------clear()方法测试-----------------', function () {
+                const popover = TestUtils.renderIntoDocument(<Popover
+                    defaultValue={'scan'}
+                    mask={true}
+                    overlayClassName={'fortest'}
+                    overlayStyle={{left: '30px', top: '60px'}}
+                    visible={false}
+                    placement={'bottomLeft'}
+                    overlay={[
+                        (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)}>扫一扫</Item>),
+                        (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }}>我的二维码</Item>),
+                        (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} disabled={true}>
+                            <span style={{ marginRight: 5 }}>帮助</span>
+                        </Item>)
+                    ]}
+                >
+                    <div>
+                        更多（下左）
+                    </div>
+                </Popover>);
+                popover.clear();
+                expect(popover.state.value).to.be.empty;
+            });
+        });
+        describe('Popover-reset()方法测试', function () {
+            it('--------------reset()方法测试-----------------', function () {
+                const popover = TestUtils.renderIntoDocument(<Popover
+                    defaultValue={'scan'}
+                    mask={true}
+                    overlayClassName={'fortest'}
+                    overlayStyle={{left: '30px', top: '60px'}}
+                    visible={false}
+                    placement={'bottomLeft'}
+                    overlay={[
+                        (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)}>扫一扫</Item>),
+                        (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }}>我的二维码</Item>),
+                        (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} disabled={true}>
+                            <span style={{ marginRight: 5 }}>帮助</span>
+                        </Item>)
+                    ]}
+                >
+                    <div>
+                        更多（下左）
+                    </div>
+                </Popover>);
+                popover.setValue('specail');
+                popover.reset();
+                expect(popover.state.value).to.be.equal('scan');
+            });
+        });
+        describe('Popover-show()方法测试', function () {
+            it('--------------show()方法测试-----------------', function () {
+                const popover = TestUtils.renderIntoDocument(<Popover
+                    mask={true}
+                    overlayClassName={'fortest'}
+                    overlayStyle={{left: '30px', top: '60px'}}
+                    visible={false}
+                    placement={'bottomLeft'}
+                    overlay={[
+                        (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)}>扫一扫</Item>),
+                        (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }}>我的二维码</Item>),
+                        (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} disabled={true}>
+                            <span style={{ marginRight: 5 }}>帮助</span>
+                        </Item>)
+                    ]}
+                >
+                    <div>
+                        更多（下左）
+                    </div>
+                </Popover>);
+                popover.show();
+                expect(popover.state.visible).to.be.ok;
+            });
+        });
+        describe('Popover-hide()方法测试', function () {
+            it('--------------hide()方法测试-----------------', function () {
+                const popover = TestUtils.renderIntoDocument(<Popover
+                    mask={true}
+                    overlayClassName={'fortest'}
+                    overlayStyle={{left: '30px', top: '60px'}}
+                    visible={false}
+                    placement={'bottomLeft'}
+                    overlay={[
+                        (<Item key="4" value="scan" icon={(<img src='../images/1.png' />)}>扫一扫</Item>),
+                        (<Item key="5" value="special" icon={(<img src='../images/1.png' />)} style={{ whiteSpace: 'nowrap' }}>我的二维码</Item>),
+                        (<Item key="6" value="button ct" icon={(<img src='../images/1.png' />)} disabled={true}>
+                            <span style={{ marginRight: 5 }}>帮助</span>
+                        </Item>)
+                    ]}
+                >
+                    <div>
+                        更多（下左）
+                    </div>
+                </Popover>);
+                popover.hide();
+                expect(popover.state.visible).to.not.be.ok;
             });
         });
     });

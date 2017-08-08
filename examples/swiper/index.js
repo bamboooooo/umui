@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 140);
+/******/ 	return __webpack_require__(__webpack_require__.s = 134);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -124,7 +124,43 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 105:
+/***/ 134:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Swiper = __webpack_require__(99);
+var Root = React.createClass({
+    displayName: 'Root',
+
+    render: function render() {
+        return React.createElement(
+            Swiper,
+            { defaultValue: 1, dots: true, arrows: true, autoPlay: true },
+            React.createElement(
+                Swiper.Item,
+                null,
+                '1'
+            ),
+            React.createElement(
+                Swiper.Item,
+                null,
+                '2'
+            ),
+            React.createElement(
+                Swiper.Item,
+                null,
+                '3'
+            )
+        );
+    }
+});
+ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
+
+/***/ }),
+
+/***/ 99:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -356,42 +392,6 @@ Swiper.Item = React.createClass({
         );
     }
 });
-
-/***/ }),
-
-/***/ 140:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Swiper = __webpack_require__(105);
-var Root = React.createClass({
-    displayName: 'Root',
-
-    render: function render() {
-        return React.createElement(
-            Swiper,
-            { defaultValue: 1, dots: true, arrows: true, autoPlay: true },
-            React.createElement(
-                Swiper.Item,
-                null,
-                '1'
-            ),
-            React.createElement(
-                Swiper.Item,
-                null,
-                '2'
-            ),
-            React.createElement(
-                Swiper.Item,
-                null,
-                '3'
-            )
-        );
-    }
-});
-ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
 
 /***/ })
 

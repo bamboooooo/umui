@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 134);
+/******/ 	return __webpack_require__(__webpack_require__.s = 128);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -124,7 +124,219 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 101:
+/***/ 128:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Popover = __webpack_require__(95);
+var Item = Popover.Item;
+var Root = React.createClass({
+    displayName: 'Root',
+
+    onSelect: function onSelect() {
+        console.log('选中值：', this.refs.myPopover.getValue());
+    },
+    onVisibleChange: function onVisibleChange() {
+        console.log('onVisibleChange');
+    },
+    render: function render() {
+        return React.createElement(
+            'div',
+            null,
+            React.createElement(
+                'div',
+                { style: { marginLeft: '30px', marginTop: '30px' } },
+                React.createElement(
+                    Popover,
+                    {
+                        displayMaskLayer: true,
+                        onVisibleChange: this.onVisibleChange,
+                        className: 'fortest',
+                        overlayStyle: { left: '30px', top: '60px' },
+                        visible: false,
+                        placement: 'bottomLeft',
+                        overlay: [React.createElement(
+                            Item,
+                            { key: '4', value: 'scan', icon: React.createElement('img', { src: '../images/1.png' }) },
+                            '\u626B\u4E00\u626B'
+                        ), React.createElement(
+                            Item,
+                            { key: '5', value: 'special', icon: React.createElement('img', { src: '../images/1.png' }), style: { whiteSpace: 'nowrap' } },
+                            '\u6211\u7684\u4E8C\u7EF4\u7801'
+                        ), React.createElement(
+                            Item,
+                            { key: '6', value: 'button ct', icon: React.createElement('img', { src: '../images/1.png' }), disabled: true },
+                            React.createElement(
+                                'span',
+                                { style: { marginRight: 5 } },
+                                '\u5E2E\u52A9'
+                            )
+                        )]
+                    },
+                    React.createElement(
+                        'div',
+                        null,
+                        '\u66F4\u591A\uFF08\u4E0B\u5DE6\uFF09'
+                    )
+                )
+            ),
+            React.createElement(
+                'div',
+                { style: { position: 'absolute', right: '30px', top: '100px' } },
+                React.createElement(
+                    Popover,
+                    {
+                        ref: 'myPopover',
+                        displayMaskLayer: false,
+                        className: 'fortest',
+                        overlayStyle: { right: '30px', top: '130px' },
+                        visible: false,
+                        placement: 'bottomRight',
+                        overlay: [React.createElement(
+                            Item,
+                            { key: '4', value: 'scan', icon: React.createElement('img', { src: '../images/1.png' }) },
+                            '\u626B\u4E00\u626B'
+                        ), React.createElement(
+                            Item,
+                            { key: '5', value: 'special', icon: React.createElement('img', { src: '../images/1.png' }), style: { whiteSpace: 'nowrap' } },
+                            '\u6211\u7684\u4E8C\u7EF4\u7801'
+                        ), React.createElement(
+                            Item,
+                            { key: '6', value: 'button ct', icon: React.createElement('img', { src: '../images/1.png' }) },
+                            React.createElement(
+                                'span',
+                                { style: { marginRight: 5 } },
+                                '\u5E2E\u52A9'
+                            )
+                        )],
+                        onSelect: this.onSelect
+                    },
+                    React.createElement(
+                        'div',
+                        null,
+                        '\u66F4\u591A\uFF08\u4E0B\u53F3\uFF09'
+                    )
+                )
+            ),
+            React.createElement(
+                'div',
+                { style: { position: 'absolute', left: '150px', top: '200px' } },
+                React.createElement(
+                    Popover,
+                    {
+                        displayMaskLayer: true,
+                        className: 'fortest',
+                        overlayStyle: { left: '95px', top: '70px' },
+                        visible: false,
+                        placement: 'top',
+                        overlay: [React.createElement(
+                            Item,
+                            { key: '4', value: 'scan', icon: React.createElement('img', { src: '../images/1.png' }) },
+                            '\u626B\u4E00\u626B'
+                        ), React.createElement(
+                            Item,
+                            { key: '5', value: 'special', icon: React.createElement('img', { src: '../images/1.png' }), style: { whiteSpace: 'nowrap' } },
+                            '\u6211\u7684\u4E8C\u7EF4\u7801'
+                        ), React.createElement(
+                            Item,
+                            { key: '6', value: 'button ct', icon: React.createElement('img', { src: '../images/1.png' }) },
+                            React.createElement(
+                                'span',
+                                { style: { marginRight: 5 } },
+                                '\u5E2E\u52A9'
+                            )
+                        )]
+                    },
+                    React.createElement(
+                        'div',
+                        null,
+                        '\u66F4\u591A\uFF08\u4E0A\uFF09'
+                    )
+                )
+            ),
+            React.createElement(
+                'div',
+                { style: { position: 'absolute', left: '30px', top: '300px' } },
+                React.createElement(
+                    Popover,
+                    {
+                        autoSlideUp: false,
+                        displayMaskLayer: true,
+                        className: 'fortest',
+                        overlayStyle: { left: '105px', top: '245px' },
+                        visible: false,
+                        placement: 'right',
+                        overlay: [React.createElement(
+                            Item,
+                            { key: '4', value: 'scan', icon: React.createElement('img', { src: '../images/1.png' }) },
+                            '\u626B\u4E00\u626B'
+                        ), React.createElement(
+                            Item,
+                            { key: '5', value: 'special', icon: React.createElement('img', { src: '../images/1.png' }), style: { whiteSpace: 'nowrap' } },
+                            '\u6211\u7684\u4E8C\u7EF4\u7801'
+                        ), React.createElement(
+                            Item,
+                            { key: '6', value: 'button ct', icon: React.createElement('img', { src: '../images/1.png' }) },
+                            React.createElement(
+                                'span',
+                                { style: { marginRight: 5 } },
+                                '\u5E2E\u52A9'
+                            )
+                        )]
+                    },
+                    React.createElement(
+                        'div',
+                        null,
+                        '\u66F4\u591A\uFF08\u53F3\uFF09'
+                    )
+                )
+            ),
+            React.createElement(
+                'div',
+                { style: { position: 'absolute', right: '30px', top: '300px' } },
+                React.createElement(
+                    Popover,
+                    {
+                        displayMaskLayer: true,
+                        className: 'fortest',
+                        overlayStyle: { right: '110px', top: '245px' },
+                        visible: false,
+                        placement: 'left',
+                        overlay: [React.createElement(
+                            Item,
+                            { key: '4', value: 'scan', icon: React.createElement('img', { src: '../images/1.png' }) },
+                            '\u626B\u4E00\u626B'
+                        ), React.createElement(
+                            Item,
+                            { key: '5', value: 'special', icon: React.createElement('img', { src: '../images/1.png' }), style: { whiteSpace: 'nowrap' } },
+                            '\u6211\u7684\u4E8C\u7EF4\u7801'
+                        ), React.createElement(
+                            Item,
+                            { key: '6', value: 'button ct', icon: React.createElement('img', { src: '../images/1.png' }) },
+                            React.createElement(
+                                'span',
+                                { style: { marginRight: 5 } },
+                                '\u5E2E\u52A9'
+                            )
+                        )]
+                    },
+                    React.createElement(
+                        'div',
+                        null,
+                        '\u66F4\u591A\uFF08\u5DE6\uFF09'
+                    )
+                )
+            )
+        );
+    }
+});
+ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
+
+/***/ }),
+
+/***/ 95:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -139,14 +351,17 @@ var Popover = React.createClass({
     getDefaultProps: function getDefaultProps() {
         return {
             visible: false,
-            mask: true,
+            displayMaskLayer: true,
             onVisibleChange: null,
-            overlayClassName: '',
+            className: '',
             overlayStyle: { left: 0, top: 0 },
             placement: 'bottomLeft',
             overlay: [],
             onSelect: null,
-            defaultValue: ''
+            defaultValue: '',
+            id: '',
+            autoSlideUp: true,
+            style: {}
         };
     },
     getInitialState: function getInitialState() {
@@ -187,20 +402,20 @@ var Popover = React.createClass({
 
         var maskCls = classnames({
             'ucs-popover-mask': true,
-            'ucs-popover-mask-hidden': !_this.props.mask || _this.props.mask && !_this.state.visible
+            'ucs-popover-mask-hidden': !_this.props.displayMaskLayer || _this.props.displayMaskLayer && !_this.state.visible
         });
         var popoverCls = classnames((_classnames = {
             'ucs-popover': true,
             'ucs-popover-hidden': !_this.state.visible
-        }, _defineProperty(_classnames, 'ucs-popover-placement-' + _this.props.placement, !!_this.props.placement), _defineProperty(_classnames, _this.props.overlayClassName, !!_this.props.overlayClassName), _classnames));
+        }, _defineProperty(_classnames, 'ucs-popover-placement-' + _this.props.placement, !!_this.props.placement), _defineProperty(_classnames, _this.props.className, !!_this.props.className), _classnames));
 
         return React.createElement(
             'div',
             null,
-            React.createElement('div', { className: maskCls, onClick: _this.clickHandler }),
+            React.createElement('div', { className: maskCls, onClick: _this.props.autoSlideUp ? _this.clickHandler : '' }),
             React.createElement(
                 'div',
-                { className: popoverCls, style: _this.props.overlayStyle, onClick: _this.clickHandler },
+                { id: _this.props.id, className: popoverCls, style: _this.props.overlayStyle, onClick: _this.clickHandler },
                 React.createElement(
                     'div',
                     { className: 'ucs-popover-content' },
@@ -227,15 +442,36 @@ var Popover = React.createClass({
         });
     },
     onSelect: function onSelect(v) {
-        this.props.onSelect && this.props.onSelect(v);
         this.setState({
             value: v
+        }, function () {
+            this.props.onSelect && this.props.onSelect();
+        });
+    },
+    clear: function clear() {
+        this.setState({
+            value: ''
+        });
+    },
+    reset: function reset() {
+        this.setState({
+            value: this.props.defaultValue
+        });
+    },
+    show: function show() {
+        this.setState({
+            visible: true
+        });
+    },
+    hide: function hide() {
+        this.setState({
+            visible: false
         });
     },
     render: function render() {
         return React.createElement(
             'div',
-            { ref: 'popover', onClick: this.clickHandler },
+            { ref: 'popover', onClick: this.clickHandler, style: this.props.style },
             this.props.children
         );
     }
@@ -273,216 +509,6 @@ Popover.Item = React.createClass({
         );
     }
 });
-
-/***/ }),
-
-/***/ 134:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Popover = __webpack_require__(101);
-var Item = Popover.Item;
-var Root = React.createClass({
-    displayName: 'Root',
-
-    onSelect: function onSelect(v) {
-        console.log('选中值：', v);
-    },
-    onVisibleChange: function onVisibleChange() {
-        console.log('onVisibleChange');
-    },
-    render: function render() {
-        return React.createElement(
-            'div',
-            null,
-            React.createElement(
-                'div',
-                { style: { marginLeft: '30px', marginTop: '30px' } },
-                React.createElement(
-                    Popover,
-                    {
-                        mask: true,
-                        onVisibleChange: this.onVisibleChange,
-                        overlayClassName: 'fortest',
-                        overlayStyle: { left: '30px', top: '60px' },
-                        visible: false,
-                        placement: 'bottomLeft',
-                        overlay: [React.createElement(
-                            Item,
-                            { key: '4', value: 'scan', icon: React.createElement('img', { src: '../images/1.png' }) },
-                            '\u626B\u4E00\u626B'
-                        ), React.createElement(
-                            Item,
-                            { key: '5', value: 'special', icon: React.createElement('img', { src: '../images/1.png' }), style: { whiteSpace: 'nowrap' } },
-                            '\u6211\u7684\u4E8C\u7EF4\u7801'
-                        ), React.createElement(
-                            Item,
-                            { key: '6', value: 'button ct', icon: React.createElement('img', { src: '../images/1.png' }), disabled: true },
-                            React.createElement(
-                                'span',
-                                { style: { marginRight: 5 } },
-                                '\u5E2E\u52A9'
-                            )
-                        )]
-                    },
-                    React.createElement(
-                        'div',
-                        null,
-                        '\u66F4\u591A\uFF08\u4E0B\u5DE6\uFF09'
-                    )
-                )
-            ),
-            React.createElement(
-                'div',
-                { style: { position: 'absolute', right: '30px', top: '100px' } },
-                React.createElement(
-                    Popover,
-                    {
-                        mask: false,
-                        overlayClassName: 'fortest',
-                        overlayStyle: { right: '30px', top: '130px' },
-                        visible: false,
-                        placement: 'bottomRight',
-                        overlay: [React.createElement(
-                            Item,
-                            { key: '4', value: 'scan', icon: React.createElement('img', { src: '../images/1.png' }) },
-                            '\u626B\u4E00\u626B'
-                        ), React.createElement(
-                            Item,
-                            { key: '5', value: 'special', icon: React.createElement('img', { src: '../images/1.png' }), style: { whiteSpace: 'nowrap' } },
-                            '\u6211\u7684\u4E8C\u7EF4\u7801'
-                        ), React.createElement(
-                            Item,
-                            { key: '6', value: 'button ct', icon: React.createElement('img', { src: '../images/1.png' }) },
-                            React.createElement(
-                                'span',
-                                { style: { marginRight: 5 } },
-                                '\u5E2E\u52A9'
-                            )
-                        )],
-                        onSelect: this.onSelect
-                    },
-                    React.createElement(
-                        'div',
-                        null,
-                        '\u66F4\u591A\uFF08\u4E0B\u53F3\uFF09'
-                    )
-                )
-            ),
-            React.createElement(
-                'div',
-                { style: { position: 'absolute', left: '150px', top: '200px' } },
-                React.createElement(
-                    Popover,
-                    {
-                        mask: true,
-                        overlayClassName: 'fortest',
-                        overlayStyle: { left: '95px', top: '70px' },
-                        visible: false,
-                        placement: 'top',
-                        overlay: [React.createElement(
-                            Item,
-                            { key: '4', value: 'scan', icon: React.createElement('img', { src: '../images/1.png' }) },
-                            '\u626B\u4E00\u626B'
-                        ), React.createElement(
-                            Item,
-                            { key: '5', value: 'special', icon: React.createElement('img', { src: '../images/1.png' }), style: { whiteSpace: 'nowrap' } },
-                            '\u6211\u7684\u4E8C\u7EF4\u7801'
-                        ), React.createElement(
-                            Item,
-                            { key: '6', value: 'button ct', icon: React.createElement('img', { src: '../images/1.png' }) },
-                            React.createElement(
-                                'span',
-                                { style: { marginRight: 5 } },
-                                '\u5E2E\u52A9'
-                            )
-                        )]
-                    },
-                    React.createElement(
-                        'div',
-                        null,
-                        '\u66F4\u591A\uFF08\u4E0A\uFF09'
-                    )
-                )
-            ),
-            React.createElement(
-                'div',
-                { style: { position: 'absolute', left: '30px', top: '300px' } },
-                React.createElement(
-                    Popover,
-                    {
-                        mask: true,
-                        overlayClassName: 'fortest',
-                        overlayStyle: { left: '105px', top: '245px' },
-                        visible: false,
-                        placement: 'right',
-                        overlay: [React.createElement(
-                            Item,
-                            { key: '4', value: 'scan', icon: React.createElement('img', { src: '../images/1.png' }) },
-                            '\u626B\u4E00\u626B'
-                        ), React.createElement(
-                            Item,
-                            { key: '5', value: 'special', icon: React.createElement('img', { src: '../images/1.png' }), style: { whiteSpace: 'nowrap' } },
-                            '\u6211\u7684\u4E8C\u7EF4\u7801'
-                        ), React.createElement(
-                            Item,
-                            { key: '6', value: 'button ct', icon: React.createElement('img', { src: '../images/1.png' }) },
-                            React.createElement(
-                                'span',
-                                { style: { marginRight: 5 } },
-                                '\u5E2E\u52A9'
-                            )
-                        )]
-                    },
-                    React.createElement(
-                        'div',
-                        null,
-                        '\u66F4\u591A\uFF08\u53F3\uFF09'
-                    )
-                )
-            ),
-            React.createElement(
-                'div',
-                { style: { position: 'absolute', right: '30px', top: '300px' } },
-                React.createElement(
-                    Popover,
-                    {
-                        mask: true,
-                        overlayClassName: 'fortest',
-                        overlayStyle: { right: '110px', top: '245px' },
-                        visible: false,
-                        placement: 'left',
-                        overlay: [React.createElement(
-                            Item,
-                            { key: '4', value: 'scan', icon: React.createElement('img', { src: '../images/1.png' }) },
-                            '\u626B\u4E00\u626B'
-                        ), React.createElement(
-                            Item,
-                            { key: '5', value: 'special', icon: React.createElement('img', { src: '../images/1.png' }), style: { whiteSpace: 'nowrap' } },
-                            '\u6211\u7684\u4E8C\u7EF4\u7801'
-                        ), React.createElement(
-                            Item,
-                            { key: '6', value: 'button ct', icon: React.createElement('img', { src: '../images/1.png' }) },
-                            React.createElement(
-                                'span',
-                                { style: { marginRight: 5 } },
-                                '\u5E2E\u52A9'
-                            )
-                        )]
-                    },
-                    React.createElement(
-                        'div',
-                        null,
-                        '\u66F4\u591A\uFF08\u5DE6\uFF09'
-                    )
-                )
-            )
-        );
-    }
-});
-ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
 
 /***/ })
 

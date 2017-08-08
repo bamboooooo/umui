@@ -1,8 +1,8 @@
 var Popover = require('../../src/complex/popover');
 var Item = Popover.Item;
 var Root = React.createClass({
-    onSelect: function (v) {
-        console.log('选中值：', v);
+    onSelect: function () {
+        console.log('选中值：', this.refs.myPopover.getValue());
     },
     onVisibleChange: function () {
         console.log('onVisibleChange');
@@ -12,9 +12,9 @@ var Root = React.createClass({
             <div>
                 <div style={{marginLeft: '30px', marginTop: '30px'}}>
                     <Popover
-                        mask={true}
+                        displayMaskLayer={true}
                         onVisibleChange={this.onVisibleChange}
-                        overlayClassName={'fortest'}
+                        className={'fortest'}
                         overlayStyle={{left: '30px', top: '60px'}}
                         visible={false}
                         placement={'bottomLeft'}
@@ -33,8 +33,9 @@ var Root = React.createClass({
                 </div>
                 <div style={{position: 'absolute', right: '30px', top: '100px'}}>
                     <Popover
-                        mask={false}
-                        overlayClassName={'fortest'}
+                        ref="myPopover"
+                        displayMaskLayer={false}
+                        className={'fortest'}
                         overlayStyle={{right: '30px', top: '130px'}}
                         visible={false}
                         placement={'bottomRight'}
@@ -54,8 +55,8 @@ var Root = React.createClass({
                 </div>
                 <div style={{position: 'absolute', left: '150px', top: '200px'}}>
                     <Popover
-                        mask={true}
-                        overlayClassName={'fortest'}
+                        displayMaskLayer={true}
+                        className={'fortest'}
                         overlayStyle={{left: '95px', top: '70px'}}
                         visible={false}
                         placement={'top'}
@@ -74,8 +75,9 @@ var Root = React.createClass({
                 </div>
                 <div style={{position: 'absolute', left: '30px', top: '300px'}}>
                     <Popover
-                        mask={true}
-                        overlayClassName={'fortest'}
+                        autoSlideUp={false}
+                        displayMaskLayer={true}
+                        className={'fortest'}
                         overlayStyle={{left: '105px', top: '245px'}}
                         visible={false}
                         placement={'right'}
@@ -94,8 +96,8 @@ var Root = React.createClass({
                 </div>
                 <div style={{position: 'absolute', right: '30px', top: '300px'}}>
                     <Popover
-                        mask={true}
-                        overlayClassName={'fortest'}
+                        displayMaskLayer={true}
+                        className={'fortest'}
                         overlayStyle={{right: '110px', top: '245px'}}
                         visible={false}
                         placement={'left'}
