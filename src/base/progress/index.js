@@ -29,7 +29,10 @@ var Progress = React.createClass({
             value: 0,
             animate: true,
             speed: 10,
-            className: ''
+            className: '',
+            id: '',
+            doc: false,
+            showInfo: true
         };
     },
     getInitialState: function () {
@@ -70,6 +73,7 @@ var Progress = React.createClass({
         var _lineInner = _wrap.querySelector('.line-inner');
         var _info = _wrap.querySelector('.line-info');
         var _num = _info.querySelector('.num-info');
+        var _doc = _wrap.querySelector('.line-doc');
 
         _lineBg.style.height = bd + 'px';
         _lineBg.style.borderRadius = bd + 'px';
@@ -84,6 +88,14 @@ var Progress = React.createClass({
         _info.style.top = -bd + 'px';
         _info.style.color = fnc;
 
+        if (_doc) {
+            _doc.style.width = (bd + 4) + 'px';
+            _doc.style.height = (bd + 4) + 'px';
+            _doc.style.backgroundColor = fnc;
+            _doc.style.top = '-2px';
+            _doc.style.marginLeft = (-(bd + 4)/2) + 'px';
+        }
+
         if (_animate) {
             var range = 0;
             var loading = setInterval(function () {
@@ -91,13 +103,20 @@ var Progress = React.createClass({
                     clearInterval(loading);
                 }
                 _lineInner.style.width = range + '%';
-                _num.childNodes[0].innerHTML = range;
+                if (_this.props.showInfo) {
+                    _num.childNodes[0].innerHTML = range;
+                }
+                if (_doc) {
+                    _doc.style.left = range + '%';
+                }
                 _info.style.left = range + '%';
                 range++;
             }, _speed);
         } else {
             _lineInner.style.width = _value + '%';
-            _num.childNodes[0].innerHTML = _value;
+            if (_this.props.showInfo) {
+                _num.childNodes[0].innerHTML = _value;
+            }
             _info.style.left = _value + '%';
         }
     },
@@ -163,7 +182,9 @@ var Progress = React.createClass({
                     _right.style.left = -bd + 'px';
                 }
                 _left.style.webkitTransform = 'rotate(' + (18 / 5) * percent + 'deg)';
-                _num.childNodes[0].innerHTML = percent;
+                if (_this.props.showInfo) {
+                    _num.childNodes[0].innerHTML = percent;
+                }
                 percent++;
             }, _speed);
         } else {
@@ -177,7 +198,9 @@ var Progress = React.createClass({
                 _right.style.left = -bd + 'px';
             }
             _left.style.webkitTransform = 'rotate(' + (18 / 5) * _value + 'deg)';
-            _num.childNodes[0].innerHTML = _value;
+            if (_this.props.showInfo) {
+                _num.childNodes[0].innerHTML = _value;
+            }
         }
     },
     render: function () {
@@ -186,7 +209,7 @@ var Progress = React.createClass({
             [this.props.className]: !!this.props.className
         });
         return (
-            <div className={classes}>
+            <div className={classes} id={this.props.id}>
                 {
                     this.props.type === 'ring' ? (
                         <div className="ring-wrap" ref="ring">
@@ -195,7 +218,9 @@ var Progress = React.createClass({
                                 <div className="ring-percent right wth0"></div>
                             </div>
                             <div className="ring-info">
-                                <span className="num-info"><i>0</i>%</span>
+                                {
+                                    this.props.showInfo ? (<span className="num-info"><i>0</i>%</span>) : ''
+                                }
                                 {
                                     this.props.children
                                 }
@@ -206,8 +231,13 @@ var Progress = React.createClass({
                             <div className="line-bg">
                                 <div className="line-inner"></div>
                                 <div className="line-info">
-                                    <span className="num-info"><i>0</i>%</span>
+                                    {
+                                        this.props.showInfo ? (<span className="num-info"><i>0</i>%</span>) : ''
+                                    }
                                 </div>
+                                {
+                                    this.props.doc ? (<div className="line-doc"></div>) : ''
+                                }
                             </div>
                         </div>
                     )
