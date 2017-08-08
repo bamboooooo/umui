@@ -4,36 +4,36 @@ var Root = React.createClass({
         return {
             option: [
                 {
-                    text: '操作一',
-                    clickHandler: null
+                    text: '操作一'
                 },
                 {
-                    text: '操作二',
-                    clickHandler: null
+                    text: '取消'
                 },
                 {
-                    text: '操作三',
-                    clickHandler: null
+                    text: '操作三'
+                },
+                {
+                    text: '操作二'
                 }
             ],
             option2: [
                 {
-                    text: '按钮一',
-                    clickHandler: null
+                    text: '按钮一'
                 },
                 {
-                    text: '按钮二',
-                    clickHandler: null
+                    text: '按钮二'
                 },
                 {
-                    text: '按钮三',
-                    clickHandler: null
+                    text: '按钮三'
+                },
+                {
+                    text: '取消'
                 }
             ]
         };
     },
-    _listClickHandler: function () {
-        alert('你点击了动作面板组件');
+    _listClickHandler: function (index) {
+        alert('你点击了第' + index + '个按钮');
     },
     _openActionSheet: function () {
         this.refs.actionSheet1.show();

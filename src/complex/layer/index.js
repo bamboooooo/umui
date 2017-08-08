@@ -32,6 +32,7 @@ var Layer = React.createClass({
                     id={this.props.id}>
                     <div className="ucs-layer-body">
                         <a href="javascript:;" className="alert-close" style={{display: this.props.isShowClose ? 'block' : 'none'}} onClick={this.props.closeBack}>×</a>
+                        {this.props.title}
                         {this.props.children}
                         <div className="ucs-layer-button">
                             <a href="javascript:;" className="ucs-layer-btn confirm" onClick={this.props.confirmBack}>{this.props.confirmText}</a>
@@ -39,15 +40,6 @@ var Layer = React.createClass({
                         </div>
                     </div>
                 </div>
-            </div>
-        );
-    }
-});
-Layer.Title = React.createClass({
-    render: function () {
-        return (
-            <div className="ucs-layer-title">
-                {this.props.children}
             </div>
         );
     }

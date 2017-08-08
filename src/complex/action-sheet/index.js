@@ -22,8 +22,8 @@ var ActionSheet = React.createClass({
             this.refs.actionSheet.style.display = 'none';
         }
     },
-    _onClick: function () {
-        this.props.onClick && this.props.onClick();
+    _onClick: function (index) {
+        this.props.onClick && this.props.onClick(index);
     },
     show: function () {
         this.refs.mask.style.display = 'block';
@@ -35,24 +35,19 @@ var ActionSheet = React.createClass({
     },
     render: function () {
         var optionArray = this.props.option;
-        if (this.props.cancelButtonIndex || this.props.cancelButtonIndex === 0) {
-            optionArray.splice(this.props.cancelButtonIndex, 0, {text: '取消', clickHandler: this.hide});
-        } else {
-            optionArray.push({text: '取消', clickHandler: this.hide});
-        }
+        var _this = this;
         return (
             <div>
-                <div className="ucs-actionsheet-mask" onClick={this._closeMask} ref="mask"></div>
+                <div className="ucs-actionsheet-mask" onClick={this._closeMask} ref="mask">{this.props.title}</div>
                 <aside
                     id={this.props.id}
                     className={this.state.className}
-                    ref='actionSheet'
-                    onClick={this._onClick}>
+                    ref='actionSheet'>
                     <ul>
                         <li style={{display: this.props.title === '' ? 'none' : 'block'}} className="ucs-actionsheet-title">{this.props.title}</li>
                         {optionArray.map(function (item, index) {
                             return (
-                                <li key={index} onClick={item.clickHandler}>{item.text}</li>
+                                <li key={index} onClick={_this._onClick.bind(_this, index + 1)}>{item.text}</li>
                             );
                         })}
                     </ul>

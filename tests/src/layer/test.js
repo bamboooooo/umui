@@ -5,8 +5,8 @@ describe('Layer组件测试', function() {
         // props测试
         describe('Layer-props测试', function() {
             it('----------ActionSheet-props测试---------------', function() {
-                const Root = (<Layer className='testClass' id="testId" confirmText="按钮一" cancelText="按钮二" isShowClose={false}>
-                    <Layer.Title>标题</Layer.Title>
+                const title = <div className="ucs-layer-title">我是标题</div>;
+                const Root = (<Layer className='testClass' id="testId" confirmText="按钮一" cancelText="按钮二" isShowClose={false} title={title}>
                     <div className="ucs-layer-text">内容内容内容内容</div>
                 </Layer>);
 
@@ -14,7 +14,7 @@ describe('Layer组件测试', function() {
                 const layerDom = findDOMNode(layer);
                 expect(layer.props.className.indexOf('testClass')).to.not.be.equal(-1);
                 expect(layer.props.id.indexOf('testId')).to.not.be.equal(-1);
-                expect(layerDom.querySelector('.ucs-layer-title').innerHTML).to.be.equal('标题');
+                expect(layerDom.querySelector('.ucs-layer-title').innerHTML).to.be.equal('我是标题');
                 expect(layerDom.querySelector('.ucs-layer-text').innerHTML).to.be.equal('内容内容内容内容');
                 expect(layerDom.querySelector('.confirm').innerHTML).to.be.equal('按钮一');
                 expect(layerDom.querySelector('.cancel').innerHTML).to.be.equal('按钮二');
