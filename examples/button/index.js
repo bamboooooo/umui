@@ -63,12 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 97);
+/******/ 	return __webpack_require__(__webpack_require__.s = 116);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 2:
+/***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -124,13 +124,76 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 29:
+/***/ 116:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var classnames = __webpack_require__(2);
+var Button = __webpack_require__(7);
+var Root = React.createClass({
+    displayName: 'Root',
+
+    onClick1: function onClick1() {
+        console.log('click');
+    },
+    onClick2: function onClick2() {
+        console.log('取消');
+    },
+    onClick4: function onClick4() {
+        this.refs.button4.setDisabled(true);
+    },
+    onClick5: function onClick5() {
+        this.refs.button5.setValue('我变了');
+    },
+    render: function render() {
+        return React.createElement(
+            'div',
+            null,
+            React.createElement(
+                'p',
+                null,
+                '\u6B63\u5E38\u7684\u4F7F\u7528'
+            ),
+            React.createElement(Button, { ref: 'button1', id: 'test', value: '\u786E\u5B9A', onClick: this.onClick1 }),
+            React.createElement(
+                'p',
+                null,
+                '\u53D6\u6D88\u7684\u60C5\u51B5'
+            ),
+            React.createElement(Button, { ref: 'button2', className: 'ucs-btn-cancel', value: '\u53D6\u6D88', onClick: this.onClick2 }),
+            React.createElement(
+                'p',
+                null,
+                '\u7981\u7528\u7684\u60C5\u51B5'
+            ),
+            React.createElement(Button, { ref: 'button3', disabled: true, value: '\u4E0D\u53EF\u70B9\u51FB' }),
+            React.createElement(
+                'p',
+                null,
+                '\u8BBE\u7F6E\u7981\u7528\u7684\u60C5\u51B5'
+            ),
+            React.createElement(Button, { ref: 'button4', value: '\u70B9\u51FB/\u4E0D\u53EF\u70B9\u51FB', onClick: this.onClick4 }),
+            React.createElement(
+                'p',
+                null,
+                '\u8BBE\u7F6Evalue\u7684\u60C5\u51B5'
+            ),
+            React.createElement(Button, { ref: 'button5', value: '\u6539\u53D8\u6211', onClick: this.onClick5 })
+        );
+    }
+});
+ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
+
+/***/ }),
+
+/***/ 7:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var classnames = __webpack_require__(0);
 var Button = React.createClass({
     displayName: 'Button',
 
@@ -189,69 +252,6 @@ var Button = React.createClass({
     }
 });
 module.exports = Button;
-
-/***/ }),
-
-/***/ 97:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Button = __webpack_require__(29);
-var Root = React.createClass({
-    displayName: 'Root',
-
-    onClick1: function onClick1() {
-        console.log('click');
-    },
-    onClick2: function onClick2() {
-        console.log('取消');
-    },
-    onClick4: function onClick4() {
-        this.refs.button4.setDisabled(true);
-    },
-    onClick5: function onClick5() {
-        this.refs.button5.setValue('我变了');
-    },
-    render: function render() {
-        return React.createElement(
-            'div',
-            null,
-            React.createElement(
-                'p',
-                null,
-                '\u6B63\u5E38\u7684\u4F7F\u7528'
-            ),
-            React.createElement(Button, { ref: 'button1', id: 'test', value: '\u786E\u5B9A', onClick: this.onClick1 }),
-            React.createElement(
-                'p',
-                null,
-                '\u53D6\u6D88\u7684\u60C5\u51B5'
-            ),
-            React.createElement(Button, { ref: 'button2', className: 'ucs-btn-cancel', value: '\u53D6\u6D88', onClick: this.onClick2 }),
-            React.createElement(
-                'p',
-                null,
-                '\u7981\u7528\u7684\u60C5\u51B5'
-            ),
-            React.createElement(Button, { ref: 'button3', disabled: true, value: '\u4E0D\u53EF\u70B9\u51FB' }),
-            React.createElement(
-                'p',
-                null,
-                '\u8BBE\u7F6E\u7981\u7528\u7684\u60C5\u51B5'
-            ),
-            React.createElement(Button, { ref: 'button4', value: '\u70B9\u51FB/\u4E0D\u53EF\u70B9\u51FB', onClick: this.onClick4 }),
-            React.createElement(
-                'p',
-                null,
-                '\u8BBE\u7F6Evalue\u7684\u60C5\u51B5'
-            ),
-            React.createElement(Button, { ref: 'button5', value: '\u6539\u53D8\u6211', onClick: this.onClick5 })
-        );
-    }
-});
-ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
 
 /***/ })
 

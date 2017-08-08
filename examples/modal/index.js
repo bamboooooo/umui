@@ -63,12 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 114);
+/******/ 	return __webpack_require__(__webpack_require__.s = 127);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 1:
+/***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -124,7 +124,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 114:
+/***/ 127:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -133,8 +133,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /**
  * Created by maxuezhu on 2017/8/4.
  */
-var Modal = __webpack_require__(95);
-var Button = __webpack_require__(29);
+var Modal = __webpack_require__(98);
+var Button = __webpack_require__(7);
 var Root = React.createClass({
     displayName: 'Root',
 
@@ -172,13 +172,13 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'
 
 /***/ }),
 
-/***/ 29:
+/***/ 7:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var classnames = __webpack_require__(1);
+var classnames = __webpack_require__(0);
 var Button = React.createClass({
     displayName: 'Button',
 
@@ -197,6 +197,15 @@ var Button = React.createClass({
             disabled: this.props.disabled ? this.props.disabled : false,
             value: this.props.value
         };
+    },
+    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
+        if (newProps !== this.props) {
+            this.setState({
+                value: newProps.value,
+                className: classnames('ucs-button', newProps.className),
+                disabled: newProps.disabled
+            });
+        }
     },
     _onClick: function _onClick() {
         this.props.onClick && this.props.onClick();
@@ -231,7 +240,7 @@ module.exports = Button;
 
 /***/ }),
 
-/***/ 95:
+/***/ 98:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -241,7 +250,7 @@ module.exports = Button;
  * Created by maxuezhu on 2017/8/4.
  * 说明：提示对话框组件
  */
-var Button = __webpack_require__(29);
+var Button = __webpack_require__(7);
 var Modal = function () {
     var div = document.createElement('div');
     var ConfirmItem = React.createClass({

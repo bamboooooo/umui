@@ -63,12 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 98);
+/******/ 	return __webpack_require__(__webpack_require__.s = 117);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 2:
+/***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -124,13 +124,76 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 29:
+/***/ 117:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var classnames = __webpack_require__(2);
+var CheckCode = __webpack_require__(93);
+var Root = React.createClass({
+    displayName: "Root",
+
+    onClick1: function onClick1() {
+        this.refs.checkCode.start();
+    },
+    onClick2: function onClick2() {
+        this.refs.checkCode2.start();
+    },
+    onClick3: function onClick3() {
+        this.refs.checkCode2.setDisabled(true);
+    },
+    onClick4: function onClick4() {
+        this.refs.checkCode2.reset();
+    },
+    render: function render() {
+        return React.createElement(
+            "div",
+            null,
+            React.createElement(
+                "h3",
+                null,
+                "\u6B63\u5E38\u7684\u4F7F\u7528"
+            ),
+            React.createElement(CheckCode, { ref: "checkCode", id: "test", onClick: this.onClick1 }),
+            React.createElement(
+                "h3",
+                null,
+                "\u7981\u7528"
+            ),
+            React.createElement(CheckCode, { ref: "checkCode1", disabled: true }),
+            React.createElement(
+                "h3",
+                null,
+                "\u529F\u80FD\u6D4B\u8BD5"
+            ),
+            React.createElement(CheckCode, { ref: "checkCode2", text: "\u70B9\u51FB\u83B7\u53D6", temp: "s", onClick: this.onClick2 }),
+            React.createElement("br", null),
+            React.createElement(
+                "a",
+                { onClick: this.onClick3 },
+                "\u8BBE\u4E3A\u7981\u7528"
+            ),
+            React.createElement("br", null),
+            React.createElement(
+                "a",
+                { onClick: this.onClick4 },
+                "\u91CD\u7F6E"
+            )
+        );
+    }
+});
+ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
+
+/***/ }),
+
+/***/ 7:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var classnames = __webpack_require__(0);
 var Button = React.createClass({
     displayName: 'Button',
 
@@ -192,7 +255,7 @@ module.exports = Button;
 
 /***/ }),
 
-/***/ 86:
+/***/ 93:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -201,8 +264,8 @@ module.exports = Button;
 /**
  * Created by chenzefang on 2017/8/4.
  */
-var classnames = __webpack_require__(2);
-var Button = __webpack_require__(29);
+var classnames = __webpack_require__(0);
+var Button = __webpack_require__(7);
 var CheckCode = React.createClass({
     displayName: 'CheckCode',
 
@@ -285,69 +348,6 @@ var CheckCode = React.createClass({
 });
 
 module.exports = CheckCode;
-
-/***/ }),
-
-/***/ 98:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var CheckCode = __webpack_require__(86);
-var Root = React.createClass({
-    displayName: "Root",
-
-    onClick1: function onClick1() {
-        this.refs.checkCode.start();
-    },
-    onClick2: function onClick2() {
-        this.refs.checkCode2.start();
-    },
-    onClick3: function onClick3() {
-        this.refs.checkCode2.setDisabled(true);
-    },
-    onClick4: function onClick4() {
-        this.refs.checkCode2.reset();
-    },
-    render: function render() {
-        return React.createElement(
-            "div",
-            null,
-            React.createElement(
-                "h3",
-                null,
-                "\u6B63\u5E38\u7684\u4F7F\u7528"
-            ),
-            React.createElement(CheckCode, { ref: "checkCode", id: "test", onClick: this.onClick1 }),
-            React.createElement(
-                "h3",
-                null,
-                "\u7981\u7528"
-            ),
-            React.createElement(CheckCode, { ref: "checkCode1", disabled: true }),
-            React.createElement(
-                "h3",
-                null,
-                "\u529F\u80FD\u6D4B\u8BD5"
-            ),
-            React.createElement(CheckCode, { ref: "checkCode2", text: "\u70B9\u51FB\u83B7\u53D6", temp: "s", onClick: this.onClick2 }),
-            React.createElement("br", null),
-            React.createElement(
-                "a",
-                { onClick: this.onClick3 },
-                "\u8BBE\u4E3A\u7981\u7528"
-            ),
-            React.createElement("br", null),
-            React.createElement(
-                "a",
-                { onClick: this.onClick4 },
-                "\u91CD\u7F6E"
-            )
-        );
-    }
-});
-ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
 
 /***/ })
 

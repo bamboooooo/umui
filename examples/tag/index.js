@@ -63,12 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 91);
+/******/ 	return __webpack_require__(__webpack_require__.s = 143);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 5:
+/***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -124,7 +124,40 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 78:
+/***/ 143:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * 创建人：DuHuiling
+ * 创建时间：2017/7/17
+ * 说明：
+ */
+var Tag = __webpack_require__(90);
+var Root = React.createClass({
+    displayName: 'Root',
+
+    componentDidMount: function componentDidMount() {
+        var _this = this;
+        _this.refs.tag.setValue(12345);
+
+        console.log(_this.refs.tag.getValue());
+    },
+    render: function render() {
+        return React.createElement(
+            'div',
+            null,
+            React.createElement(Tag, { ref: 'tag', value: '123+' })
+        );
+    }
+});
+ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
+
+/***/ }),
+
+/***/ 90:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -137,7 +170,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * 1.角标用于提示，提醒等
  * 2.有新消息或内容有更新时，提醒用户查看
  */
-var classnames = __webpack_require__(5);
+var classnames = __webpack_require__(0);
 var Tag = React.createClass({
     displayName: 'Tag',
 
@@ -185,39 +218,6 @@ var Tag = React.createClass({
     }
 });
 module.exports = Tag;
-
-/***/ }),
-
-/***/ 91:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * 创建人：DuHuiling
- * 创建时间：2017/7/17
- * 说明：
- */
-var Tag = __webpack_require__(78);
-var Root = React.createClass({
-    displayName: 'Root',
-
-    componentDidMount: function componentDidMount() {
-        var _this = this;
-        _this.refs.tag.setValue(12345);
-
-        console.log(_this.refs.tag.getValue());
-    },
-    render: function render() {
-        return React.createElement(
-            'div',
-            null,
-            React.createElement(Tag, { ref: 'tag', value: '123+' })
-        );
-    }
-});
-ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
 
 /***/ })
 

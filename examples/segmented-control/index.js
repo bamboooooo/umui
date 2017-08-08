@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 136);
+/******/ 	return __webpack_require__(__webpack_require__.s = 139);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -124,7 +124,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 101:
+/***/ 104:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -215,7 +215,7 @@ module.exports = SegmentedControl;
 
 /***/ }),
 
-/***/ 136:
+/***/ 139:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -226,7 +226,7 @@ module.exports = SegmentedControl;
  * 创建时间：2017/7/17
  * 说明：
  */
-var SegmentedControl = __webpack_require__(101);
+var SegmentedControl = __webpack_require__(104);
 var values = [{ 'icon': 'icon1', 'text': '分段一', 'value': '1' }, { 'icon': 'icon2', 'text': '分段二', 'value': '2' }, { 'icon': 'icon3', 'text': '分段三', 'value': '3' }, { 'icon': 'icon3', 'text': '分段三', 'value': '3' }, { 'icon': 'icon3', 'text': '分段三', 'value': '3' }, { 'icon': 'icon3', 'text': '分段三', 'value': '3' }];
 var Root = React.createClass({
     displayName: 'Root',

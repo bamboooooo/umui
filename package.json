@@ -35,9 +35,9 @@
     "eslint-plugin-standard": "^3.0.1",
     "js-md5": "^0.4.2",
     "md5": "^2.2.1",
-    "sha1": "^1.1.1",
     "node-sass": "^4.5.3",
-    "sass-loader": "^6.0.5",
+    "sass-loader": "^6.0.6",
+    "sha1": "^1.1.1",
     "sha256": "^0.2.0"
   },
   "scripts": {

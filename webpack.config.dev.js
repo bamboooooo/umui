@@ -8,7 +8,7 @@ var glob = require('glob');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWepackPlugin = require('copy-webpack-plugin');
-const SOURCE_DIR = './src-views/';
+const SOURCE_DIR = './src-examples/';
 const PRODUCT_DIR = 'examples';
 
 var getEntrys = function(globPath) {
@@ -110,7 +110,7 @@ var css_config = {
 		'app': './scss/app.scss'
 	},
 	output: {
-		path: path.resolve(__dirname, 'dist/css'),
+		path: path.resolve(__dirname, 'dist/assets/css'),
 		filename: 'app.css'
 	},
 	plugins: [

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 128);
+/******/ 	return __webpack_require__(__webpack_require__.s = 134);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -124,13 +124,165 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 128:
+/***/ 101:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Popover = __webpack_require__(95);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var classnames = __webpack_require__(0);
+var Popover = React.createClass({
+    displayName: 'Popover',
+
+    getDefaultProps: function getDefaultProps() {
+        return {
+            visible: false,
+            mask: true,
+            onVisibleChange: null,
+            overlayClassName: '',
+            overlayStyle: { left: 0, top: 0 },
+            placement: 'bottomLeft',
+            overlay: [],
+            onSelect: null,
+            defaultValue: ''
+        };
+    },
+    getInitialState: function getInitialState() {
+        return {
+            visible: this.props.visible,
+            value: this.props.defaultValue
+        };
+    },
+    componentDidMount: function componentDidMount() {
+        this._layer = document.createElement('div');
+        document.body.appendChild(this._layer);
+        this._renderLayer();
+    },
+    componentDidUpdate: function componentDidUpdate() {
+        this._renderLayer();
+    },
+    setValue: function setValue(v) {
+        this.setState({
+            value: v
+        });
+    },
+    getValue: function getValue() {
+        return this.state.value;
+    },
+    _renderLayer: function _renderLayer() {
+        var layerElement = this.renderLayer();
+
+        if (layerElement === null) {
+            ReactDOM.render(React.createElement('noscript', null), this._layer);
+        } else {
+            ReactDOM.render(layerElement, this._layer);
+        }
+    },
+    renderLayer: function renderLayer() {
+        var _classnames;
+
+        var _this = this;
+
+        var maskCls = classnames({
+            'ucs-popover-mask': true,
+            'ucs-popover-mask-hidden': !_this.props.mask || _this.props.mask && !_this.state.visible
+        });
+        var popoverCls = classnames((_classnames = {
+            'ucs-popover': true,
+            'ucs-popover-hidden': !_this.state.visible
+        }, _defineProperty(_classnames, 'ucs-popover-placement-' + _this.props.placement, !!_this.props.placement), _defineProperty(_classnames, _this.props.overlayClassName, !!_this.props.overlayClassName), _classnames));
+
+        return React.createElement(
+            'div',
+            null,
+            React.createElement('div', { className: maskCls, onClick: _this.clickHandler }),
+            React.createElement(
+                'div',
+                { className: popoverCls, style: _this.props.overlayStyle, onClick: _this.clickHandler },
+                React.createElement(
+                    'div',
+                    { className: 'ucs-popover-content' },
+                    React.createElement('div', { className: 'ucs-popover-arrow' }),
+                    React.createElement(
+                        'div',
+                        { className: 'ucs-popover-inner' },
+                        _this.props.overlay.map(function (item, index) {
+                            return React.createElement(
+                                'div',
+                                { key: index, className: 'ucs-popover-item', value: item.props.value, onClick: _this.onSelect.bind(_this, item.props.value) },
+                                item
+                            );
+                        })
+                    )
+                )
+            )
+        );
+    },
+    clickHandler: function clickHandler() {
+        this.props.onVisibleChange && this.props.onVisibleChange();
+        this.setState({
+            visible: !this.state.visible
+        });
+    },
+    onSelect: function onSelect(v) {
+        this.props.onSelect && this.props.onSelect(v);
+        this.setState({
+            value: v
+        });
+    },
+    render: function render() {
+        return React.createElement(
+            'div',
+            { ref: 'popover', onClick: this.clickHandler },
+            this.props.children
+        );
+    }
+});
+module.exports = Popover;
+
+Popover.Item = React.createClass({
+    displayName: 'Item',
+
+    getDefaultProps: function getDefaultProps() {
+        return {
+            disabled: false
+        };
+    },
+    clickHandler: function clickHandler(e) {
+        if (this.props.disabled) {
+            e.stopPropagation();
+            return;
+        }
+    },
+    render: function render() {
+        return React.createElement(
+            'div',
+            { className: 'ucs-popover-item-container', onClick: this.clickHandler },
+            React.createElement(
+                'span',
+                { className: 'ucs-popover-item-icon', 'aria-hidden': 'true' },
+                this.props.icon
+            ),
+            React.createElement(
+                'span',
+                { className: 'ucs-popover-item-content' },
+                this.props.children
+            )
+        );
+    }
+});
+
+/***/ }),
+
+/***/ 134:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Popover = __webpack_require__(101);
 var Item = Popover.Item;
 var Root = React.createClass({
     displayName: 'Root',
@@ -331,158 +483,6 @@ var Root = React.createClass({
     }
 });
 ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
-
-/***/ }),
-
-/***/ 95:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var classnames = __webpack_require__(0);
-var Popover = React.createClass({
-    displayName: 'Popover',
-
-    getDefaultProps: function getDefaultProps() {
-        return {
-            visible: false,
-            mask: true,
-            onVisibleChange: null,
-            overlayClassName: '',
-            overlayStyle: { left: 0, top: 0 },
-            placement: 'bottomLeft',
-            overlay: [],
-            onSelect: null,
-            defaultValue: ''
-        };
-    },
-    getInitialState: function getInitialState() {
-        return {
-            visible: this.props.visible,
-            value: this.props.defaultValue
-        };
-    },
-    componentDidMount: function componentDidMount() {
-        this._layer = document.createElement('div');
-        document.body.appendChild(this._layer);
-        this._renderLayer();
-    },
-    componentDidUpdate: function componentDidUpdate() {
-        this._renderLayer();
-    },
-    setValue: function setValue(v) {
-        this.setState({
-            value: v
-        });
-    },
-    getValue: function getValue() {
-        return this.state.value;
-    },
-    _renderLayer: function _renderLayer() {
-        var layerElement = this.renderLayer();
-
-        if (layerElement === null) {
-            ReactDOM.render(React.createElement('noscript', null), this._layer);
-        } else {
-            ReactDOM.render(layerElement, this._layer);
-        }
-    },
-    renderLayer: function renderLayer() {
-        var _classnames;
-
-        var _this = this;
-
-        var maskCls = classnames({
-            'ucs-popover-mask': true,
-            'ucs-popover-mask-hidden': !_this.props.mask || _this.props.mask && !_this.state.visible
-        });
-        var popoverCls = classnames((_classnames = {
-            'ucs-popover': true,
-            'ucs-popover-hidden': !_this.state.visible
-        }, _defineProperty(_classnames, 'ucs-popover-placement-' + _this.props.placement, !!_this.props.placement), _defineProperty(_classnames, _this.props.overlayClassName, !!_this.props.overlayClassName), _classnames));
-
-        return React.createElement(
-            'div',
-            null,
-            React.createElement('div', { className: maskCls, onClick: _this.clickHandler }),
-            React.createElement(
-                'div',
-                { className: popoverCls, style: _this.props.overlayStyle, onClick: _this.clickHandler },
-                React.createElement(
-                    'div',
-                    { className: 'ucs-popover-content' },
-                    React.createElement('div', { className: 'ucs-popover-arrow' }),
-                    React.createElement(
-                        'div',
-                        { className: 'ucs-popover-inner' },
-                        _this.props.overlay.map(function (item, index) {
-                            return React.createElement(
-                                'div',
-                                { key: index, className: 'ucs-popover-item', value: item.props.value, onClick: _this.onSelect.bind(_this, item.props.value) },
-                                item
-                            );
-                        })
-                    )
-                )
-            )
-        );
-    },
-    clickHandler: function clickHandler() {
-        this.props.onVisibleChange && this.props.onVisibleChange();
-        this.setState({
-            visible: !this.state.visible
-        });
-    },
-    onSelect: function onSelect(v) {
-        this.props.onSelect && this.props.onSelect(v);
-        this.setState({
-            value: v
-        });
-    },
-    render: function render() {
-        return React.createElement(
-            'div',
-            { ref: 'popover', onClick: this.clickHandler },
-            this.props.children
-        );
-    }
-});
-module.exports = Popover;
-
-Popover.Item = React.createClass({
-    displayName: 'Item',
-
-    getDefaultProps: function getDefaultProps() {
-        return {
-            disabled: false
-        };
-    },
-    clickHandler: function clickHandler(e) {
-        if (this.props.disabled) {
-            e.stopPropagation();
-            return;
-        }
-    },
-    render: function render() {
-        return React.createElement(
-            'div',
-            { className: 'ucs-popover-item-container', onClick: this.clickHandler },
-            React.createElement(
-                'span',
-                { className: 'ucs-popover-item-icon', 'aria-hidden': 'true' },
-                this.props.icon
-            ),
-            React.createElement(
-                'span',
-                { className: 'ucs-popover-item-content' },
-                this.props.children
-            )
-        );
-    }
-});
 
 /***/ })
 

@@ -63,44 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 131);
+/******/ 	return __webpack_require__(__webpack_require__.s = 137);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 131:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Result = __webpack_require__(97);
-var Root = React.createClass({
-    displayName: 'Root',
-
-    render: function render() {
-        return React.createElement(
-            'div',
-            null,
-            React.createElement(Result, {
-                img: React.createElement('img', { src: '../images/1.png', alt: '' }),
-                title: '验证成功',
-                message: '所提交内容已成功完成验证'
-            }),
-            React.createElement('div', { className: 'ucs-whitespace', style: { height: '30px' } }),
-            React.createElement(Result, {
-                img: React.createElement('img', { src: '../images/1.png', alt: '' }),
-                title: '支付失败',
-                message: '所选银行卡余额不足'
-            })
-        );
-    }
-});
-ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
-
-/***/ }),
-
-/***/ 97:
+/***/ 103:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -139,6 +107,38 @@ var Result = React.createClass({
     }
 });
 module.exports = Result;
+
+/***/ }),
+
+/***/ 137:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Result = __webpack_require__(103);
+var Root = React.createClass({
+    displayName: 'Root',
+
+    render: function render() {
+        return React.createElement(
+            'div',
+            null,
+            React.createElement(Result, {
+                img: React.createElement('img', { src: '../images/1.png', alt: '' }),
+                title: '验证成功',
+                message: '所提交内容已成功完成验证'
+            }),
+            React.createElement('div', { className: 'ucs-whitespace', style: { height: '30px' } }),
+            React.createElement(Result, {
+                img: React.createElement('img', { src: '../images/1.png', alt: '' }),
+                title: '支付失败',
+                message: '所选银行卡余额不足'
+            })
+        );
+    }
+});
+ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
 
 /***/ })
 

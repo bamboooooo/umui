@@ -63,65 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 113);
+/******/ 	return __webpack_require__(__webpack_require__.s = 128);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 113:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var NavBar = __webpack_require__(94);
-var Root = React.createClass({
-    displayName: "Root",
-
-    getInitialState: function getInitialState() {
-        return {};
-    },
-    getDefaultProps: function getDefaultProps() {
-        return {};
-    },
-    render: function render() {
-        return React.createElement(
-            "div",
-            null,
-            React.createElement(
-                NavBar,
-                {
-                    id: "ucs-nav-bar",
-                    className: "my-nav-bar",
-                    leftItem: [React.createElement(
-                        "span",
-                        { key: "0" },
-                        React.createElement("i", { className: "iconfont icon-arrow" })
-                    ), React.createElement(
-                        "span",
-                        { key: "1" },
-                        "\u8FD4\u56DE"
-                    )],
-                    rightItem: [React.createElement(
-                        "span",
-                        { key: "0" },
-                        React.createElement("i", { className: "iconfont icon-more-2" })
-                    )]
-                },
-                React.createElement(
-                    "h1",
-                    null,
-                    "\u6211\u7684\u6807\u9898"
-                )
-            )
-        );
-    }
-});
-ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
-
-/***/ }),
-
-/***/ 2:
+/***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -177,7 +124,60 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 94:
+/***/ 128:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var NavBar = __webpack_require__(99);
+var Root = React.createClass({
+    displayName: "Root",
+
+    getInitialState: function getInitialState() {
+        return {};
+    },
+    getDefaultProps: function getDefaultProps() {
+        return {};
+    },
+    render: function render() {
+        return React.createElement(
+            "div",
+            null,
+            React.createElement(
+                NavBar,
+                {
+                    id: "ucs-nav-bar",
+                    className: "my-nav-bar",
+                    leftItem: [React.createElement(
+                        "span",
+                        { key: "0" },
+                        React.createElement("i", { className: "iconfont icon-arrow" })
+                    ), React.createElement(
+                        "span",
+                        { key: "1" },
+                        "\u8FD4\u56DE"
+                    )],
+                    rightItem: [React.createElement(
+                        "span",
+                        { key: "0" },
+                        React.createElement("i", { className: "iconfont icon-more-2" })
+                    )]
+                },
+                React.createElement(
+                    "h1",
+                    null,
+                    "\u6211\u7684\u6807\u9898"
+                )
+            )
+        );
+    }
+});
+ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
+
+/***/ }),
+
+/***/ 99:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -205,7 +205,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 * @createTime 2017-08-03
 */
 
-var classnames = __webpack_require__(2);
+var classnames = __webpack_require__(0);
 var PropTypes = React.PropTypes;
 
 /**

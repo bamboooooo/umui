@@ -63,12 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 87);
+/******/ 	return __webpack_require__(__webpack_require__.s = 121);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 7:
+/***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -124,7 +124,48 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 75:
+/***/ 121:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * 创建人：DuHuiling
+ * 创建时间：2017/7/17
+ * 说明：
+ */
+var FloatButton = __webpack_require__(80);
+var Root = React.createClass({
+    displayName: "Root",
+
+    componentDidMount: function componentDidMount() {
+        // var _this = this;
+        // setTimeout(function () {
+        //     console.log(_this);
+        //     _this.refs.fb.hide();
+        // }, 3000);
+        // setTimeout(function () {
+        //     console.log(_this);
+        //     _this.refs.fb.show();
+        // }, 6000);
+    },
+    _click: function _click() {
+        alert(123);
+    },
+    render: function render() {
+        return React.createElement(
+            "div",
+            null,
+            React.createElement(FloatButton, { move: true, ref: "fb", className: "test", img: "https://www.baidu.com/img/bd_logo1.png", text: "\u767E\u5EA6", onClick: this._click })
+        );
+    }
+});
+ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
+
+/***/ }),
+
+/***/ 80:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -135,7 +176,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * 创建时间：2017/7/17
  * 说明：漂浮按钮组件
  */
-var classnames = __webpack_require__(7);
+var classnames = __webpack_require__(0);
 var FloatButton = React.createClass({
     displayName: 'FloatButton',
 
@@ -239,47 +280,6 @@ var FloatButton = React.createClass({
     }
 });
 module.exports = FloatButton;
-
-/***/ }),
-
-/***/ 87:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * 创建人：DuHuiling
- * 创建时间：2017/7/17
- * 说明：
- */
-var FloatButton = __webpack_require__(75);
-var Root = React.createClass({
-    displayName: "Root",
-
-    componentDidMount: function componentDidMount() {
-        // var _this = this;
-        // setTimeout(function () {
-        //     console.log(_this);
-        //     _this.refs.fb.hide();
-        // }, 3000);
-        // setTimeout(function () {
-        //     console.log(_this);
-        //     _this.refs.fb.show();
-        // }, 6000);
-    },
-    _click: function _click() {
-        alert(123);
-    },
-    render: function render() {
-        return React.createElement(
-            "div",
-            null,
-            React.createElement(FloatButton, { move: true, ref: "fb", className: "test", img: "https://www.baidu.com/img/bd_logo1.png", text: "\u767E\u5EA6", onClick: this._click })
-        );
-    }
-});
-ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
 
 /***/ })
 
