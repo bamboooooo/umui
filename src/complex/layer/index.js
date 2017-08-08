@@ -9,7 +9,8 @@ var Layer = React.createClass({
             confirmBack: null,
             cancelBack: null,
             isShowClose: true,
-            closeBack: null
+            closeBack: null,
+            isShow: false
         };
     },
     getInitialState: function () {
@@ -18,22 +19,29 @@ var Layer = React.createClass({
         };
     },
     show: function () {
-        this.refs.layer.style.display = 'block';
+        this.setState({
+            isShow: true
+        });
     },
     hide: function () {
-        this.refs.layer.style.display = 'none';
+        this.setState({
+            isShow: false
+        });
     },
     render: function () {
+        var isShow = {display: this.state.isShow ? 'block' : 'none'};
         return (
-            <div className="alert-layer" ref="layer">
+            <div ref="layer" style={isShow}>
                 <div className="ucs-layer-mask"></div>
                 <div
                     className={this.state.className}
                     id={this.props.id}>
                     <div className="ucs-layer-body">
                         <a href="javascript:;" className="alert-close" style={{display: this.props.isShowClose ? 'block' : 'none'}} onClick={this.props.closeBack}>×</a>
-                        {this.props.title}
-                        {this.props.children}
+                        <div className="ucs-layer-title">{this.props.title}</div>
+                        <div className="ucs-layer-text">
+                            {this.props.children}
+                        </div>
                         <div className="ucs-layer-button">
                             <a href="javascript:;" className="ucs-layer-btn confirm" onClick={this.props.confirmBack}>{this.props.confirmText}</a>
                             <a href="javascript:;" className="ucs-layer-btn cancel" onClick={this.props.cancelBack}>{this.props.cancelText}</a>
