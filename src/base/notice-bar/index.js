@@ -25,9 +25,10 @@ var NoticeBar = React.createClass({
         var _wrapIn = this.refs.ucsSeamlessScrollIn;
         var _block1 = this.refs.seamlessScrollList1;
         var _block2 = this.refs.seamlessScrollList2;
+        _block2.innerHTML = '';
         var _scrollBlock = _block1.getElementsByTagName('p')[0];
         var _scrollBlockWidth = _scrollBlock.offsetWidth;
-        if (_scrollBlock < _wrap.offsetWidth) {
+        if (_scrollBlock.offsetWidth < _wrap.offsetWidth) {
             return;
         } else {
             _block2.innerHTML = _block1.innerHTML;
@@ -44,7 +45,7 @@ var NoticeBar = React.createClass({
         var _speed = this.props.scrollSpeed;
 
         var _scrollBlockWidth = _scrollBlock.offsetWidth;
-        if (_scrollBlock < _wrap.offsetWidth) {
+        if (_scrollBlock.offsetWidth < _wrap.offsetWidth) {
             return;
         } else {
             _block2.innerHTML = _block1.innerHTML;
