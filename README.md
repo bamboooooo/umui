@@ -2,30 +2,30 @@
 黄金梅丽号 Going Merry是基于React.js V15.5.4进行开发的，支持双向数据绑定的组件化前端库，兼容IE9+，Chrome，Safari，Firefox。
 ***
 ## 项目目录结构说明
-- dist 
+- **dist **
 
     - **assets** &nbsp&nbsp移动版UI静态资源库，包括css、font、images
 	- **ucsmy-mui.js** &nbsp&nbsp移动版UI组件库的UMD(Universal Module Definition)发布版本，未压缩版本，适用于开发模式下，方便调试。
 	- **ucsmy-mui.min.js**  &nbsp&nbsp移动版UI组件库的UMD(Universal Module Definition)发布版本，压缩版本，生产上建议使用压缩版来提高加载效率。
 	- **libs** &nbsp&nbsp组件库依赖的基础类库，生产上建议使用压缩版来提高加载效率，包括react.js、react.min.js、react-dom.js、react-dom.min.js、u-ajax.js、u-ajax.min.js、u-eventhub.js、u-eventhub.min.js
 	
-- api
+- **api**
 	
 	UI组件的API说明文档。
 	
-- examples
+- **examples**
 	
 	UI组件的使用示例，包括可运行示例，每一个组件都有一个示例。
 	
-- sass
+- **sass**
 	
 	UI组件示例所用到的css样式源码。
 
-- src
+- **src**
 
 	UI组件的组件源码。
 
-- src-examples
+- **src-examples**
 
 	UI组件的使用示例源码。
 	
