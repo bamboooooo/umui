@@ -14,7 +14,7 @@
 className | 样式类名 | string |无
 id|dom元素id|string|无
 data|导航栏数据:`[{icon:'',title:'',href:''}]`|array|无
-num|  设置一行显示多少个，可选4、5；4：展示数据不能超过8个；5：不能超过10个，否则控制台报错 | number | 4
+num|  设置一行显示多少个，可选4、5；4：展示数据不能超过8个；5：不能超过10个| number | 4
 
 
 ---
