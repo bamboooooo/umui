@@ -58,10 +58,14 @@ var Root = React.createClass({
                     text: '新内容5' + Math.random()
                 }
             ];
-            _this.setState({
-                data: newData
-            });
-            callback();
+            if(false){
+                _this.setState({
+                    data: newData
+                });
+                callback();
+            }else{
+                _this.refs.pullRefresh.setTips('加载失败');
+            }
         }, 2000);
     },
     render: function () {

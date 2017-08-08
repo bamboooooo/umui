@@ -13,8 +13,17 @@ describe('PullRefresh-props测试', function () {
     });
     describe('function测试', function () {
         // function测试
+        describe('PullRefresh-function测试-setTips', function () {
+            it('setTips()测试', function () {
+                var pullRefresh = TestUtils.renderIntoDocument(<PullRefresh><div>123</div></PullRefresh>);
+                var pullRefreshDom = findDOMNode(pullRefresh);
+                pullRefresh.setTips('努力加载中...');
+                var pullRefreshControlloading = pullRefreshDom.querySelector('.ucs-pullrefresh-control-top-loading');
+                expect(pullRefreshControlloading.innerHTML).to.be.contain('努力加载中...');
+            });
+        });
         describe('PullRefresh-function测试-未达到临界值', function () {
-            it('props测试', function () {
+            it('下拉测试', function () {
                 var a = '1';
                 function onRefresh() {
                     a = '2';
@@ -34,7 +43,7 @@ describe('PullRefresh-props测试', function () {
             });
         });
         describe('PullRefresh-function测试-达到临界值-未触发touchend', function () {
-            it('props测试', function () {
+            it('下拉测试', function () {
                 var a = '1';
                 function onRefresh() {
                     a = '2';
@@ -53,7 +62,7 @@ describe('PullRefresh-props测试', function () {
             });
         });
         describe('PullRefresh-function测试-达到临界值-触发touchend', function () {
-            it('props测试', function () {
+            it('下拉测试', function () {
                 var a = '1';
                 function onRefresh() {
                     a = '2';

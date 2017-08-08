@@ -15,7 +15,8 @@ var PullRefresh = React.createClass({
             pointStart: 0,
             pointEnd: 0,
             pullTopState: 'pull',
-            pullBottomState: 'pull'
+            pullBottomState: 'pull',
+            loadText: '加载中...'
         };
     },
     componentDidMount: function () {
@@ -84,7 +85,8 @@ var PullRefresh = React.createClass({
             if (offset >= Number(this.props.distance)) {
                 this._doTransition(this._top, 300);
                 this.setState({
-                    pullTopState: 'loading'
+                    pullTopState: 'loading',
+                    loadText: '加载中...'
                 });
                 this.onRefresh();
             } else {
@@ -95,7 +97,8 @@ var PullRefresh = React.createClass({
             if (-offset >= Number(this.props.distance)) {
                 this._doTransition(-this._bottom, 300);
                 this.setState({
-                    pullBottomState: 'loading'
+                    pullBottomState: 'loading',
+                    loadText: '加载中...'
                 });
                 this.onRefresh();
             } else {
@@ -108,6 +111,11 @@ var PullRefresh = React.createClass({
     },
     _onRefreshCallback: function () {
         this._doTransition(0, 300);
+    },
+    setTips: function (v) {
+        this.setState({
+            loadText: v
+        });
     },
     render: function () {
         var _this = this;
@@ -180,7 +188,7 @@ var PullRefresh = React.createClass({
                             </div>
                         </div>
                         <div className="ucs-pullrefresh-control-top-loading" style={pullrefreshLoadingTopStyle}>
-                            <span>加载中...</span>
+                            <span>{this.state.loadText}</span>
                         </div>
                     </div>}
                     <div className="ucs-pullrefresh-list">
@@ -196,7 +204,7 @@ var PullRefresh = React.createClass({
                             </div>
                         </div>
                         <div className="ucs-pullrefresh-control-bottom-loading" style={pullrefreshLoadingBottomStyle}>
-                            <span>加载中...</span>
+                            <span>{this.state.loadText}</span>
                         </div>
                     </div>}
                 </div>
