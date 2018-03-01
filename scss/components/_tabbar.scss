@@ -1,0 +1,94 @@
+@charset "UTF-8";
+$tabbar-height:  49px !default;
+$z-index-tabbar: 1000;
+$ns: 'ucs-';
+$fa-var-angle-right:20px;
+.ucs-tabbar {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: $tabbar-height;
+    line-height: $tabbar-height;
+    z-index: $z-index-tabbar;
+
+    ul {
+        padding-left: 0;
+        margin: 0;
+        list-style: none;
+        width: 100%;
+        background: #FAFAFA;
+    }
+
+    .ucs-tabbar-nav {
+        //padding-left: 8px;
+        //padding-right: 8px;
+        text-align: center;
+        overflow: hidden;
+        // display: flex;
+        li {
+            // flex: 1;
+            display: table-cell;
+            width: 1%;
+            float: none;
+        }
+    }
+}
+
+.ucs-tabbar-nav {
+    position: relative;
+    z-index: $z-index-tabbar + 5;
+
+    a {
+        display: inline-block;
+        width: 100%;
+        height: $tabbar-height;
+        line-height: 20px;
+        text-decoration: none;
+        color:#C2B4B4;
+        img {
+            display: block;
+            vertical-align: middle;
+            height: 24px;
+            width: 24px;
+            margin: 4px auto 0
+        }
+
+        [class*="#{$ns}icon"] {
+            width: 24px;
+            height: 24px;
+            margin: 4px auto 0;
+            display: block;
+            line-height: 24px;
+
+            &:before {
+                font-size: 22px;
+                vertical-align: middle;
+            }
+        }
+
+        .ucs-tabbar-label {
+            padding-top: 2px;
+            line-height: 1;
+            font-family: PingFangSC-Regular;
+            font-size: 11px;
+            color: #C2B4B4;
+            letter-spacing: 0;
+        }
+    }
+    .active {
+        a{
+            color: #FF5C5C;
+        }
+        .ucs-tabbar-label {
+            color: #FF5C5C;
+        }
+
+    }
+}
+
+
+// 给body 增加的className
+.ucs-with-fixed-tabbar {
+    padding-bottom: $tabbar-height + 5;
+}
