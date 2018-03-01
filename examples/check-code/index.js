@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 117);
+/******/ 	return __webpack_require__(__webpack_require__.s = 111);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -124,13 +124,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 117:
+/***/ 111:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var CheckCode = __webpack_require__(93);
+var CheckCode = __webpack_require__(86);
 var Root = React.createClass({
     displayName: "Root",
 
@@ -187,7 +187,7 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'
 
 /***/ }),
 
-/***/ 7:
+/***/ 8:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -255,7 +255,7 @@ module.exports = Button;
 
 /***/ }),
 
-/***/ 93:
+/***/ 86:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -265,7 +265,7 @@ module.exports = Button;
  * Created by chenzefang on 2017/8/4.
  */
 var classnames = __webpack_require__(0);
-var Button = __webpack_require__(7);
+var Button = __webpack_require__(8);
 var CheckCode = React.createClass({
     displayName: 'CheckCode',
 
@@ -287,6 +287,7 @@ var CheckCode = React.createClass({
             text: this.props.text
         };
     },
+
     /*
      * 设置不可用
      * */
@@ -303,6 +304,7 @@ var CheckCode = React.createClass({
             disabled: v
         });
     },
+
     /*
     * 开始倒计时
     * */
@@ -331,6 +333,7 @@ var CheckCode = React.createClass({
             }
         }, 1000);
     },
+
     /*
     *
     * */

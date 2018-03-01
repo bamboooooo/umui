@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 139);
+/******/ 	return __webpack_require__(__webpack_require__.s = 132);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -124,7 +124,38 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 104:
+/***/ 132:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * 创建人：DuHuiling
+ * 创建时间：2017/7/17
+ * 说明：
+ */
+var SegmentedControl = __webpack_require__(97);
+var values = [{ 'icon': 'icon1', 'text': '分段一', 'value': '1' }, { 'icon': 'icon2', 'text': '分段二', 'value': '2' }, { 'icon': 'icon3', 'text': '分段三', 'value': '3' }, { 'icon': 'icon3', 'text': '分段三', 'value': '3' }, { 'icon': 'icon3', 'text': '分段三', 'value': '3' }, { 'icon': 'icon3', 'text': '分段三', 'value': '3' }];
+var Root = React.createClass({
+    displayName: 'Root',
+
+    handlerClick: function handlerClick(index) {
+        console.log(index);
+    },
+    render: function render() {
+        return React.createElement(
+            'div',
+            null,
+            React.createElement(SegmentedControl, { values: values, displayIcon: false, onClick: this.handlerClick })
+        );
+    }
+});
+ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
+
+/***/ }),
+
+/***/ 97:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -212,37 +243,6 @@ var SegmentedControl = React.createClass({
     }
 });
 module.exports = SegmentedControl;
-
-/***/ }),
-
-/***/ 139:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * 创建人：DuHuiling
- * 创建时间：2017/7/17
- * 说明：
- */
-var SegmentedControl = __webpack_require__(104);
-var values = [{ 'icon': 'icon1', 'text': '分段一', 'value': '1' }, { 'icon': 'icon2', 'text': '分段二', 'value': '2' }, { 'icon': 'icon3', 'text': '分段三', 'value': '3' }, { 'icon': 'icon3', 'text': '分段三', 'value': '3' }, { 'icon': 'icon3', 'text': '分段三', 'value': '3' }, { 'icon': 'icon3', 'text': '分段三', 'value': '3' }];
-var Root = React.createClass({
-    displayName: 'Root',
-
-    handlerClick: function handlerClick(index) {
-        console.log(index);
-    },
-    render: function render() {
-        return React.createElement(
-            'div',
-            null,
-            React.createElement(SegmentedControl, { values: values, displayIcon: false, onClick: this.handlerClick })
-        );
-    }
-});
-ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
 
 /***/ })
 

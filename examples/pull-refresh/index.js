@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 136);
+/******/ 	return __webpack_require__(__webpack_require__.s = 130);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -124,7 +124,95 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 102:
+/***/ 130:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var PullRefresh = __webpack_require__(95);
+var Root = React.createClass({
+    displayName: 'Root',
+
+    getInitialState: function getInitialState() {
+        return {
+            data: [{
+                text: '内容1'
+            }, {
+                text: '内容2'
+            }, {
+                text: '内容3'
+            }, {
+                text: '内容4'
+            }, {
+                text: '内容5'
+            }, {
+                text: '内容6'
+            }, {
+                text: '内容7'
+            }, {
+                text: '内容8'
+            }, {
+                text: '内容9'
+            }, {
+                text: '内容10'
+            }]
+        };
+    },
+    onRefresh: function onRefresh(callback) {
+        var newData;
+        var _this = this;
+        // 模拟3秒后获取到新数据
+        setTimeout(function () {
+            newData = [{
+                text: '新内容1' + Math.random()
+            }, {
+                text: '新内容2' + Math.random()
+            }, {
+                text: '新内容3' + Math.random()
+            }, {
+                text: '新内容4' + Math.random()
+            }, {
+                text: '新内容5' + Math.random()
+            }];
+            if (false) {
+                _this.setState({
+                    data: newData
+                });
+                callback();
+            } else {
+                _this.refs.pullRefresh.setTips('加载失败');
+            }
+        }, 2000);
+    },
+    render: function render() {
+        var _data = this.state.data.map(function (item, index) {
+            return React.createElement(
+                'li',
+                { key: index },
+                item.text
+            );
+        });
+        return React.createElement(
+            'div',
+            null,
+            React.createElement(
+                PullRefresh,
+                { onRefresh: this.onRefresh, ref: 'pullRefresh', direction: 'down' },
+                React.createElement(
+                    'ul',
+                    null,
+                    _data
+                )
+            )
+        );
+    }
+});
+ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
+
+/***/ }),
+
+/***/ 95:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -149,7 +237,8 @@ var PullRefresh = React.createClass({
             pointStart: 0,
             pointEnd: 0,
             pullTopState: 'pull',
-            pullBottomState: 'pull'
+            pullBottomState: 'pull',
+            loadText: '加载中...'
         };
     },
     componentDidMount: function componentDidMount() {
@@ -218,7 +307,8 @@ var PullRefresh = React.createClass({
             if (offset >= Number(this.props.distance)) {
                 this._doTransition(this._top, 300);
                 this.setState({
-                    pullTopState: 'loading'
+                    pullTopState: 'loading',
+                    loadText: '加载中...'
                 });
                 this.onRefresh();
             } else {
@@ -229,7 +319,8 @@ var PullRefresh = React.createClass({
             if (-offset >= Number(this.props.distance)) {
                 this._doTransition(-this._bottom, 300);
                 this.setState({
-                    pullBottomState: 'loading'
+                    pullBottomState: 'loading',
+                    loadText: '加载中...'
                 });
                 this.onRefresh();
             } else {
@@ -242,6 +333,11 @@ var PullRefresh = React.createClass({
     },
     _onRefreshCallback: function _onRefreshCallback() {
         this._doTransition(0, 300);
+    },
+    setTips: function setTips(v) {
+        this.setState({
+            loadText: v
+        });
     },
     render: function render() {
         var _this = this;
@@ -333,7 +429,7 @@ var PullRefresh = React.createClass({
                         React.createElement(
                             'span',
                             null,
-                            '\u52A0\u8F7D\u4E2D...'
+                            this.state.loadText
                         )
                     )
                 ),
@@ -373,7 +469,7 @@ var PullRefresh = React.createClass({
                         React.createElement(
                             'span',
                             null,
-                            '\u52A0\u8F7D\u4E2D...'
+                            this.state.loadText
                         )
                     )
                 )
@@ -382,90 +478,6 @@ var PullRefresh = React.createClass({
     }
 });
 module.exports = PullRefresh;
-
-/***/ }),
-
-/***/ 136:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var PullRefresh = __webpack_require__(102);
-var Root = React.createClass({
-    displayName: 'Root',
-
-    getInitialState: function getInitialState() {
-        return {
-            data: [{
-                text: '内容1'
-            }, {
-                text: '内容2'
-            }, {
-                text: '内容3'
-            }, {
-                text: '内容4'
-            }, {
-                text: '内容5'
-            }, {
-                text: '内容6'
-            }, {
-                text: '内容7'
-            }, {
-                text: '内容8'
-            }, {
-                text: '内容9'
-            }, {
-                text: '内容10'
-            }]
-        };
-    },
-    onRefresh: function onRefresh(callback) {
-        var newData;
-        var _this = this;
-        // 模拟3秒后获取到新数据
-        setTimeout(function () {
-            newData = [{
-                text: '新内容1' + Math.random()
-            }, {
-                text: '新内容2' + Math.random()
-            }, {
-                text: '新内容3' + Math.random()
-            }, {
-                text: '新内容4' + Math.random()
-            }, {
-                text: '新内容5' + Math.random()
-            }];
-            _this.setState({
-                data: newData
-            });
-            callback();
-        }, 2000);
-    },
-    render: function render() {
-        var _data = this.state.data.map(function (item, index) {
-            return React.createElement(
-                'li',
-                { key: index },
-                item.text
-            );
-        });
-        return React.createElement(
-            'div',
-            null,
-            React.createElement(
-                PullRefresh,
-                { onRefresh: this.onRefresh, ref: 'pullRefresh', direction: 'down' },
-                React.createElement(
-                    'ul',
-                    null,
-                    _data
-                )
-            )
-        );
-    }
-});
-ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
 
 /***/ })
 

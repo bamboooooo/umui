@@ -35,6 +35,7 @@ var getEntrys = function(globPath) {
 		}
 	}
 	return entries;
+
 }
 
 var entries = getEntrys(SOURCE_DIR + "*/*.*");
@@ -156,5 +157,5 @@ var css_config = {
 		]
 	},
 }
-
+console.log(app_src_config.plugins[0]);
 module.exports = [app_src_config,css_config];

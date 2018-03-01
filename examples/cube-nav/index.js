@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 119);
+/******/ 	return __webpack_require__(__webpack_require__.s = 113);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -124,13 +124,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 119:
+/***/ 113:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var CubeNav = __webpack_require__(94);
+var CubeNav = __webpack_require__(87);
 var datasource = [{
     icon: 'http://cdn.youxiputao.com/attach/news/2014/03/25/cee281e371788349.jpg',
     title: '标题一很长很长很长很长很长很长很长很长很长很长很长很长',
@@ -179,7 +179,7 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'
 
 /***/ }),
 
-/***/ 94:
+/***/ 87:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

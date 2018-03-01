@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 142);
+/******/ 	return __webpack_require__(__webpack_require__.s = 135);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -124,7 +124,95 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 106:
+/***/ 135:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Created by chenzefang on 2017/7/19.
+ */
+
+var Tabbar = __webpack_require__(99);
+var Root = React.createClass({
+    displayName: "Root",
+
+    onClick: function onClick(index) {
+        console.log(index);
+    },
+    componentDidMount: function componentDidMount() {
+        this.refs.tabbar.setSelected(2);
+    },
+    render: function render() {
+        return React.createElement(
+            Tabbar,
+            { ref: "tabbar", onClick: this.onClick },
+            React.createElement(
+                Tabbar.Item,
+                null,
+                React.createElement(
+                    "a",
+                    { href: "#" },
+                    React.createElement("span", { className: "ucs-icon icon-home-fill" }),
+                    React.createElement(
+                        "span",
+                        { className: "ucs-tabbar-label" },
+                        "\u9996\u9875"
+                    )
+                )
+            ),
+            React.createElement(
+                Tabbar.Item,
+                null,
+                React.createElement(
+                    "a",
+                    { href: "#" },
+                    React.createElement("span", { className: "ucs-icon icon-about" }),
+                    React.createElement(
+                        "span",
+                        { className: "ucs-tabbar-label" },
+                        "\u6D88\u606F"
+                    )
+                )
+            ),
+            React.createElement(
+                Tabbar.Item,
+                null,
+                React.createElement(
+                    "a",
+                    { href: "#" },
+                    React.createElement("span", { className: "ucs-icon icon-mpack" }),
+                    React.createElement(
+                        "span",
+                        { className: "ucs-tabbar-label" },
+                        "\u8D44\u4EA7"
+                    )
+                )
+            ),
+            React.createElement(
+                Tabbar.Item,
+                null,
+                React.createElement(
+                    "a",
+                    { href: "#" },
+                    React.createElement("span", { className: "ucs-icon icon-people-2-fill" }),
+                    React.createElement(
+                        "span",
+                        { className: "ucs-tabbar-label" },
+                        "\u6211\u7684"
+                    )
+                )
+            )
+        );
+    }
+});
+
+ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
+
+/***/ }),
+
+/***/ 99:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -220,94 +308,6 @@ Tabbar.Item = React.createClass({
     }
 });
 module.exports = Tabbar;
-
-/***/ }),
-
-/***/ 142:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Created by chenzefang on 2017/7/19.
- */
-
-var Tabbar = __webpack_require__(106);
-var Root = React.createClass({
-    displayName: "Root",
-
-    onClick: function onClick(index) {
-        console.log(index);
-    },
-    componentDidMount: function componentDidMount() {
-        this.refs.tabbar.setSelected(2);
-    },
-    render: function render() {
-        return React.createElement(
-            Tabbar,
-            { ref: "tabbar", onClick: this.onClick },
-            React.createElement(
-                Tabbar.Item,
-                null,
-                React.createElement(
-                    "a",
-                    { href: "#" },
-                    React.createElement("span", { className: "ucs-icon icon-home-fill" }),
-                    React.createElement(
-                        "span",
-                        { className: "ucs-tabbar-label" },
-                        "\u9996\u9875"
-                    )
-                )
-            ),
-            React.createElement(
-                Tabbar.Item,
-                null,
-                React.createElement(
-                    "a",
-                    { href: "#" },
-                    React.createElement("span", { className: "ucs-icon icon-about" }),
-                    React.createElement(
-                        "span",
-                        { className: "ucs-tabbar-label" },
-                        "\u6D88\u606F"
-                    )
-                )
-            ),
-            React.createElement(
-                Tabbar.Item,
-                null,
-                React.createElement(
-                    "a",
-                    { href: "#" },
-                    React.createElement("span", { className: "ucs-icon icon-mpack" }),
-                    React.createElement(
-                        "span",
-                        { className: "ucs-tabbar-label" },
-                        "\u8D44\u4EA7"
-                    )
-                )
-            ),
-            React.createElement(
-                Tabbar.Item,
-                null,
-                React.createElement(
-                    "a",
-                    { href: "#" },
-                    React.createElement("span", { className: "ucs-icon icon-people-2-fill" }),
-                    React.createElement(
-                        "span",
-                        { className: "ucs-tabbar-label" },
-                        "\u6211\u7684"
-                    )
-                )
-            )
-        );
-    }
-});
-
-ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
 
 /***/ })
 

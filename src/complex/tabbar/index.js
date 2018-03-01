@@ -45,7 +45,7 @@ var Tabbar = React.createClass({
     * */
     show: function () {
         this.setState({
-            className: classnames('ucs-tabbar', this.props.className, {'ucs-hide': false}),
+            className: classnames('ucs-tabbar', this.props.className, {'ucs-hide': false})
         });
     },
 
@@ -54,7 +54,7 @@ var Tabbar = React.createClass({
     * */
     hide: function () {
         this.setState({
-            className: classnames('ucs-tabbar', this.props.className, {'ucs-hide': true}),
+            className: classnames('ucs-tabbar', this.props.className, {'ucs-hide': true})
         });
     },
     render: function () {

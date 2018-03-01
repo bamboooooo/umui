@@ -458,7 +458,7 @@ var DatePicker = React.createClass({
         }
         return {
             value,
-            cols,
+            cols
         };
     },
 

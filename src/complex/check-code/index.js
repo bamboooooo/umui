@@ -22,6 +22,7 @@ var CheckCode = React.createClass({
             text: this.props.text
         };
     },
+
     /*
      * 设置不可用
      * */
@@ -38,6 +39,7 @@ var CheckCode = React.createClass({
             disabled: v
         });
     },
+
     /*
     * 开始倒计时
     * */
@@ -66,6 +68,7 @@ var CheckCode = React.createClass({
             }
         }, 1000);
     },
+
     /*
     *
     * */

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 131);
+/******/ 	return __webpack_require__(__webpack_require__.s = 125);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -124,7 +124,73 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 100:
+/***/ 125:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+/**
+ * Created by maxuezhu on 2017/8/2.
+ */
+var OffCanvas = __webpack_require__(93);
+var Root = React.createClass({
+    displayName: 'Root',
+
+    getDefaultProps: function getDefaultProps() {
+        return {
+            id: '333',
+            sidebar: '123',
+            onOpenChange: function onOpenChange() {
+                console.log('芝麻开门嘛哩嘛哩哄');
+            },
+            touch: true,
+            transitions: true,
+            width: 300,
+            maskClosable: true,
+            isDisabled: false,
+            open: false
+        };
+    },
+    _clickHandle1: function _clickHandle1() {
+        this.refs.OffCanvas.show();
+    },
+    _clickHandle2: function _clickHandle2() {
+        this.refs.OffCanvas.hide();
+    },
+    render: function render() {
+        return React.createElement(
+            'div',
+            null,
+            React.createElement(
+                'button',
+                { onClick: this._clickHandle1 },
+                '\u5F39\u51FA\u4FA7\u8FB9\u680F'
+            ),
+            React.createElement(
+                'button',
+                { onClick: this._clickHandle2 },
+                '\u6536\u8D77\u4FA7\u8FB9\u680F'
+            ),
+            React.createElement(
+                'div',
+                { className: 'slider' },
+                React.createElement(
+                    OffCanvas,
+                    _extends({ ref: 'OffCanvas' }, this.props),
+                    '\u70B9\u51FB\u6309\u94AE\u5F39\u51FA\u4FA7\u8FB9\u680F'
+                )
+            )
+        );
+    }
+});
+ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
+
+/***/ }),
+
+/***/ 93:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -305,72 +371,6 @@ var OffCanvas = React.createClass({
     }
 });
 module.exports = OffCanvas;
-
-/***/ }),
-
-/***/ 131:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-/**
- * Created by maxuezhu on 2017/8/2.
- */
-var OffCanvas = __webpack_require__(100);
-var Root = React.createClass({
-    displayName: 'Root',
-
-    getDefaultProps: function getDefaultProps() {
-        return {
-            id: '333',
-            sidebar: '123',
-            onOpenChange: function onOpenChange() {
-                console.log('芝麻开门嘛哩嘛哩哄');
-            },
-            touch: true,
-            transitions: true,
-            width: 300,
-            maskClosable: true,
-            isDisabled: false,
-            open: false
-        };
-    },
-    _clickHandle1: function _clickHandle1() {
-        this.refs.OffCanvas.show();
-    },
-    _clickHandle2: function _clickHandle2() {
-        this.refs.OffCanvas.hide();
-    },
-    render: function render() {
-        return React.createElement(
-            'div',
-            null,
-            React.createElement(
-                'button',
-                { onClick: this._clickHandle1 },
-                '\u5F39\u51FA\u4FA7\u8FB9\u680F'
-            ),
-            React.createElement(
-                'button',
-                { onClick: this._clickHandle2 },
-                '\u6536\u8D77\u4FA7\u8FB9\u680F'
-            ),
-            React.createElement(
-                'div',
-                { className: 'slider' },
-                React.createElement(
-                    OffCanvas,
-                    _extends({ ref: 'OffCanvas' }, this.props),
-                    '\u70B9\u51FB\u6309\u94AE\u5F39\u51FA\u4FA7\u8FB9\u680F'
-                )
-            )
-        );
-    }
-});
-ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'));
 
 /***/ })
 

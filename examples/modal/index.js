@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 127);
+/******/ 	return __webpack_require__(__webpack_require__.s = 121);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -124,7 +124,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 127:
+/***/ 121:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -133,8 +133,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /**
  * Created by maxuezhu on 2017/8/4.
  */
-var Modal = __webpack_require__(98);
-var Button = __webpack_require__(7);
+var Modal = __webpack_require__(91);
+var Button = __webpack_require__(8);
 var Root = React.createClass({
     displayName: 'Root',
 
@@ -172,7 +172,7 @@ ReactDOM.render(React.createElement(Root, null), document.getElementById('merry'
 
 /***/ }),
 
-/***/ 7:
+/***/ 8:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -240,7 +240,7 @@ module.exports = Button;
 
 /***/ }),
 
-/***/ 98:
+/***/ 91:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -250,7 +250,7 @@ module.exports = Button;
  * Created by maxuezhu on 2017/8/4.
  * 说明：提示对话框组件
  */
-var Button = __webpack_require__(7);
+var Button = __webpack_require__(8);
 var Modal = function () {
     var div = document.createElement('div');
     var ConfirmItem = React.createClass({
